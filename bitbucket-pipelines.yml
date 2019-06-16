@@ -15,7 +15,7 @@ pipelines:
             - apt-get -qq install git-ftp
             - pip install mkdocs
             - pip install mkdocs-material
-            - python -m mkdocs build
+            - python -m mkdocs build -v
             - git ftp init --syncroot $BITBUCKET_CLONE_DIR/site/ --user $ftp_user --passwd $ftp_pw $ftp_host
     docs_prod_init:
       - step:
@@ -36,7 +36,7 @@ pipelines:
             - apt-get -qq install git-ftp
             - pip install mkdocs
             - pip install mkdocs-material
-            - python -m mkdocs build
+            - python -m mkdocs build -v
             - git ftp push --syncroot $BITBUCKET_CLONE_DIR/site/ --user $ftp_user --passwd $ftp_pw $ftp_host
     docs_prod:
       - step:
