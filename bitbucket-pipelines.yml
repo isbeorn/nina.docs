@@ -16,6 +16,7 @@ pipelines:
             - pip install mkdocs
             - pip install mkdocs-material
             - python -m mkdocs build -v
+            - echo $BITBUCKET_CLONE_DIR/site/
             - git ftp init --syncroot $BITBUCKET_CLONE_DIR/site/ --user $ftp_user --passwd $ftp_pw $ftp_host
     docs_prod_init:
       - step:
