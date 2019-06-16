@@ -6,7 +6,21 @@
 image: python:3.7.3
 
 pipelines:
-  custom: # Documentation Deployment    
+  custom: # Documentation Deployment
+    docs_dev_init:
+      - step:
+          deployment: test
+          script:
+            - apt-get update
+            - apt-get -qq install git-ftp
+            - git ftp init --user $ftp_user -- passwd $ftp_pw $ftp_host
+    docs_prod_init:
+      - step:
+          deployment: production
+          script:
+            - apt-get update
+            - apt-get -qq install git-ftp
+            - git ftp init --user $ftp_user -- passwd $ftp_pw $ftp_host
     docs_dev:
       - step:
           deployment: test
