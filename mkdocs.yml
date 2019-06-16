@@ -25,6 +25,7 @@ nav:
         - Automated Meridian Flip: 'advanced/meridianflip.md'
         - Advanced Sequencing: 'advanced/advancedsequence.md'
         - Bulb Shutter Control: 'advanced/bulbshutter.md'
+        - FITS Keywords: 'advanced/fits.md'
     - Troubleshooting: 'troubleshooting.md'
     - Glossary: 'glossary.md'
 
