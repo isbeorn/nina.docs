@@ -9,7 +9,7 @@ pipelines:
   custom: # Documentation Deployment    
     documentation:
       - step:
-          deployment: production
+          deployment: $deployment
           caches:
             - pip
           script: # Modify the commands below to build your repository.
