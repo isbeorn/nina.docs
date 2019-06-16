@@ -3,7 +3,7 @@
 # Only use spaces to indent your .yml configuration.
 # -----
 # You can specify a custom docker image from Docker Hub as your build environment.
-image: python:3.7.3
+image: squidfunk/mkdocs-material
 
 pipelines:
   custom: # Documentation Deployment
@@ -13,8 +13,6 @@ pipelines:
           script:
             - apt-get update
             - apt-get -qq install git-ftp
-            - pip install mkdocs
-            - pip install mkdocs-material
             - python -m mkdocs build -v
             - echo $BITBUCKET_CLONE_DIR/site/
             - git ftp init --syncroot $BITBUCKET_CLONE_DIR/site/ --user $ftp_user --passwd $ftp_pw $ftp_host
@@ -24,8 +22,6 @@ pipelines:
           script:
             - apt-get update
             - apt-get -qq install git-ftp
-            - pip install mkdocs
-            - pip install mkdocs-material
             - python -m mkdocs build
             - git ftp init --syncroot $BITBUCKET_CLONE_DIR/site/ --user $ftp_user --passwd $ftp_pw $ftp_host
   branches: # Pipelines that run automatically on a commit to a branch can also be triggered manually
@@ -37,8 +33,6 @@ pipelines:
           script:
             - apt-get update
             - apt-get -qq install git-ftp
-            - pip install mkdocs
-            - pip install mkdocs-material
             - python -m mkdocs build -v
             - git ftp push --syncroot $BITBUCKET_CLONE_DIR/site/ --user $ftp_user --passwd $ftp_pw $ftp_host
     master:
@@ -49,8 +43,6 @@ pipelines:
           script: # Modify the commands below to build your repository.
             - apt-get update
             - apt-get -qq install git-ftp
-            - pip install mkdocs
-            - pip install mkdocs-material
             - python -m mkdocs build
             - git ftp push --syncroot $BITBUCKET_CLONE_DIR/site/ --user $ftp_user --passwd $ftp_pw $ftp_host
           
