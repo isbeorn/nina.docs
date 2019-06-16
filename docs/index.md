@@ -1,4 +1,4 @@
-<img src="/images/nina-logo2.png" align="center" alt="N.I.N.A. Logo">
+![N.I.N.A. Logo](/images/nina-logo2.png)
 
 ## About N.I.N.A.
 
