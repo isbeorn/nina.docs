@@ -1,0 +1,57 @@
+site_name: Nighttime Imaging 'N' Astronomy
+
+nav:
+    - Introduction: 'index.md'
+    - Requirements: 'requirements.md'
+    - Quick Start:
+        - UI Overview: 'quickstart/uioverview.md'
+        - Connecting Your Equipment: 'quickstart/equipment.md'
+        - Finalizing Settings: 'quickstart/settings.md'
+        - Focusing: 'quickstart/focusing.md'
+        - Starting a Sequence: 'quickstart/sequence.md'
+    - Tabs:
+        - Overview: 'tabs/overview.md'
+        - Equipment: 'tabs/equipment.md'
+        - Sky Atlas: 'tabs/skyatlas.md'
+        - Framing Assistant: 'tabs/framing.md'
+        - Sequence: 'tabs/sequence.md'
+        - Imaging: 'tabs/imaging.md'
+        - Settings: 'tabs/settings.md'
+    - Advanced Topics:
+        - Plate Solving: 'advanced/platesolving.md'
+        - Object Browser: 'advanced/objectbrowser.md'
+        - Dithering: 'advanced/dithering.md'
+        - Framing Assistant: 'advanced/framingassistant.md'
+        - Automated Meridian Flip: 'advanced/meridianflip.md'
+        - Advanced Sequencing: 'advanced/advancedsequence.md'
+        - Bulb Shutter Control: 'advanced/bulbshutter.md'
+    - Troubleshooting: 'troubleshooting.md'
+    - Glossary: 'glossary.md'
+
+theme:
+    name: 'material'
+    logo: 'images/nina-logo.png'
+    palette:
+        primary: 'indigo'
+        accent: 'teal'
+
+markdown_extensions:
+    - toc:
+        permalink: '#'
+    - admonition
+    - attr_list
+    - codehilite:
+        guess_lang: false
+    - def_list
+    - footnotes
+    - meta
+    - pymdownx.caret
+    - pymdownx.critic
+    - pymdownx.details
+    - pymdownx.extrarawhtml
+    - pymdownx.keys
+    - pymdownx.snippets
+    - pymdownx.superfences
+    - pymdownx.tasklist:
+        custom_checkbox: true
+    - pymdownx.tilde
