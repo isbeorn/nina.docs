@@ -28,18 +28,20 @@ pipelines:
             - pip install mkdocs-material
             - python -m mkdocs build
             - git ftp init --syncroot $BITBUCKET_CLONE_DIR/site/ --user $ftp_user --passwd $ftp_pw $ftp_host
+  branches: # Pipelines that run automatically on a commit to a branch can also be triggered manually
+    develop:
       - step:
           deployment: test
           caches:
             - pip
-          script: # Modify the commands below to build your repository.
+          script:
             - apt-get update
             - apt-get -qq install git-ftp
             - pip install mkdocs
             - pip install mkdocs-material
             - python -m mkdocs build -v
             - git ftp push --syncroot $BITBUCKET_CLONE_DIR/site/ --user $ftp_user --passwd $ftp_pw $ftp_host
-    docs_prod:
+    master:
       - step:
           deployment: production
           caches:
