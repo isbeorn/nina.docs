@@ -13,15 +13,20 @@ pipelines:
           script:
             - apt-get update
             - apt-get -qq install git-ftp
-            - git ftp init --user $ftp_user -- passwd $ftp_pw $ftp_host
+            - pip install mkdocs
+            - pip install mkdocs-material
+            - python -m mkdocs build
+            - git ftp init --syncroot $BITBUCKET_CLONE_DIR/site/ --user $ftp_user -- passwd $ftp_pw $ftp_host
     docs_prod_init:
       - step:
           deployment: production
           script:
             - apt-get update
             - apt-get -qq install git-ftp
-            - git ftp init --user $ftp_user -- passwd $ftp_pw $ftp_host
-    docs_dev:
+            - pip install mkdocs
+            - pip install mkdocs-material
+            - python -m mkdocs build
+            - git ftp init --syncroot $BITBUCKET_CLONE_DIR/site/ --user $ftp_user -- passwd $ftp_pw $ftp_host
       - step:
           deployment: test
           caches:
@@ -32,7 +37,7 @@ pipelines:
             - pip install mkdocs
             - pip install mkdocs-material
             - python -m mkdocs build
-            - git ftp push --syncroot $BITBUCKET_CLONE_DIR/site --user $ftp_user --passwd $ftp_pw $ftp_host
+            - git ftp push --syncroot $BITBUCKET_CLONE_DIR/site/ --user $ftp_user --passwd $ftp_pw $ftp_host
     docs_prod:
       - step:
           deployment: production
@@ -44,5 +49,5 @@ pipelines:
             - pip install mkdocs
             - pip install mkdocs-material
             - python -m mkdocs build
-            - git ftp push --syncroot $BITBUCKET_CLONE_DIR/site --user $ftp_user --passwd $ftp_pw $ftp_host
+            - git ftp push --syncroot $BITBUCKET_CLONE_DIR/site/ --user $ftp_user --passwd $ftp_pw $ftp_host
           
