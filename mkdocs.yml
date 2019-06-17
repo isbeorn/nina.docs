@@ -1,4 +1,10 @@
 site_name: Nighttime Imaging 'N' Astronomy
+site_url: https://www.nighttime-imaging.eu
+site_description: An astrophotography suite designed for all DSO imagers.
+site_author: N.I.N.A. Team
+
+repo_url: https://bitbucket.org/Isbeorn/nina/
+repo_name: Bitbucket
 
 nav:
     - Introduction: 'index.md'
