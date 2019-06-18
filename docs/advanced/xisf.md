@@ -70,4 +70,4 @@ Requires a focuser to be connected
 - Position: Current step position
 
 !!! tip 
-    Additionally all FITS related information that is explained [in the FITS description](fits.md) is stored using the [FITSKeyword](http://pixinsight.com/doc/docs/XISF-1.0-spec/XISF-1.0-spec.html#__XISF_Core_Elements_:_FITSKeyword_Core_Element__).
+    Additionally all information that is explained [in the FITS description](fits.md) is stored using the [FITSKeyword Core Element](http://pixinsight.com/doc/docs/XISF-1.0-spec/XISF-1.0-spec.html#__XISF_Core_Elements_:_FITSKeyword_Core_Element__).
