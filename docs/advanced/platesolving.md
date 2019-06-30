@@ -6,18 +6,34 @@ Plate solving is a method used to determine exactly where the telescope is point
 	Plate solving requires that your camera and telescope settings are correct. The two important settings are the camera's sensor pixel size and the focal length of the telescope. N.I.N.A. will usually be able to detect the sensor's pixel size, but the user **will** need to inform the software of the effective focal length of the optical path. This includes the focal length of the telescope itself and any focal length-affecting devices such as reducers, telecompressors, or barlows.
 
 
-## General Plate Solving
+## Manual Plate Solving
 
-To plate solve an image you need to capture an image and use the Plate solve current image button in the image panel. This will start the procedure of plate solving your image with the Plate Solver as set in the plate solving settings. Should the solve attempt fail, N.I.N.A. then use the Blind Solver to solve the image. The reason for this is that while most plate solving software is quite good, none are infallible. Where one fails to solve a given image, another might succeed. Thus, the Blind Solver acts as a back up method.
+To manual trigger plate solve of an image you need to use the Plate Solving tool in the image panel.
+There clicking on the play button a new image will be captured and solved based on the given parameters.
+Should the solve attempt fail, N.I.N.A. will prompt if the the Blind Solver should be used to solve the image.
+The reason for this is that while most plate solving software is quite good, none are infallible.
+Where one fails to solve a given image, another might succeed.
+Thus, the Blind Solver acts as a back up method.
 
 Before being able to plate solve N.I.N.A., any setup that the primary and blind solvers require must be done in accordance with their respective instructions.
 
 !!! tip
     In the event that both the Primary and Blind plate solving applications fail to produce a result, please verify that your image is in focus and, if necessary, increase the exposure time or change the filter type to allow more stars to be adequately exposed.
 
-To apply the plate solving results to your mount, you need to enable the Sync option and, if desired, tje Reslew To Target option in the Plate Solving panel. The former will synchronize your mount's notion of its pointing position to the position that the plate solver has determined is it pointed. The latter option will make N.I.N.A. slew your mount to the location where it was supposed to be in the first place. This cam allow this skipping of the star alignment process that is typically done during a mount's start-up process.
+To apply the plate solving results to your mount, you need to enable the Sync option and, if desired, the Reslew To Target option in the Plate Solving panel.
+The former will synchronize your mount's notion of its pointing position to the position that the plate solver has determined is it pointed.
+The latter option will make N.I.N.A. slew your mount to the location where it was supposed to be in the first place.
+This allows skipping the star alignment process that is typically done during a mount's start-up process.
+For a precise centering with a given error margin use the "Repeat until error <" option.
 
-Plate solving is also utilized in the [Automated Meridian Flip](meridianflip.md) feature to re-center the image after a meridian flip has been performed. This is essential for a hands-off operation of N.I.N.A. It is recommended that all plate solvers be set up to have a backup Blind Solver should the preferred Primary plate solver not work as expected.
+
+
+## Automatic Plate Solving
+
+Plate solving is also utilized in the [Sequence](advancedsequence.md) and [Automated Meridian Flip](meridianflip.md) feature to center the image. 
+Here plate solving will be triggered automatically and the parameters used from the Plate Solving Options.
+This is essential for a hands-off operation of N.I.N.A. and it is recommended that the application is set up to have a blind solver, should the preferred primary plate solver not work as expected.
+
 
 ## Plate Solving Software
 
