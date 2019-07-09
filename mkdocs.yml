@@ -43,7 +43,7 @@ nav:
 
 theme:
     name: 'material'
-    logo: 'images/nina-logo.png'
+    logo: 'images/nina-icon.png'
     palette:
         primary: 'indigo'
         accent: 'teal'
