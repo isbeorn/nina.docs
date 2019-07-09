@@ -10,7 +10,7 @@ Plate solving is a method used to determine exactly where the telescope is point
 
 To manual trigger plate solve of an image you need to use the Plate Solving tool in the image panel.
 There clicking on the play button a new image will be captured and solved based on the given parameters.
-Should the solve attempt fail, N.I.N.A. will prompt if the the Blind Solver should be used to solve the image.
+Should the solve attempt fail, N.I.N.A. will prompt if the Blind Solver should be used to solve the image.
 The reason for this is that while most plate solving software is quite good, none are infallible.
 Where one fails to solve a given image, another might succeed.
 Thus, the Blind Solver acts as a back up method.

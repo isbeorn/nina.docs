@@ -1,4 +1,4 @@
-The Equipment tab is where one manages the the hardware that N.I.N.A. interacts with. The classes of hardware devices that N.I.N.A. supports are each their own sub-tab. Each sub-tab operates similarly.
+The Equipment tab is where one manages the hardware that N.I.N.A. interacts with. The classes of hardware devices that N.I.N.A. supports are each their own sub-tab. Each sub-tab operates similarly.
 
 ## Selecting Equipment
 

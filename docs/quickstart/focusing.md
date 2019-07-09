@@ -10,7 +10,7 @@ You can leave those panels enabled, or disable any other at your will. Feel free
 
 ![Focusing](../images/quickstart/focusing3.png)
 
-Since our target now is to focus our telescope to get pinpoint stars, we have to use the the following currently enabled panels.
+Since our target now is to focus our telescope to get pinpoint stars, we have to use the following currently enabled panels.
 
 !!! tip
     An alternative to focus is to use a Bahtinov Mask. You can try our experimental feature for Bahtinov Detection by enabling the icon in the Image panel.
