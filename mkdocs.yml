@@ -7,34 +7,39 @@ repo_url: https://bitbucket.org/Isbeorn/nina/
 repo_name: Bitbucket
 
 nav:
-    - Introduction: 'index.md'
-    - Requirements: 'requirements.md'
+    - Documentation:
+        - Introduction: 'index.md'
+        - Requirements: 'requirements.md'        
+        - Tabs:
+            - Overview: 'tabs/overview.md'
+            - Equipment: 'tabs/equipment.md'
+            - Sky Atlas: 'tabs/skyatlas.md'
+            - Framing Assistant: 'tabs/framing.md'
+            - Sequence: 'tabs/sequence.md'
+            - Imaging: 'tabs/imaging.md'
+            - Settings: 'tabs/settings.md'
+        - Advanced Topics:
+            - Plate Solving: 'advanced/platesolving.md'
+            - Object Browser: 'advanced/objectbrowser.md'
+            - Dithering: 'advanced/dithering.md'
+            - Framing Assistant: 'advanced/framingassistant.md'
+            - Automated Meridian Flip: 'advanced/meridianflip.md'
+            - Advanced Sequencing: 'advanced/advancedsequence.md'
+            - Bulb Shutter Control: 'advanced/bulbshutter.md'
+            - FITS File Format: 'advanced/fits.md'
+            - XISF File Format: 'advanced/xisf.md'
+        - Troubleshooting: 'troubleshooting.md'
+        - Glossary: 'glossary.md'
+        - License: 'license.md'
     - Quick Start:
         - UI Overview: 'quickstart/uioverview.md'
         - Connecting Your Equipment: 'quickstart/equipment.md'
         - Finalizing Settings: 'quickstart/settings.md'
         - Focusing: 'quickstart/focusing.md'
         - Starting a Sequence: 'quickstart/sequence.md'
-    - Tabs:
-        - Overview: 'tabs/overview.md'
-        - Equipment: 'tabs/equipment.md'
-        - Sky Atlas: 'tabs/skyatlas.md'
-        - Framing Assistant: 'tabs/framing.md'
-        - Sequence: 'tabs/sequence.md'
-        - Imaging: 'tabs/imaging.md'
-        - Settings: 'tabs/settings.md'
-    - Advanced Topics:
-        - Plate Solving: 'advanced/platesolving.md'
-        - Object Browser: 'advanced/objectbrowser.md'
-        - Dithering: 'advanced/dithering.md'
-        - Framing Assistant: 'advanced/framingassistant.md'
-        - Automated Meridian Flip: 'advanced/meridianflip.md'
-        - Advanced Sequencing: 'advanced/advancedsequence.md'
-        - Bulb Shutter Control: 'advanced/bulbshutter.md'
-        - FITS File Format: 'advanced/fits.md'
-        - XISF File Format: 'advanced/xisf.md'
-    - Troubleshooting: 'troubleshooting.md'
-    - Glossary: 'glossary.md'
+    - Contributing:
+        - 
+        - Documentation: 'contributing/contributing.md'
 
 theme:
     name: 'material'
@@ -42,6 +47,8 @@ theme:
     palette:
         primary: 'indigo'
         accent: 'teal'
+    feature:
+        tabs: true
 
 markdown_extensions:
     - toc:

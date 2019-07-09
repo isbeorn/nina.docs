@@ -45,6 +45,7 @@ N.I.N.A. can directly interface with a wide range of popular cameras without the
  * QHYCCD
  * ToupTek
  * ZWO
+ * FLI
 
 !!! note
     Certain older Nikon DSLRs require a serial shutter cable for bulb exposures. Please consult your camera's documentation regarding its requirements for long exposure operation using a USB or other remote cable.
@@ -61,6 +62,7 @@ Astronomy-related equipment often has an [ASCOM](//ascom-standards.org/) driver 
  * Focusers
  * Rotators
  * Weather data (ASCOM ObservingConditions)
+ * Switches
 
 !!! tip
     Be aware that ASCOM drivers that are provided by their vendor in a 32 bit-only form will **not** be accessible by a 64 bit N.I.N.A. or any other 64 bit ASCOM client application. If this is the case for you, then the 32 bit version of N.I.N.A. must be installed.
