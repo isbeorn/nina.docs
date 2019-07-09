@@ -54,11 +54,12 @@ The ASTAP (Astrometric STAcking Program) astrometric solver and FITS file viewer
 
 **Drawbacks**
 
- * None known
+ * None
 
 **Recommendation**
 
-This solver is recommended as both Primary and Blind Solver.
+ * Primary Solver: Recommended
+ * Blind Solver: Recommended
 
 ---
 
@@ -89,7 +90,8 @@ N.I.N.A. can upload the image to the API servers of Astrometry.Net for them to p
 Author: Andy Glasso  
 URL: [adgsoftware.com/ansvr/](//adgsoftware.com/ansvr/)
 
-The local Astrometry.Net plate solver needs to be installed separately. It requires download of index files which can be installed through N.I.N.A., as well as the required index files that you need for your combination of focal length and pixel size. See plate solving settings.
+The local Astrometry.Net plate solver needs to be installed separately.
+It requires download of index files which can be installed through N.I.N.A., as well as the required index files that you need for your combination of focal length and pixel size. See plate solving settings.
 
 **Benefits**
 
@@ -110,11 +112,36 @@ The local Astrometry.Net plate solver needs to be installed separately. It requi
 
 ---
 
+### All Sky Platesolver
+Author: Giovanni Benintende
+URL: [astrogb.com/astrogb/All_Sky_Plate_Solver.html](//www.astrogb.com/astrogb/All_Sky_Plate_Solver.html)
+
+This application is basically a wrapper for the local astrometry.net client. 
+
+**Benefits**
+
+* Much easier to set up than the local astrometry.net client
+* Does not require an Internet connection
+
+**Drawbacks**
+
+ * Same as local astrometry.net client, except the setup part
+
+**Recommendation**
+
+ * Primary Solver: Not recommended
+ * Blind Solver: Not recommended 
+
+---
+
+
 ### PlateSolve2
 Author: PlaneWave Instruments  
 URL: [planewave.com/downloads/software/](//planewave.com/downloads/software/)
 
-PlateSolve2 is a standalone executable which can be downloaded from Planewave's PlateSolve2 downloads page. It requires the download of at least one catalogue of stars so it can properly work. You need to start the executable once standalone and set the catalog location of the catalog that you want to use. Both the APM or UCAC3 catalogues will work fine, but it is recommended to download both of them should you encounter issues with either one of them.
+PlateSolve2 is a standalone executable which can be downloaded from Planewave's PlateSolve2 downloads page.
+It requires the download of at least one catalogue of stars so it can properly work.
+You need to start the executable once standalone and set the catalog location of the catalog that you want to use. Both the APM or UCAC3 catalogues will work fine, but it is recommended to download both of them should you encounter issues with either one of them.
 
 **Benefits**
 
@@ -128,4 +155,4 @@ PlateSolve2 is a standalone executable which can be downloaded from Planewave's 
 **Recommendation**
 
  * Primary Solver: Recommended
- * Blind Solver: use as a Blind Solver is not technically possible
+ * Blind Solver: use as a Blind Solver is not possible
