@@ -38,8 +38,8 @@ nav:
         - Focusing: 'quickstart/focusing.md'
         - Starting a Sequence: 'quickstart/sequence.md'
     - Contributing:
-        - 
-        - Documentation: 'contributing/contributing.md'
+        - Enhance documentation: 'contributing/contributing.md'
+        - How to setup the development environment: 'contributing/howtosetupdev.md'
 
 theme:
     name: 'material'

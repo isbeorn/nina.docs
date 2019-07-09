@@ -27,7 +27,7 @@ This project is utilizing a standard git flow where it has the following branche
 
 [A more in-depth guide about this model can be found here](https://nvie.com/posts/a-successful-git-branching-model/)
 
-The most relevant branches are master, release and develop. These branches all have a separate documentation on the homepage. 
+The most relevant branches are master and develop. These branches all have a separate papge for documentation on the homepage. 
 This enables users that will use for example the released version of N.I.N.A. to have a separate documentation, compared the ones that use the nightly builds and already want to see new features described.
 
 ## Pull Requests
