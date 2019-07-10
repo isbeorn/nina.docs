@@ -113,8 +113,8 @@ It requires download of index files which can be installed through N.I.N.A., as 
 ---
 
 ### All Sky Platesolver
-Author: Giovanni Benintende
-URL: [astrogb.com/astrogb/All_Sky_Plate_Solver.html](//www.astrogb.com/astrogb/All_Sky_Plate_Solver.html)
+Author: Giovanni Benintende  
+URL: [astrogb.com/astrogb/All_Sky_Plate_Solver.html](http://www.astrogb.com/astrogb/All_Sky_Plate_Solver.html)
 
 This application is basically a wrapper for the local astrometry.net client. 
 
