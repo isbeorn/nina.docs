@@ -88,14 +88,14 @@ Requires a rotator to be connected
 Requires a weather data source to be connected
 
 - CLOUDCVR: Cloud cover percantage
-- DEWPOINT: Dew point in °C
+- DEWPOINT: Dew point in Celsius
 - HUMIDITY: Humidity percentage
 - PRESSURE: Air pressure in hPa
 - SKYBRGHT: Sky brightness in lux
-- MPSAS: Sky quality in mags/arcsecs²
-- SKYTEMP: Sky temperature in °C
+- MPSAS: Sky quality in mags/arcsecs^2
+- SKYTEMP: Sky temperature in Celsius
 - STARFWHM: Star FWHM
-- AMBTEMP: Ambient air temperature in °C
+- AMBTEMP: Ambient air temperature in Celsius
 - WINDDIR: Wind direction: 0=N, 180=S, 90=E, 270=W
 - WINDGUST: Wind gust in kph
 - WINDSPD: Wind speed in kph

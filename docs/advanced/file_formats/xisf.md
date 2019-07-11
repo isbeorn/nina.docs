@@ -39,7 +39,7 @@ Requires a weather data source to be connected
 
 - RelativeHumidity: Relative humidity percentage
 - AtmosphericPressure: Air pressure in hPa
-- AmbientTemperature: Ambient air temperature in °C
+- AmbientTemperature: Ambient air temperature in Celsius
 - WindDirection: Wind direction: 0=N, 180=S, 90=E, 270=W
 - WindGust: Wind gust in kph
 - WindSpeed: Wind speed in kph
