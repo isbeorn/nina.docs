@@ -83,3 +83,19 @@ Requires a rotator to be connected
 - ROTATOR: Current position
 - ROTATANG: Current position
 - ROTSTPSZ: Step size
+
+## Weather Data Headers
+Requires a weather data source to be connected
+
+- CLOUDCVR: Cloud cover percantage
+- DEWPOINT: Dew point in °C
+- HUMIDITY: Humidity percentage
+- PRESSURE: Air pressure in hPa
+- SKYBRGHT: Sky brightness in lux
+- MPSAS: Sky quality in mags/arcsecs²
+- SKYTEMP: Sky temperature in °C
+- STARFWHM: Star FWHM
+- AMBTEMP: Ambient air temperature in °C
+- WINDDIR: Wind direction: 0=N, 180=S, 90=E, 270=W
+- WINDGUST: Wind gust in kph
+- WINDSPD: Wind speed in kph

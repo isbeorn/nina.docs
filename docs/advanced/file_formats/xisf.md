@@ -34,6 +34,16 @@ Available when a target is set inside a sequence.
 - RA: Right ascension of target
 - Dec: Declination of target
 
+### Meterology
+Requires a weather data source to be connected
+
+- RelativeHumidity: Relative humidity percentage
+- AtmosphericPressure: Air pressure in hPa
+- AmbientTemperature: Ambient air temperature in °C
+- WindDirection: Wind direction: 0=N, 180=S, 90=E, 270=W
+- WindGust: Wind gust in kph
+- WindSpeed: Wind speed in kph
+
 ## [Instrument Namespace](http://pixinsight.com/doc/docs/XISF-1.0-spec/XISF-1.0-spec.html#__XISF_Core_Elements_:_Image_Core_Element_:_Astronomical_Image_Properties_:_Instrument_Namespace__)
 - ExposureTime: Expsure duration in seconds
 
@@ -68,6 +78,8 @@ Requires a filterwheel to be connected
 Requires a focuser to be connected
 
 - Position: Current step position
+
+
 
 !!! tip 
     Additionally all information that is explained [in the FITS description](fits.md) is stored using the [FITSKeyword Core Element](http://pixinsight.com/doc/docs/XISF-1.0-spec/XISF-1.0-spec.html#__XISF_Core_Elements_:_FITSKeyword_Core_Element__).
