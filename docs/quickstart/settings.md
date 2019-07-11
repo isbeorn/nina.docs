@@ -1,10 +1,11 @@
-This whole setup routine only has to be done once for a specific profile. Once you have your default mount and camera set you just need to press the Connect button (7) once N.I.N.A. is started up to connect to the saved equipment automatically.
+This whole setup routine only has to be done once for a specific profile. 
+Once you have your default mount and camera set up you just need to press the connect button on the lower left after N.I.N.A. is started up to connect to the saved equipment automatically.
 
-We have a few small steps to do before we can start with imaging. For that we need to switch to the Settings tab (8).
+We have a few small steps to do before we can start with imaging. For that we need to switch to the options tab.
 
 ![N.I.N.A Configuration](../images/quickstart/settings1.png)
 
-In the settings we go directly to the Equipment tab (1) and have to set a few things first. You should set your pixel size to the pixel size that your camera has, if it has not been set automatically, which is the case with most DSLR. Search online for the pixel size of your camera and enter the value in (2).
+In the options we go directly to the Equipment tab (1) and have to set a few things first. You should set your pixel size to the pixel size that your camera has, if it has not been set automatically, which is the case with most DSLR. Search online for the pixel size of your camera and enter the value in (2).
 
 !!! tip
     If you have an older Nikon camera you might not be able to use the native bulb mode, controlled via USB, for exposures that are longer than 30 second. If you have a RS232 (serial) shutter cable or your mount has a canera shutter control port , change the **Bulb Mode** in (3). Please refer to the Advanced topic using RS232 or mount for bulb shutter.
