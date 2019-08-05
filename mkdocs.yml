@@ -15,9 +15,15 @@ nav:
             - Equipment: 'tabs/equipment.md'
             - Sky Atlas: 'tabs/skyatlas.md'
             - Framing Assistant: 'tabs/framing.md'
+            - Flat Wizard: 'tabs/flatwizard.md'
             - Sequence: 'tabs/sequence.md'
             - Imaging: 'tabs/imaging.md'
-            - Settings: 'tabs/settings.md'
+            - Options:
+                - General: 'tabs/options/general.md'
+                - Equipment: 'tabs/options/equipment.md'
+                - Imaging: 'tabs/options/imaging.md'
+                - Plate Solving: 'tabs/options/platesolving.md'
+                - Planetarium: 'tabs/options/planetarium.md'
         - Advanced Topics:
             - Plate Solving: 'advanced/platesolving.md'
             - Object Browser: 'advanced/objectbrowser.md'

@@ -2,7 +2,7 @@ Framing Assistant allows you to frame the next shot perfectly via several online
 
 For further information about using the Framing Asisstant refer to the [advanced framing topic](../advanced/framingassistant.md)
 
-![The Framing Tab](../images/advanced/framingassistant1.png)
+![The Framing Tab](../images/tabs/framingassistant1.png)
 
 1. **Image Source Drop Down**
     * Allows you to change the image source 
