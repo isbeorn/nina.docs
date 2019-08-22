@@ -32,6 +32,8 @@ nav:
             - Automated Meridian Flip: 'advanced/meridianflip.md'
             - Advanced Sequencing: 'advanced/advancedsequence.md'
             - Bulb Shutter Control: 'advanced/bulbshutter.md'
+            - Auto-Focus: 'advanced/autofocus.md'
+            - Focuser Backlash Measurement: 'advanced/backlashmeasurement.md'
             - File Formats:
                 - TIFF: 'advanced/file_formats/tiff.md'
                 - FITS: 'advanced/file_formats/fits.md'

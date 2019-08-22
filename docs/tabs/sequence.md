@@ -17,6 +17,10 @@ The UI consists of following elements:
 3. **Start guiding**
     * When enabled will try to start guiding with PHD2 after the start of the sequence
     > PHD2 needs to be connected in the guider tab in equipment
+	> The guider (PHD2 or Direct Guider) has to be connected for dithering to work properly.
+	
+	!!! Note
+		As sequences typically start with a slew and centering process, the guider will be stopped at the beginning of the sequence, and only restarted if this option is set to on.
     
 4. **Slew to target**
     * Slews to the target as specified in RA and Dec
