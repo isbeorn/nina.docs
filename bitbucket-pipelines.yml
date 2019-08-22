@@ -6,16 +6,51 @@
 image: python:3.7.3
 
 pipelines:
-  custom: # Documentation Deployment    
-    documentation:
+  custom: # Documentation Deployment
+    docs_dev_init:
       - step:
-          caches:
-            - pip
-          script: # Modify the commands below to build your repository.
+          deployment: test
+          script:
+            - apt-get update
+            - apt-get -qq install git-ftp
+            - pip install mkdocs
+            - pip install mkdocs-material
+            - python -m mkdocs build -v
+            - echo $BITBUCKET_CLONE_DIR/site/
+            - git ftp init --syncroot $BITBUCKET_CLONE_DIR/site/ --user $ftp_user --passwd $ftp_pw $ftp_host
+    docs_prod_init:
+      - step:
+          deployment: production
+          script:
             - apt-get update
             - apt-get -qq install git-ftp
             - pip install mkdocs
             - pip install mkdocs-material
             - python -m mkdocs build
-            - git ftp push --syncroot site --user $ftp_user --passwd $ftp_pw $ftp_host
+            - git ftp init --syncroot $BITBUCKET_CLONE_DIR/site/ --user $ftp_user --passwd $ftp_pw $ftp_host
+  branches: # Pipelines that run automatically on a commit to a branch can also be triggered manually
+    develop:
+      - step:
+          deployment: test
+          caches:
+            - pip
+          script:
+            - apt-get update
+            - apt-get -qq install git-ftp
+            - pip install mkdocs
+            - pip install mkdocs-material
+            - python -m mkdocs build -v
+            - git ftp push --syncroot $BITBUCKET_CLONE_DIR/site/ --user $ftp_user --passwd $ftp_pw $ftp_host
+    #master:
+    #  - step:
+    #      deployment: production
+    #      caches:
+    #        - pip
+    #      script: # Modify the commands below to build your repository.
+    #        - apt-get update
+    #        - apt-get -qq install git-ftp
+    #        - pip install mkdocs
+    #        - pip install mkdocs-material
+    #        - python -m mkdocs build
+    #        - git ftp push --syncroot $BITBUCKET_CLONE_DIR/site/ --user $ftp_user --passwd $ftp_pw $ftp_host
           

@@ -1,0 +1,82 @@
+site_name: Nighttime Imaging 'N' Astronomy
+site_url: https://www.nighttime-imaging.eu
+site_description: An astrophotography suite designed for all DSO imagers.
+site_author: N.I.N.A. contributors
+
+repo_url: https://bitbucket.org/Isbeorn/nina/
+repo_name: Bitbucket
+
+nav:
+    - Documentation:
+        - Introduction: 'index.md'
+        - Requirements: 'requirements.md'        
+        - Tabs:
+            - Overview: 'tabs/overview.md'
+            - Equipment: 'tabs/equipment.md'
+            - Sky Atlas: 'tabs/skyatlas.md'
+            - Framing Assistant: 'tabs/framing.md'
+            - Flat Wizard: 'tabs/flatwizard.md'
+            - Sequence: 'tabs/sequence.md'
+            - Imaging: 'tabs/imaging.md'
+            - Options:
+                - General: 'tabs/options/general.md'
+                - Equipment: 'tabs/options/equipment.md'
+                - Imaging: 'tabs/options/imaging.md'
+                - Plate Solving: 'tabs/options/platesolving.md'
+                - Planetarium: 'tabs/options/planetarium.md'
+        - Advanced Topics:
+            - Plate Solving: 'advanced/platesolving.md'
+            - Object Browser: 'advanced/objectbrowser.md'
+            - Dithering: 'advanced/dithering.md'
+            - Framing Assistant: 'advanced/framingassistant.md'
+            - Automated Meridian Flip: 'advanced/meridianflip.md'
+            - Advanced Sequencing: 'advanced/advancedsequence.md'
+            - Bulb Shutter Control: 'advanced/bulbshutter.md'
+            - File Formats:
+                - TIFF: 'advanced/file_formats/tiff.md'
+                - FITS: 'advanced/file_formats/fits.md'
+                - XISF: 'advanced/file_formats/xisf.md'
+        - Troubleshooting: 'troubleshooting.md'
+        - Glossary: 'glossary.md'
+        - License: 'license.md'
+    - Quick Start:
+        - UI Overview: 'quickstart/uioverview.md'
+        - Connecting Your Equipment: 'quickstart/equipment.md'
+        - Finalizing Settings: 'quickstart/settings.md'
+        - Focusing: 'quickstart/focusing.md'
+        - Starting a Sequence: 'quickstart/sequence.md'
+    - Contributing:
+        - Enhance documentation: 'contributing/contributing.md'
+        - How to setup the development environment: 'contributing/howtosetupdev.md'
+
+theme:
+    name: 'material'
+    logo: 'images/nina-icon.png'
+    palette:
+        primary: 'indigo'
+        accent: 'teal'
+    feature:
+        tabs: true
+
+markdown_extensions:
+    - toc:
+        permalink: '#'
+    - admonition
+    - attr_list
+    - codehilite:
+        guess_lang: false
+    - def_list
+    - footnotes
+    - meta
+    - pymdownx.caret
+    - pymdownx.critic
+    - pymdownx.details
+    - pymdownx.extrarawhtml
+    - pymdownx.keys
+    - pymdownx.snippets
+    - pymdownx.superfences
+    - pymdownx.tasklist:
+        custom_checkbox: true
+    - pymdownx.tilde
+
+copyright: Copyright &copy; 2019 Stefan Berg and the N.I.N.A. contributors
