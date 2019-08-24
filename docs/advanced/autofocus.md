@@ -1,7 +1,7 @@
 ## Overview
 
 Proper focusing is a critical part of astro-imaging. Poor focus will yield softer images and lower SNR. As such it is common for imagers to focus with precision tools such as a Bahtinov mask prior to imaging.
-However, most optical assemblies will suffer from focus shift throughout the night, whether it be because of temperature shift or other causes. Additionally, the popularity of monochrome sensor with narrowband or broadband filters has led to the need to refocus between filters, due to slight focus shifts.
+However, most optical assemblies will suffer from focus shift throughout the night whether it be because of temperature shift or other causes. Additionally, the popularity of monochrome sensors used together with narrowband or broadband filters has led to the need to refocus between filters, due to the slight focus shifts introduced.
 There is therefore a need for automated focusing procedures which can run at the beginning of a sequence, but also throughout the night.
 
 ## Requirements
@@ -13,15 +13,15 @@ For Auto-Focus to be available for use in N.I.N.A. the following must be availab
 
 ## N.I.N.A. Autofocus
 
-N.I.N.A. is unique in that provides multiple ways to autofocus on star fields, on bright objects such as the moon or planets, or on terrestrial objects via two techniques to measure how far from focus an image is.
+N.I.N.A. is unique in that provides multiple ways to autofocus on star fields, on bright objects such as the moon or planets, or on terrestrial objects. This is done using two methods to measure how far from focus an image is.
 
 ### Star HFR
 
-N.I.N.A. will move far out of focus, take an exposure, detect the stars in the image, compute the Half Flux Radius (HFR) of the stars and take the average HFR across the frame. Then, moving the focuser by some defined amount (the Auto Focus Step Size), N.I.N.A. can repeat the process, until a nice focus curve is available, and the minimum (point of best focus) can be found by different types of fitting (trend lines, hyperbolic, or parabolic). The obtained curve is as the below.
+With this method, N.I.N.A. will move far out of focus, take an exposure, detect the stars in the image, compute the Half Flux Radius (HFR) of the stars and take the average HFR across the frame. Then, moving the focuser by some defined amount (the Auto Focus Step Size), N.I.N.A. can repeat the process, until a nice focus curve is available, and the minimum (point of best focus) can be found by different types of fitting (trend lines, hyperbolic, or parabolic). The obtained curve is as the below.
 
 ![Autofocus Curve Example - Star HFR](../images/advanced/autofocuscurve1.png)
 
-Each of the focus points above represent the HFR at its respective focus position. In addition, the red bars on each point represent the potential error on each of the focus points - wind and other factors can cause this error to be large. The line and curve fitting used to find best focus make use of those errors to take into account points with smaller error more than points with bigger error. The routine is therefore resistant to noise and other factors such as wind.
+Each of the focus points above represents the HFR at its respective focus position. In addition, the red bars on each point represent the potential error on each of the focus points - wind and other factors can cause this error to be large. The line and curve fitting used to find best focus make use of those errors to take into account points with smaller error more than points with bigger error. The routine is therefore resistant to noise and other factors such as wind.
 
 Note however that for Star HFR measurement to work, stars must be detected in the field of view - as such, the routine will have issues with short exposures and far from focus, where out of focus stars will tend to be very large. The Auto-Focus Exposure time is therefore an important parameter to the autofocus routine.
 
@@ -29,7 +29,7 @@ It is also important to note that if the N.I.N.A Step Size were too big (in the 
 
 ### Contrast Detection
 
-A second method is to detect the contrast available in the image - in the same way that a smartphone or mirrorless camera does to perform autofocus. The focuser is moved per the Auto Focus Step Size, exposures are taken per the Auto-Focus exposure time, and contrast is measured via different techniques. The curve obtained is close to a Gaussian Curve, where the maximum of the curve is the point of highest contrast and therefore best focus. And example would be as per the below.
+A second method is to detect the contrast available in the image - in the same way that a smartphone or mirrorless camera does to perform autofocus. The focuser is moved per the Auto Focus Step Size, exposures are taken per the Auto-Focus exposure time, and contrast is measured via different techniques. The curve obtained is close to a Gaussian Curve, where the maximum of the curve is the point of highest contrast and therefore best focus. An example would be as per the below.
 
 ![Autofocus Curve Example - Contrast Detection](../images/advanced/autofocuscurve2.png)
 
@@ -55,18 +55,18 @@ Some additional parameters are available:
 * Use FilterWheel Offsets (which does not directly affect auto-focus)
 
 !!! Note
-	The Default Auto Focus Exposure Time won't be used if a filter wheel is connected, and Auto Focus Exposure Times have been set up in the Filterwheel section of the Options -> Equipment view. Instead, the per-filter exposure times will be used depending on the filter used presently. This can be very convenient for imagers doing both broadband and narrowband (such as HaRGB). More details on how to set this up are available in the [Equipment Options Section](../tabs/options/equipment.md#filter-wheel-configuration).
+	The Default Auto Focus Exposure Time won't be used if a filter wheel is connected, and Auto Focus Exposure Times have been set up in the Filterwheel section of the Options -> Equipment view. Instead, the per-filter exposure times will be used depending on the filter set at the time. This can be very convenient for imagers doing both broadband and narrowband (such as HaRGB). More details on how to set this up are available in the [Equipment Options Section](../tabs/options/equipment.md#filter-wheel-configuration).
 
 ## Auto-Focus algorithm
 
 The autofocus logic is as follows:
 
 1. For Star HFR, N.I.N.A. takes an exposure at current focuser position, and computes the Star HFR. This will be the "benchmark to beat", and the final focus point will be checked against this benchmark to ensure better focus has been achieved.
-2. N.I.N.A. will then move the focuser outwards (to a higher focuser position value than current) by *Auto Focus Initial Offset Steps* multipled by *Auto Focus Step Size*. In the above example, the focuser would be moved by 5 * 10 = 50 focuser steps to the right.
+2. N.I.N.A. will then move the focuser outwards (to a higher focuser position value than current) by *Auto Focus Initial Offset Steps* multiplied by *Auto Focus Step Size*. In the above example, the focuser would be moved by 5 * 10 = 50 focuser steps to the right.
 3. N.I.N.A. then starts moving the focuser inwards (to lower focuser position values), one *Auto Focus Step Size* (e.g. 10 focuser steps in the above example) at a time, measuring the contrast or HFR at each step.
 4. N.I.N.A. will keep moving inwards until it has found a minimum (for HFR) or maximum (for Contrast) point, and at least *Auto Focus Initial Offset Steps* (5 in this example) points on each side of that minimum or maximum. If N.I.N.A. finds that it doesn't have enough focus points to the right of the minimum/maximum, it will move back outwards to the rightmost point, then proceed again, one *Auto Focus Step Size* at a time, until it has enough points right of the minimum/maximum as well
 5. N.I.N.A. performs a fitting on the points (trend lines, parabolic, hyperbolic, or Gaussian) to find the point of best focus, and moves the focuser to it.
-6. For Star HFR, a final validation exposure is taken, the HFR computed, and compared to the benchmark taken in Step 1. If the final HFR is worse than the initial HFR by 15% or worse, the autofocus routine is declared a failure and the focuser returns to initial focus position, or an additional auto-focus run is attempted.
+6. For Star HFR, a final validation exposure is taken, the HFR computed, and compared to the benchmark taken in Step 1. If the final HFR is worse than the initial HFR by 15% or more, the autofocus routine is deemed a failure and the focuser returns to its initial focus position, or an additional auto-focus run is attempted.
 
 ## Determining ideal parameters
 
@@ -85,7 +85,7 @@ Under Options -> Imaging -> Image Options, set the "Annotate Image" parameter to
 
 For your filter of interest, take an exposure near best focus on an area with many stars. An ideal exposure time for Star HFR  would be an exposure that almost saturates the brightest stars, but keeps the majority under the saturation threshold. The stars should be easily visible and identifiable to you. Now enable the Star icon (HFR measurement) on the Image pane of the Imaging tab - N.I.N.A. will highlight the detected stars. If many stars are detected, this exposure time is likely fine.
 
-Then, move the focuser out of focus, by the *Auto Focus Initial Offset Steps* multipled by *Auto Focus Step Size*. Take a frame with the same exposure time, and check that some of the out of focus shapes are still quite bright, with some very obvious borders. Again, using the Star icon, have N.I.N.A. highlight the detected stars - are some of the brightest stars correctly detected? If so, you have the right exposure time.
+Then, move the focuser out of focus, by the *Auto Focus Initial Offset Steps* multiplied by *Auto Focus Step Size*. Take a frame with the same exposure time, and check that some of the out of focus shapes are still quite bright, with some very obvious borders. Again, using the Star icon, have N.I.N.A. highlight the detected stars - are some of the brightest stars correctly detected? If so, you have the right exposure time.
 
 If both of the above are OK, you have found the correct default auto-focus exposure time for Star HFR. Note that this can change depending on your Imaging Auto-Stretch Settings. If you find that you have problems detecting stars far out of focus, you may want to increase the exposure time, and potentially decrease your Auto Stretch Factor.
 
@@ -93,7 +93,7 @@ Note that for contrast detection methods, it is generally safe to use an exposur
 
 ### Use FilterWheel Offsets
 
-Even par focal filters can cause small changes to focus, due to the filter itself, or the optical system and how it deals with different light wavelengths. As such it is possible to set offsets, in focuser steps, for each filter relative to one another. If a filter wheel is used, and offsets are properly defined per filter, this setting should be turned on. Otherwise, it should be kept off. This setting doesn't affect autofocus directly, unless an Auto-Focus filter is set.
+Even par focal filters can cause small changes to focus, due to the filter itself, or the optical system and how it deals with different light wavelengths. As such it is possible to set offsets, in focuser steps, for each filter relative to one another. If a filter wheel is used, and offsets are properly defined per filter, this setting should be turned on. Otherwise, it should be kept off. This setting doesn't affect autofocus directly, unless an Auto-Focus filter is set. Defining filter offsets is further explained in the [Equipment Options Section](../tabs/options/equipment.md#filter-wheel-configuration).
 
 ## Important considerations
 
@@ -103,7 +103,7 @@ The basic parameters above should provide good auto-focus. The star HFR measurem
 
 ### Autostretch factor and Black point clipping
 
-These settings are used for stretching images automatically so that the target features are visible by human eyes. The stretch factor determines how bright the image becomes (the higher the brighter), and the black clipping determines whether some of the background should be clipped to black.
+These settings are used for stretching images automatically so that the target features are visible by human eyes. The stretch factor determines how bright the image becomes (the higher the brighter), and the black clipping determines whether some of the background should be clipped to black, increasing contrast.
 
 Some of the routines used by autofocus use the stretched images as well (for edge detection for example), and are thus affected by this setting. This includes:
 
@@ -124,7 +124,7 @@ Similarly, the Debayered HFR option provides a better way to perform HFR calcula
 
 ### Star Sensitivity
 
-Star sensitivity is a parameter that takes effect during Star Detection, and therefore affects the Star HFR autofocus methodology. More agressive settings will typically detect more stars, but will become more sensitive to noise as a result, which could lead to misdetecting stars. With the Annotate Stars setting set to On it is possible for the end user to see the effects of this setting both in and out of focus. Typically, a value of Normal or High will provide good results.
+Star sensitivity is a parameter that takes effect during Star Detection, and therefore affects the Star HFR autofocus methodology. More aggressive settings will typically detect more stars, but will become more sensitive to noise as a result, which could lead to misdetecting stars. With the Annotate Stars setting set to On it is possible for the user to see the effects of this setting both in and out of focus. Typically, a value of Normal or High will provide good results.
 
 As making this parameter more aggressive increases noise sensitivity, it can be used efficiently with the Noise Reduction parameter described below.
 
@@ -139,7 +139,7 @@ The possible values are as below:
 
 * None: no additional noise reduction is applied prior to star detection or contrast measurement
 * Median: a 3x3 Median filter is applied on the full size image prior to star or contrast detection. This is extremely effective at getting rid of hot pixels (which could be recognized as stars), but adds some processing time
-* Normal: A Gaussian smoothing is applied to the image prior to star or contrast detection. This is effective in reducing thermal noise. Processing time impact is minimum, but detectable.
+* Normal: A Gaussian smoothing is applied to the image prior to star or contrast detection. This is effective at reducing thermal noise. Processing time impact is minimum, but detectable.
 * High: A stronger Gaussian smoothing is applied to the image
 * Highest: An even stronger Gaussian smoothing is applied to the image
 
@@ -165,7 +165,7 @@ Under the Focuser options, there are a range of advanced options that will affec
 
 ### AF Method
 
-The method used for autofocus. This is either Star HFR or contrast detection, both of which have been described in this document. Default is Star HFR.
+The method used for autofocus. This is either Star HFR or Contrast Detection, both of which have been described in this document. Default is Star HFR.
 
 ### AF Disable Guiding
 
@@ -175,7 +175,7 @@ Determines whether guiding should be disabled when autofocusing. For OAG or belt
 
 This option is only available when the Star HFR autofocus method is selected (for contrast detection, a Gaussian curve is always used). It determines what methodology should be used for fitting the focus points to a smooth curve.
 
-* Trend Lines: this is the default option, and uses error-weighted trend lines for the left and right side of focus. The interesection of the trend lines is the point of best focus.
+* Trend Lines: this is the default option, and uses error-weighted trend lines for the left and right side of focus. The intersection of the trend lines is the point of best focus.
 * Parabolic: an error-weighted parabolic fit will be done on the focus points, and its minimum determines the point of best focus. This is most appropriate for users whose autofocus step size and offset steps keep them in the vicinity of the CFZ (critical focus zone), so that the asymptotes of the focus curve are usually not reached.
 * Hyperbolic: an error-weighted hyperbolic fit will be done on the focus points, and its minimum determines the point of best focus. This is appropriate for most users, for whom the focus curve will resemble a hyperbola, with clear asymptotes on each side of focus.
 * Parabolic + Trends or Hyperbolic + Trends: This will fit the focus points with both trend lines and a parabolic or hyperbolic fitting. The point of best focus is then an average between the trend line intersection and the hyperbolic or parabolic minimum.
@@ -189,7 +189,7 @@ This is the time, in seconds, that will be waited for after a focuser movement, 
 
 ### AF Number of attempts
 
-If a focus run is deemed unsuccessful (which can happen with the Star HFR methodology, which compares the final Star HFR with the initial Star HFR), if there are Auto Focus Attempts left, a new focus run will be attempted. When all the attempts are exhausted, the autofocus routine will declare failure, get back to its original focuser position, and imaging will continue as usual. For most users, a value of 1 (single attempts, no re-try in case of failure) or 2 (one reattempt in case of failure) is appropriate.
+If a focus run is deemed unsuccessful (which can happen with the Star HFR methodology, which compares the final Star HFR to the initial Star HFR), if there are Auto Focus Attempts left, a new focus run will be attempted. When all the attempts are exhausted, the autofocus routine will declare failure, get back to its original focuser position, and imaging will continue as usual. For most users, a value of 1 (single attempt, no re-try in case of failure) or 2 (one reattempt in case of failure) is appropriate.
 
 ### AF Number of Frames per point
 
@@ -212,7 +212,7 @@ These settings (numbers between 0.2 and 1) are used to define a region of intere
 
 ![Outer Crop Ratio](../images/advanced/outercropratio.png)
 
-Note that it is possible to have the inner crop ratio to some value, and the outer crop ratio to a value such as 0.99 to take into account only the outside of the center - this can be useful for very dense globular clusters, although they should not pose a big issue to the N.I.N.A. star detection routines.
+Note that it is possible to have the inner crop ratio to some value, and the outer crop ratio to a value such as 0.99 to take into account only the outside of the center - this can be useful for centered very dense globular clusters, although they should not pose a big issue to the N.I.N.A. star detection routines.
 
 Note that for Contrast Detection methods, only the inner crop ratio is available. In addition, for the Statistics contrast detection method, it will only work if the camera can subsample to the required ROI.
 

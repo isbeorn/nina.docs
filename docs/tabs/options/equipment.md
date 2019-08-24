@@ -9,7 +9,7 @@ As a summary:
 * Auto Focus Initial Offset Steps: the number of focus points that will be used on each side of perfect focus by the autofocus routine
 * Default Auto Focus Exposure Time: the exposure time in seconds that will be used by autofocus, if filter times are not set
 * AF Method: the autofocus method to be used
-* AF Disable Guiding: determines whether the autoguiding will be stopped during the autofocus routine
+* AF Disable Guiding: determines whether autoguiding will be stopped during the autofocus routine
 * AF Curve Fitting: the curve fitting method used for finding best focus based on autofocus points
 * Focuser Settle Time: the amount of time, in seconds, that should be awaited after a focuser move before starting a new exposure
 * AF Number of Attempts: the number of attempts the autofocus routine should be retried in case of unsuccessful focusing
@@ -87,4 +87,4 @@ Finding a good exposure time for autofocus is further explained in the [Auto-Foc
 
 ### Auto Focus Filter
 
-From this screen, it is possible to set (or unset) an autofocus filter, which will be used by the autofocus routine (if the User FilterWheel Offsets under Focuser Settings is set to On). This can be done by simply selecting a filter in the list, and clicking on the *Set as Default AF Filter* button. The same button can be used to unset the Auto-Focus Filter.
+From this screen, it is possible to set (or unset) an autofocus filter, which will be used by the autofocus routine (if the *Use FilterWheel Offsets* setting under *Focuser Settings* is set to On). This can be done by simply selecting a filter in the list, and clicking on the *Set as Default AF Filter* button. The same button can be used to unset the Auto-Focus Filter.
