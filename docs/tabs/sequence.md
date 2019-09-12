@@ -1,117 +1,128 @@
-The Sequences menu enables the creation of a sequence of exposures with various options for automation. The main usage is to set exposure times, filters and other settings for a total amount of frames to not have to shoot manually and have it stop after a specific amount of frames.
+The Sequences menu enables the creation of a sequence of exposures with various options for automation. The main usage is to set exposure times, filters, and other settings for a total amount of frames to not have to shoot manually and have it stop after a specific amount of frames.
 
-For further information about sequencing refer to the [Advanced Sequencing topic](../advanced/advancedsequence.md) and [Automated Meridian Flip topic](../advanced/meridianflip.md).
+For further information about sequencing refer to the [Advanced Sequencing](../advanced/advancedsequence.md) and [Automated Meridian Flip](../advanced/meridianflip.md) topics.
 
-The UI consists of following elements:
+The Sequence interface consists of the following elements:
 
 ![The sequencing tab](../images/tabs/sequence1.png)
 
 1. **Delay start**
-    * Specifies a delay (in seconds) before the first operation when the sequence is started
-    
-2. **Sequence Mode**
-    * Specify between one of two modes, “One by another” or “Rotate through”
-        * “One by another” would process each sequence entry (9) fully before switching to the next sequence entry
-        * “Rotate through” would process one item from a sequence entry and then continue with the next. Allows for example, the rotation of LRGB sequences
 
-3. **Start guiding**
-    * When enabled will try to start guiding with PHD2 after the start of the sequence
-    > PHD2 needs to be connected in the guider tab in equipment
-	> The guider (PHD2 or Direct Guider) has to be connected for dithering to work properly.
-	
-	!!! Note
-		As sequences typically start with a slew and centering process, the guider will be stopped at the beginning of the sequence, and only restarted if this option is set to on.
-    
+    Specifies a delay (in seconds) before the first operation when the sequence starts.
+
+2. **Sequence Mode**
+
+    Specify the preferred mode of sequence entry advancement.
+
+    * **One after another**: N.I.N.A. processes each sequence entry (9) in full before advancing to the next sequence entry.
+    * **Loop**: N.I.N.A. processes one item from a sequence entry before advancing to the next entry. The entire sequence will loop until all sequence entries are completed.
+
+3. **Start Guiding**
+
+    When Start Guiding is set to On, N.I.N.A. will command PHD2 to choose a guide star and begin guiding when the sequence starts. N.I.N.A must be connected to PHD2 (See Also: **Equipment > Guider**.)
+
+    !!! Note
+        Since sequences typically start with a slew and centering process, the guider will be stopped at the beginning of the sequence and only restarted if this option is set to On.
+
 4. **Slew to target**
-    * Slews to the target as specified in RA and Dec
-    * Does not Plate Solve to verify it is on target
-    
+
+    At the beginning of the sequence, N.I.N.A. will command the mount to slew to the coordinates that are specified in RA and Dec fields. This does not plate solve to verify it is on target.
+
 5. **Center target**
-    * Will center the target given the Ra and Dec coordinates
-    * Utilizes the plate solver as specified in the settings
-    > Requires a set up primary plate solver
-    
+
+    When set to On, N.I.N.A. will use the configured [plate solver](../advanced/platesolving.md) to ensure that the target is centered on the specified RA and Dec coordinates. If a rotation angle is specified and a rotator is configured and connected (See Also: **Equipment > Rotator**), N.I.N.A. will rotate the camera to the desired angle.
+
+    If the Manual Rotator is in use, the sequence will be paused and the user prompted to manually rotate the camera. The prompt will specify the necessary amount of degrees clockwise or anti-clockwise to rotate the camera, and N.I.N.A. will verify the rotation angle again until the angle is within the tolerances configured under **Options > Plate Solving > Rotation Tolerance**.
+
 6. **Estimated Download Time**
-    * User may specify the approximate download time their camera takes to download a single image however it will be automatically populated with the average download times as measured by N.I.N.A. on image download.
-    > Will be added to calculations of (7)
-    
+
+    By default, the value here will be automatically populated with the average download time of a single image from the camera, as measured by N.I.N.A. If the user wishes, this value may be changed by editing it. This time specified here will effect the Estimated Finish Time (7).
+
 7. **Estimated Finish Time**
-    * Displays the estimated finish time of the sequence
-    * Adds the download time (6) to each sequence entry
-    
-8. **Auto Focus Expander & Settings**
-    * Displays enabled auto focus options when not expanded
-    > All settings inside require a connected auto focuser
-    * Auto Focus can take place on the following conditions if enabled:
-        * Auto focus on start of the sequence 
-        * Auto focus on filter change
-        * Auto focus after elapsed time
-            * Starts the auto focus routine after a set amount of time has passed since the last auto focus routine
-        * Auto focus after a number of exposures
-            * Starts the auto focus routine after a set amount of exposures have been taken since the last auto focus routine
-        * Auto focus after a temperature change
-            * Starts the auto focus routine after a set amount of temperature change
-            * Specify the temperature difference that has to be reached since the last auto focus routine
-            > Requires a temperature sensor that reports the temperature for the auto focuser
-        * Auto focus after HFR increase
-            * If measured HFR from the previous exposure is more than the specified % of the baseline, the auto focus routine will trigger
-            * The baseline HFR is determined from the first exposure after autofocus
-            
+
+    Displays the date and time (in the computer's configured time zone) that N.I.N.A. estimates the entire sequence will complete. This estimation takes into account the number and length of the sequence's exposures, as well as the time required to download each exposure from the camera (See Also: Estimated Download Time.)
+
+8. **Auto Focus behavior and settings**
+
+    Due to the large number of auto focus options that can be configured in a sequence, they are grouped under an expandable menu. When the menu is not expanded, a summary of the activated options will be displayed. Expanding the menu by clicking on the arrow will reveal the auto focus settings and make them available for altering.
+
+    Many of the options are self-explanatory, however two in particular may require some clarification:
+
+    * **After temperature change**: Triggers an auto focus operation if the temperature changes the specified amount since the previous auto focus operation. The temperature used is sourced from the focuser, if it provides it. This option does not yet use a Weather source if the focuser does not have a temperature reporting capability.
+
+    * **After HFR increase**: If measured HFR from the previous exposure is more than the specified percent of the baseline, an auto focus operation will be triggered. The baseline HFR is determined from the first exposure after an auto focus operation.
+
 9. **Sequence entry**
-    * Each sequence entry consists out of up to 11 columns which determine how the image will be shot   
-        * Progress: shows the current progress of the image sequence
-        * Total #: the amount of frames for that specific sequence entry
-        * Time: the exposure time in seconds
-        * Type: the type of the sequence entry: BIAS, DARK, LIGHT, FLAT. Takes into effect only on the naming of the file pattern
-        * Filter: the filter that should be used
-        * Binning: the binning of your camera that should be used
-        * Dither: enable it if this sequence entry should dither while downloading
-        > Dithering will only work when PHD2 is connected
-        * Dither Every # Frame: will dither only every # frame as set when dithering is enabled
-        * Gain: Change the gain of the camera for this entry. Only available when camera can set gain
-        * Offset: Change the offset of the camera for this entry. Only available when camera can set offset
-    * Sequences cannot be changed while the sequence is running, changes require the sequence to be paused, aborted or completed.
+
+    Sequence entries define the image acquisition order and behavior of N.I.N.A. Each sequence entry consists of up to 11 columns which determine how the images will be exposed:
+
+    * **Progress**: Displays the current progress of the sequence entry in terms of exposures completed out of the total number specified
+    * **Total #**: Specifies the number of frames to expose
+    * **Time**: Specifies the exposure time, in seconds
+    * **Type**: Specifies the type of the expsosure and sequence entry. BIAS, DARK, LIGHT, FLAT.
+    * **Filter**: Specifies the filter to be used
+    * **Binning**: Specifies the camera binning level
+    * **Dither**: When enabled, N.I.N.A. will command a dither operation. To save time, dither operations are initiated while the preceding image is being downloaded from the camera
+
+    !!! important
+        Dithering will work only when PHD2 or the built-in Direct Guider is connected. See **Equipment > Guider**
+
+    * **Dither Every # Frame**: Initiates a dither operation after the specified number of frames are exposed
+    * **Gain**: Specifies the camera gain to use for the entry. This option is available only if camera is capable of setting exposure gain
+
+    * **Offset**: Specifies the camera offset to use for the entry. This option is available only if camera is capable of setting an exposure offset
+
 
 10. **Add new Sequence entry**
-    * Adds a new sequence entry line
-    
+
+    Adds a new sequence entry below the last one
+
 11. **Delete Sequence entry**
-    * Deletes the currently selected sequence line
+
+    Deletes the selected sequence entry
 
 12. **Reset Sequence entry**
-    * This resets the progress of the selected sequence line
-    
+
+    Resets the progress of the selected sequence entry to 0
+
 13. **Save Sequence**
-    * Saves the sequence as a .xml file
+
+    Saves the sequence as a XML file in the specifed folder. The file's name will be the text in the Target Name field (15).
 
 14. **Open Sequence**
-    * Loads a previously saved sequence file
-    * Will overwrite all current sequence settings
+
+    Opens a file selection window and loads a the selected sequence file. The opened sequence's settings will overwrite all settings in the current sequence.
 
 15. **Target information**
-    * Displays the target name, RA, and Dec which can be changed from here
-    * RA and Dec will affect slew on start (4) and center target (5)
-    
+
+    Displays the target name, RA, Dec, and desired rotation angle. These may be edited as needed. The RA, Dec, and rotation angle specified will be used to slew on sequence start (4) and for centering the target (5)
+
 16. **Object altitude**
-    * Shows the object's altitude, what direction it will transit, and the darkness phase of today, including the current time
-    > Altitude depends on Latitude and Longitude set in the Settings
+
+    Displays the target object's altitude, the direction point at which it will transit, the darkness phase of the current day, and includes a veritical marker for the current time.  The accuracy of the altitude curve requires that the latitude and longitude be set under **Options > General > Astrometry**.
 
 17. **Start Sequence**
-    * Starts the sequence
-    * Once a sequence is started this button changes into a pause and cancel button
-    * Pausing will pause the sequence after the current frame
-    * Cancel will abort the frame capture completely and stop the sequence
-    
-18. **Sequence Target Tab List**
-    * List of planned sequence targets for multi target sessions
-    * Clicking on a tab will switch to that targets sequence
-    > Sequence settings are target specific
-    * Hovering the cursor over a tab reveals the reset progress button and delete target button
 
-19. **Add Target Button**
-    * Adds an unspecified target to the target list
-    > Using the set target buttons in framing and sky atlas will change the target for the currently selected sequence
-    
+    Pressing the Start button starts the sequence, either from the beginning or from where it was last stopped or paused. Once a sequence is started, this button will change to separate Pause or Cancel buttons.
+
+    * Pausing will pause the sequence after the current frame completes exposing
+    * Cancel will abort any active operation (including any in-progress exposures) and stop the sequence
+
+18. **Sequence Target Tab List**
+
+    Multiple sequences can be loaded into N.I.N.A., with each residing in its own tab at the top of the Sequence window. When multiple sequences are opened, N.I.N.A. will run each sequence in order after the prior sequence is completed. This allows you to specify multiple targets to image over the course of a night, each with their own settings and behaviors.
+
+    * Clicking on a tab will switch to that target's sequence
+    * Sequence settings are specific to the target
+    * Hovering the cursor over a tab will reveal the Reset Progress and Delete buttons
+
+19. **Add Sequence button**
+
+    Pressing this button adds an empty sequence as a new tab. If a **Sequence Template** file is specified under **Options > Imaging > Sequence**, that template will be automatically loaded in the new tab.
+
 20. **Grab Coordinates button**
-    * This grabs coordinates from a preconfigured planetarium software
-    > This is configured in the options tab
+
+    Pressing this button grabs coordinates of the selected object in a supported planetarium application. See **Options > Planetarium > Planetarium Preferences** to configure and select a supported planetarium application.
+
+!!! note
+    Sequences cannot be changed while the sequence is running. Changing a sequence's settings require the it to be paused, aborted, or completed.

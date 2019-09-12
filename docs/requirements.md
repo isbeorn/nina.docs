@@ -4,7 +4,7 @@
 
 The following represents the minimum system resources required to operate N.I.N.A.
 
- * A dual core x64 CPU
+ * A dual-core x64 CPU
  * 2GB of RAM
  * Windows 7 (64 bit) or later, however Windows 10 is highly recommended
  * 250MB of free disk space without the optional SkyAtlas image data (1.5GB with)
@@ -15,7 +15,7 @@ The following represents the minimum system resources required to operate N.I.N.
 
 ## Recommended and Optional support software
 
-The functionality of N.I.N.A. shines through when paired with a supporting cast of other applications. Please consider the items in the following lists in order to access the full breadth of N.I.N.A.'s capabilities.
+The functionality of N.I.N.A. shines through when paired with a supporting cast of other applications. Please consider the items in the following lists to access the full breadth of N.I.N.A.'s capabilities.
 
   * [ASCOM 6.4 framework](//ascom-standards.org/Downloads/Index.htm) (recommended)
   * [PHD2 Guiding](//openphdguiding.org/downloads/) (recommended)
@@ -36,7 +36,7 @@ The functionality of N.I.N.A. shines through when paired with a supporting cast 
 
 ### Direct (native) camera support
 
-N.I.N.A. can directly interface with a wide range of popular cameras without the need for an intermediate ASCOM driver. Direct camera access is preferred over accesing the camera through ASCOM for performance reasons and to access additional camera controls that cannot be manipulated through ASCOM.
+N.I.N.A. can directly interface with a wide range of popular cameras without the need for an intermediate ASCOM driver. Direct camera control is recommended over accessing the camera through ASCOM for performance reasons and to access additional camera controls that cannot be manipulated through ASCOM.
 
  * Altair
  * Atik
@@ -50,11 +50,11 @@ N.I.N.A. can directly interface with a wide range of popular cameras without the
 !!! note
     Certain older Nikon DSLRs require a serial shutter cable for bulb exposures. Please consult your camera's documentation regarding its requirements for long exposure operation using a USB or other remote cable.
 
-The list of supported cameras can change and expand as N.I.N.A. developers gain access to relevant hardware or support is contributed in some fashion.
+The list of supported cameras can change and expand as N.I.N.A. developers gain access to relevant hardware or support is contributed.
 
 ### ASCOM Device Support
 
-Astronomy-related equipment often has an [ASCOM](//ascom-standards.org/) driver for it. N.I.N.A. supports accessing the following types of devices through their associated ASCOM drivers, as long as the drivers are fully compliant with the relevant ASCOM frameworks. Cameras which lack direct support in N.I.N.A. but *do* have an ASCOM driver may also be utilized this way. The following ASCOM device classes are suppported:
+Astronomy-related equipment often has an [ASCOM](//ascom-standards.org/) driver for it. N.I.N.A. supports accessing the following types of devices through their associated ASCOM drivers, as long as the drivers are fully compliant with the relevant ASCOM frameworks. Cameras that lack direct support in N.I.N.A. but *do* have an ASCOM driver may also be utilized this way. The following ASCOM device classes are supported:
 
  * Cameras
  * Mounts (aka "Telescopes")
@@ -72,4 +72,4 @@ Astronomy-related equipment often has an [ASCOM](//ascom-standards.org/) driver 
 
 ### Guiding Applications
 
-N.I.N.A. supports interfacing directly with PHD2 to know the status of guiding and to effect actions such as dithering. Telemetry from PHD2 also can be displayed inside the Imaging tab. If desired, N.I.N.A. can automatically launch PHD2. Currently, PHD2 is the only external guiding application that N.I.N.A. supports in such a way.
+N.I.N.A. supports interfacing directly with PHD2 to monitor the status of guiding and to effect actions such as dithering. Telemetry from PHD2 also can be displayed inside the Imaging tab. If desired, N.I.N.A. can automatically launch PHD2. Currently, PHD2 is the only external guiding application that N.I.N.A. supports.

@@ -1,4 +1,4 @@
-The Equipment tab is where one manages the hardware that N.I.N.A. interacts with. The classes of hardware devices that N.I.N.A. supports are each their own sub-tab. Each sub-tab operates similarly.
+The Equipment tab is where one manages the hardware that N.I.N.A. controls. The classes of hardware devices that N.I.N.A. supports are separate sub-tabs.
 
 ## Selecting Equipment
 
@@ -6,7 +6,7 @@ Each tab has a drop-down box that lists the devices and drives that were detecte
 
 ![Equipment Listing](../images/tabs/equipment1.png)
 
-In the above exmaple of a list of Cameras, the `ZWO ASI1600MM Pro` is listed under the `ZWOptical` category. You would select this device to connect to the camera directly. If connecting to the camera via ASCOM is desired, you would select the apprpriate `ASI Camera` driver in the `ASCOM` driver section. This is so it is clear *how* the device is accessed and operated.
+In the above example of a list of cameras, the `ZWO ASI1600MM Pro` is listed under the `ZWOptical` category. You would select this device to connect to the camera directly. If connecting to the camera via ASCOM is desired, you would select the appropriate `ASI Camera` driver under the `ASCOM` section. Driver categories exist so that it is clear *how* the device is accessed and operated.
 
 ## Management
 
@@ -14,7 +14,7 @@ Next to the drop-down box is a series of buttons:
 
 ![Management](../images/tabs/equipment2.png)
 
-1. The drop-down box that lists detected devices.
+1. A drop-down box that lists all detected devices.
 2. Buttons to the right of the drop-down box may be used to:
 <ol type="a">
     <li>Configure the selected device or ASCOM driver</li>
@@ -27,6 +27,4 @@ Next to the drop-down box is a series of buttons:
 
 ## Information and Controls
 
-Any device tab will also display information pertaining to the device that was selected and connected to. What information is displayed various among device types.
-
-Devices might also display controls in the tab
+Any device tab also displays information that pertains to the device that was selected and connected. Specific devices may also display control functions in this area.

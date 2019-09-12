@@ -1,40 +1,38 @@
-Framing Assistant allows you to frame the next shot perfectly via several online sourced survey images, an inbuilt planetarium, or user supplied image. It can utilize plate solving to perfectly align your telescope to match the position of the framing rectangle.
+Framing Assistant allows you to frame the next shot perfectly via several online sky survey services, an inbuilt planetarium, or a user-supplied image. It can utilize plate solving to perfectly align your telescope and rotator (if equipped) to match the position of the framing rectangle.
 
-For further information about using the Framing Asisstant refer to the [advanced framing topic](../advanced/framingassistant.md)
+For further information about using the Framing Assistant refer to the [Advanced Framing](../advanced/framingassistant.md) topic.
 
 ![The Framing Tab](../images/tabs/framingassistant1.png)
 
-1. **Image Source Drop Down**
-    * Allows you to change the image source 
-    * Possible options are 
-        * Digital Sky Survey: requires an internet connection to download the data 
-        * SkyAtlas: An offline planetarium that displays circles representing approximate target sizes 
-        * From File: can load in a jpg, gif, png or tif file 
-        * Cache: utilizes the local cache 
-    * Successfully solved local and survey images are cached 
-    * From File will utilize the Blind Solver to determine the coordinates and it can take a while 
+1. **Image Source** selection menu
+    * Allows you to specify the source of an image to utilize in the Framing Assistant. Possible options are:
+        * **Digital Sky Survey**: Fetch an image of the object from a sky survey server. This requires an internet connection
+        * **Sky Atlas**: N.I.N.A.'s own database of objects. Circles representing approximate target sizes will be displayed
+        * **From File**: Load an existing JPEG, GIF, PNG or TIFF image of an object.
+        * **Cache**: Utilize images from a local cache of images there have already been downloded from one of the Digital Sky Survey servers
+    * When an image is provided through **From File**, the configured [Blind Solver](../advanced/platesolving.md) is used to determine the coordinates and orientation of the image. Blind solving can be a slow process and may take a long time to complete
+    * Successfully-solved or downloaded local and sky survey images are cached
 
-2. **Planetarium Sync Button**
-    * This grabs coordinates from a external planetarium program (i.e. stellarium) 
+2. **Planetarium Sync**
+    * Pressing the Planetarium Sync button fetches the coordinates of a selected object from the configured external planetarium program
 
 3. **Coordinates**
-    * You can set the name, RA and Dec coordinates here as well as the field of view in degrees 
-    * RA, Dec and field of view are unavailable when loading from file 
-    > Fields will be populated once the image has been solved 
+    * The RA, Dec, and Field of View of a location in the sky may be manually entered here 
+    * RA, Dec and Field of View are initially unavailable when loading an image from file, however these fields will be populated once the image has been automatically solved
 
 4. **Load Image**
-    * Starts the image download when using a survey 
-    * Starts the plate solving mechanism when using from file 
-    * Tries to load the coordinates from cache 
+    * Starts the image download when using a sky survey 
+    * Starts the plate solving mechanism when using **From File**
+    * Attempts to load an image from the cache using the provided coordinates
 
 5. **Width, Height, Pixel Size and Focal Length**
-    * Values will be set from a connected camera automatically if available 
-    * Not available for DSLR users 
-    * Focal length is not synchronized to the Settings page > This allows you to play around with various focal lengths to check your framing 
-    * These parameters determine the size of the framing rectangle (15) 
+    * Values will be set from the connected camera automatically, if available 
+    * These settings are not available to DSLR users
+    * The specified Focal Length is **not** synchronized to the your Telescope settings. This allows you to experiment with various focal lengths
+    * These parameters determine the size of the framing rectangle (15)
 
 6. **Mosaic Panels and rotation**
-    * Rotation can be set freely and should match your cameras orientation as determined by plate solving 
+    * Rotation can be set freely and should match your camera's orientation as determined by plate solving 
     * You can specify the number of panels for an N x M size mosaic 
     * You can specify the % overlap between each panel 
 
@@ -43,14 +41,14 @@ For further information about using the Framing Asisstant refer to the [advanced
     * When using cached images or file source, the framing rectangle is centered on the image center 
 
 8. **Slew**
-    * Slews the mount exactly to the coordinates of the center of the framing rectangle (16) 
+    * Slews the mount to the coordinates of the center of the framing rectangle (16) 
 
 9. **Replace as Sequence**
     * Sets the coordinates of the RA and Dec of the framing window as the sequence and copies the name over to the sequence tab as well 
     * Replacing the target also resets sequence settings to default 
 
 10. **Add as Sequence**
-    * The same as (9) but the framed target is added as a new sequence target and tab, this does not affect the current sequence 
+    * The same as (9), but the framed target is added as an addition sequence target. This does not affect other sequences
 
 11. **Altitude browser**
     * Displays the altitude of the target over time, indicating current position and meridian 
@@ -62,7 +60,7 @@ For further information about using the Framing Asisstant refer to the [advanced
     * From left to right: Opacity of framing rectangle, constellation boundaries, constellation annotation, equatorial grid, annotate DSOs 
 
 14. **Image**
-    * The image as downloaded from the survey, cache, skyatlas or  loaded file 
+    * The image as downloaded from the sky survey, cache, Sky Atlas or provided by **From File** 
 
 15. **Framing rectangle**
     * Depends on the camera and focal length parameters (5) 
