@@ -38,7 +38,9 @@ nav:
                 - TIFF: 'advanced/file_formats/tiff.md'
                 - FITS: 'advanced/file_formats/fits.md'
                 - XISF: 'advanced/file_formats/xisf.md'
-        - Troubleshooting: 'troubleshooting.md'
+        - Troubleshooting:
+            - General: 'troubleshooting/general.md'
+            - iOptron Mount Setup: 'troubleshooting/ioptron.md'
         - Glossary: 'glossary.md'
         - License: 'license.md'
     - Quick Start:
