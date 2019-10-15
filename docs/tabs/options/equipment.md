@@ -90,6 +90,16 @@ This is the tab where you set up all the parameters recmd-k vlated to your equip
 20. **Binning**
     * The binning to be used for Autofocus exposures. 
 
+### Auto Focus Exposure Time
+
+The ideal auto-focus time can change per filter, particularly between broadband and narrowband filters (in the above example, the narrowband filter requires an exposure time 5 times longer than the broadband filters). This can easily be set up here.
+
+Finding a good exposure time for autofocus is further explained in the [Auto-Focus section](../../advanced/autofocus.md)
+
+### Auto Focus Filter
+
+From this screen, it is possible to set (or unset) an autofocus filter, which will be used by the autofocus routine (if the *Use FilterWheel Offsets* setting under *Focuser Settings* is set to On). This can be done by simply selecting a filter in the list, and clicking on the *Set as Default AF Filter* button. The same button can be used to unset the Auto-Focus Filter.
+
 ## Weather
   This section is used to enter the OpenWeatherMap API Key to retrieve real time weather data in [Imaging](../imaging.md) tab Weather window.
 
@@ -108,55 +118,6 @@ This is the tab where you set up all the parameters recmd-k vlated to your equip
 24. **Filterwheel**
     * If a Filter Wheel is connected in [Equipment](../equipment.md) this window lists the available filters and names.
     > Filters can be added manually  (25) or imported from ASCOM filter wheel drivers (26)
-
-## Guider Settings
-This section is used to connect N.I.N.A. with PHD2 and define Dithering parameters
-
-27. **PHD2 Path**
-    * PHD2 installation path
-
-28. **PHD2 Server URL and Port**
-    * You can set the PHD2 server settings here
-    > Usually the defaults should work fine. You need to enable PHD2 server in PHD2.
-
-29. **PHD2 Dither Pixels and Dither RA Only**
-    * The amount of guide camera pixels to dither in PHD2. If "Dither RA only" is checked, the dither movements will only be performed in RA. 
-
-30. **PHD2 Settle Pixel Tolerance**
-    * The threshold expressed in guide camera pixels that will determine a dither settling completion after a dither move.
-    > A dither  will be considered settled if, after the "Minimum Settle Time" and before the "PHD2 Settle Timeout", the guide movements in PHD2  will be below the "PHD2 Settle Pixel Tolerance".
-
-31. **Minimum Settle Time**
-    * The minimum time N.I.N.A. should wait after a dithering process until it starts the next capture
-
-32. **PHD2 Settle Timeout**
-    * The maximum time N.I.N.A. should wait after a dithering process until it starts the next capture. After this time N.I.N.A. will start a new capture regardless of dithering settling completion.
-
-33. **Direct Guide Duration**
-    * Duration of guide when Direct Guide is selected
-  
-!!!tip
-    Refer to [Dithering](../../advanced/dithering.md) in Advanced documentation topics for more information about Dithering and how to set the above parameters
-## Focuser Options
-
-This section contains options that are related to the focuser and the auto-focus methods. They are described in detail in the [Auto-Focus Documentation](../../Advanced/autofocus.md).
-
-As a summary:
-
-* Use FilterWheel Offsets: determines whether the focuser should move per the defined offset when the filter wheel changes filter
-* Auto Focus Step Size: the number of focuser steps that the autofocus routine will move by between autofocus points
-* Auto Focus Initial Offset Steps: the number of focus points that will be used on each side of perfect focus by the autofocus routine
-* Default Auto Focus Exposure Time: the exposure time in seconds that will be used by autofocus, if filter times are not set
-* AF Method: the autofocus method to be used
-* AF Disable Guiding: determines whether autoguiding will be stopped during the autofocus routine
-* AF Curve Fitting: the curve fitting method used for finding best focus based on autofocus points
-* Focuser Settle Time: the amount of time, in seconds, that should be awaited after a focuser move before starting a new exposure
-* AF Number of Attempts: the number of attempts the autofocus routine should be retried in case of unsuccessful focusing
-* AF Number of Frames per Point: the number of frames whose HFR or contrast will be averaged per focus points
-* Use Brightest n Stars: the number of top brightest stars that the autofocus routine will use - 0 means there is no limit
-* AF Inner and Outer Crop Ratios: ratios (as numbers between 0.2 and 1) that will determine a centered region of interest for autofocus
-* Backlash IN/OUT: the focuser backlash in the IN (decreasing position) and OUT (increasing position) directions, expressed in focuser steps. A tool described in the [Focuser Backlash Measurement Section](../../advanced/backlashmeasurement) is available to measure it
-* Binning: the binning to be used for Autofocus exposures
 
 ## Filter Wheel Configuration
 
@@ -218,12 +179,31 @@ This is what has been done in the above screenshot.
 
 Note that for this to work, the *Use FilterWheel Offsets* parameter under the Focuser Options needs to be set to On.
 
-### Auto Focus Exposure Time
+## Guider Settings
+This section is used to connect N.I.N.A. with PHD2 and define Dithering parameters
 
-The ideal auto-focus time can change per filter, particularly between broadband and narrowband filters (in the above example, the narrowband filter requires an exposure time 5 times longer than the broadband filters). This can easily be set up here.
+27. **PHD2 Path**
+    * PHD2 installation path
 
-Finding a good exposure time for autofocus is further explained in the [Auto-Focus section](../../advanced/autofocus.md)
+28. **PHD2 Server URL and Port**
+    * You can set the PHD2 server settings here
+    > Usually the defaults should work fine. You need to enable PHD2 server in PHD2.
 
-### Auto Focus Filter
+29. **PHD2 Dither Pixels and Dither RA Only**
+    * The amount of guide camera pixels to dither in PHD2. If "Dither RA only" is checked, the dither movements will only be performed in RA. 
 
-From this screen, it is possible to set (or unset) an autofocus filter, which will be used by the autofocus routine (if the *Use FilterWheel Offsets* setting under *Focuser Settings* is set to On). This can be done by simply selecting a filter in the list, and clicking on the *Set as Default AF Filter* button. The same button can be used to unset the Auto-Focus Filter.
+30. **PHD2 Settle Pixel Tolerance**
+    * The threshold expressed in guide camera pixels that will determine a dither settling completion after a dither move.
+    > A dither  will be considered settled if, after the "Minimum Settle Time" and before the "PHD2 Settle Timeout", the guide movements in PHD2  will be below the "PHD2 Settle Pixel Tolerance".
+
+31. **Minimum Settle Time**
+    * The minimum time N.I.N.A. should wait after a dithering process until it starts the next capture
+
+32. **PHD2 Settle Timeout**
+    * The maximum time N.I.N.A. should wait after a dithering process until it starts the next capture. After this time N.I.N.A. will start a new capture regardless of dithering settling completion.
+
+33. **Direct Guide Duration**
+    * Duration of guide when Direct Guide is selected
+  
+!!!tip
+    Refer to [Dithering](../../advanced/dithering.md) in Advanced documentation topics for more information about Dithering and how to set the above parameters
