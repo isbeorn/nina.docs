@@ -1,7 +1,6 @@
-<<<<<<< HEAD
 This is the tab where you set up all the parameters recmd-k vlated to your equipment.  
 
-![Equipment Settings](.../../../../images/tabs/equipmentSettings1.png)
+![Equipment Settings](../../images/tabs/equipmentSettings1.png)
 
 ## Camera
 
@@ -26,7 +25,7 @@ This is the tab where you set up all the parameters recmd-k vlated to your equip
     > This value changes for different Gain/Offset.   
      To evaluate the mean ADU you can follow these simple steps: 
      > - set the same Gain/Offset that will be used durign your imaging session  
-     > - go to [Imaging](../../../nina.docs/docs/tabs/imaging.md) tab, under "Imaging" window  set an exposure of 0.001s
+     > - go to [Imaging](../../tabs/imaging.md) tab, under "Imaging" window  set an exposure of 0.001s
      > - take an exposure  
      > - the Mean value will be displayed in the "Statistics" window   
      ![settingswindow](../../images/tabs/settingswindow.png)
@@ -53,8 +52,8 @@ This is the tab where you set up all the parameters recmd-k vlated to your equip
 
 ## Telescope
 9. **Telescope**
-* This section lets you enter the parameters relative to your telescope that will be used for [Platesolving](../../../nina.docs/docs/advanced/platesolving.md).  
-> If you change telescope, remember to update these settings or to switch profile under [Options/General](../../../nina.docs/docs/tabs/options/general.md).
+* This section lets you enter the parameters relative to your telescope that will be used for [Platesolving](../../advanced/platesolving.md).  
+> If you change telescope, remember to update these settings or to switch profile under [Options/General](../../tabs/options/general.md).
 
 ## Focuser
 
@@ -137,4 +136,4 @@ This section is used to connect N.I.N.A. with PHD2 and define Dithering paramete
     * Duration of guide when Direct Guide is selected
   
 !!!tip
-Refer to [Dithering](../../advanced/dithering.md) in Advanced documentation topics for more information about Dithering and how to set the above parameters
+    Refer to [Dithering](../../advanced/dithering.md) in Advanced documentation topics for more information about Dithering and how to set the above parameters
