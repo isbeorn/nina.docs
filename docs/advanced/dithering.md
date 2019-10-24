@@ -56,13 +56,12 @@ An explanation of the two most important dithering-related settings follows:
 
  * **PHD2 Dither Pixels**: The amount of pixels (on the guiding camera) that the dithering action will shift. This value should take into account the guiding imaging scale and main camera imaging scale, in arcsec/pixels. To select the appropriate value you need to consider how many imaging camera pixels will shift between two exposures as a consequence of a dither move. Obviously, 2 pixels at one focal length and pixel size will cover a different amount of sky than another setup with a different focal length and pixel size.
  It is usually recommended to dither a number of guide camera pixels that will shift the main imaging camera of about 10 pixels.
- > Let's assume to have a guide camera with 2.9microns pixel and a 240mm focal length off-axis guidescope, resulting in a guide scale of 2.9arcsec/px. The imaging optical train is composed by a camera with 3.8microns pixel and a 540mm focal length scope, resulting in an imaging scale of 1.5arcsec/pixel.  A guide camera shift of 6 pixels corresponds to a motion of 15arcsec or 10 pixels of shift for the main imaging camera. In this case a PHD" Dither Pixels of 6 pixel is therefore appropriate.
+ > Let's assume to have a guide camera with 2.9microns pixel and a 240mm focal length off-axis guidescope, resulting in a guide scale of 2.9arcsec/px. The imaging optical train is composed by a camera with 3.8microns pixel and a 540mm focal length scope, resulting in an imaging scale of 1.5arcsec/pixel.  A guide camera shift of 6 pixels corresponds to a motion of 15arcsec or 10 pixels of shift for the main imaging camera. In this case a PHD2 Dither Pixels of 6 pixel is therefore appropriate.
 
- !!! Note
-     UThe PHD2 Dither Pixel value will be multiplied by PHD2 by the "Scale" value found under Advance Setup>Dither Settings of PHD2. This value will be multiplied by the Dither Pixel set in N.I.N.A. to determine the final pixel shift amount. It is recommended to leave it at 1 and only change the amount of dither pixels in N.I.N.A.  
-     ![phdscale](../images/advanced/PHD2Scale.PNG)
-
-
+!!! note
+    The PHD2 Dither Pixel value will be multiplied by PHD2 by the "Scale" value found under Advance Setup>Dither Settings of PHD2. This value will be multiplied by the Dither Pixel set in N.I.N.A. to determine the final pixel shift amount. It is recommended to leave it at 1 and only change the amount of dither pixels in N.I.N.A.  
+        ![phdscale](../images/advanced/PHD2Scale.PNG)
+ 
  * **Dither RA Only**: This will cause dithering to happen on the RA axis only and allow the declination axis to continue guiding.
   > This option should only be checked in the following cases:
   > - your mount does not support DEC guiding (i.e. skytracker)
