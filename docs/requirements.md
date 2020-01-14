@@ -6,7 +6,7 @@ The following represents the minimum system resources required to operate N.I.N.
 
  * A dual-core x64 CPU
  * 2GB of RAM
- * Windows 7 (64 bit) or later, however Windows 10 is highly recommended
+ * Windows 8 (64 bit) or later, however Windows 10 is highly recommended
  * 250MB of free disk space without the optional SkyAtlas image data (1.5GB with)
  * [.NET Framework 4.7.2 Runtime](//dotnet.microsoft.com/download/dotnet-framework/net472) (included with Windows 10 April 2018 Update (build 1803) and later)
 
