@@ -131,22 +131,8 @@ In this panel  all the important information about the last acaptured image are 
     * Number of detected stars and mean HFR
         > Stars and HFR will only be displayed if Automatic HFR is active
     * Bit Depth as reported by the image header  
-  
-   
 
-2. Optimal Exposure Calculator: this tool will suggest  recommended exposure times based on the measured Min and Max ADU values of the last captured image.  The tool takes into consideration  the average skyglow and will calulate the exposures to swamp the camera read noise by a factor of 3x (Min) and 10x (Max).   
-The Optimal exposure time will factor in the download to data ratio. For fast download cameras this will basically match  the Min recommended time.
-Min and Max exposure times are calculated as follows:
-`MinimumRecommendedExposureTime = ((MinExposureADU - _offset) / (mean - _offset)) * exposureTime`
-`MaximumRecommendedExposureTime = ((MaxExposureADU - _offset) / (mean - _offset)) * exposureTime`
-where:
-`MinExposureADU = _offset + 3 * _squaredReadNoise`  
-`MaxExposureADU = _offset + 10 * _squaredReadNoise`
-
-    > Formulas rely on the camera parameters set in Options-[Equipment](options/equipment.md) and are only valid for one specific gain level.
-    If you change the gain of your camera, a new set of  parametes must be entered in [Equipment](options/equipment.md).
-
-3. Image histogram of the last captured image
+2. Image histogram of the last captured image
 
 **M. HFR History**  ![HFRicon](../images/tabs/imaging_HFRicon.PNG)  
 When automatic HFR (Half-FLux-Radius) star detection is ON, this panel will diplay the history of HFR values and number of stars used to evaluate the HFR for each exposure.
@@ -243,5 +229,44 @@ When you have to manual focus your scope this tab lets you conveniently choose a
 2. Selected star properties
 3. Slews telescope to the selected star
 
+**T. Exposure Calculator** ![ExpCalcIcon](../images/tabs/imaging_expcalcicon.PNG)  
+
+This tool will suggest recommended exposure times based on the measured Min and Max ADU values of a captured image. Average skyglow will be taken into consideration and will calulate the exposures to swamp the camera read noise by a factor of 3x (Min) and 10x (Max).
+When the button (2) is clicked the application will take one exposure and calculate the recommended times based on the image and the given input values.
+Min and Max exposure times are calculated as follows:
+`MinimumRecommendedExposureTime = ((MinExposureADU - BIASMean) / (mean - BIASMean)) * exposureTime`
+`MaximumRecommendedExposureTime = ((MaxExposureADU - BIASMean) / (mean - BIASMean)) * exposureTime`
+where:
+`MinExposureADU = BIASMean + 3 * _squaredReadNoise`  
+`MaxExposureADU = BIASMean + 10 * _squaredReadNoise`
+
+    > Formulas rely on the camera parameters set in (1) and are only valid for one specific gain level.
+    If you change the gain of your camera, a new set of  parametes must be entered.
+
+![ExpCalc](../images/tabs/imaging_expcalc.png)
+
+
+        
+5. **Full Well Capacity in e**
+    * The Full Well Capacity in electrons 
+    > Full well charts for different Gain values are usually provided by camera manufacturers. Consult your camera manual/website or contact your vendor.  
+
+6.	**Download to Data ratio**
+      * The ratio the optimal exposure calculator will utilize this value to calculate the maximum adequately possible exposures. Default will work in most cases.
+7. 
+2. **Camera read noise in e**
+    * The read noise in electrons of your camera device
+    > Read noise charts for different Gain values are usually provided by camera manufacturers. Consult your camera manual/website or contact your vendor.   
+    For DSLR refer to sensorgen.info or ccdparameters script in PixInsight
+
+3. **BIAS mean (native)**
+    * The mean value in ADU of your BIAS (shortest exposure) at your cameras native bit depth (4)
+    > This value changes for different Gain/Offset.   
+     To evaluate the mean ADU you can follow these simple steps: 
+     > - set the same Gain/Offset that will be used durign your imaging session  
+     > - go to [Imaging](../../tabs/imaging.md) tab, under "Imaging" window  set an exposure of 0.001s
+     > - take an exposure  
+     > - the Mean value will be displayed in the "Statistics" window   
+     ![settingswindow](../../images/tabs/settingswindow.png)
 
 

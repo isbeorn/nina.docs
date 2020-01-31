@@ -23,7 +23,6 @@ nav:
                 - Equipment: 'tabs/options/equipment.md'
                 - Imaging: 'tabs/options/imaging.md'
                 - Plate Solving: 'tabs/options/platesolving.md'
-                - Planetarium: 'tabs/options/planetarium.md'
         - Advanced Topics:
             - Plate Solving: 'advanced/platesolving.md'
             - Object Browser: 'advanced/objectbrowser.md'
