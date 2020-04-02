@@ -26,6 +26,16 @@
 7. Next you need to add a the "upstream" to the root repository (where your fork is based on). This is later required for merging from the main dev branch etc.
 ![Add upstream](../images/setup/Clone3.png)
 
+## Fetching the Large File Storage files
+
+1. Bitbucket will not automatically copy over the LFS into the fork repository. This has to be done manually
+2. Run the following commands to sync the lfs
+```
+git lfs fetch --all upstream
+git lfs push --all origin
+git lfs pull
+```
+
 ## Navigation in Visual Studio
 
 1. Navigate to your local clone and open "NINA.sln"
