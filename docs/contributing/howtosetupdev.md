@@ -22,9 +22,16 @@
 4. Navigate to the folder where you want your repository folder should be created in
 5. Enter the command that was shown in step 2.
 ![Command string to clone](../images/setup/Clone2.png)
+```
+git clone https://<YourUserName>@bitbucket.org/<YourUserName>/<YourForkName>.git
+cd <YourForkName>
+```
 6. Navigate to the created sub folder
 7. Next you need to add a the "upstream" to the root repository (where your fork is based on). This is later required for merging from the main dev branch etc.
 ![Add upstream](../images/setup/Clone3.png)
+```
+git remote add upstream htps://<YourUserName>@bitbucket.org/Isbeorn/nina.git
+```
 
 ## Fetching the Large File Storage files
 
