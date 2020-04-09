@@ -55,7 +55,7 @@ This panel displays the focuser status and lets you manually move it to the desi
    > It is convenient to set the target position as the position of near-focus for your setup. This position can be determined by using a Bahtinov mask on a bright star (see **Manual Focus Targets**). Once the near-focus position is determined, input the number of steps indicated in "Position" (3) in Target Position field. You can then instruct the focuser to move to this position at the beginning of each imaging session before starting the Auto-Focusing routine 
 7. The arrows will move the focusers back and forth of a pre-defined amount related to the Auto Focus Step Size defined under Options - [Equipment](options/equipment.md):
     * Single arrow <  > : half the Auto Focus Step Size
-    * Double arrows <<  >> : twice the Auto Focus Step Size
+    * Double arrows <<  >> : five times the Auto Focus Step Size
 
 
 **E. Rotator** ![roticon](../images/tabs/imaging_rotatoricon.PNG)  
