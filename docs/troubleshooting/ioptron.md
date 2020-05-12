@@ -23,7 +23,7 @@ Click “Apply Settings” and close
 
 ## Configure N.I.N.A.
 
-a) Launch N.I.N.A., under Options>General>Astrometry set Epoch to JNOW, this is how iOptron Commander is sending coordinates to the mount. Hemisphere, Lat and Long according to your location (when you connect the mount, N.I.N.A. will ask you if you want to sync Lat and Long from the mount if it has an integrated GPS)
+a) Launch N.I.N.A.,  Epoch to JNOW is automatically detected. Set hemisphere, Lat and Long according to your location (when you connect the mount, N.I.N.A. will ask you if you want to sync Lat and Long from the mount if it has an integrated GPS)
 ![Astrometry Settings](../images/troubleshooting/ioptron/astrometry.png)
 
 b) In Options>Imaging>Auto Meridian Flip you can define the mount behavior at meridian passing. Please refer to N.I.N.A. documentation [here](../advanced/meridianflip.md) for a detailed description of each parameter.

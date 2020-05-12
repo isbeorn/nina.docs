@@ -22,10 +22,10 @@ For usage of the Plate Solver refer to [Advanced Topics: Plate Solving](../../ad
     * The default filter to be used for platesolving
   
 5. **Binning**
-   * The default binning to be used for platesolving
+    * The default binning to be used for platesolving
   
 6. **Gain**
-   * The default binning to be used for platesolving
+    * The default binning to be used for platesolving
     > If empty the current camera Gain will be used
 
 7. **Pointing Tolerance**
@@ -41,7 +41,7 @@ For usage of the Plate Solver refer to [Advanced Topics: Plate Solving](../../ad
 10. **Delay between attempts**
     * The delay between plate solving reattempts in minutes
 
-### Plate Solver Settings
+    ## Plate Solver Settings
 
 11. **Plate Solver Settings Selection**
     * This menu displays the currently supported platesolvers in NINA

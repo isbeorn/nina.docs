@@ -2,7 +2,7 @@ This is the tab where you set up all the parameters recmd-k vlated to your equip
 
 ![Equipment Settings](../../images/tabs/OptionsEquipment10.png)
 
-### Camera
+## Camera
 
 1. **Pixel Size**
     * The Pixel Size of your camera sensor in micrometers. This field will be automatically populated by the camera, if it provides the information.
@@ -38,216 +38,221 @@ This is the tab where you set up all the parameters recmd-k vlated to your equip
     !!! note
         Both raw converters will deliver you the raw frame of your DSLR, but they might vary in color. Saving the raw frame without adding the camera specific profile with FreeImage can deliver more faint and less colorful raw images than you are used to.
 
-### Telescope
+    ## Telescope
 
-6. **Telescope**
+7. **Telescope**
     * This section lets you enter the parameters of your telescope that will be used for [Platesolving](../../advanced/platesolving.md).  
     > If you change telescope, remember to update these settings or to switch profile under [Options/General](../../tabs/options/general.md).
 
-7. **Settle time after slew**
+8. **Settle time after slew**
     * Time in seconds to wait after a scope slew before imaging again
 
-8. **No Sync**
+9.  **No Sync**
     * When active it prevents sending syncs to the mount during centering. Instead an offset is calculated to center the mount.
     > Can be useful when you have a permanent setup and a good mount and created a solid pointing model in order not to interfere with it.
   
-### Focuser
-
-9. **Use FilterWheel offset**
+10. **Use FilterWheel offset**
     * Determines whether the focuser should move per the defined offset when the filter wheel changes filter
 
-10. **Auto Focus Step Size**
+11. **Auto Focus Step Size**
     *  the number of focuser steps that the autofocus routine will move by between autofocus points
   
-11. **Auto Focus Initial Offset Steps**
+12. **Auto Focus Initial Offset Steps**
     * The number of focus points that will be used on each side of perfect focus by the autofocus routine
 
-12. **Default Auto Focus Exposure Time**
+13. **Default Auto Focus Exposure Time**
     * The exposure time in seconds that will be used by autofocus, if filter times are not set
 
-13. **AF Method**
+14. **AF Method**
     * Method used to detect datapoints for auto focus
 
-14. **AF disable Guiding**
+15. **AF disable Guiding**
     * Activate to pause guiding during AF routine (recommended when guiding with OAG)
 
-15. **AF Curve Fitting**
+16. **AF Curve Fitting**
     * Fitting that should be used to determine ideal focus position out of the measured data points
 
-16. **Focuser Settle Time**
+17. **Focuser Settle Time**
     * The amount of time, in seconds, that should be awaited after a focuser move before starting a new exposure
   
-17. **AF Number of Attempts**
+18. **AF Number of Attempts**
     * The number of attempts the autofocus routine should be retried in case of unsuccessful focusing
 
-18. **AF Number of Frames per Point**
+19. **AF Number of Frames per Point**
     * The number of frames whose HFR or contrast will be averaged per focus points
   
-19. **Use brightest n stars**
+20. **Use brightest n stars**
     * The number of top brightest stars that the autofocus routine will use - 0 means there is no limit
 
-20. **AF Inner Crop Ratio**
+21. **AF Inner Crop Ratio**
     * Inner ratio that will determine a centered region of interest for autofocus
 
-21.  **AF Outer Crop Ratio**
+22.  **AF Outer Crop Ratio**
     * Outer ratio that will determine a centered region of interest for autofocus
-22. **Backlash IN/OUT**
-    * The focuser backlash in the IN (decreasing position) and OUT (increasing position) directions, expressed in focuser steps. A tool described in the Focuser Backlash Measurement Section is available to measure it [Imaging](../imaging.md) tab Focuser window.
   
-23. **Binning**
-    * The binning to be used for Autofocus exposures. 
+23. **Backlash Compensation Method**
+    * This controls the backlash compensation method used. The method can only be changed when the focuser is not connected!
+      * Absolute: 
+  When the focuser changes directions, an absolute value will be added to the focuser movement.
+  Backlash IN: when the focuser changes from moving outwards to moving inwards the Backlash IN value will be added
+  Backlash OUT: when the focuser changes from moving inwards to moving outwards the Backlash OUT value will be added
+      * Overshoot:
+  This method will compensate for Backlash by overshooting the target position by a large amount and then moving the focuser back to the initially requested position.
+  Due to this compensation the last movement of the focuser will always be in the same direction (either always inwards or always outwards)
+  
+24. **Backlash IN/OUT**
+      * The focuser backlash in the IN (decreasing position) and OUT (increasing position) directions, expressed in focuser steps. A tool described in the Focuser Backlash Measurement Section is available to measure it [Imaging](../imaging.md) tab Focuser window (only suggested for focusers with small backlash).
+  
+        > When Overshoot is choosen, only ONE between Backlash IN and OUT must be set! When setting IN, the amount will be applied on each inward movement, so the final movement will always be outwards. For Backlash OUT, it will be the other way around
 
-## Weather
-  This section is used to enter the OpenWeatherMap API Key to retrieve real time weather data in [Imaging](../imaging.md) tab Weather window.
+25. **Binning**
+    * The binning to be used for Autofocus exposures.
 
-24. **Fahrenheit Temperatures**
+    ## Weather
+
+26. **Fahrenheit Temperatures**
     * Switch ON to use Fahrenheit temperature scale
-
-25. **Imperial Units**
+27. **Imperial Units**
     * Switch ON to use Imperial Units
-
-26. **OpenWeatherMap API Key**
+28. **OpenWeatherMap API Key**
     * Input your personal OpenWeather API key.
     > You can get your OpenWeather free API key [here](https://openweathermap.org/api)
 
-### Filterwheel
+    ## Filterwheel
 
-27. **Filterwheel**
+29. **Filterwheel**
     * If a Filter Wheel is connected in [Equipment](../equipment.md) this window lists the available filters and names.
       * Position: filter position
       * Name: name of the filter as imported from ASCOm driver
       * Focus Offset: offset values that are used at each filter change if "Use FilterWheel Offset" is enabled  
       * Auto Focus Exposure Time: it is possible to specify an AF exposure time for each filter 
-    
-28.  **Filter + - Buttons**
+30. **Filter + - Buttons**
      * These buttons add and remove filters from the filterwheel list (24)
-
-29. **Import Button**
+31. **Import Button**
     * When clicked filters will be imported from the ascom filter wheel driver 
   
-## Filter Wheel Configuration
+    ## Filter Wheel Configuration
 
-The Filters defined in the Filter Wheel list are used in various places in N.I.N.A., especially in:
+    The Filters defined in the Filter Wheel list are used in various places in N.I.N.A., especially in:
 
-* The Sequence Tab: each sequence item can use its own filter for capture
-* The Plate Solving routine: it can be set to use a particular filter, to have lower exposure times for plate solving (e.g. using L rather than HA for example)
-* The Auto-Focus routine: like plate-solving, autofocus can be set to use a particular filter
+      * The Sequence Tab: each sequence item can use its own filter for capture
+      * The Plate Solving routine: it can be set to use a particular filter, to have lower exposure times for plate solving (e.g. using L rather than HA for example)
+      * The Auto-Focus routine: like plate-solving, autofocus can be set to use a particular filter
 
-For the above to work well, it is necessary to define the proper filters available, if necessary their filter offsets, and any filter to be used for Auto-Focus from this view.
+        For the above to work well, it is necessary to define the proper filters available, if necessary their filter offsets, and any filter to be used for Auto-Focus from this view.
 
-The screen looks like the below:
+        The screen looks like the below:
 
-![Filters](../../images/tabs/filterwheel1.png)
+        ![Filters](../../images/tabs/filterwheel1.png)
 
-**Adding filters**
+        **Adding filters**
 
-Typically the first step for a user when first setting up the filter wheel is to click on the *Import Filters from Filterwheel* button. This will take the information about the filters from the filter wheel itself (if any is available), and automatically populate the list in N.I.N.A. based on that information.
+        Typically the first step for a user when first setting up the filter wheel is to click on the *Import Filters from Filterwheel* button. This will take the information about the filters from the filter wheel itself (if any is available), and automatically populate the list in N.I.N.A. based on that information.
 
-If this doesn't work, it is possible for the user to use the *+* and *-* buttons to manually add or remove filters. Note that the Position order of the filters in this tab should match the order of the physical filters in the filter wheel.
+        If this doesn't work, it is possible for the user to use the *+* and *-* buttons to manually add or remove filters. Note that the Position order of the filters in this tab should match the order of the physical filters in the filter wheel.
 
-For example, if a filter wheel has the following filters:
+        For example, if a filter wheel has the following filters:
 
-1. Luminance filter at position 1
-2. Red filter at position 2
-3. Green filter at position 3
-4. Blue filter at position 4
-5. H-Alpha filter at position 5
+      1. Luminance filter at position 1
+      2.  Red filter at position 2
+      3.  Green filter at position 3
+      4.  Blue filter at position 4
+      5.  H-Alpha filter at position 5
 
-then the screen should be configured as per the screenshot above, starting with the L filter, and going in order until the HA filter.
+        then the screen should be configured as per the screenshot above, starting with the L filter, and going in order until the HA filter.
 
-**Changing filter information**
+        **Changing filter information**
 
-It is possible to double click within the table to change the name of the filter (used throughout N.I.N.A.), its focuser offset and its Auto Focus Exposure Time directly.
+        It is possible to double click within the table to change the name of the filter (used throughout N.I.N.A.), its focuser offset and its Auto Focus Exposure Time directly.
 
-**Filter offsets**
+        **Filter offsets**
 
-Most filters are not exactly par focal, meaning that when changing filters, the ideal focus distance changes slightly. This will cause an imaging system that was in perfect focus with one filter to be slightly out of focus with another filter. This can be a big problem for precise imaging, requiring an additional autofocus run each time the filter is changed.
+        Most filters are not exactly par focal, meaning that when changing filters, the ideal focus distance changes slightly. This will cause an imaging system that was in perfect focus with one filter to be slightly out of focus with another filter. This can be a big problem for precise imaging, requiring an additional autofocus run each time the filter is changed.
 
-To avoid this, it is possible to set filter offsets, which are the amount of focuser steps that the focuser should move by when switching from one filter to another.
+        To avoid this, it is possible to set filter offsets, which are the amount of focuser steps that the focuser should move by when switching from one filter to another.
 
-For example, I could run the autofocus routine on each of my filters one after the other (with hopefully very little temperature change in between), with the following results:
+        For example, I could run the autofocus routine on each of my filters one after the other (with hopefully very little temperature change in between), with the following results:
 
-* L filter achieves perfect focus at focuser position 5000
-* R filter achieves perfect focus at focuser position 4990 (10 steps fewer than L filter)
-* G filter achieves perfect focus at focuser position 5030 (30 steps more than L filter)
-* B filter achieves perfect focus at focuser position 5045 (45 steps more than L filter)
-* HA filter achieves perfect focus at focuser position 4988 (12 steps fewer than L filter)
+      * L filter achieves perfect focus at focuser position 5000
+      * R filter achieves perfect focus at focuser position 4990 (10 steps fewer than L filter)
+      * G filter achieves perfect focus at focuser position 5030 (30 steps more than L filter)
+      * B filter achieves perfect focus at focuser position 5045 (45 steps more than L filter)
+      * Ha filter achieves perfect focus at focuser position 4988 (12 steps fewer than L filter)
 
-If we take the L filter as the reference filter, we can set up all the filter offsets relative to the L filter, as below:
+        If we take the L filter as the reference filter, we can set up all the filter offsets relative to the L filter, as below:
 
-* L filter offset 0 (reference filter)
-* R filter offset -10 (10 steps fewer than L)
-* G filter offset 30 (30 steps more than L)
-* B filter offset 45 (45 more steps than L)
-* HA filter offset -12 (12 steps fewer than L)
+      * L filter offset 0 (reference filter)
+      * R filter offset -10 (10 steps fewer than L)
+      * G filter offset 30 (30 steps more than L)
+      * B filter offset 45 (45 more steps than L)
+      * HA filter offset -12 (12 steps fewer than L)
 
-This is what has been done in the above screenshot.
+        This is what has been done in the above screenshot.
 
-Note that for this to work, the *Use FilterWheel Offsets* parameter under the Focuser Options needs to be set to On.
+        Note that for this to work, the *Use FilterWheel Offsets* parameter under the Focuser Options needs to be set to On.
 
-**Auto Focus Exposure Time**
+        **Auto Focus Exposure Time**
 
-The ideal auto-focus time can change per filter, particularly between broadband and narrowband filters (in the above example, the narrowband filter requires an exposure time 5 times longer than the broadband filters). This can easily be set up here.
+        The ideal auto-focus time can change per filter, particularly between broadband and narrowband filters (in the above example, the narrowband filter requires an exposure time 5 times longer than the broadband filters). This can easily be set up here.
 
-Finding a good exposure time for autofocus is further explained in the [Auto-Focus section](../../advanced/autofocus.md)
+        Finding a good exposure time for autofocus is further explained in the [Auto-Focus section](../../advanced/autofocus.md)
 
-**Auto Focus Filter**
+        **Auto Focus Filter**
 
-From this screen, it is possible to set (or unset) an autofocus filter, which will be used by the autofocus routine (if the *Use FilterWheel Offsets* setting under *Focuser Settings* is set to On). This can be done by simply selecting a filter in the list, and clicking on the *Set as Default AF Filter* button. The same button can be used to unset the Auto-Focus Filter.
+        From this screen, it is possible to set (or unset) an autofocus filter, which will be used by the autofocus routine (if the *Use FilterWheel Offsets* setting under *Focuser Settings* is set to On). This can be done by simply selecting a filter in the list, and clicking on the *Set as Default AF Filter* button. The same button can be used to unset the Auto-Focus Filter.
 
-## Guider Settings
-This section is used to connect N.I.N.A. with PHD2 and define Dithering parameters
+    ## Guider Settings
 
-30. **PHD2 Path**
+31. **PHD2 Path**
     * PHD2 installation path
 
-31. **PHD2 Server URL**
+32. **PHD2 Server URL**
     * You can set the PHD2 server settings here
     > Usually the defaults should work fine. You need to enable PHD2 server in PHD2.
 
-32. **PHD2 Server URL**
+33. **PHD2 Server URL**
     * PHD server port, usually the default 4400 works fine
 
-33. **PHD2 Dither Pixels and Dither RA Only**
+34. **PHD2 Dither Pixels and Dither RA Only**
     * The amount of guide camera pixels to dither in PHD2. If "Dither RA only" is checked, the dither movements will only be performed in RA. 
     
     !!!tip
     Refer to [Dithering](../../advanced/dithering.md) in Advanced documentation topics for more information about Dithering and how to set the above parameters
 
-34. **PHD2 Settle Pixel Tolerance**
+35. **PHD2 Settle Pixel Tolerance**
     * The threshold expressed in guide camera pixels that will determine a dither settling completion after a dither move.
     > A dither  will be considered settled if, after the "Minimum Settle Time" and before the "PHD2 Settle Timeout", the guide movements in PHD2  will be below the "PHD2 Settle Pixel Tolerance".
 
-35. **Minimum Settle Time**
+36. **Minimum Settle Time**
     * The minimum time N.I.N.A. should wait after a dithering process until it starts the next capture
 
-36. **PHD2 Settle Timeout**
+37. **PHD2 Settle Timeout**
     * The maximum time N.I.N.A. should wait after a dithering process until it starts the next capture. After this time N.I.N.A. will start a new capture regardless of dithering settling completion.
 
-37. **Direct Guide Duration**
+38. **Direct Guide Duration**
     * Duration of guide when Direct Guide is selected.
   
-38. **Guiding Start Retry**
+39. **Guiding Start Retry**
     * If PHD2 fails to restart NINA will send a new start guiding command again until a succesfull guiding is initiated.
   
-39. **Guiding Start Timeout (seconds)**
+40. **Guiding Start Timeout (seconds)**
     * Seconds to wait before sending a new start guiding command to PHD2 (defualt = 60).
   
   
-## Planetarium Settings
-The Planetarium section contains settings for each of the 4 supported planetarium programs.
-Currently N.I.N.A. supports Stellarium, Cartes du Ciel, TheSkyX and HNSKY.
-The connection allows a one way communication of coordaintes from the planetarium software to N.I.N.A. 
+    ## Planetarium Settings
+    The Planetarium section contains settings for each of the 4 supported planetarium programs.
+    Currently N.I.N.A. supports Stellarium, Cartes du Ciel, TheSkyX and HNSKY.
+    The connection allows a one way communication of coordaintes from the planetarium software to N.I.N.A. 
 
-If a planetarium program is configured, coordinates can be imported anywhere in the program that has the Planetarium Sync Button.
+    If a planetarium program is configured, coordinates can be imported anywhere in the program that has the Planetarium Sync Button.
 
-40. **Preferred Planetarium Software**
+41. **Preferred Planetarium Software**
     * This drop down menu selects the planetarium software to be used
 
-41. **Host**
+42. **Host**
     * This is the address the planetarium server is hosted on
     > The default 'localhost' will work if you're running the planetarium software on the same machine
 
-42. **Port**
+43. **Port**
     * Each software's server operates on a different port
     > It is recommended to leave this at default

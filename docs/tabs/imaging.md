@@ -33,7 +33,10 @@ The image panel is the central part of the Imaging tab and is used to diplay the
 This panel displays the main camera and sensor properties and cooling status
 > Requires a connected camera
 1. Camera status details
-2. Activate/Deactivate the camera cooling. If a Cooling/Warming period is set in [Equipment](/docs/tabs/equipment.md) this will be used to perform the temperature variation routine. 
+2. Camera cooling properties
+3. Activate/Deactivate the camera cooling. If a Cooling/Warming period is set in [Equipment](/docs/tabs/equipment.md) this will be used to perform the temperature variation routine. 
+   
+![cameratab](../images/tabs/cameratab.PNG)
 
 **C. Filter Wheel** ![fwicon](../images/tabs/imaging_fwicon.PNG)  
 When a Filter Wheel is connected, this panel displays the current filter (1) and lets you manually switch filters by selecting them with the drop-down menu (2)
@@ -135,12 +138,13 @@ In this panel  all the important information about the last acaptured image are 
 2. Image histogram of the last captured image
 
 **M. HFR History**  ![HFRicon](../images/tabs/imaging_HFRicon.PNG)  
-When automatic HFR (Half-FLux-Radius) star detection is ON, this panel will diplay the history of HFR values and number of stars used to evaluate the HFR for each exposure.
+When automatic HFR (Half-Flux-Radius) star detection is ON, this panel will diplay the history of HFR values and number of stars used to evaluate the HFR for each exposure.
 
-![HFRHistory](../images/tabs/imaging_HFRhistory.png)
+![HFRHistory](../images/tabs/HFR2.png)
 
 1. Yellow line: number of stars used for HFR evaluation
 2. Green line: mean HFR
+3. Triangle marks: AF runs
    
 ## **Tools**  
 
@@ -175,15 +179,13 @@ Platesolving is a very important step in the imaging process, for further inform
 ![platesolve](../images/tabs/imaging_platesolve.png)
 
 1. Plate solving results
-2. Toggles ON/OFF synching the telescope mount with the plate solved coordinates (recommended when )
-3. Toggles ON/OFF reslewing the mount to the plate solved coordinates if the plate solved position is not matching with the expected one
-4. Toggles ON/OFF recentering the mount to the target until the error is less than what defined in (5)
-5. Error threshold for (4)
-6. Exposure that will be used to capture the image for plate solving
-7. Filter that will be used to capture the image for plate solving
-8. Binning that will be used to capture the image  for plate solving
-9. Captures  an image for plate solving
-10. History of plate solving sessions
+2. Toggles ON/OFF synching the telescope mount with the plate solved coordinates 
+3. Toggles ON/OFF reslewing and recentering the mount to the plate solved coordinates if the plate solved position is not matching with the expected one
+4. Error threshold for (4)
+5. Exposure that will be used to capture the image for plate solving
+6. Filter that will be used to capture the image for plate solving
+7. Captures  an image for plate solving
+8. History of plate solving sessions
 
 **Q. Polar alignment** ![polaricon](../images/tabs/imaging_polaricon.PNG)    
 The polar alignment panel gives you two ways to determine how off your polar alignment is and to improve it. One is plate solved polar alignment and the other is DARV slew.
@@ -213,12 +215,12 @@ The polar alignment panel gives you two ways to determine how off your polar ali
 **R. Auto Focus** ![AFicon](../images/tabs/imaging_aficon.PNG)  
 This panel lets you manually trigger an Auto Focus routine based on the Auto Focus parameters set in Options [Equipment](options/equipment.md).
 
-![AF](../images/tabs/imaging_AF.png)
+![AF](../images/tabs/AF10.png)
 
 1. Autofocus curve 
 2. Last Auto Focus run parameters
 3. Start Auto Focus routine
-4. Start Auto Focus backlash measurement routine
+4. Start Auto Focus backlash measurement routine (only recommended for focusers with little backlash)
 
 **S. Manual Focus Targets** ![MFicon](../images/tabs/imaging_mftargetsicon.PNG)  
 When you have to manual focus your scope this tab lets you conveniently choose among the current visible brighter stars according to your location and time.
@@ -231,42 +233,33 @@ When you have to manual focus your scope this tab lets you conveniently choose a
 
 **T. Exposure Calculator** ![ExpCalcIcon](../images/tabs/imaging_expcalcicon.PNG)  
 
-This tool will suggest recommended exposure times based on the measured Min and Max ADU values of a captured image. Average skyglow will be taken into consideration and will calulate the exposures to swamp the camera read noise by a factor of 3x (Min) and 10x (Max).
-When the button (2) is clicked the application will take one exposure and calculate the recommended times based on the image and the given input values.
-Min and Max exposure times are calculated as follows:
-`MinimumRecommendedExposureTime = ((MinExposureADU - BIASMean) / (mean - BIASMean)) * exposureTime`
-`MaximumRecommendedExposureTime = ((MaxExposureADU - BIASMean) / (mean - BIASMean)) * exposureTime`
-where:
-`MinExposureADU = BIASMean + 3 * _squaredReadNoise`  
-`MaxExposureADU = BIASMean + 10 * _squaredReadNoise`
+This tool will suggest a recommended exposure time based on the read noise from the camera sensor and the average skyglow.
+If SharpCap is installed and a Sensor Analysis is available for the current camera, RN and FW are derived from the sensor analysis.
 
-    > Formulas rely on the camera parameters set in (1) and are only valid for one specific gain level.
-    If you change the gain of your camera, a new set of  parametes must be entered.
+1. Exposure time. this is only used to mesure the average skyglow when clicking on (8)
+2. Filter: this menu lets you choose the filter for the calculation
+    > Filters affect the  wavelength bandpass of incident light and therefore the average skyglow. The analysis should be repeated for each filter to determine an optimal exposure set.
+3. Gain: select the gain for the exposure analysis. 
+    > Camera parameters vary significantly with gain values, the analysis should be repeated for different gain values. 
+4. The drop-down menu lets you select availavle sensor analysis files from SharpCap
+   > SharpCap must be installed and you must first perform a Sensor Analysis in SharpCap follwoing the instructions [here](http://docs.sharpcap.co.uk/3.2/19_SensorAnalysis.htm). Sensor analysis files are saved in %APPDATA%\Roaming\SharpCap\SensorCharacteristics
+5. Full Well Capacity in electrons: if known this value can be entered manually for the specified gain or retrieved automatically from the Sharpcap Sensor Analysis
+6. Read Noise in electrons: if known this value can be entered manually for the specified gain or retrieved automatically from the Sharpcap Sensor Analysis
+7. BIAS mean (native): mean ADU value of a bias frame, can be entered manually or calculated automatically by covering the scope and cliecking on the "Calculate Bias" button
+8. Click here to perform the exposure for the analysis
+9. The recommended exposure times are diplayed in this section
 
-![ExpCalc](../images/tabs/imaging_expcalc.png)
+Recommended exposure time is calculated according to the following [formula](https://forums.sharpcap.co.uk/viewtopic.php?t=456):
 
+`Recommended Exposure Time = 10 * read noise squared / light pollution rate`
 
-        
-5. **Full Well Capacity in e**
-    * The Full Well Capacity in electrons 
-    > Full well charts for different Gain values are usually provided by camera manufacturers. Consult your camera manual/website or contact your vendor.  
+where light pollution rate is defined as:
 
-6.	**Download to Data ratio**
-      * The ratio the optimal exposure calculator will utilize this value to calculate the maximum adequately possible exposures. Default will work in most cases.
-7. 
-2. **Camera read noise in e**
-    * The read noise in electrons of your camera device
-    > Read noise charts for different Gain values are usually provided by camera manufacturers. Consult your camera manual/website or contact your vendor.   
-    For DSLR refer to sensorgen.info or ccdparameters script in PixInsight
+`(median ADU of a subframe - mean of the bias) * electrons per ADU / the length of the exposure`
 
-3. **BIAS mean (native)**
-    * The mean value in ADU of your BIAS (shortest exposure) at your cameras native bit depth (4)
-    > This value changes for different Gain/Offset.   
-     To evaluate the mean ADU you can follow these simple steps: 
-     > - set the same Gain/Offset that will be used durign your imaging session  
-     > - go to [Imaging](../../tabs/imaging.md) tab, under "Imaging" window  set an exposure of 0.001s
-     > - take an exposure  
-     > - the Mean value will be displayed in the "Statistics" window   
-     ![settingswindow](../../images/tabs/settingswindow.png)
+ >  The analysis will use whatever gain is specified and linear interpolate between the values calculated by sharpcap. for example, if you have read noise in the analysis for gains 100 and 150 but specify 125, the tool will set the read noise exactly between the two.
+ Remember to cool down your camera to the desired temperature before using the tool, high Dark Current values may affect the results.
+
+![ExpCalc](../images/tabs/expcalc10.png)
 
 

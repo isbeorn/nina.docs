@@ -24,7 +24,7 @@ After a flip N.I.N.A. verifies that it is still imaging the desired area of sky 
 
 To enable the Automated Meridian Flip you need to enable it in the imaging settings.
 
-![Automated Meridian Flip Settings](../images/advanced/meridian_flip1.png)
+![Automated Meridian Flip Settings](../images/advanced/meridianflip.PNG)
 
 - _Enabled_: Turns automated meridian flips on or off.
 - _Minutes after Meridian_: This setting defines how many minutes after the meridian has been passed the flip should occur.

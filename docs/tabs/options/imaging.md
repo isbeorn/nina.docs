@@ -2,7 +2,7 @@ The Imaging options tab contains settings for file formats, save directories, Au
 
 ![The imaging options tab](../../images/tabs/Options-Imaging10.png)
 
-### File Settings
+## File Settings
 
 1. **Image Save File Format**
     * The format for every image to be saved as
@@ -30,7 +30,7 @@ The Imaging options tab contains settings for file formats, save directories, Au
     * The structure of folders and the filename can be defined by the user using the keywords listed in the table below. A preview of the file pattern is also displayed.
     > Fixed text is also possible
     
-### Auto Meridian Flip
+    ## Auto Meridian Flip
 
 7.  **Meridian Flip Enabled**
     * This switch toggles the automatic meridian flip
@@ -61,7 +61,7 @@ The Imaging options tab contains settings for file formats, save directories, Au
     * Turns ON/OFF the AF routine after flipping. 
     > Useful for scopes with mirror flop or focus shift after Meridian Flip.
   
-### Image Options
+    ## Image Options
 
 14. **Autostretch factor and Black Clipping**
     * These are the parameters for the display autostretch
