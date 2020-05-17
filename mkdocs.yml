@@ -12,7 +12,17 @@ nav:
         - Requirements: 'requirements.md'        
         - Tabs:
             - Overview: 'tabs/overview.md'
-            - Equipment: 'tabs/equipment.md'
+            - Equipment: 
+                - Equipment: 'tabs/equipment/equipment.md'
+                - Camera: 'tabs/equipment/camera.md'
+                - Filterwheel: 'tabs/equipment/filterwheel.md'
+                - Focuser: 'tabs/equipment/focuser.md'
+                - Rotator: 'tabs/equipment/rotator.md'
+                - Telescope: 'tabs/equipment/telescope.md'
+                - Guider: 'tabs/equipment/guider.md'
+                - Switch: 'tabs/equipment/switch.md'
+                - Flat Panel: 'tabs/equipment/flatpanel.md'
+                - Weather: 'tabs/equipment/weather.md'
             - Sky Atlas: 'tabs/skyatlas.md'
             - Framing Assistant: 'tabs/framing.md'
             - Flat Wizard: 'tabs/flatwizard.md'

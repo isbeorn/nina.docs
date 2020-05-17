@@ -93,17 +93,34 @@ The Imaging options tab contains settings for file formats, save directories, Au
 20. **Noise Reduction**
     * This changes the amount of noise reduction performed on the image for star detection and HFR analysis
     
-21. **Sequence Template**
+21. **Sharpcap Sensor Analysis Folder**
+    * This is use to locate the SharpCap sensor analysis folder used in [Imaging->Exposure Calculator](../imaging.md)
+
+
+    ## Sequence
+
+22. **Default folder for sequence files**
+    * The user can set here the default folder for saving/loading sequences
+  
+23. **Sequence Template**
     * The user can set a default user defined sequence template here
     > Templates can be made with the 'Save template as xml' button in the sequence tab
-    
-22. **Park mount when sequence ends**
+
+24. **Run command when sequence completes**
+    * It is possible to select an external command/script to be automatically executed after sequence ends
+
+25. **Park mount when sequence ends**
     * Initiates a park once all sequences are complete
     > Ascom does not support custom park positions and so the driver must support this
     > For example eqmod's custom park position can override the default park position 
     
-23. **Warm camera when sequence ends**
+26. **Warm camera when sequence ends**
     * If the camera driver supports a warming sequence this will be intiated when sequence has ended
     
-24. **Reset Layout**
+27. **Close cover when sequence ends**
+    * When present, it is possible to autmoatically close a flat panel cover after sequence ends
+
+    ## Layout
+
+28. **Reset Layout**
     * This will reset the layout of docked windows in the imaging tab

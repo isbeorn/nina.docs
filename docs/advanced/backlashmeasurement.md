@@ -2,36 +2,26 @@
 
 Focusers can suffer from backlash when they reverse directions, which is basically the number of focuser steps that "slip by" before the focuser physically moves again during a change in directions.
 
-It is possible to set that up in the Focuser Options under the Options -> Equipment tab. However, a tool is available to determine the current focuser backlash. It is available in the AutoFocus tool, in the imaging tab.
+A typical effect of backlash on the AF curve is show in the image below. In the first part of the curve (from right to left) the HFR remains constant due to the focuser drawtube not moving while the focuser is only compensating for backlash. In this case the curve is showing aproximately 150 steps of backlash
 
-![Launching Focuser Backlash](../images/advanced/LaunchingBacklashMeasurement.png)
+![focuserbacklash](../images/advanced/focuserbacklash.png)
 
-## Pre-requisites
+A good AF curve should not display any signs of backlash and look similar to the one below:
 
-For the focuser backlash measurement tool to be available and to work correctly, the following conditions need to be met:
+![good AF](../images/advanced/goodAF.PNG)
 
-* Both a camera and focuser are connected
-* The autofocusing options have been set correctly, so that a decent autofocus run can already be accomplished (minus backlash). This is described in the [Auto-Focus Documentation](../autofocus#determining-ideal-parameters)
-* Your overall auto focus curve profile should be a hyperbola - this should generally be the case
-* The system is currently well focused (using a Bahtinov mask for example)
+Several methods can be used to measure the focuser backlash and most of them involve a mechanical measurement of the focuser drawtube movements.
+For example, by using a dial gauge to measure focuser drawtube movements, backlash is determined by changing focuser movement direction and measuring how many steps are necessary before the drawtube moves again.  
+![dialgauge](../images/advanced/dialgauge.PNG)
 
-## Algorithm
+If the drawtube has a marked scale that can also be used in the same fashion as above. 
+Another mathod involves running a standard AF routine and determine the number of backlash steps as showed in the example above.
 
-The following method will be used to measure the IN backlash, based on the assumption that far enough from focus, focus points should be on a line (e.g. the focus curve profile is a hyperbola).
 
-* Start at best focus (after an AF routine)
-* Move the focuser out by twice the amount moved by the autofocus routine (e.g. *Auto Focus Initial Offset Steps* multiplied by *Auto Focus Step Size* times 2) and measure HFR (HFR2 at position2)
-* Move in by the *Auto Focus Step Size* and measure HFR (HFR1 at position1). If HFR1 and HFR2 are very close, backlash is not cleared yet, and repeat (move in by *Auto Focus Step Size*, measure and replace HFR1 and position1 with the new position and measure). Remember the number of times the measurement is done, to a maximum of 3 times
-* Move in by *Auto Focus Step Size* again, get to position0, and measure HFR0
-* Compute the slope between position2 and position1 as measuredSlope = (HFR2 - HFR1) / (position2 - position1)
-* Compute the slope between position0 and position1 as idealSlope = (HFR1 - HFR0) / *Auto Focus Step Size*
-* If abs(measuredSlope) > abs(idealSlope), there is no significant backlash
-* Else, Backlash In is (1- measuredSlope / idealSlope) * (position2 - position1)
+N.I.N.A. offers two [backlash compensation methods](autofocus.md): __Absolute__ and __Overshoot__.
 
-The same routine, inverted, will be used for the Backlash OUT.
+When __Absolute__ backlash compensation is used. N.I.N.A. will add a fixed amount of steps (as specified in [Focuser Advanced options](autofocus.md)) when the focuser changes directions. This requires a good backlash measurement and is mostly effective with focusers with small backlash with respect to the _Auto Focus Step Size_.
 
-As can be seen above, the routine relies a lot on the *Auto Focus Step Size* setting, which can be changed as necessary if issues are noted with the process
-
-## Running the tool
-
-Running the focuser backlash tool is very simple: simply click on the *Measure Backlash* button. This will run the routine automatically - note that for greater precision, the routine takes three exposures per focus points, so it may take longer than expected. Once it's over, the routine will output a result that can be automatically saved in the focuser options.
+With __Overshoot__  N.I.N.A. compensate for Backlash by overshooting the target position by a large amount and then moving the focuser back to the initially requested position. This method is much more forgiving than Absolute and is recommended for focusers with large backlash or when the backlash measurment is not very accurate.
+For __Overshoot__, once the user has determined a rough backlash value, this can be increased by an extra 50% and input as IN or OUT compensation. Since this method is very forgiving a trial-and-error procedure is also possible, by using progressively larger compensation values until the AF routine behaves properly and no sign of backlash is shown in the AF curve.
+> Overshoot can  be very useful for STC users to avoid mirrir flop. In fact, when setting the Backlash Compensation to _IN_, the last focuser movement will always be inward.

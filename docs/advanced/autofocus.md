@@ -76,7 +76,11 @@ As we have seen, there are three important parameters that are used in the autof
 This is typically good at the default value of 4 for Star HFR. For contrast measurement, a value of 6 is preferable.
 
 ### Auto Focus Step Size
-To determine the correct Auto Focus Step Size, a user could start with the focuser slightly out of focus outwards from best focus. Then move the focuser outwards by say 10 steps. If there an obvious difference to the eye, and the star diameter has increased by around 20-30% or so, this is likely a right step size. Otherwise, the user should keep experimenting until they find a step size that shifts the focus by the right amount.
+To determine the correct Auto Focus Step Size, a user could start with the focuser slightly out of focus outwards from best focus. Then move the focuser outwards by say 10 steps. If there an obvious difference to the eye, and the star diameter has increased by around 20-30% or so, this is likely a right step size. 
+Another method is the following: starting from a good focus position (e.g. by focusing with a Bahtinov mask) the user can progressively move the focuser inward (or outward) unitil N.I.N.A. is not able to determine stars HFR in the image. The total increment represents the maximum initial offset. To be on the safe side the user can take 80% of the max initial offset and divide it by the _Auto Focus Initial Offset Steps_ (default = 4). The resulting value represents a good Auto Focus Step size. [Star HFR](../tabs/imaging.md) detaction and [Annotate Image](../tabs/options/imaging.md) must be turned ON during the process.
+> Example: assuming a starting point of good focus of 4000 steps, we will move the focuser outward by an amount of 10 steps at the time, and take a new exposure at the end of each increment to check the measured HFR. Lest's say that after 12 moves (120 focuser steps) no or just a couple of very defocused stars will still be detected by N.I.N.A. The value of 120 steps will therefore represent be the max increment. Sclaing it by 80% (rougly 100) and dividing it by the Initial Offset (4) will give us an _Auto Focus Step Size_ of 25.
+
+Otherwise, the user should keep experimenting until they find a step size that shifts the focus by the right amount.
 
 The above Step Size (in focuser steps) will be correct for Star HFR measurement. For contrast measurement based on Sobel or Laplace methods, this should also work fine. For Statistics-based contrast measurement, it may be appropriate to divide the Step Size by 2 or 3 and use that (as we saw in the previous example, the peak in that case is quite narrow).
 
@@ -159,9 +163,9 @@ If both camera and focuser are properly connected, the "Start Autofocus" button 
 
 ## Advanced Options
 
-Under the Focuser options, there are a range of advanced options that will affect autofocus. The available options are different depending on the focus methodology being used.
+Under the Focuser options, there are a range of advanced options that will affect autofocus. The available options are different depending on the focus methodology being used. See [Options->Equipment](../tabs/options/equipment.md) for further details.
 
-![Advanced Star HFR Settings](../images/advanced/advancedautofocussettingshfr.png)
+![AF Advanced](../images/advanced/AF_advanced10.PNG)
 
 ### AF Method
 
@@ -216,11 +220,25 @@ Note that it is possible to have the inner crop ratio to some value, and the out
 
 Note that for Contrast Detection methods, only the inner crop ratio is available. In addition, for the Statistics contrast detection method, it will only work if the camera can subsample to the required ROI.
 
-### Backlash IN and OUT
+### Backlash 
 
-Most focusers suffer from some degree of backlash, which is a certain amount of "slippage" when reversing directions. That backlash can be precisely measured and compensated in software. For most focusers, the IN (when the focuser switches back to an inwards direction after moving outwards) and OUT (when focuser switches back to an outwards direction after moving inwards) are identical. A separate section on measuring backlash is available in the [Backlash Measurement Section](../backlashmeasurement)
+Most focusers suffer from some degree of backlash, which is a certain amount of "slippage" when reversing directions. That backlash can be precisely measured and compensated in software. For most focusers, the IN (when the focuser switches back to an inwards direction after moving outwards) and OUT (when focuser switches back to an outwards direction after moving inwards) are identical. 
 
-This setting, expressed in focuser steps, compensates for backlash, and affects more than the autofocus, as it will affect focuser movements whenever the focuser direction is reversed. Since the autofocus routine will reverse the focuser direction at least twice, it is critical to have the backlash numbers properly dialed in.
+N.I.N.A. offers two backlash compensation methods:
+* Absolute: 
+  When the focuser changes directions, an absolute value will be added to the focuser movement.
+  Backlash IN: when the focuser changes from moving outwards to moving inwards the Backlash IN value will be added
+  Backlash OUT: when the focuser changes from moving inwards to moving outwards the Backlash OUT value will be added
+ * Overshoot:
+  This method will compensate for Backlash by overshooting the target position by a large amount and then moving the focuser back to the initially requested position.
+  Due to this compensation the last movement of the focuser will always be in the same direction (either always inwards or always outwards)
+
+> Absolute is indicated for focusers with relatively small backlash and requires a more accurate measurement of the amount of backlash, while Overshoot is more forgiving and can be safely used for most focusers.
+
+**Backlash IN/OUT**
+* The focuser backlash in the IN (decreasing position) and OUT (increasing position) directions, expressed in focuser steps. 
+  
+> When Overshoot is choosen, only ONE between Backlash IN and OUT must be set! When setting IN, the amount will be applied on each inward movement, so the final movement will always be outwards. For Backlash OUT, it will be the other way around
 
 ### Binning
 

@@ -10,9 +10,8 @@ For further information about using the Framing Assistant refer to the [Advanced
     * Allows you to specify the source of an image to utilize in the Framing Assistant. Possible options are:
         * **Digital Sky Survey**: Fetch an image of the object from a sky survey server. This requires an internet connection
         * **Sky Atlas**: N.I.N.A.'s own database of objects. Circles representing approximate target sizes will be displayed
-        * **From File**: Load an existing JPEG, GIF, PNG or TIFF image of an object.
-        * **Cache**: Utilize images from a local cache of images there have already been downloded from one of the Digital Sky Survey servers
-    * When an image is provided through **From File**, the configured [Blind Solver](../advanced/platesolving.md) is used to determine the coordinates and orientation of the image. Blind solving can be a slow process and may take a long time to complete
+        * **From File**: Load an existing JPEG, GIF, PNG or TIFF image of an object. When an image is provided through **From File**, the configured [Solver](../advanced/platesolving.md) is used to determine the coordinates and orientation of the image. Alternatively, for FITS and XSIF files the WCS header coordinates are used if present.
+        * **Cache**: Utilize images from a local cache of images there have already been downloded from one of the Digital Sky Survey servers (useful to browse Survey images when offline)
     * Successfully-solved or downloaded local and sky survey images are cached
 
 2. **Planetarium Sync**
@@ -36,43 +35,46 @@ For further information about using the Framing Assistant refer to the [Advanced
     * These parameters determine the size of the framing rectangle (15)
     > These parameters are only used for displaying the framing rectangle. For camera and focal length parameters used in platesolving refer to [Options](.../.../tabs/options/equipment.md)
 
+    ## Targets
+
 6. **Mosaic Panels and rotation**
     * Rotation can be set freely and should match your camera's orientation as determined by plate solving 
     * You can specify the number of panels for an N x M size mosaic 
     * You can specify the % overlap between each panel 
-  
-![Mosaic](../images/tabs/framing_mosaic.PNG)
+     ![Mosaic](../images/tabs/framing_mosaic.PNG)
 
-1. **Recenter Image**
+7. **Recenter Image**
     * When using a survey source, redownloads an image of the region centered on the current coordinates set by the framing rectangle (15) 
     * When using cached images or file source, the framing rectangle is centered on the image center 
 
-2. **Slew**
+8. **Slew**
     * Slews the mount to the coordinates of the center of the framing rectangle (16) 
 
-3. **Replace as Sequence**
+9.  **Replace as Sequence**
     * Sets the coordinates of the RA and Dec of the framing window as the sequence and copies the name over to the sequence tab as well 
     * Replacing the target also resets sequence settings to default 
 
-4.  **Add as Sequence**
+10. **Add as Sequence**
     * The same as (9), but the framed target is added as an addition sequence target. This does not affect other sequences
 
-5.  **Altitude browser**
+11. **Altitude browser**
     * Displays the altitude of the target over time, indicating current position and meridian 
 
-6.  **Image display controls**
+    ## Main tab
+
+12. **Image display controls**
     * From left to right: Zoom in, zoom out, fit image to screen, show image in original resolution 
 
-7.  **Annotation controls**
+13. **Annotation controls**
     * From left to right: Opacity of framing rectangle, constellation boundaries, constellation annotation, equatorial grid, annotate DSOs 
 
-8.  **Image**
+14. **Image**
     * The image as downloaded from the sky survey, cache, Sky Atlas or provided by **From File** 
 
-9.  **Framing rectangle**
+15. **Framing rectangle**
     * Depends on the camera and focal length parameters (5) 
     * Can be dragged around with the mouse 
     * Can be rotated with (6) 
  
-10. **RA/DEC Coordinates**
+16. **RA/DEC Coordinates**
     * The coordinates of the center of the framing rectangle. These are used as a sequences target coordinates  

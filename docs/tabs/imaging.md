@@ -9,7 +9,7 @@ The top bar is divided in two main sections: **Info** and **Tools**
 
 ![topbarmenu](../images/tabs/Imaging_menu.PNG)  
 
-## **Info**  
+## Info  
 These windows provide important status information about captured images and connected equipment  
 
 **A. Image**  ![imageicon](../images/tabs/imaging_imageicon.PNG)  
@@ -25,18 +25,19 @@ The image panel is the central part of the Imaging tab and is used to diplay the
 6.   Toggles crosshair overlay on/off
 7.   Toggles automatic display of the displayed image (for autostretch settings refer to [Options](options/imaging.md))
 8.   Toggles automatic HFR (Half-FLux-Radius) star detection analysis. HFR is used for [Autofocus](options/equipment.md) routines. When HFR detection is ON, the average HFR value for each captured image are plotted in the HFR History wiwdow (M)  
-     > If "Annotate Image" is switched ON under Options [Imaging](options/imaging.md), calculated HFR values will be displayed on the image  
+> If _Annotate Image_ is switched ON under [Options->Imaging](options/imaging.md), the calculated HFR values will be displayed on the image  
    ![HFR](../images/tabs/imaging_HFR.PNG)
 9.   Activates the Bahtinov Analyzer aid tool for manual focusing with a Bahtinov Mask.
 
 **B. Camera** ![cameraicon](../images/tabs/imaging_cameraicon.PNG)  
 This panel displays the main camera and sensor properties and cooling status
 > Requires a connected camera
+
 1. Camera status details
 2. Camera cooling properties
-3. Activate/Deactivate the camera cooling. If a Cooling/Warming period is set in [Equipment](/docs/tabs/equipment.md) this will be used to perform the temperature variation routine. 
+3. Camera warming 
    
-![cameratab](../images/tabs/cameratab.PNG)
+![cameratab](../images/tabs/cameratab.png)
 
 **C. Filter Wheel** ![fwicon](../images/tabs/imaging_fwicon.PNG)  
 When a Filter Wheel is connected, this panel displays the current filter (1) and lets you manually switch filters by selecting them with the drop-down menu (2)
@@ -146,8 +147,7 @@ When automatic HFR (Half-Flux-Radius) star detection is ON, this panel will dipl
 2. Green line: mean HFR
 3. Triangle marks: AF runs
    
-## **Tools**  
-
+    ## Tools 
 
 **N. Imaging** ![image1icon](../images/tabs/imaging_imagingicon.PNG)  
 The imaging panel allows you to take a single exposure or live view when supported by the camera
@@ -219,8 +219,7 @@ This panel lets you manually trigger an Auto Focus routine based on the Auto Foc
 
 1. Autofocus curve 
 2. Last Auto Focus run parameters
-3. Start Auto Focus routine
-4. Start Auto Focus backlash measurement routine (only recommended for focusers with little backlash)
+3. Starts Auto Focus routine
 
 **S. Manual Focus Targets** ![MFicon](../images/tabs/imaging_mftargetsicon.PNG)  
 When you have to manual focus your scope this tab lets you conveniently choose among the current visible brighter stars according to your location and time.
@@ -236,16 +235,18 @@ When you have to manual focus your scope this tab lets you conveniently choose a
 This tool will suggest a recommended exposure time based on the read noise from the camera sensor and the average skyglow.
 If SharpCap is installed and a Sensor Analysis is available for the current camera, RN and FW are derived from the sensor analysis.
 
-1. Exposure time. this is only used to mesure the average skyglow when clicking on (8)
+![ExpCalc](../images/tabs/expcalc10.png)
+
+1. Exposure time. This is only used to mesure the average skyglow when clicking on (8)
 2. Filter: this menu lets you choose the filter for the calculation
-    > Filters affect the  wavelength bandpass of incident light and therefore the average skyglow. The analysis should be repeated for each filter to determine an optimal exposure set.
+    > Filters affect the  wavelength bandpass of incident light and therefore the average skyglow. The analysis should be repeated for each filter to determine an optimal exposures set.
 3. Gain: select the gain for the exposure analysis. 
-    > Camera parameters vary significantly with gain values, the analysis should be repeated for different gain values. 
+    > Camera parameters vary significantly with gain values, the analysis should be repeated for the different gain values used for imaging. A guideline to determine the optimal gain values for your imaging conditions can be found [here](https://www.youtube.com/watch?v=ub1HjvlCJ5Y&list=PLhIb8N-jSR_rNKxCFGzbd87TfmyQS4U4X&index=14)
 4. The drop-down menu lets you select availavle sensor analysis files from SharpCap
    > SharpCap must be installed and you must first perform a Sensor Analysis in SharpCap follwoing the instructions [here](http://docs.sharpcap.co.uk/3.2/19_SensorAnalysis.htm). Sensor analysis files are saved in %APPDATA%\Roaming\SharpCap\SensorCharacteristics
 5. Full Well Capacity in electrons: if known this value can be entered manually for the specified gain or retrieved automatically from the Sharpcap Sensor Analysis
 6. Read Noise in electrons: if known this value can be entered manually for the specified gain or retrieved automatically from the Sharpcap Sensor Analysis
-7. BIAS mean (native): mean ADU value of a bias frame, can be entered manually or calculated automatically by covering the scope and cliecking on the "Calculate Bias" button
+7. BIAS median value (in 16bit): median ADU value of a bias frame (scald to 16bit), can be entered manually or calculated automatically by covering the scope and cliecking on the "Calculate Bias" button
 8. Click here to perform the exposure for the analysis
 9. The recommended exposure times are diplayed in this section
 
@@ -255,11 +256,14 @@ Recommended exposure time is calculated according to the following [formula](htt
 
 where light pollution rate is defined as:
 
-`(median ADU of a subframe - mean of the bias) * electrons per ADU / the length of the exposure`
+`(median ADU of a subframe - median of the bias) * electrons per ADU / the length of the exposure`
+
+Further details on the theory for the optimal exposure calculation can be found [here](https://www.youtube.com/watch?v=3RH93UvP358)
 
  >  The analysis will use whatever gain is specified and linear interpolate between the values calculated by sharpcap. for example, if you have read noise in the analysis for gains 100 and 150 but specify 125, the tool will set the read noise exactly between the two.
- Remember to cool down your camera to the desired temperature before using the tool, high Dark Current values may affect the results.
 
-![ExpCalc](../images/tabs/expcalc10.png)
+ > Remember to cool down your camera to the desired temperature before using the tool, high Dark Current values may affect the results.
+
+
 
 

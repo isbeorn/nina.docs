@@ -101,7 +101,7 @@ This is the tab where you set up all the parameters recmd-k vlated to your equip
   Due to this compensation the last movement of the focuser will always be in the same direction (either always inwards or always outwards)
   
 24. **Backlash IN/OUT**
-      * The focuser backlash in the IN (decreasing position) and OUT (increasing position) directions, expressed in focuser steps. A tool described in the Focuser Backlash Measurement Section is available to measure it [Imaging](../imaging.md) tab Focuser window (only suggested for focusers with small backlash).
+      * The focuser backlash in the IN (decreasing position) and OUT (increasing position) directions, expressed in focuser steps. 
   
         > When Overshoot is choosen, only ONE between Backlash IN and OUT must be set! When setting IN, the amount will be applied on each inward movement, so the final movement will always be outwards. For Backlash OUT, it will be the other way around
 
