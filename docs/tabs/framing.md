@@ -33,7 +33,7 @@ For further information about using the Framing Assistant refer to the [Advanced
     * These settings are not available to DSLR users
     * The specified Focal Length is **not** synchronized to the your Telescope settings. This allows you to experiment with various focal lengths
     * These parameters determine the size of the framing rectangle (15)
-    > These parameters are only used for displaying the framing rectangle. For camera and focal length parameters used in platesolving refer to [Options](.../.../tabs/options/equipment.md)
+    > These parameters are only used for displaying the framing rectangle. For camera and focal length parameters used in platesolving refer to [Options](../tabs/options/equipment.md)
 
     ## Targets
 

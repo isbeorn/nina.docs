@@ -121,7 +121,7 @@ This is the tab where you set up all the parameters recmd-k vlated to your equip
     ## Filterwheel
 
 29. **Filterwheel**
-    * If a Filter Wheel is connected in [Equipment](../equipment.md) this window lists the available filters and names.
+    * If a Filter Wheel is connected in [Equipment](../equipment/equipment.md) this window lists the available filters and names.
       * Position: filter position
       * Name: name of the filter as imported from ASCOm driver
       * Focus Offset: offset values that are used at each filter change if "Use FilterWheel Offset" is enabled  

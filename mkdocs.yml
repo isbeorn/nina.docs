@@ -93,4 +93,4 @@ markdown_extensions:
         custom_checkbox: true
     - pymdownx.tilde
 
-copyright: Copyright &copy; 2019 Stefan Berg and the N.I.N.A. contributors
+copyright: Copyright &copy; 2019-2020 Stefan Berg and the N.I.N.A. contributors

@@ -17,7 +17,7 @@ The Sequence interface consists of the following elements:
     * Hovering the cursor over a tab will reveal the Reset Progress and Delete buttons
   
 2. **Sequence buttons**
-    ![](../images/tabs/sequencebuttons1.png)
+    ![](../images/tabs/sequencebuttons1.PNG)
      Buttons to edit sequences, from left to right:
      * Moves sequence to the right
      * Moves sequence to the left
@@ -93,8 +93,7 @@ The Sequence interface consists of the following elements:
     * **Offset**: Specifies the camera offset to use for the entry. This option is available only if camera is capable of setting an exposure offset
   
 12. **Sequence Buttons**
-    ![](../images/tabs/sequencebuttons.png)
-
+    ![](../images/tabs/Sequencebuttons.JPG)
     From left to right:
     * Adds a new row to the sequence (new rows will be defaulted to the previous one)
     * Deletes the acrtive sequence entry
