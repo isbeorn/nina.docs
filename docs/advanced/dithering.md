@@ -23,7 +23,7 @@ This is the typical scenario for most users. The user has a single main camera, 
 
 Multiple imaging telescopes and cameras in addition to a single guide camera has become a common configuration. N.I.N.A. can be used to control these kinds of setups through multiple instances of the application. One instance controls the mount, guiding, and one of the main cameras. Additional instances of N.I.N.A. control each additional main imaging camera present and communicate their actions to the master instance of N.I.N.A. This coordination is automatically set up in the background when multiple instances of N.I.N.A are started. This configuration poses an issue for dithering because, without coordination between the multiple instances of N.I.N.A., a dither operation may be initiated while one of the other main cameras still is busy exposing.
 
-To manage this, a dither operation will be coordinated with PHD2 so that it happens when none of the imaging cameras are exposing. N.I.N.A. developer Stanley Demont [describes Synchronized Dithering](//youtu.be/edYcKUPEEAU?t=546) in his N.I.N.A. 1.8 feature overview video.
+To manage this, a dither operation will be coordinated with PHD2 so that it happens when none of the imaging cameras are exposing. N.I.N.A. developer Stanley Dimant [describes Synchronized Dithering](//youtu.be/edYcKUPEEAU?t=546) in his N.I.N.A. 1.8 feature overview video.
 
 ### Built-in Dithering
 
