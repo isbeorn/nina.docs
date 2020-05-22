@@ -62,10 +62,10 @@ Some additional parameters are available:
 The autofocus logic is as follows:
 
 1. For Star HFR, N.I.N.A. takes an exposure at current focuser position, and computes the Star HFR. This will be the "benchmark to beat", and the final focus point will be checked against this benchmark to ensure better focus has been achieved.
-2. N.I.N.A. will then move the focuser outwards (to a higher focuser position value than current) by *Auto Focus Initial Offset Steps* multiplied by *Auto Focus Step Size*. In the above example, the focuser would be moved by 5 * 10 = 50 focuser steps to the right.
-3. N.I.N.A. then starts moving the focuser inwards (to lower focuser position values), one *Auto Focus Step Size* (e.g. 10 focuser steps in the above example) at a time, measuring the contrast or HFR at each step.
-4. N.I.N.A. will keep moving inwards until it has found a minimum (for HFR) or maximum (for Contrast) point, and at least *Auto Focus Initial Offset Steps* (5 in this example) points on each side of that minimum or maximum. If N.I.N.A. finds that it doesn't have enough focus points to the right of the minimum/maximum, it will move back outwards to the rightmost point, then proceed again, one *Auto Focus Step Size* at a time, until it has enough points right of the minimum/maximum as well
-5. N.I.N.A. performs a fitting on the points (trend lines, parabolic, hyperbolic, or Gaussian) to find the point of best focus, and moves the focuser to it.
+2. Move the focuser outwards (to a higher focuser position value than current) by *Auto Focus Initial Offset Steps* multiplied by *Auto Focus Step Size*. In the above example, the focuser would be moved by 5 * 10 = 50 focuser steps to the right.
+3. Start moving the focuser inwards (to lower focuser position values), one *Auto Focus Step Size* (e.g. 10 focuser steps in the above example) at a time, measuring the contrast or HFR at each step.
+4. Keep moving inwards until it has found a minimum (for HFR) or maximum (for Contrast) point, and at least *Auto Focus Initial Offset Steps* (5 in this example) points on each side of that minimum or maximum. If N.I.N.A. finds that it doesn't have enough focus points to the right of the minimum/maximum, it will move back outwards to the rightmost point, then proceed again, one *Auto Focus Step Size* at a time, until it has enough points right of the minimum/maximum as well
+5. Perform a fitting on the points (trend lines, parabolic, hyperbolic, or Gaussian) to find the point of best focus, and moves the focuser to it.
 6. For Star HFR, a final validation exposure is taken, the HFR computed, and compared to the benchmark taken in Step 1. If the final HFR is worse than the initial HFR by 15% or more, the autofocus routine is deemed a failure and the focuser returns to its initial focus position, or an additional auto-focus run is attempted.
 
 ## Determining ideal parameters
