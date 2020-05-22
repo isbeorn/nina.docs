@@ -14,7 +14,7 @@ This exported sequence can then be set as a template inside **Options->Imaging->
 ![Template](../images/advanced/sequencing/Template.png)
 
 !!! tip
-The best use for these templates are sequences created out of the Framing Assistant. For example when you have the broadband sequence set, that were mentioned earlier, you can just set up the mosaic, click "Replace Sequence" and the following sequence is created based on the template
+    The best use for these templates are sequences created out of the Framing Assistant. For example when you have the broadband sequence set, that were mentioned earlier, you can just set up the mosaic, click "Replace Sequence" and the following sequence is created based on the template
 
 ![Mosaic](../images/advanced/sequencing/Mosaic.png)
 
