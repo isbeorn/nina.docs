@@ -225,6 +225,7 @@ Note that for Contrast Detection methods, only the inner crop ratio is available
 Most focusers suffer from some degree of backlash, which is a certain amount of "slippage" when reversing directions. That backlash can be precisely measured and compensated in software. For most focusers, the IN (when the focuser switches back to an inwards direction after moving outwards) and OUT (when focuser switches back to an outwards direction after moving inwards) are identical. 
 
 N.I.N.A. offers two backlash compensation methods:
+
 * Absolute: 
   When the focuser changes directions, an absolute value will be added to the focuser movement.
   Backlash IN: when the focuser changes from moving outwards to moving inwards the Backlash IN value will be added
@@ -247,3 +248,5 @@ Autofocus can sometimes work more efficiently on binned images. This is a number
 ## Auto-Focus Filter
 
 Another parameter that affects the auto-focus routine is the Auto-Focus Filter. It is possible to set an auto-focus filter, as described in the [Equipment Options Section](../tabs/options/equipment.md). If set, and the *Use FilterWheel Offsets* setting is set to On, the autofocus routine will use the Auto-Focus filter rather than the currently set filter in the filter wheel, and make sure the focuser offset is applied when switching to the autofocus filter, and when switching back to the imaging filter. This can be particularly useful for Narrowband imagers, where the filters can force long exposures for autofocus, such as 10 to 30 seconds.
+
+![Auto-Focus Filter](../images/advanced/Autofocusfilter.png)
