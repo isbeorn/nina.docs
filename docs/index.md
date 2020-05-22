@@ -6,7 +6,7 @@ Welcome to N.I.N.A. - Nighttime Imaging 'N' Astronomy. If are reading this docum
 
 N.I.N.A. is designed for automated DSO imaging using the sequencing model. Whether you are new to the world of DSO imaging or are a seasoned veteran, the goal of N.I.N.A. is to make your imaging sessions easier, faster, and comfortable. N.I.N.A. attempts to make complex concepts and operations easy to understand and effect so that more time is spent on imaging rather than minding equipment.
 
-N.I.N.A is also a [FOSS](//en.wikipedia.org/wiki/Free_and_open-source_software) application that is licened and distributed under the provisions of the [GNU GPLv3](//www.gnu.org/licenses/gpl-3.0.en.html) license. Its maintenance, maturation, and further development is realized by a team of dedicated vollunteers from around the world. If you have an interest in helping the project or contributing to it, please join the project's Discord server (see below) and reading the [contributor guidelines](//bitbucket.org/Isbeorn/nina/src/develop/CONTRIBUTING.md).
+N.I.N.A is also a [FOSS](//en.wikipedia.org/wiki/Free_and_open-source_software) application that is licened and distributed under the provisions of the [Mozilla Public License Version 2.0](//www.mozilla.org/en-US/MPL/2.0/) license. Its maintenance, maturation, and further development is realized by a team of dedicated vollunteers from around the world. If you have an interest in helping the project or contributing to it, please join the project's Discord server (see below) and reading the [contributor guidelines](//bitbucket.org/Isbeorn/nina/src/develop/CONTRIBUTING.md).
 
 ## About this Documentation
 
