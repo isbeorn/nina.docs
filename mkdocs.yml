@@ -53,6 +53,7 @@ nav:
             - Altair Dual Gain: 'troubleshooting/altair_dualgain.md'
         - Glossary: 'glossary.md'
         - License: 'license.md'
+        - 3rd-Party-Licenses: '3rd-party-license.md'
     - Quick Start:
         - UI Overview: 'quickstart/uioverview.md'
         - Connecting Your Equipment: 'quickstart/equipment.md'
