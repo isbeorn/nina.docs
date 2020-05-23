@@ -50,6 +50,7 @@ nav:
         - Troubleshooting:
             - General: 'troubleshooting/general.md'
             - iOptron Mount Setup: 'troubleshooting/ioptron.md'
+            - Altair Dual Gain: 'troubleshooting/altair_dualgain.md'
         - Glossary: 'glossary.md'
         - License: 'license.md'
     - Quick Start:
