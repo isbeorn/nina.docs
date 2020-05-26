@@ -15,13 +15,13 @@ The Imaging options tab contains settings for file formats, save directories, Au
     * If an OSC camera is used, the raw bayered data is saved
     
 2. **Compression**
-   * Select the compression method (if available)
+    * Select the compression method (if available)
   
 3. **Byte Shuffling**
-   * Enable/disable byte shuffling for XSIF compression
+    * Enable/disable byte shuffling for XSIF compression
 
 4. **Checksum**
-   * Select a checksum method for XSIF (optional)
+    * Select a checksum method for XSIF (optional)
    
 5. **Image File Path**
     * The file path where images will be saved
