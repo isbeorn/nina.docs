@@ -29,7 +29,16 @@ The Imaging options tab contains settings for file formats, save directories, Au
 6. **Image File Pattern and Preview**
     * The structure of folders and the filename can be defined by the user using the keywords listed in the table below. A preview of the file pattern is also displayed.
     > Fixed text is also possible
-    
+
+    !!! tip
+        By using the backslash characters `\\` you can separate your images into various folders and sub folders.
+        For example N.I.N.A. will create separate folders on each new day and create sub folders for Lights Darks etc. and then inside these folders putting the actual image files when using a pattern like    
+        `$$DATEMINUS12$$\\$$IMAGETYPE$$\\$$EXPOSURENUMBER$$`  
+        which will result in    
+        `2020-01-01 -> FLAT -> 0001.fits`  
+        `2020-01-01 -> LIGHT -> 0001.fits`  
+        `2020-01-02 -> LIGHT -> 0001.fits` 
+
     ## Auto Meridian Flip
 
 7.  **Meridian Flip Enabled**
