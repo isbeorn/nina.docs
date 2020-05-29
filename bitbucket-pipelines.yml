@@ -40,6 +40,7 @@ pipelines:
             - pip install mkdocs
             - pip install mkdocs-material
             - python -m mkdocs build -v
+            - git config git-ftp.syncroot .
             - git ftp push --syncroot $BITBUCKET_CLONE_DIR/site/ --user $ftp_user --passwd $ftp_pw $ftp_host
     master:
       - step:
@@ -52,5 +53,6 @@ pipelines:
             - pip install mkdocs
             - pip install mkdocs-material
             - python -m mkdocs build
+            - git config git-ftp.syncroot .
             - git ftp push --syncroot $BITBUCKET_CLONE_DIR/site/ --user $ftp_user --passwd $ftp_pw $ftp_host
           
