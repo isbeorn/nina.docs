@@ -11,7 +11,7 @@
 7. Uncheck Issue tracking and Wiki as you don't need this in your fork.
 8. Click on "Fork repository"
 ![Fork settings](../images/setup/Fork3.png)
-9. You will be navigated to your new repository at https://bitbucket.org/<your_username>/<your_fork's_name>/
+9. You will be navigated to your new repository at https://bitbucket.org/\<your\_username\>/\<your\_fork's\_name\>/
 
 ## Cloning Repository
 
