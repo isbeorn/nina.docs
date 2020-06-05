@@ -20,8 +20,10 @@ Another mathod involves running a standard AF routine and determine the number o
 
 N.I.N.A. offers two [backlash compensation methods](autofocus.md): __Absolute__ and __Overshoot__.
 
-When __Absolute__ backlash compensation is used. N.I.N.A. will add a fixed amount of steps (as specified in [Focuser Advanced options](autofocus.md)) when the focuser changes directions. This requires a good backlash measurement and is mostly effective with focusers with small backlash with respect to the _Auto Focus Step Size_.
+When __Absolute__ backlash compensation is used. N.I.N.A. will add a fixed amount of steps (as specified in [Focuser Advanced options](autofocus.md)) when the focuser changes directions. This requires a good backlash measurement and is mostly effective with focusers with small backlash with respect to the _Auto Focus Step Size_.  
 
-With __Overshoot__  N.I.N.A. compensate for Backlash by overshooting the target position by a large amount and then moving the focuser back to the initially requested position. This method is much more forgiving than Absolute and is recommended for focusers with large backlash or when the backlash measurment is not very accurate.
+With __Overshoot__  N.I.N.A. compensate for Backlash by overshooting the target position by a large amount and then moving the focuser back to the initially requested position. This method is much more forgiving than Absolute and is recommended for focusers with large backlash or when the backlash measurment is not very accurate.  
 For __Overshoot__, once the user has determined a rough backlash value, this can be increased by an extra 50% and input as IN or OUT compensation. Since this method is very forgiving a trial-and-error procedure is also possible, by using progressively larger compensation values until the AF routine behaves properly and no sign of backlash is shown in the AF curve.
-> Overshoot can  be very useful for STC users to avoid mirrir flop. In fact, when setting the Backlash Compensation to _IN_, the last focuser movement will always be inward.
+  
+!!! tip 
+    Overshoot can  be very useful for SCT users to avoid mirror flop. In fact, when setting the Backlash Compensation to _IN_, the last focuser movement will always be inward.
