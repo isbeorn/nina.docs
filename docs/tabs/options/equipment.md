@@ -103,7 +103,7 @@ This is the tab where you set up all the parameters recmd-k vlated to your equip
 24. **Backlash IN/OUT**
       * The focuser backlash in the IN (decreasing position) and OUT (increasing position) directions, expressed in focuser steps. 
   
-        > When Overshoot is choosen, only ONE between Backlash IN and OUT must be set! When setting IN, the amount will be applied on each inward movement, so the final movement will always be outwards. For Backlash OUT, it will be the other way around
+        > When Overshoot is chosen, only ONE between Backlash IN and OUT must be set! When setting IN, the amount will be applied on each inward movement, so the final movement will always be outwards. For Backlash OUT, it will be the other way around
 
 25. **Binning**
     * The binning to be used for Autofocus exposures.

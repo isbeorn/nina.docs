@@ -23,7 +23,7 @@ The Sequence interface consists of the following elements:
      * Moves sequence to the left
      * Saves Sequence set to a specific folder. This will save all sequences that are present in the sequence tab.
      * Loads Sequence set. This will replace all sequences in the Sequence tab.
-     * Adds sequence 
+     * Adds a new sequence 
   
     > If a **Sequence Template** file is specified under **Options > Imaging > Sequence**, that template will be automatically loaded in the new tab.
 

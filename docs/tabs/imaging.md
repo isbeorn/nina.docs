@@ -140,6 +140,8 @@ In this panel  all the important information about the last acaptured image are 
 
 **M. HFR History**  ![HFRicon](../images/tabs/imaging_HFRicon.PNG)  
 When automatic HFR (Half-Flux-Radius) star detection is ON, this panel will diplay the history of HFR values and number of stars used to evaluate the HFR for each exposure.
+The chart is limited to displaying a moving window of the last 100 exposures. 
+
 
 ![HFRHistory](../images/tabs/HFR2.png)
 
