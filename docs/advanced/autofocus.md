@@ -250,3 +250,9 @@ Autofocus can sometimes work more efficiently on binned images. This is a number
 Another parameter that affects the auto-focus routine is the Auto-Focus Filter. It is possible to set an auto-focus filter, as described in the [Equipment Options Section](../tabs/options/equipment.md). If set, and the *Use FilterWheel Offsets* setting is set to On, the autofocus routine will use the Auto-Focus filter rather than the currently set filter in the filter wheel, and make sure the focuser offset is applied when switching to the autofocus filter, and when switching back to the imaging filter. This can be particularly useful for Narrowband imagers, where the filters can force long exposures for autofocus, such as 10 to 30 seconds.
 
 ![Auto-Focus Filter](../images/advanced/Autofocusfilter.png)
+
+## Auto-Focus Logs
+
+For each successful Auto-Focus that has been performed a JSON log file is created containing detailed information about the autofocus run. There you can find the used filter, all the steps that were measured and other useful  information to evaluate an Auto-Focus run from the past. Furthermore these logs can help greatly in analysing potential issues with Auto-Focus by sharing this file with other people.  
+  
+These logs are stored inside `%LOCALAPPDATA%\NINA\Autofocus\`
