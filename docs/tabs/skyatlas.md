@@ -14,7 +14,7 @@ The UI consists of following elements:
         
 2. **Filters**
     * Filtering and modifying a search can be done by various object criteria and parameters
-        * Object type
+        * Object type (For more info about object types refer to the [glossary](../glossary.md))
             * Galaxy, 2 Stars, 1 Star, Cluster with Nebulosity in a Galaxy, Open Cluster, Planetary Nebula, Galaxy cluster, 3 Stars, Globular Cluster, Asterism, Dark Nebula, Bright Nebula, 8 Stars, Nonexistent, Supernova Remnant, Cluster with Nebulosity, Quasar, 4 Stars, Diffuse Nebula in a Galaxy, various forms of clusters in the LMC and SMC
         * Constellation: any constellation in the night sky
         * Coordinates: limits the search to specific right ascension and declination coordinates or a specific subset of those
