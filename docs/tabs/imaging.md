@@ -9,7 +9,7 @@ The top bar is divided in two main sections: **Info** and **Tools**
 
 ![topbarmenu](../images/tabs/Imaging_menu.PNG)  
 
-## **Info**  
+## Info  
 These windows provide important status information about captured images and connected equipment  
 
 **A. Image**  ![imageicon](../images/tabs/imaging_imageicon.PNG)  
@@ -25,15 +25,19 @@ The image panel is the central part of the Imaging tab and is used to diplay the
 6.   Toggles crosshair overlay on/off
 7.   Toggles automatic display of the displayed image (for autostretch settings refer to [Options](options/imaging.md))
 8.   Toggles automatic HFR (Half-FLux-Radius) star detection analysis. HFR is used for [Autofocus](options/equipment.md) routines. When HFR detection is ON, the average HFR value for each captured image are plotted in the HFR History wiwdow (M)  
-     > If "Annotate Image" is switched ON under Options [Imaging](options/imaging.md), calculated HFR values will be displayed on the image  
+> If _Annotate Image_ is switched ON under [Options->Imaging](options/imaging.md), the calculated HFR values will be displayed on the image  
    ![HFR](../images/tabs/imaging_HFR.PNG)
 9.   Activates the Bahtinov Analyzer aid tool for manual focusing with a Bahtinov Mask.
 
 **B. Camera** ![cameraicon](../images/tabs/imaging_cameraicon.PNG)  
 This panel displays the main camera and sensor properties and cooling status
 > Requires a connected camera
+
 1. Camera status details
-2. Activate/Deactivate the camera cooling. If a Cooling/Warming period is set in [Equipment](/docs/tabs/equipment.md) this will be used to perform the temperature variation routine. 
+2. Camera cooling properties
+3. Camera warming 
+   
+![cameratab](../images/tabs/cameratab.png)
 
 **C. Filter Wheel** ![fwicon](../images/tabs/imaging_fwicon.PNG)  
 When a Filter Wheel is connected, this panel displays the current filter (1) and lets you manually switch filters by selecting them with the drop-down menu (2)
@@ -131,33 +135,21 @@ In this panel  all the important information about the last acaptured image are 
     * Number of detected stars and mean HFR
         > Stars and HFR will only be displayed if Automatic HFR is active
     * Bit Depth as reported by the image header  
-  
-   
 
-2. Optimal Exposure Calculator: this tool will suggest  recommended exposure times based on the measured Min and Max ADU values of the last captured image.  The tool takes into consideration  the average skyglow and will calulate the exposures to swamp the camera read noise by a factor of 3x (Min) and 10x (Max).   
-The Optimal exposure time will factor in the download to data ratio. For fast download cameras this will basically match  the Min recommended time.
-Min and Max exposure times are calculated as follows:
-`MinimumRecommendedExposureTime = ((MinExposureADU - _offset) / (mean - _offset)) * exposureTime`
-`MaximumRecommendedExposureTime = ((MaxExposureADU - _offset) / (mean - _offset)) * exposureTime`
-where:
-`MinExposureADU = _offset + 3 * _squaredReadNoise`  
-`MaxExposureADU = _offset + 10 * _squaredReadNoise`
-
-    > Formulas rely on the camera parameters set in Options-[Equipment](options/equipment.md) and are only valid for one specific gain level.
-    If you change the gain of your camera, a new set of  parametes must be entered in [Equipment](options/equipment.md).
-
-3. Image histogram of the last captured image
+2. Image histogram of the last captured image
 
 **M. HFR History**  ![HFRicon](../images/tabs/imaging_HFRicon.PNG)  
-When automatic HFR (Half-FLux-Radius) star detection is ON, this panel will diplay the history of HFR values and number of stars used to evaluate the HFR for each exposure.
+When automatic HFR (Half-Flux-Radius) star detection is ON, this panel will diplay the history of HFR values and number of stars used to evaluate the HFR for each exposure.
+The chart is limited to displaying a moving window of the last 100 exposures. 
 
-![HFRHistory](../images/tabs/imaging_HFRhistory.png)
+
+![HFRHistory](../images/tabs/HFR2.png)
 
 1. Yellow line: number of stars used for HFR evaluation
 2. Green line: mean HFR
+3. Triangle marks: AF runs
    
-## **Tools**  
-
+    ## Tools 
 
 **N. Imaging** ![image1icon](../images/tabs/imaging_imagingicon.PNG)  
 The imaging panel allows you to take a single exposure or live view when supported by the camera
@@ -189,15 +181,13 @@ Platesolving is a very important step in the imaging process, for further inform
 ![platesolve](../images/tabs/imaging_platesolve.png)
 
 1. Plate solving results
-2. Toggles ON/OFF synching the telescope mount with the plate solved coordinates (recommended when )
-3. Toggles ON/OFF reslewing the mount to the plate solved coordinates if the plate solved position is not matching with the expected one
-4. Toggles ON/OFF recentering the mount to the target until the error is less than what defined in (5)
-5. Error threshold for (4)
-6. Exposure that will be used to capture the image for plate solving
-7. Filter that will be used to capture the image for plate solving
-8. Binning that will be used to capture the image  for plate solving
-9. Captures  an image for plate solving
-10. History of plate solving sessions
+2. Toggles ON/OFF synching the telescope mount with the plate solved coordinates 
+3. Toggles ON/OFF reslewing and recentering the mount to the plate solved coordinates if the plate solved position is not matching with the expected one
+4. Error threshold for (4)
+5. Exposure that will be used to capture the image for plate solving
+6. Filter that will be used to capture the image for plate solving
+7. Captures  an image for plate solving
+8. History of plate solving sessions
 
 **Q. Polar alignment** ![polaricon](../images/tabs/imaging_polaricon.PNG)    
 The polar alignment panel gives you two ways to determine how off your polar alignment is and to improve it. One is plate solved polar alignment and the other is DARV slew.
@@ -227,12 +217,11 @@ The polar alignment panel gives you two ways to determine how off your polar ali
 **R. Auto Focus** ![AFicon](../images/tabs/imaging_aficon.PNG)  
 This panel lets you manually trigger an Auto Focus routine based on the Auto Focus parameters set in Options [Equipment](options/equipment.md).
 
-![AF](../images/tabs/imaging_AF.png)
+![AF](../images/tabs/AF10.png)
 
 1. Autofocus curve 
 2. Last Auto Focus run parameters
-3. Start Auto Focus routine
-4. Start Auto Focus backlash measurement routine
+3. Starts Auto Focus routine
 
 **S. Manual Focus Targets** ![MFicon](../images/tabs/imaging_mftargetsicon.PNG)  
 When you have to manual focus your scope this tab lets you conveniently choose among the current visible brighter stars according to your location and time.
@@ -242,6 +231,41 @@ When you have to manual focus your scope this tab lets you conveniently choose a
 1. List of stars to choose from
 2. Selected star properties
 3. Slews telescope to the selected star
+
+**T. Exposure Calculator** ![ExpCalcIcon](../images/tabs/imaging_expcalcicon.PNG)  
+
+This tool will suggest a recommended exposure time based on the read noise from the camera sensor and the average skyglow.
+If SharpCap is installed and a Sensor Analysis is available for the current camera, RN and FW are derived from the sensor analysis.
+
+![ExpCalc](../images/tabs/expcalc10.png)
+
+1. Exposure time. This is only used to mesure the average skyglow when clicking on (8)
+2. Filter: this menu lets you choose the filter for the calculation
+    > Filters affect the  wavelength bandpass of incident light and therefore the average skyglow. The analysis should be repeated for each filter to determine an optimal exposures set.
+3. Gain: select the gain for the exposure analysis. 
+    > Camera parameters vary significantly with gain values, the analysis should be repeated for the different gain values used for imaging. A guideline to determine the optimal gain values for your imaging conditions can be found [here](https://www.youtube.com/watch?v=ub1HjvlCJ5Y&list=PLhIb8N-jSR_rNKxCFGzbd87TfmyQS4U4X&index=14)
+4. The drop-down menu lets you select availavle sensor analysis files from SharpCap
+   > SharpCap must be installed and you must first perform a Sensor Analysis in SharpCap follwoing the instructions [here](http://docs.sharpcap.co.uk/3.2/19_SensorAnalysis.htm). Sensor analysis files are saved in %APPDATA%\Roaming\SharpCap\SensorCharacteristics
+5. Full Well Capacity in electrons: if known this value can be entered manually for the specified gain or retrieved automatically from the Sharpcap Sensor Analysis
+6. Read Noise in electrons: if known this value can be entered manually for the specified gain or retrieved automatically from the Sharpcap Sensor Analysis
+7. BIAS median value (in 16bit): median ADU value of a bias frame (scald to 16bit), can be entered manually or calculated automatically by covering the scope and cliecking on the "Calculate Bias" button
+8. Click here to perform the exposure for the analysis
+9. The recommended exposure times are diplayed in this section
+
+Recommended exposure time is calculated according to the following [formula](https://forums.sharpcap.co.uk/viewtopic.php?t=456):
+
+`Recommended Exposure Time = 10 * read noise squared / light pollution rate`
+
+where light pollution rate is defined as:
+
+`(median ADU of a subframe - median of the bias) * electrons per ADU / the length of the exposure`
+
+Further details on the theory for the optimal exposure calculation can be found [here](https://www.youtube.com/watch?v=3RH93UvP358)
+
+ >  The analysis will use whatever gain is specified and linear interpolate between the values calculated by sharpcap. for example, if you have read noise in the analysis for gains 100 and 150 but specify 125, the tool will set the read noise exactly between the two.
+
+ > Remember to cool down your camera to the desired temperature before using the tool, high Dark Current values may affect the results.
+
 
 
 

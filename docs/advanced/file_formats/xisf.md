@@ -83,3 +83,26 @@ Requires a focuser to be connected
 
 !!! tip 
     Additionally all information that is explained [in the FITS description](fits.md) is stored using the [FITSKeyword Core Element](http://pixinsight.com/doc/docs/XISF-1.0-spec/XISF-1.0-spec.html#__XISF_Core_Elements_:_FITSKeyword_Core_Element__).
+
+
+## Compression
+
+N.I.N.A. offers the possibility to use compression algorithms to try to reduce the file size of your images.
+There are three algorithms available:
+
+- LZ4: This algorithm is optimized for speed. While not as potent as Zlib it is dramatically faster and will result in an acceptable amount of compression most of the time
+- LZ4HC: Basically the same algorithm as LZ4 but with a higher compression rate. A bit more computational heavy than just LZ4.
+- Zlib: This algorithm will yield the highest compression result in most scenarios, but takes a long time to process and is by far the most computational heavy algorithm.
+- The option for byte shuffling will re-arrange the actual data in an attempt to optimize it for the compression. In most scenarios this will result in a better compressed result, but is a bit more computational heavy.
+
+![Compression](../../images/advanced/XISF_Compression.png)
+
+!!! tip
+    For a more in depth info on how the compression works refer to the [XISF Data Block Compression](https://pixinsight.com/doc/docs/XISF-1.0-spec/XISF-1.0-spec.html#data_block_compression)
+
+## Checksum
+
+This option will store a checksum value into the XISF file to be able to validate data integrity. 
+
+!!! tip
+    For a more in depth info on how the checksum works refer to the [XISF Data Block Checksum](https://pixinsight.com/doc/docs/XISF-1.0-spec/XISF-1.0-spec.html#data_block_checksum)

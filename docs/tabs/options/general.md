@@ -1,6 +1,6 @@
 The General Settings tab allows you to manage N.I.N.A. in terms of all general settings. Settings here affect the whole application.
 
-![The general settings tab](../../images/tabs/generalSettings1.png)
+![The general settings tab](../../images/tabs/OptionsGeneralv10.png)
 
 1. **Profiles**
     * Lists all user defined N.I.N.A. profiles
@@ -8,7 +8,7 @@ The General Settings tab allows you to manage N.I.N.A. in terms of all general s
     
 2. **Profile Buttons**
     * The user may add, duplicate, delete or load a profile using these buttons
-    * Another profile cannot be loaded if the current one is preoccupied taking exposures 
+    > A profile cannot be loaded if the current one has a device connected 
 
 3. **Name and Language settings**
     * Sets the name of the currently loaded and active user defined profile
@@ -39,7 +39,7 @@ The General Settings tab allows you to manage N.I.N.A. in terms of all general s
     * The button here opens the directory containing the logs, logs are typically located in %localappdata%\NINA\logs
     
 8. **Device Polling Interval**
-    * This sets the interval of device polling in seconds
+    * This sets the interval of device polling in seconds. Default works well in most situations.
     
 9. **Current UI Color Schema**
     * Enables customisation of the color scheme of N.I.N.A. 
@@ -54,8 +54,6 @@ The General Settings tab allows you to manage N.I.N.A. in terms of all general s
     > This can be done from anywhere in the application
     
 12. **Astrometry Settings**
-    * Specifies the epoch for astrometry to be either JNOW or J2000
-    > This must be matched with the epoch used in the mount
     * Hemisphere, Latitude and Longitude can be set here
 
 13. **NMEA GPS Button**
@@ -63,4 +61,7 @@ The General Settings tab allows you to manage N.I.N.A. in terms of all general s
     
 14. **Planetarium Button**
     * Loads coordinates from a user connected planetarium software
-    > Planetarium can be connected in the [Planetarium menu](planetarium.md)
+    > Planetarium can be connected in the [Planetarium menu](equipment.md)
+
+15. **Cirrent NINA version and active Profile**
+    * The title displays the current NINA versiona nd the active profile
