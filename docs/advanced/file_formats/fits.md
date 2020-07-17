@@ -23,6 +23,7 @@ Many applications can make use of these headers (e.g. PixInsight during processi
 - EXPTIME: Exposure duration in seconds
 - DATE-LOC: Locale time at exposure start
 - DATE-UTC: UTC time at exposure start
+- ROWORDER: TOP-DOWN orientation of the image starting point. [Details at free-astro.org](https://free-astro.org/index.php?title=Siril:FITS_orientation)
 
 ## Observer Headers
 Taken from the Astrometry Options
