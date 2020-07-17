@@ -1,6 +1,6 @@
 # Glossary
 
-This is a list of terms and abbreviations fonund throughout the documentation with their meanings.
+The following is a list of terms and abbreviations found throughout the documentation with their meanings.
 
 |Term           | Description
 |---------------|:---

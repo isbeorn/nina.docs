@@ -12,7 +12,17 @@ nav:
         - Requirements: 'requirements.md'        
         - Tabs:
             - Overview: 'tabs/overview.md'
-            - Equipment: 'tabs/equipment.md'
+            - Equipment: 
+                - Equipment: 'tabs/equipment/equipment.md'
+                - Camera: 'tabs/equipment/camera.md'
+                - Filterwheel: 'tabs/equipment/filterwheel.md'
+                - Focuser: 'tabs/equipment/focuser.md'
+                - Rotator: 'tabs/equipment/rotator.md'
+                - Telescope: 'tabs/equipment/telescope.md'
+                - Guider: 'tabs/equipment/guider.md'
+                - Switch: 'tabs/equipment/switch.md'
+                - Flat Panel: 'tabs/equipment/flatpanel.md'
+                - Weather: 'tabs/equipment/weather.md'
             - Sky Atlas: 'tabs/skyatlas.md'
             - Framing Assistant: 'tabs/framing.md'
             - Flat Wizard: 'tabs/flatwizard.md'
@@ -23,7 +33,6 @@ nav:
                 - Equipment: 'tabs/options/equipment.md'
                 - Imaging: 'tabs/options/imaging.md'
                 - Plate Solving: 'tabs/options/platesolving.md'
-                - Planetarium: 'tabs/options/planetarium.md'
         - Advanced Topics:
             - Plate Solving: 'advanced/platesolving.md'
             - Object Browser: 'advanced/objectbrowser.md'
@@ -32,6 +41,8 @@ nav:
             - Automated Meridian Flip: 'advanced/meridianflip.md'
             - Advanced Sequencing: 'advanced/advancedsequence.md'
             - Bulb Shutter Control: 'advanced/bulbshutter.md'
+            - Auto-Focus: 'advanced/autofocus.md'
+            - Focuser Backlash Measurement: 'advanced/backlashmeasurement.md'
             - File Formats:
                 - TIFF: 'advanced/file_formats/tiff.md'
                 - FITS: 'advanced/file_formats/fits.md'
@@ -39,8 +50,10 @@ nav:
         - Troubleshooting:
             - General: 'troubleshooting/general.md'
             - iOptron Mount Setup: 'troubleshooting/ioptron.md'
+            - Altair Dual Gain: 'troubleshooting/altair_dualgain.md'
         - Glossary: 'glossary.md'
         - License: 'license.md'
+        - 3rd-Party-Licenses: '3rd-party-license.md'
     - Quick Start:
         - UI Overview: 'quickstart/uioverview.md'
         - Connecting Your Equipment: 'quickstart/equipment.md'
@@ -50,6 +63,7 @@ nav:
     - Contributing:
         - Enhance documentation: 'contributing/contributing.md'
         - How to setup the development environment: 'contributing/howtosetupdev.md'
+        - Localization: 'contributing/localization.md'
 
 theme:
     name: 'material'
@@ -81,4 +95,4 @@ markdown_extensions:
         custom_checkbox: true
     - pymdownx.tilde
 
-copyright: Copyright &copy; 2019 Stefan Berg and the N.I.N.A. contributors
+copyright: Copyright &copy; 2019-2020 Stefan Berg and the N.I.N.A. contributors

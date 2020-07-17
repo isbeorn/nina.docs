@@ -11,7 +11,7 @@
 7. Uncheck Issue tracking and Wiki as you don't need this in your fork.
 8. Click on "Fork repository"
 ![Fork settings](../images/setup/Fork3.png)
-9. You will be navigated to your new repository at https://bitbucket.org/<your_username>/<your_fork's_name>/
+9. You will be navigated to your new repository at https://bitbucket.org/\<your\_username\>/\<your\_fork's\_name\>/
 
 ## Cloning Repository
 
@@ -22,9 +22,26 @@
 4. Navigate to the folder where you want your repository folder should be created in
 5. Enter the command that was shown in step 2.
 ![Command string to clone](../images/setup/Clone2.png)
+```
+git clone https://<YourUserName>@bitbucket.org/<YourUserName>/<YourForkName>.git
+cd <YourForkName>
+```
 6. Navigate to the created sub folder
 7. Next you need to add a the "upstream" to the root repository (where your fork is based on). This is later required for merging from the main dev branch etc.
 ![Add upstream](../images/setup/Clone3.png)
+```
+git remote add upstream htps://<YourUserName>@bitbucket.org/Isbeorn/nina.git
+```
+
+## Fetching the Large File Storage files
+
+1. Bitbucket will not automatically copy over the LFS into the fork repository. This has to be done manually
+2. Run the following commands to sync the lfs
+```
+git lfs fetch --all upstream
+git lfs push --all origin
+git lfs pull
+```
 
 ## Navigation in Visual Studio
 

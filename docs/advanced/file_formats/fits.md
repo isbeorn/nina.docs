@@ -19,7 +19,8 @@ Many applications can make use of these headers (e.g. PixInsight during processi
 ## Image Headers
 
 - IMAGETYP: Type of exposure (LIGHT, DARK etc.)
-- EXPOSURE: Expsure duration in seconds
+- EXPOSURE: Exposure duration in seconds
+- EXPTIME: Exposure duration in seconds
 - DATE-LOC: Locale time at exposure start
 - DATE-UTC: UTC time at exposure start
 
@@ -46,9 +47,14 @@ Requires a camera to be connected
 - GAIN: Gain
 - OFFSET: Offset (if camera can set an offset)
 - EGAIN: Electrons per A/D unit (only available for some cameras)
-- XPIXSZ: Pixelsize
+- XPIXSZ: X-Pixelsize
+- YPIXSZ: Y-Pixelsize
 - SET-TEMP: tempterature set point (requires a cooling unit)
 - CCD-TEMP: actual sensor temperature (requires a cooling unit)
+- READOUTM: Sensor readout mode
+- BAYERPAT: Sensor bayer pattern
+- XBAYEROFF: Bayer pattern X axis offset
+- YBAYEROFF: Bayer pattern Y axis offset
 
 ## Telescope Headers
 Requires a telescope to be connected
@@ -80,8 +86,8 @@ Requires a focuser to be connected
 Requires a rotator to be connected
 
 - ROTNAME: Name of rotator
-- ROTATOR: Current position
-- ROTATANG: Current position
+- ROTATOR: Rotator angle in degrees
+- ROTATANG: Rotator angle in degrees
 - ROTSTPSZ: Step size
 
 ## Weather Data Headers
