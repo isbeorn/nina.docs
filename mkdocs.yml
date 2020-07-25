@@ -23,6 +23,7 @@ nav:
                 - Switch: 'tabs/equipment/switch.md'
                 - Flat Panel: 'tabs/equipment/flatpanel.md'
                 - Weather: 'tabs/equipment/weather.md'
+                - Dome: 'tabs/equipment/dome.md'
             - Sky Atlas: 'tabs/skyatlas.md'
             - Framing Assistant: 'tabs/framing.md'
             - Flat Wizard: 'tabs/flatwizard.md'
@@ -33,6 +34,7 @@ nav:
                 - Equipment: 'tabs/options/equipment.md'
                 - Imaging: 'tabs/options/imaging.md'
                 - Plate Solving: 'tabs/options/platesolving.md'
+                - Dome: 'tabs/options/dome.md'
         - Advanced Topics:
             - Plate Solving: 'advanced/platesolving.md'
             - Object Browser: 'advanced/objectbrowser.md'
