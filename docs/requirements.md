@@ -20,7 +20,7 @@ The functionality of N.I.N.A. shines through when paired with a supporting cast 
   * [ASCOM 6.4 framework](//ascom-standards.org/Downloads/Index.htm) (recommended)
   * [PHD2 Guiding](//openphdguiding.org/downloads/) (recommended)
   * Any of several supported [plate solving](advanced/platesolving.md) applications (recommended)
-    * [ASTAP](//www.hnsky.org/astap.htm)  
+    * [ASTAP](//www.hnsky.org/astap.htm)
     * [All Sky Plate Solver](http://www.astrogb.com/astrogb/All_Sky_Plate_Solver.html)
     * [Local Astrometry.net (ansvr)](//adgsoftware.com/ansvr/)
     * [PlateSolve2](//planewave.com/downloads/software/)
@@ -72,4 +72,8 @@ Astronomy-related equipment often has an [ASCOM](//ascom-standards.org/) driver 
 
 ### Guiding Applications
 
-N.I.N.A. supports interfacing directly with PHD2 to monitor the status of guiding and to effect actions such as dithering. Telemetry from PHD2 also can be displayed inside the Imaging tab. If desired, N.I.N.A. can automatically launch PHD2. Currently, PHD2 is the only external guiding application that N.I.N.A. supports.
+N.I.N.A. supports several guiding applications to guide, dither, and monitor tracking accuracy. Telemetry from these applications are also displayed inside of the Imaging tab. The guiding applications N.I.N.A. supports are:
+
+  * [PHD2](https://openphdguiding.org/)
+  * [MGEN2](https://mgen-autoguider.com/en/)
+  * [MetaGuide](http://www.astrogeeks.com/Bliss/MetaGuide/)

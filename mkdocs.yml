@@ -38,6 +38,7 @@ nav:
         - Advanced Topics:
             - Plate Solving: 'advanced/platesolving.md'
             - Object Browser: 'advanced/objectbrowser.md'
+            - Guiding: 'advanced/guiding.md'
             - Dithering: 'advanced/dithering.md'
             - Framing Assistant: 'advanced/framingassistant.md'
             - Automated Meridian Flip: 'advanced/meridianflip.md'
