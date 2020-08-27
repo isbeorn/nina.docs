@@ -30,7 +30,7 @@ cd <YourForkName>
 7. Next you need to add a the "upstream" to the root repository (where your fork is based on). This is later required for merging from the main dev branch etc.
 ![Add upstream](../images/setup/Clone3.png)
 ```
-git remote add upstream htps://<YourUserName>@bitbucket.org/Isbeorn/nina.git
+git remote add upstream https://<YourUserName>@bitbucket.org/Isbeorn/nina.git
 ```
 
 ## Fetching the Large File Storage files
