@@ -165,8 +165,8 @@ The imaging panel allows you to take a single exposure or live view when support
 7. Takes the exposure
 
 **O. Image History** ![imagehistory](../images/tabs/imaging_historyicon.PNG)  
-The Image History panel shows a list of thumbinalis of the current sequence captured images with basic statistics: Meean value in ADU, average HFR, Filter used, duration and capture time.
-> By double-clicking on any of the thumbinails the relative image will be opened in the Image panel (A)
+The Image History panel shows a list of thumbnalis of the current sequence captured images with basic statistics: Mean value in ADU, average HFR, Filter used, duration and capture time.
+> By double-clicking on any of the thumbnails the relative image will be opened in the Image panel (A)
 
 ![history](../images/tabs/imaging_history.png)
 
