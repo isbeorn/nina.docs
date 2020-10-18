@@ -41,7 +41,7 @@ The Sky Atlas interface consists of following elements:
 
 8. **Set as Sequence**
 
-    Sets the selected object as a Sequence target
+    Sets the selected object as a Sequence target for the sequence builder or the sequencer using a specific template based on the selection
 
 9. **Set for Framing Assistant**
 
