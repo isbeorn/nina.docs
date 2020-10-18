@@ -4,7 +4,11 @@ A Manual Rotato option is also available
 ![Rotator](../../images/tabs/equipment_rotator.png)
 
 1. Rotator information 
-2. Move the rotator to the selected angle
+2. Reverse the direction of the rotator (if available). Enable this option, when the rotator moves into the wrong direction during centering and rotation. This is for example required on setups like a Hyperstar where the horizontal image axis is flipped.  
+3. Move the rotator to the selected angle
+
+!!! note
+The rotator angle will be synced to the sky angle after a center+rotation happened and will display the sky angle instead of the mechanical angle instead.
 
 ## Manual Rotator
 
@@ -25,5 +29,5 @@ Rotate the camera and close the manual rotator window, a new platesolve will be 
 
 ![ManualRotator](../../images/tabs/manualrotator.PNG)
 
-!!!tip
+!!! tip
      If you want to set camera rotation before starting the main imaging sequence you can use a dummy sequence with exposure 1s to kick the manual rotator in
