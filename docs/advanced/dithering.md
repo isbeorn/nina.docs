@@ -13,7 +13,7 @@ N.I.N.A. offers three different ways to perform dithering:
 2. Synchronized dithering across multiple main cameras on the same mount, also through PHD2
 3. Built-in dithering using N.I.N.A.'s Direct Guider function
 
-The desired method of dithering is selected in the **Equipment > Guider** tab.
+The desired way of dithering is based on the connected device in the **Equipment > Guider** tab.
 
 ### Standard Dithering
 
