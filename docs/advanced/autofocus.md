@@ -224,6 +224,18 @@ Note that for Contrast Detection methods, only the inner crop ratio is available
 
 Most focusers suffer from some degree of backlash, which is a certain amount of "slippage" when reversing directions. That backlash can be precisely measured and compensated in software. For most focusers, the IN (when the focuser switches back to an inwards direction after moving outwards) and OUT (when focuser switches back to an outwards direction after moving inwards) are identical. 
 
+#### Identifying backlash
+
+It is critical for autofocus that all backlash is removed during a focus run. Without it the final focus position will never be reached properly. Therefore the backlash needs to be identified.  
+An easy way to see this, is by looking at the Autofocus chart itself. The backlash will be prominent on the right side from the starting position and will show as a horizontal line in the chart.
+
+![Typical Backlash](../images/advanced/backlash.png)
+
+In the above example the amount of backlash is at least 100 steps. Let's explain why the right side will show the backlash like that.  
+The initial focuser position for the above example was around step 9000. To begin the autofocus routine, the focuser will move outwards to position 9300. The first measurement is taken. Then the focuser needs to travel to position 9200. Here the direction is changed from outwards to inwards. Every time a change of direction happens, the backlash needs to be compensated. As there was no compensation for the above example, the focuser thinks that it moved to position 9200, but due to the backlash the physical movement of the draw tube was none. Therefore the next measurement point will have the same HFR value as before, resulting in a flat line until the backlash was overcome. Finally when the focuser was moving inwards to the last autofocus point at position 8600 it needs to change directions again to move to the calculated focus point. Here again the backlash was not compensated and the focus position will be missed, resulting in a bad end result.
+
+#### Compensating backlash
+
 N.I.N.A. offers two backlash compensation methods:
 
 * Absolute: 
