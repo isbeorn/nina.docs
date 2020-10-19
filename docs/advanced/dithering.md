@@ -9,15 +9,15 @@ Because dithering is an operation that must be coordinated with guiding (remembe
 
 N.I.N.A. offers three different ways to effect dither operations:
 
-1. Standard dithering through PHD2
+1. Standard dithering through PHD2 or MGEN2
 2. Synchronized dithering across multiple main cameras on the same mount, also through PHD2
 3. Built-in dithering using N.I.N.A.'s Direct Guider function
 
-The desired method of dithering is selected in the **Equipment > Guider** tab.
+The desired way of dithering is based on the connected device in the **Equipment > Guider** tab.
 
-### Standard PHD2 Dithering
+### Standard Dithering
 
-This is the typical scenario for most users. The user has a single main camera, a guide camera, and is using PHD2 for guiding. At the intervals configured in the sequence, N.I.N.A. will pause operations with the main camera and signal PHD2 to begin a dither operation. Photography resumes when the dither operation is completed.
+This is the typical scenario for most users. The user has a single main camera, a guide camera, and is using PHD2/MGEN2 for guiding. At the intervals configured in the sequence, N.I.N.A. will pause operations with the main camera and signal PHD2/MGEN2 to begin a dither operation. Photography resumes when the dither operation is completed.
 
 ### Synchronized Dithering with PHD2
 
