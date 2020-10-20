@@ -36,6 +36,8 @@ nav:
                 - Imaging: 'tabs/options/imaging.md'
                 - Plate Solving: 'tabs/options/platesolving.md'
                 - Dome: 'tabs/options/dome.md'
+        - Sequencer:
+            - Overview: 'sequencer/overview.md'
         - Advanced Topics:
             - Plate Solving: 'advanced/platesolving.md'
             - Object Browser: 'advanced/objectbrowser.md'
