@@ -50,31 +50,27 @@ For further information about using the Framing Assistant refer to the [Advanced
 8. **Slew**
     * Slews the mount to the coordinates of the center of the framing rectangle (16) 
 
-9.  **Replace as Sequence**
-    * Sets the coordinates of the RA and Dec of the framing window as the sequence and copies the name over to the sequence tab as well 
-    * Replacing the target also resets sequence settings to default 
+9. **Add as Sequence**
+    * Takes the name and coordinates of the RA and Dec of the framing window and adds it as a sequence target for either the sequence builder or the sequencer using a deep sky object template
 
-10. **Add as Sequence**
-    * The same as (9), but the framed target is added as an addition sequence target. This does not affect other sequences
-
-11. **Altitude browser**
+10. **Altitude browser**
     * Displays the altitude of the target over time, indicating current position and meridian 
 
     ## Main tab
 
-12. **Image display controls**
+11. **Image display controls**
     * From left to right: Zoom in, zoom out, fit image to screen, show image in original resolution 
 
-13. **Annotation controls**
+12. **Annotation controls**
     * From left to right: Opacity of framing rectangle, constellation boundaries, constellation annotation, equatorial grid, annotate DSOs 
 
-14. **Image**
+13. **Image**
     * The image as downloaded from the sky survey, cache, Sky Atlas or provided by **From File** 
 
-15. **Framing rectangle**
+14. **Framing rectangle**
     * Depends on the camera and focal length parameters (5) 
     * Can be dragged around with the mouse 
     * Can be rotated with (6) 
  
-16. **RA/DEC Coordinates**
+15. **RA/DEC Coordinates**
     * The coordinates of the center of the framing rectangle. These are used as a sequences target coordinates  

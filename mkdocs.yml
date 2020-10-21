@@ -27,7 +27,8 @@ nav:
             - Sky Atlas: 'tabs/skyatlas.md'
             - Framing Assistant: 'tabs/framing.md'
             - Flat Wizard: 'tabs/flatwizard.md'
-            - Sequence: 'tabs/sequence.md'
+            - Sequence Builder: 'tabs/sequencebuilder.md'
+            - Sequencer: 'tabs/sequencer.md'
             - Imaging: 'tabs/imaging.md'
             - Options:
                 - General: 'tabs/options/general.md'
