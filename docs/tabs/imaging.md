@@ -95,17 +95,9 @@ The guider panel replicates the PHD guiding graph in real time.
 5. Chart area, this is where the PHD2 graph will be visualized
 
 **H. Sequence**  ![sequenceicon](../images/tabs/imaging_sequenceicon.PNG)  
-Sequence panel lets you start/pause/stop imaging sequences and provides information on the active sequence. To learn how to set up a sequence refer to the [Sequence](sequence.md) section.
+Sequence panel lets you start/stop imaging sequences and provides information on the sequence run in a compressed format. To learn how to set up a sequence refer to the [Sequence](sequencer.md) section.
 
 ![sequence1](../images/tabs/imaging_sequence.png)
-
-1. Sequence status: displays the completed/remaining sequences
-2. Estimated Finish Time: the estimated finish time of the active sequence
-3. Completed/remaining exposures for the active sequence
-4. Camera parameters of the active sequence
-5. Play: start the active sequence. When a sequence is running, the Pause (6) and Cancel (7) sequence options will be available instead
-
-![sequence2](../images/tabs/imaging_sequence2.png)
 
 **I. Switches** ![switchesicon](../images/tabs/imaging_switchesicon.PNG)  
 This panel will let you control the active switches
