@@ -1,5 +1,11 @@
-
+The sequencer page makes it possible to completely plan and customize an imaging run based on specific needs for each user by giving the capability to plan on a very granular level. Equipment can be controlled step by step with various available instructions and each instruction can be further customized by specific parameters for each one.  
+The main area will contain the actual instructions. There it is possible to add the instructions, customize the parameters and see the progress of the sequencer.  
+On the bottom left it is possible to save and load a complete sequence run while on the bottom right it is possible to start and stop a sequence.  
+The right sidebar will show all available instructions as well as templates. These are described in more detail below.
 ![Overview](../images/sequencer/Sequencer_Overview.png)
+
+Everything inside the sequencer page is enabled to use drag and drop. For example an instruction can be grabbed by holding the left mouse button and then dragged into the sequencer area to add an instruction at the mouse location.  
+However it is also possible to plan everything without using drag and drop at all
 ![Drag & Drop](../images/sequencer/Sequencer_DragDrop.png)
 
 ## Instructions
@@ -64,11 +70,27 @@ As triggers are evaluated in the same fashion as loop conditions, you can set tr
 ![Nested Triggers](../images/sequencer/Sequencer_NestedTriggers.png)
 
 ## Templates
+A template is a set of various customized instructions set up with predefined values to be re-used constantly. To be able to quickly set up a sequence for an imaging run, the templates will take a key part and enable the possibility to easily create specific types of sequences in a matter of no time.  
+Each instruction set is capable of being templated. When a set is templated, all its content and the values set inside are saved and put into the template. When the template is then added to the sequence again, it will create a copy of it and create an instruction set that is exactly set up like the templated set.  
+The templates are located on the right sidebar when switching to the templates tab. A couple of basic templates are provided with the application.  
 ![Templates](../images/sequencer/Sequencer_Templates.png)
+
+User specific templates are listed below the basic templates.
 ![User Templates](../images/sequencer/Sequencer_UserTemplate.png)
+
+To create a user template an instruction needs to be added to the sequencer. Then the desired instructions, triggers and loop conditions should be added to the instruction set. Once the instruction set is set up with all desired parameters a click on the save button next to the instruction set will save it as a template. Then the name of the instruction set will be taken for the template name and a new template will be shown in the sidebar. When a name is already taken, the application will ask if the existing template should be overwritten.
 ![Save As Template](../images/sequencer/Sequencer_SaveAsTemplate.png)
+
+Furthermore it is possbile to just drag and drop the instruction set into the template area to create a new one.
 ![Save As Template Drag Drop](../images/sequencer/Sequencer_SaveAsTemplateDragDrop.png)
 
 !!! tip
     Templates using a Deep Sky Object Set will be available for selection in the sky atlas and framing assistant to be used to add targets to a sequence
 
+## Shortcuts
+| Key          | Command                                              | Note                                                                                |
+|--------------|------------------------------------------------------|-------------------------------------------------------------------------------------|
+| Ctrl+S       | Saves the current sequence                           |                                                                                     |
+| Ctrl+Shift+S | Saves the current sequence to a new file             |                                                                                     |
+| Ctrl+O       | Opens an existing sequence                           |                                                                                     |
+| Alt          | Duplicate the current instruction or instruction set | When in the process of dragging an instruction or instruction set to a new location |
