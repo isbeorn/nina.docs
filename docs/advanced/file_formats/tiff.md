@@ -16,5 +16,5 @@ Some software might also not be compatible with compressed TIFF files.
 ### zip vs lzw
 
 Zip and lzw are different algorithms for compression and the result is highly depending on the input data. 
-It could even be possible that the file size increases when the data is layed out in a worst case scenario for the algorithm.
-For deciding on an algorithm it is adviced to try out which one works best for your specific camera and data.
+It could even be possible that the file size increases when the data is laid out in a worst case scenario for the algorithm.
+For deciding on an algorithm it is advised to try out which one works best for your specific camera and data.

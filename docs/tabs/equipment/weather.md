@@ -2,7 +2,7 @@ This tab lets you connect a compatible or ASCOM-compliant weather observing stat
 
 ![Weather](../../images/tabs/weather.PNG)
 
-Currently the followind devices are compatible with N.I.N.A.:
+Currently the following devices are compatible with N.I.N.A.:
 
 1. Any ASCOM-compatible devices
    

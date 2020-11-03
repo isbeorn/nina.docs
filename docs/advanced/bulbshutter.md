@@ -1,10 +1,10 @@
 If you have a DSLR that does not allow bulb exposure time over USB this is a solution for you. 
-Instead of native USB mode you can use a selfmade RS232 shutter cable or use the mounts snap port for shutter (if available).
+Instead of native USB mode you can use a self made RS232 shutter cable or use the mounts snap port for shutter (if available).
 You can test whether you need or don't need an external shutter cable by trying taking an exposure of more than 30s.
 This will trigger bulb mode on a DSLR. If your camera won't take a picture you need to look at this section.
 
 !!! tip
-    Prerequsite for any method of this functionality is that your DSLR has a shutter port!
+    Prerequisite for any method of this functionality is that your DSLR has a shutter port!
 
 You can find the necessary settings in the Camera settings.
 

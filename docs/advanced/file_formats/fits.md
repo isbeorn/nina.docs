@@ -50,7 +50,7 @@ Requires a camera to be connected
 - EGAIN: Electrons per A/D unit (only available for some cameras)
 - XPIXSZ: X-Pixelsize
 - YPIXSZ: Y-Pixelsize
-- SET-TEMP: tempterature set point (requires a cooling unit)
+- SET-TEMP: temperature set point (requires a cooling unit)
 - CCD-TEMP: actual sensor temperature (requires a cooling unit)
 - READOUTM: Sensor readout mode
 - BAYERPAT: Sensor bayer pattern
@@ -94,7 +94,7 @@ Requires a rotator to be connected
 ## Weather Data Headers
 Requires a weather data source to be connected
 
-- CLOUDCVR: Cloud cover percantage
+- CLOUDCVR: Cloud cover percentage
 - DEWPOINT: Dew point in Celsius
 - HUMIDITY: Humidity percentage
 - PRESSURE: Air pressure in hPa

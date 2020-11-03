@@ -45,7 +45,7 @@ Requires a weather data source to be connected
 - WindSpeed: Wind speed in kph
 
 ## [Instrument Namespace](http://pixinsight.com/doc/docs/XISF-1.0-spec/XISF-1.0-spec.html#__XISF_Core_Elements_:_Image_Core_Element_:_Astronomical_Image_Properties_:_Instrument_Namespace__)
-- ExposureTime: Expsure duration in seconds
+- ExposureTime: Exposure duration in seconds
 
 ### Camera
 Requires a camera to be connected

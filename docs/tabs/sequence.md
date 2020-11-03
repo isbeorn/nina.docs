@@ -81,7 +81,7 @@ The Sequence interface consists of the following elements:
     * **Progress**: Displays the current progress of the sequence entry in terms of exposures completed out of the total number specified
     * **Total #**: Specifies the number of frames to expose
     * **Time**: Specifies the exposure time, in seconds
-    * **Type**: Specifies the type of the expsosure and sequence entry. BIAS, DARK, LIGHT, FLAT.
+    * **Type**: Specifies the type of the exposure and sequence entry. BIAS, DARK, LIGHT, FLAT.
     * **Filter**: Specifies the filter to be used
     * **Binning**: Specifies the camera binning level
     * **Dither**: When enabled, N.I.N.A. will command a dither operation. To save time, dither operations are initiated while the preceding image is being downloaded from the camera
@@ -97,11 +97,11 @@ The Sequence interface consists of the following elements:
     ![](../images/tabs/Sequencebuttons.JPG)
     From left to right:
     * Adds a new row to the sequence (new rows will be defaulted to the previous one)
-    * Deletes the acrtive sequence entry
+    * Deletes the active sequence entry
     * Resets the progress of the selected sequence entry to 0
     * Moves the selected entry up
     * Moves the selected entry down
-    * Saves Sequence as a XML file in the specifed folder
+    * Saves Sequence as a XML file in the specified folder
     * Saves Sequence As
     * Loads a saved Sequence. The opened sequence's settings will overwrite all settings in the current sequence.
 
@@ -113,14 +113,14 @@ The Sequence interface consists of the following elements:
 
 14. **Object altitude**
 
-    Displays the target object's altitude, the direction point at which it will transit, the darkness phase of the current day, and includes a veritical marker for the current time.  The accuracy of the altitude curve requires that the latitude and longitude be set under **Options > General > Astrometry**.
+    Displays the target object's altitude, the direction point at which it will transit, the darkness phase of the current day, and includes a vertical marker for the current time.  The accuracy of the altitude curve requires that the latitude and longitude be set under **Options > General > Astrometry**.
 
 15. **Start Sequence**
     
      Pressing the Start button starts the sequence, either from the beginning or from where it was last stopped or paused. Once a sequence is started, this button will change to separate Pause or Cancel buttons.
 
     * Pausing will pause the sequence after the current frame completes exposing
-    * Cancel will abort any active operation (including any in-progress exposures) and stop the sequenc3
+    * Cancel will abort any active operation (including any in-progress exposures) and stop the sequence
 
 16. **Grab Coordinates button**
 

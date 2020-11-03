@@ -75,7 +75,7 @@ In Multi Mode, Flat Wizard settings are saved on a per-filter basis and do not t
 
 ![The Flatwizard error window](../images/tabs/flatwizard3.png)
 
-If Flat Wizard cannot determine the necessary exposure time or there is a conflict with the spcecified settings, it will display this dialog.
+If Flat Wizard cannot determine the necessary exposure time or there is a conflict with the specified settings, it will display this dialog.
 
 1. **Error message**
     * Flat Wizard will display what the issue with the current configuration is and what should be done to fix the issue

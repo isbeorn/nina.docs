@@ -11,11 +11,11 @@ For further information about using the Framing Assistant refer to the [Advanced
         * **Digital Sky Survey**: Fetch an image of the object from a sky survey server. This requires an internet connection
         * **Sky Atlas**: N.I.N.A.'s own database of objects. Circles representing approximate target sizes will be displayed
         * **From File**: Load an existing JPEG, GIF, PNG or TIFF image of an object. When an image is provided through **From File**, the configured [Solver](../advanced/platesolving.md) is used to determine the coordinates and orientation of the image. Alternatively, for FITS and XSIF files the WCS header coordinates are used if present.
-        * **Cache**: Utilize images from a local cache of images there have already been downloded from one of the Digital Sky Survey servers (useful to browse Survey images when offline)
+        * **Cache**: Utilize images from a local cache of images there have already been downloaded from one of the Digital Sky Survey servers (useful to browse Survey images when offline)
     * Successfully-solved or downloaded local and sky survey images are cached
 
 2. **Planetarium Sync**
-    * Pressing the Planetarium Sync button fetches the coordinates of a selected object from the configured external planetarium program. If no objects are slected in the planetarium the center of frame coordinates are selected as a fallback.
+    * Pressing the Planetarium Sync button fetches the coordinates of a selected object from the configured external planetarium program. If no objects are selected in the planetarium the center of frame coordinates are selected as a fallback.
 
     ## Camera parameters
 
@@ -25,7 +25,7 @@ For further information about using the Framing Assistant refer to the [Advanced
 
 4. **Load Image**
     * Starts the image download when using a sky survey 
-    * Starts the plate solving mechanism when using **From File**. If the uploaded file alredy contains WCS headers these will be used instead of attempting a new platesolve.
+    * Starts the plate solving mechanism when using **From File**. If the uploaded file already contains WCS headers these will be used instead of attempting a new platesolve.
     * Attempts to load an image from the cache using the provided coordinates
 
 5. **Width, Height, Pixel Size and Focal Length**
@@ -44,7 +44,7 @@ For further information about using the Framing Assistant refer to the [Advanced
      ![Mosaic](../images/tabs/framing_mosaic.PNG)
 
 7. **Recenter Image**
-    * When using a survey source, redownloads an image of the region centered on the current coordinates set by the framing rectangle (15) 
+    * When using a survey source, re-downloads an image of the region centered on the current coordinates set by the framing rectangle (15)
     * When using cached images or file source, the framing rectangle is centered on the image center 
 
 8. **Slew**

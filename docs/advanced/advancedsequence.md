@@ -28,10 +28,10 @@ When having a motorized focuser, the sequence offers a variety of options to ens
 
 *On filter change* - This option is useful when you don't know or don't have your filter offsets set and your filters aren't parfocals and thus having a different focus position. This is a good option when you only have a few filter changes during the course of the night. Otherwise it is beneficial to measure and set filter offsets instead.  
 
-*After elapsed time* - Triggering an autofocus after an elapsed time is almost always just a guesttimate and should be avoided. A better metric is the option to focus after an HFR increase.  
+*After elapsed time* - Triggering an autofocus after an elapsed time is almost always just a guesstimate and should be avoided. A better metric is the option to focus after an HFR increase.  
 
 *After temperature change* - This will use the focuser temperature probe as reference and refocuses every time the temperature drifts by the specified amount in reference to the last initiated auto focus. When you know that your equipment will shift focus after a certain amount of temperature change, this is a good option.  
 
-*After HFR increase* - This method will only trigger when the measured HFR trend is going up by a certain percantage. Having just one sub with worse focus won't necessarily trigger this, as it could just be one sub with bad guiding or worse sky conditions. In general this is a good way to ensure best Auto Focus during the run and can be used almost always. A visual representation of the HFR history can be seen in the imaging tab which is used to determine the baseline.
+*After HFR increase* - This method will only trigger when the measured HFR trend is going up by a certain percentage. Having just one sub with worse focus won't necessarily trigger this, as it could just be one sub with bad guiding or worse sky conditions. In general this is a good way to ensure best Auto Focus during the run and can be used almost always. A visual representation of the HFR history can be seen in the imaging tab which is used to determine the baseline.
 
 ![HFRHistory](../images/tabs/HFR2.png)

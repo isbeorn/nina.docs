@@ -1,6 +1,6 @@
 ## Overview
 
-Plate solving is a method used to determine exactly where the telescope is pointing in the sky by comparing the star field in an image to a database of star positions. Upon matching the image's stars, the plate solving application returns the right ascension (RA) and declination (Dec) of the center of the image. N.I.N.A. understands this output, and may be used to sychronise the mount to that coordinate. This gives the mount a very accurate notion of where it is pointing in space, making subsequent slews very precise.
+Plate solving is a method used to determine exactly where the telescope is pointing in the sky by comparing the star field in an image to a database of star positions. Upon matching the image's stars, the plate solving application returns the right ascension (RA) and declination (Dec) of the center of the image. N.I.N.A. understands this output, and may be used to synchronise the mount to that coordinate. This gives the mount a very accurate notion of where it is pointing in space, making subsequent slews very precise.
 
 !!! important
 	Plate solving requires that your camera and telescope settings are correct. The two important settings are the camera's sensor pixel size and the focal length of the telescope. N.I.N.A. will usually be able to detect the sensor's pixel size, but the user **will** need to inform the software of the effective focal length of the optical path. This includes the focal length of the telescope itself and any focal length-affecting devices such as reducers, telecompressors, or barlows.

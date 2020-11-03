@@ -1,4 +1,4 @@
-The Rotator Tab lets you connect an ASCOM-compatible tlescope mount. 
+The Rotator Tab lets you connect an ASCOM-compatible telescope mount.
 
 ![Telescope](../../images/tabs/equipment_scope.png)
 

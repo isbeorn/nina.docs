@@ -14,7 +14,7 @@ Note that switching from HCG to LCG or vice versa does not change the gain _valu
 
 N.I.N.A. presents Camera Gain to the user in exactly the format that the camera SDK returns. For other brands of camera which automatically switch from LCG to HCG and back, the switch is inherent in the value and transparent to the user. In those cameras, it is impossible to use LCG above the switch point or HCG below the switch point. Altair cameras however allow you the flexibility to use whichever combination you desire, and this is why N.I.N.A., in common with many other suites of Imaging Software (including Altair's very own AltairCapture program), presents the raw Gain value and offers a manual switch to toggle between LCG and HCG.
 
-There is one major piece of imaging software which does not present a manual switch: SharpCap. In order to try and be consistent with theother brands of camera that automatically switch their dual-gain sensors from LCG to HCG, SharpCap implements logic to automatically perform the switch. The way it does this is to present a single scale with the multiplier, above which point HCG is automatically enabled. This is best explained by means of an example.
+There is one major piece of imaging software which does not present a manual switch: SharpCap. In order to try and be consistent with the other brands of camera that automatically switch their dual-gain sensors from LCG to HCG, SharpCap implements logic to automatically perform the switch. The way it does this is to present a single scale with the multiplier, above which point HCG is automatically enabled. This is best explained by means of an example.
 
 ## Example: The Altiar 269C
 
@@ -43,4 +43,4 @@ At time of writing, the following dual-gain Altair cameras exist:
 | 294C\*         | IMX294      |       x4.5 |
 | 385C         | IMX385      |         x2 |
 
-\*note that the 294C should not be used with HCG below a native gain of 200 as the sensor will fail to fully saturate (the histogram will loko unsaturated, but it will really be saturated, which will make flats extremely problematic!)
+\*note that the 294C should not be used with HCG below a native gain of 200 as the sensor will fail to fully saturate (the histogram will look unsaturated, but it will really be saturated, which will make flats extremely problematic!)
