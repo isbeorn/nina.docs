@@ -54,8 +54,9 @@ nav:
         - Troubleshooting:
             - General: 'troubleshooting/general.md'
             - iOptron Mount Setup: 'troubleshooting/ioptron.md'
+            - EQMOD Setup: 'troubleshooting/eqmod.md'
             - Altair Dual Gain: 'troubleshooting/altair_dualgain.md'
-            - Planetarium Setup: 'troubleshooting/planetarium.md'
+            - Planetarium Setup: 'troubleshooting/planetarium.md'            
         - Glossary: 'glossary.md'
         - License: 'license.md'
         - 3rd-Party-Licenses: '3rd-party-license.md'
