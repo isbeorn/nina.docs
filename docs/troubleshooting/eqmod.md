@@ -26,4 +26,4 @@ Once connected EQMOD will launch a separate window showing the current Telescope
 1. Expand the Telescope panel to reveal the advanced options
 2. Set 'User Interface' to Dialog based, which is required when using Plate Solving in N.I.N.A. to properly sync coordinates to the mount
 3. Adjust your limits to match your equipment. The limits should be set in a way to not trigger before the time N.I.N.A. issues a meridian flip (which depends on your flip settings in N.I.N.A.), but rather should be the fail safe when something goes wrong
-4. In case you are using some guiding software like PHD2 the recommended PulseGuide Rate should be set to 0.5 for both RA and DEC
+4. In case you are using some guiding software like PHD2 the recommended PulseGuide Rate should be set to at least 0.5, but more likely 0.9 will work best for both RA and DEC
