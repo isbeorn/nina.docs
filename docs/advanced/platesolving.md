@@ -36,7 +36,8 @@ This is essential for a hands-off operation of N.I.N.A. and it is recommended th
 
 ## Important Parameters for Platesolving
 
-In order for plate solving to work properly a couple of important parameters have to be set as precice as possible. When these deviate to some degree from the real world hardware, platesolving software will have a hard time solving the image or even fail all the time. 
+In order for plate solving to work properly a couple of important parameters have to be set as precice as possible. When these deviate to some degree from the real world hardware, platesolving software will have a hard time solving the image or even fail all the time.   
+
 1. *Camera Pixel Size*  
 Go to Options->Equipment->Camera section, the pixel size needs to be entered in micrometers.
 2. *Telescope Focal Length*  

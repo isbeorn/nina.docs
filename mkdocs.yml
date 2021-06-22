@@ -99,5 +99,10 @@ markdown_extensions:
     - pymdownx.tasklist:
         custom_checkbox: true
     - pymdownx.tilde
+    
+#plugins:
+#    - with-pdf:
+#        toc_level: 3
+#        cover_subtitle: An astrophotography imaging suite
 
 copyright: Copyright &copy; 2019-2021 Stefan Berg and the N.I.N.A. contributors
