@@ -34,12 +34,20 @@ Plate solving is also utilized in the [Sequence](advancedsequence.md) to center 
 Here plate solving will be triggered automatically and the parameters are used from the Plate Solving Options.
 This is essential for a hands-off operation of N.I.N.A. and it is recommended that the application is set up to have a blind solver, should the preferred primary plate solver not work as expected.
 
+## Important Parameters for Platesolving
+
+In order for plate solving to work properly a couple of important parameters have to be set as precice as possible. When these deviate to some degree from the real world hardware, platesolving software will have a hard time solving the image or even fail all the time. 
+1. *Camera Pixel Size*  
+Go to Options->Equipment->Camera section, the pixel size needs to be entered in micrometers.
+2. *Telescope Focal Length*  
+Go to Options->Equipment->Telescope section and set the focal length of your telescope in millimeters. The value has to be the **effective focal length** considering all correctors and optical elements that could shift the overall focal length
+> If you are unsure about the effective focal length, you can use nova.astrometry.net to validate your real focal length. Upload a non binned image of a target that used your current setup. Once the image is solved the "Pixel Scale" is displayed. You can extract the focal length now by using the formula "Focal Length = (Camera Pixel Size / Pixel Scale) * 206.26"
 
 ## Plate Solving Software
 
 N.I.N.A. supports the most popular plate solving software suites available, each of which has its own benefits and drawbacks. The following is a list of support plate solving software and their general characteristics.
 
-### ASTAP
+### ASTAP - *recommended*
 Author: Han Kleijn  
 URL: [www.hnsky.org/astap.htm](//www.hnsky.org/astap.htm)
 
@@ -54,7 +62,7 @@ The ASTAP (Astrometric STAcking Program) astrometric solver and FITS file viewer
 
 **Drawbacks**
 
- * None
+ * Requires precise parameter setup
 
 **Recommendation**
 

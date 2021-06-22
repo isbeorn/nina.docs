@@ -36,10 +36,10 @@ For usage of the Plate Solver refer to [Advanced Topics: Plate Solving](../../ad
 
 9.  **Number of Attempts**
     * Defines the number of attempts for platesolving
-    > The default of 1 means if a plate solve fails it will not reattempt
+    > The value of 1 will not reattempt on a completely failed plate solve
     
 10. **Delay between attempts**
-    * The delay between plate solving reattempts in minutes
+    * The delay between plate solving reattempts in minutes, when number of attempts are greater than 1
 
     ## Plate Solver Settings
 
