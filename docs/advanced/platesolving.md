@@ -42,7 +42,10 @@ In order for plate solving to work properly a couple of important parameters hav
 Go to Options->Equipment->Camera section, the pixel size needs to be entered in micrometers.
 2. *Telescope Focal Length*  
 Go to Options->Equipment->Telescope section and set the focal length of your telescope in millimeters. The value has to be the **effective focal length** considering all correctors and optical elements that could shift the overall focal length
-> If you are unsure about the effective focal length, you can use nova.astrometry.net to validate your real focal length. Upload a non binned image of a target that used your current setup. Once the image is solved the "Pixel Scale" is displayed. You can extract the focal length now by using the formula "Focal Length = (Camera Pixel Size / Pixel Scale) * 206.26"
+
+!!! tip
+    If you are unsure about the effective focal length, you can use nova.astrometry.net to validate your real focal length. Upload a non binned image of a target that used your current setup. Once the image is solved the "Pixel Scale" is displayed. You can extract the focal length now by using the formula  
+    "Focal Length = (Camera Pixel Size / Pixel Scale) * 206.26"
 
 ## Plate Solving Software
 
