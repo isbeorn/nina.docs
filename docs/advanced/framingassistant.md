@@ -28,7 +28,7 @@ As you can see below you won't see much there yet, but don't worry this is an in
 
 ### Moving around inside the Offline Sky Survey
 
-Once the sky atlas is initialized move your mouse cursor onto the image and use the mouse wheel to scrool out as well as drag the map around using the left mouse button.
+Once the sky atlas is initialized move your mouse cursor onto the image and use the mouse wheel to scroll out as well as drag the map around using the left mouse button.
 While moving around the sky atlas and getting yourself familiar with the controls, keep an eye on the coordinates on the lower left corner of the image as well as the altitude chart on the lower left of the tab. Both are displaying the coordinates and altitude for the center pixel of the currently displayed section of the sky!
 
 ![Sky Survey Coordinates and Altitude](../images/advanced/framing/OfflineSkySurveyReferences.png)
@@ -40,7 +40,7 @@ Now move the center of the image to a point where the altitude chart has its pea
 
 ![Sky Survey Coordinates and Altitude](../images/advanced/framing/OfflineSkySurveyCentering.png)
 
-All you have to do now is moving the box up or down, as the peak of the altitude will stay inside the center due to the way the coordinate system is layed out. See which target is near that imaginary vertical line and then drag the ractangle over the target.
+All you have to do now is moving the box up or down, as the peak of the altitude will stay inside the center due to the way the coordinate system is laid out. See which target is near that imaginary vertical line and then drag the rectangle over the target.
 Remember that you can also zoom in and out to see more or less targets inside the frame. In this example here, I have chosen the "Hercules Galaxy Cluster".  As you can see the target fits perfectly into the night and its dimensions will also fit into the current frame.
 
 ![Sky Survey Coordinates and Altitude](../images/advanced/framing/OfflineSkySurveyTarget.png)
@@ -73,9 +73,9 @@ When an image was not solved already and does only contain header information li
 
 ![Use Reference Coordinates](../images/advanced/framing/Platesolve.png)
 
-### Image does not contain any relevent information 
+### Image does not contain any relevant information
 
-In case your image does not contain the required headers, or the image format does not have any header information at all (e.g. JPG or RAW formats) the application will need some user assistance to grab the correct reference coordinates to be able to solve the image quickly. Instead of clicking on "Load Image" first, you should specify the target's coordinates instead. Either you can do a quick search by typing in a Name inside the **Coordinates** field and if found choose the coorect coordiantes, or you need to enter in the coordinates manually. Once the coordinates are filled, you click on "Load image" and the application will ask you if these coordinates should be used for solving the image.
+In case your image does not contain the required headers, or the image format does not have any header information at all (e.g. JPG or RAW formats) the application will need some user assistance to grab the correct reference coordinates to be able to solve the image quickly. Instead of clicking on "Load Image" first, you should specify the target's coordinates instead. Either you can do a quick search by typing in a Name inside the **Coordinates** field and if found choose the correct coordinates, or you need to enter in the coordinates manually. Once the coordinates are filled, you click on "Load image" and the application will ask you if these coordinates should be used for solving the image.
 When the solve was successful the image will finally be displayed.
 
 ![Choose Target](../images/advanced/framing/ChooseTarget.png)
@@ -99,12 +99,12 @@ Inside **Equipment->Rotator** you have to choose the "Manual Rotator" and connec
 
 ## Framing a Mosaic
 
-Framing a mosaic is really simple. You can follow all the previously mentioned steps to choose a good target for the framing and orientation of your mosaic. The only difference will be that you additionally set **"Horizontal Panels"** and **"Vertical Panels"** as well as the overlap percantage of these panels.
-When having more than one panel selected, the single rectangle gets expanded and divided into multiples using the number of panels as well as the overlap percantage. Furthermore each panel will be assigned a number.
+Framing a mosaic is really simple. You can follow all the previously mentioned steps to choose a good target for the framing and orientation of your mosaic. The only difference will be that you additionally set **"Horizontal Panels"** and **"Vertical Panels"** as well as the overlap percentage of these panels.
+When having more than one panel selected, the single rectangle gets expanded and divided into multiples using the number of panels as well as the overlap percentage. Furthermore each panel will be assigned a number.
 
 ![Mosaic](../images/advanced/framing/Mosaic.png)
 
-Once you are done with the mosaic planning you can put it into the sequence by replacing or adding it. It is adviced to have a sequence template set up prior to adding a mosaic plan to the sequence, so you don't have to set up each panel separately.
+Once you are done with the mosaic planning you can put it into the sequence by replacing or adding it. It is advised to have a sequence template set up prior to adding a mosaic plan to the sequence, so you don't have to set up each panel separately.
 When adding the mosaic to the sequence, the Target Names will be your Target Name chosen inside the Coordinates section and a postfix of "Panel X" will be appended based on the panel number to easily distinguish these panels. The coordinates will be automatically shifted based on the panels and your mosaic should work without having to worry about anything.  
 
 ![Mosaic](../images/advanced/framing/MosaicPlan.png)

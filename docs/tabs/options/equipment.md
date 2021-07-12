@@ -1,4 +1,4 @@
-This is the tab where you set up all the parameters recmd-k vlated to your equipment.  
+This is the tab where you set up all the parameters related to your equipment.  
 
 ![Equipment Settings](../../images/tabs/OptionsEquipment10.png)
 
@@ -28,7 +28,7 @@ This is the tab where you set up all the parameters recmd-k vlated to your equip
 5. **Bulb Mode**
     * Allows you to change the bulb mode of the camera. Native will work in most cases.
 	> RS232 and Mount is available as well and might be necessary for older Nikon cameras
-	> For usage of RS232 and Monunt shutter refer to Usage: [Using RS232 or Mount for bulb shutter](../../advanced/bulbshutter.md)
+	> For usage of RS232 and Mount shutter refer to Usage: [Using RS232 or Mount for bulb shutter](../../advanced/bulbshutter.md)
 
 6. **Raw Converter**
     * Only for DSLR: select the RAW converter, options are DCRaw and FreeImage
@@ -233,10 +233,10 @@ This is the tab where you set up all the parameters recmd-k vlated to your equip
     * Duration of guide when Direct Guide is selected.
   
 39. **Guiding Start Retry**
-    * If PHD2 fails to restart NINA will send a new start guiding command again until a succesfull guiding is initiated.
+    * If PHD2 fails to restart NINA will send a new start guiding command again until a successful guiding is initiated.
   
 40. **Guiding Start Timeout (seconds)**
-    * Seconds to wait before sending a new start guiding command to PHD2 (defualt = 60).
+    * Seconds to wait before sending a new start guiding command to PHD2 (default = 60).
   
   
     ## Planetarium Settings

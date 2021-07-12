@@ -15,10 +15,10 @@ The Focuser Tab lets you connect and control one of the following flat panels:
 5. Opens the Flat Cover when taking darks or dark flats
 6. Closes the flat panel cover when the sequence/s end
 7. Uses trained flats exposures in (9) when taking flats
-8. Clearc trained exposures times
+8. Clear trained exposures times
 9. Trained flats exposure times from the Flats Wizard
 
-Trained exposure table will automatically populate when running the [Flats Wizard](../flatwizard.md) and will report the gains/exposure times for each Filter, remebering the relative flat panel brightness.
+Trained exposure table will automatically populate when running the [Flats Wizard](../flatwizard.md) and will report the gains/exposure times for each Filter, remembering the relative flat panel brightness.
 
 !!! tip
     Follow these steps to fully automate the acquisition of flat frames at the end of an imaging sequence:  

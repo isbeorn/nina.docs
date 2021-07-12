@@ -27,7 +27,7 @@ The Sky Atlas interface consists of following elements:
 
 5. **Moon phase and day information**
 
-    Displays the current moon phase and other day information. The accuracy of this information depends upon the correct latitude and longitude being specified under **Optoions > General > Astrometry**.
+    Displays the current moon phase and other day information. The accuracy of this information depends upon the correct latitude and longitude being specified under **Options > General > Astrometry**.
 
 6. **Object information**
 
@@ -37,7 +37,7 @@ The Sky Atlas interface consists of following elements:
 
 7. **Object altitude**
 
-    Displays the target object's altitude, the direction point at which it will transit, the darkness phase of the current day, and includes a veritical marker for the current time. The accuracy of the altitude curve requires that the latitude and longitude be set under **Options > General > Astrometry**.
+    Displays the target object's altitude, the direction point at which it will transit, the darkness phase of the current day, and includes a vertical marker for the current time. The accuracy of the altitude curve requires that the latitude and longitude be set under **Options > General > Astrometry**.
 
 8. **Set as Sequence**
 

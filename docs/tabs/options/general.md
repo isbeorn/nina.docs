@@ -21,7 +21,7 @@ The General Settings tab allows you to manage N.I.N.A. in terms of all general s
     
         > Nightly offers the latest developments including bugfixes and feature additions. These builds are not as well tested as the beta or released versions but should be stable for imaging runs
     
-        > Beta versions are considered feature complete and are typically very stable. They will undergo a series of testing and bugfixing with incremental updates before becoming a release version
+        > Beta versions are considered feature complete and are typically very stable. They will undergo a series of testing and bug fixing with incremental updates before becoming a release version
     
         > Release offers the most reliability and stability for your imaging runs 
     
@@ -63,5 +63,5 @@ The General Settings tab allows you to manage N.I.N.A. in terms of all general s
     * Loads coordinates from a user connected planetarium software
     > Planetarium can be connected in the [Planetarium menu](equipment.md)
 
-15. **Cirrent NINA version and active Profile**
-    * The title displays the current NINA versiona nd the active profile
+15. **Current NINA version and active Profile**
+    * The title displays the current NINA version and the active profile

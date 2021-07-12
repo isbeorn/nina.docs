@@ -58,37 +58,41 @@ Settings related to guiding and dithering can be found in the **Options > Equipm
 An explanation of the two most important dithering-related settings follows:
 
  * **PHD2 Dither Pixels**: The amount of pixels (on the guiding camera) that the dithering action will shift. This value should take into account the guiding imaging scale and main camera imaging scale, in arcsec/pixels. To select the appropriate value you need to consider how many imaging camera pixels will shift between two exposures as a consequence of a dither move. Obviously, 2 pixels at one focal length and pixel size will cover a different amount of sky than another setup with a different focal length and pixel size.
- It is usually recommended to dither a number of guide camera pixels that will shift the main imaging camera of about 10 pixels.
- > Let's assume to have a guide camera with a pixel size of 3.8µm and a 260mm focal length guidescope, resulting in a guide scale of about 3 arcsec/pixel. The imaging optical train is composed by a camera with a pixel size of 3.8µm and a 520mm focal length scope, resulting in an imaging scale of about 1.5 arcsec/pixel. A guide camera shift of 5 pixels corresponds to a motion of 15 arcsec or 10 pixels of shift for the main imaging camera. In this case a PHD2 Dither Pixels of 6 pixel is therefore appropriate.
+ It is usually recommended to dither a number of guide camera pixels that will shift the main imaging camera of about 10 pixels.  
+   
+!!! tip
+    Let's assume to have a guide camera with a pixel size of 3.8µm and a 260mm focal length guidescope, resulting in a guide scale of about 3 arcsec/pixel. The imaging optical train is composed by a camera with a pixel size of 3.8µm and a 520mm focal length scope, resulting in an imaging scale of about 1.5 arcsec/pixel. A guide camera shift of 5 pixels corresponds to a motion of 15 arcsec or 10 pixels of shift for the main imaging camera. In this case a PHD2 Dither Pixels of 6 pixel is therefore appropriate.
 
 !!! note
     The PHD2 Dither Pixel value will be multiplied by PHD2 by the "Scale" value found under Advance Setup>Dither Settings of PHD2. This value will be multiplied by the Dither Pixel set in N.I.N.A. to determine the final pixel shift amount. It is recommended to leave it at 1 and only change the amount of dither pixels in N.I.N.A.
         ![phdscale](../images/advanced/PHD2Scale.PNG)
 
  * **Dither RA Only**: This will cause dithering to happen on the RA axis only and allow the declination axis to continue guiding.
-  > This option should only be checked in the following cases:
-  > - your mount does not support DEC guiding (i.e. skytracker)
-  > - your mount suffers from a high declination backlash
-  > - you are guiding in one direction only in DEC
+   
+!!! note
+    This option should only be checked in the following cases:  
+    - your mount does not support DEC guiding (i.e. skytracker)  
+    - a mount that suffers from a high declination backlash   
+    - you are guiding in one direction only in DEC  
 
 !!! tip
     The pixel scale of your guide camera can be calculated using online tools. By inputting the focal length of your guiding optical train and the pixel size of your guide camera's sensor, you will know how many arcseconds of sky is covered by each pixel (arcseconds per pixel). Such a tool is the [Astronomy Tools FOV Calculator](//astronomy.tools/calculators/field_of_view/).
 
-* **Dither Settle Pixel Tolerance and Settle Time**: these are important parameters that define the succesfull end of a dither move. When a dither is initiated by PHD2 a random move of the mount in RA/DEC is issued,  the maximum amount of the random move is defined by **PHD2 Dither Pixels**. The mount then resumes its tracking operations, but depending on the mechanical stability of the gears it might take a ouple of seconds to return to its normal guiding conditions. This time represents the Settle Time and N.I.N.A. lets you define a **Minimum Settle Time** during which no attempts to start a new captures will be made.
-The succesful completion of a dither settling is achieved when guiding after a dither move remains within the tolerance defined by the **PHD2 Settle Pixel Tolerance**  expressed in guide camera pixels. Once settling is complete N.I.N.A. will start a new capture.
-Should settling be not achieved after the period defined in PHD2 Settle Timeout, the settling will be declared failed and N.I.N.A.will start a new capture.
-> **PHD2 Dither Pixels** depends on your mount guiding capabilities and guiding scale and should be determined by looking at PHD2 logs. A great tool to analyze PHD2 logs is PHD2 Log Viewer that can be downloaded from [here](http://adgsoftware.com/phd2utils/)
+* **Dither Settle Pixel Tolerance and Settle Time**: these are important parameters that define the successful end of a dither move. When a dither is initiated by PHD2 a random move of the mount in RA/DEC is issued,  the maximum amount of the random move is defined by **PHD2 Dither Pixels**. The mount then resumes its tracking operations, but depending on the mechanical stability of the gears it might take a couple of seconds to return to its normal guiding conditions. This time represents the settle time and N.I.N.A. lets you define a **Minimum Settle Time** during which the mount has to be inside the pixel tolerance. If the mount is moving outside this tolerance during this timeframe, the minimum settle time timer will restart again. 
+The successful completion of a dither settling is achieved when guiding after a dither move remains within the tolerance defined by the **PHD2 Settle Pixel Tolerance**  expressed in guide camera pixels. Once settling is complete N.I.N.A. can continue and start a new capture.
+Should settling not be achieved after the period defined in **PHD2 Settle Timeout**, the settling will be declared failed and N.I.N.A. will start a new capture.  
+**PHD2 Dither Pixels** depend on your mount guiding capabilities and guiding scale and should be determined by looking at PHD2 logs. A great tool to analyze PHD2 logs is PHD2 Log Viewer that can be downloaded from [here](http://adgsoftware.com/phd2utils/)
 
 ![DitherPHD](../images/advanced/Dither_PHD.PNG)
 
 ### Settings in Sequences
 
-Regardless of the dither method in use, initiating dithering during the course of a running sequence is simple. Dithering operations can be activated for each step in a sequence, and be initiated every *Nth* frame in each step. That is, if a step in a sequence specifies that 20 exposures be taken with a dither operation every second exposure, two normal exposures will be taken, a dither operation performed, and then the next two exposures will be taken, etcetera. N.I.N.A. manages these operations itself in conjunction with PHD2 and the process is entirely hands-off.
+Regardless of the dither method in use, initiating dithering during the course of a running sequence is simple. Dithering operations can be activated for each step in a sequence, and be initiated every *Nth* frame in each step. That is, if a step in a sequence specifies that 20 exposures be taken with a dither operation every second exposure, two normal exposures will be taken, a dither operation performed, and then the next two exposures will be taken, etc. N.I.N.A. manages these operations itself in conjunction with PHD2 and the process is entirely hands-off.
 
 
 ![N.I.N.A. Dithering in Sequences](../images/advanced/dithering3.png)
 
 Dithering operations happen while the previous image is downloading from the camera. If you have a camera with slow download speeds, it might be that the dithering operation is completed in time for the camera to be ready for the next exposure.
-
+  
 !!! tip
-    If you use a LRGB rotational sequence (See Also: [Advanced Sequencing](advancedsequence.md)) you might only want to dither on every L frame. If an OSC or DSLR camera is used, it is suggested to dither after every frame, altough if you are shooting very short exposures (30s, 60s) you may want to reduce the number of dithers to avoid ecessive perturbation of guiding.
+    If you use an LRGB rotational sequence (See Also: [Advanced Sequencing](advancedsequence.md)) you might only want to dither on every L frame. If an OSC or DSLR camera is used, it is suggested to dither after every frame, although if you are shooting very short exposures (30s, 60s) you may want to reduce the number of dithers to avoid excessive perturbation of guiding.

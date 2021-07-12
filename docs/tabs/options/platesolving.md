@@ -12,7 +12,7 @@ For usage of the Plate Solver refer to [Advanced Topics: Plate Solving](../../ad
     > ASTAP and PS2 are recommended choices
     
 2. **Blind Solver**
-    * This drop down menu selects the blind solver that is used for inital solves and or backup solving
+    * This drop down menu selects the blind solver that is used for initial solves and or backup solving
     > The blind solver will be used in the framing assistant and normal platesolving should the primary solver fail.
     
 3. **Exposure Time**
@@ -29,10 +29,10 @@ For usage of the Plate Solver refer to [Advanced Topics: Plate Solving](../../ad
     > If empty the current camera Gain will be used
 
 7. **Pointing Tolerance**
-    * The threshold of acceptable error for recentering in arcminutes
+    * The threshold of acceptable error for re-centering in arcminutes
     
 8. **Rotation Tolerance**
-    * The threshold of accepetable error in the rotation axis in degrees
+    * The threshold of acceptable error in the rotation axis in degrees
 
 9.  **Number of Attempts**
     * Defines the number of attempts for platesolving

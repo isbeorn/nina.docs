@@ -124,10 +124,10 @@ The Imaging options tab contains settings for file formats, save directories, Au
     > For example eqmod's custom park position can override the default park position 
     
 26. **Warm camera when sequence ends**
-    * If the camera driver supports a warming sequence this will be intiated when sequence has ended
+    * If the camera driver supports a warming sequence this will be initiated when sequence has ended
     
 27. **Close cover when sequence ends**
-    * When present, it is possible to autmoatically close a flat panel cover after sequence ends
+    * When present, it is possible to automatically close a flat panel cover after sequence ends
 
     ## Layout
 

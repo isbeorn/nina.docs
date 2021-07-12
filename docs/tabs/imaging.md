@@ -1,7 +1,7 @@
 The Imaging tab is your imaging cockpit.   
-Here  N.I.N.A. will diplay  a variety of information regarding  the captured images and will let you control all the vital parameters of your imaging session.
+Here  N.I.N.A. will display  a variety of information regarding  the captured images and will let you control all the vital parameters of your imaging session.
 
-The Imaging tab is organized in windows that can be arranged dynamicaly to create your own layout. 
+The Imaging tab is organized in windows that can be arranged dynamically to create your own layout.
 Available windows can be activated and deactivated from the top bar.
 To arrange a window simply drag it from the window header and drop it according to the suggested placeholders.   
 
@@ -13,7 +13,7 @@ The top bar is divided in two main sections: **Info** and **Tools**
 These windows provide important status information about captured images and connected equipment  
 
 **A. Image**  ![imageicon](../images/tabs/imaging_imageicon.PNG)  
-The image panel is the central part of the Imaging tab and is used to diplay the latest captured images
+The image panel is the central part of the Imaging tab and is used to display the latest captured images
 
 ![image](../images/tabs/imaging_image.png)
 
@@ -24,7 +24,7 @@ The image panel is the central part of the Imaging tab and is used to diplay the
 5.   Initiates a platesolving routine for the current image
 6.   Toggles crosshair overlay on/off
 7.   Toggles automatic display of the displayed image (for autostretch settings refer to [Options](options/imaging.md))
-8.   Toggles automatic HFR (Half-FLux-Radius) star detection analysis. HFR is used for [Autofocus](options/equipment.md) routines. When HFR detection is ON, the average HFR value for each captured image are plotted in the HFR History wiwdow (M)  
+8.   Toggles automatic HFR (Half-FLux-Radius) star detection analysis. HFR is used for [Autofocus](options/equipment.md) routines. When HFR detection is ON, the average HFR value for each captured image are plotted in the HFR History window (M)
 > If _Annotate Image_ is switched ON under [Options->Imaging](options/imaging.md), the calculated HFR values will be displayed on the image  
    ![HFR](../images/tabs/imaging_HFR.PNG)
 9.   Activates the Bahtinov Analyzer aid tool for manual focusing with a Bahtinov Mask.
@@ -111,16 +111,16 @@ This panel will let you control the active switches
 
 **J. Weather**  ![weathericon](../images/tabs/imaging_weathericon.PNG)  
 Weather and temperature information from OpenWeatherMap
-> OpenWeatherMap API key must be set under Optrions [Equipment](options/equipment.md)
+> OpenWeatherMap API key must be set under Options [Equipment](options/equipment.md)
 
 ![weather](../images/tabs/imaging_weather.png)
 
 **K. Statistics**  ![statsicon](../images/tabs/imaging_statsicon.PNG)  
-In this panel  all the important information about the last acaptured image are reported
+In this panel  all the important information about the last captured image are reported
 
 ![statistics](../images/tabs/imaging_statistics.png)
 
-1. Basic statistics relative to the last capured image:
+1. Basic statistics relative to the last captured image:
     * Width and Height, in pixels
     * Mean, Standard Deviation, Median and MAD values in ADU
     * Minimum and Maximum ADU values in the image
@@ -166,15 +166,15 @@ The Image History panel shows a list of thumbnalis of the current sequence captu
 Platesolving is a very important step in the imaging process, for further information on the Plate Solving process refer to [Platesolving](../advanced/platesolving.md) in the advanced topics. This panel lets you perform a manual platesolving and keeps the history of all platesolving sessions.
 > Prerequisites for platesolving to work are:
 > * An external Platesolver is  defined in Options [Platesolving](options/platesolving.md)
-> * Telescope focal lenght is defined in Options [Equipment](options/equipment.md)
+> * Telescope focal length is defined in Options [Equipment](options/equipment.md)
 > * Camera pixel size is defined in Options [Equipment](options/equipment.md)
 > * The image to be plate solved has been captured with the specified focal length and pixel size
 
 ![platesolve](../images/tabs/imaging_platesolve.png)
 
 1. Plate solving results
-2. Toggles ON/OFF synching the telescope mount with the plate solved coordinates 
-3. Toggles ON/OFF reslewing and recentering the mount to the plate solved coordinates if the plate solved position is not matching with the expected one
+2. Toggles ON/OFF syncing the telescope mount with the plate solved coordinates 
+3. Toggles ON/OFF re-slewing and re-centering the mount to the plate solved coordinates if the plate solved position is not matching with the expected one
 4. Error threshold for (4)
 5. Exposure that will be used to capture the image for plate solving
 6. Filter that will be used to capture the image for plate solving
@@ -231,18 +231,18 @@ If SharpCap is installed and a Sensor Analysis is available for the current came
 
 ![ExpCalc](../images/tabs/expcalc10.png)
 
-1. Exposure time. This is only used to mesure the average skyglow when clicking on (8)
+1. Exposure time. This is only used to measure the average skyglow when clicking on (8)
 2. Filter: this menu lets you choose the filter for the calculation
     > Filters affect the  wavelength bandpass of incident light and therefore the average skyglow. The analysis should be repeated for each filter to determine an optimal exposures set.
 3. Gain: select the gain for the exposure analysis. 
     > Camera parameters vary significantly with gain values, the analysis should be repeated for the different gain values used for imaging. A guideline to determine the optimal gain values for your imaging conditions can be found [here](https://www.youtube.com/watch?v=ub1HjvlCJ5Y&list=PLhIb8N-jSR_rNKxCFGzbd87TfmyQS4U4X&index=14)
-4. The drop-down menu lets you select availavle sensor analysis files from SharpCap
-   > SharpCap must be installed and you must first perform a Sensor Analysis in SharpCap follwoing the instructions [here](http://docs.sharpcap.co.uk/3.2/19_SensorAnalysis.htm). Sensor analysis files are saved in %APPDATA%\Roaming\SharpCap\SensorCharacteristics
+4. The drop-down menu lets you select available sensor analysis files from SharpCap
+   > SharpCap must be installed and you must first perform a Sensor Analysis in SharpCap following the instructions [here](http://docs.sharpcap.co.uk/3.2/19_SensorAnalysis.htm). Sensor analysis files are saved in %APPDATA%\Roaming\SharpCap\SensorCharacteristics
 5. Full Well Capacity in electrons: if known this value can be entered manually for the specified gain or retrieved automatically from the Sharpcap Sensor Analysis
 6. Read Noise in electrons: if known this value can be entered manually for the specified gain or retrieved automatically from the Sharpcap Sensor Analysis
-7. BIAS median value (in 16bit): median ADU value of a bias frame (scald to 16bit), can be entered manually or calculated automatically by covering the scope and cliecking on the "Calculate Bias" button
+7. BIAS median value (in 16bit): median ADU value of a bias frame (scald to 16bit), can be entered manually or calculated automatically by covering the scope and clicking on the "Calculate Bias" button
 8. Click here to perform the exposure for the analysis
-9. The recommended exposure times are diplayed in this section
+9. The recommended exposure times are displayed in this section
 
 Recommended exposure time is calculated according to the following [formula](https://forums.sharpcap.co.uk/viewtopic.php?t=456):
 
