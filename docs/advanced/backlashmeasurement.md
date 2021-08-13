@@ -26,4 +26,4 @@ With __Overshoot__  N.I.N.A. compensate for Backlash by overshooting the target 
 For __Overshoot__, once the user has determined a rough backlash value, this can be increased by an extra 50% and input as IN or OUT compensation. Since this method is very forgiving a trial-and-error procedure is also possible, by using progressively larger compensation values until the AF routine behaves properly and no sign of backlash is shown in the AF curve.
   
 !!! tip 
-    Overshoot can  be very useful for SCT users to avoid mirror flop. In fact, when setting the Backlash Compensation to _IN_, the last focuser movement will always be inward.
+    Overshoot can  be very useful for SCT users to avoid mirror flop. In fact, when setting the Backlash Compensation to _IN_, the last focuser movement will always be outwards.
