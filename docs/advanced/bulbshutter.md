@@ -1,7 +1,7 @@
-If you have a DSLR that does not allow bulb exposure time over USB this is a solution for you. 
+If you have a Nikon DSLR that does not allow bulb exposure time over USB this is a solution for you. 
 Instead of native USB mode you can use a self made RS232 shutter cable or use the mounts snap port for shutter (if available).
 You can test whether you need or don't need an external shutter cable by trying taking an exposure of more than 30s.
-This will trigger bulb mode on a DSLR. If your camera won't take a picture you need to look at this section.
+This will trigger bulb mode on a Nikon DSLR. If your camera won't take a picture you need to look at this section.
 
 !!! tip
     Prerequisite for any method of this functionality is that your DSLR has a shutter port!
@@ -23,8 +23,6 @@ There are already some pre-made cables to be bought online for this issue or you
 You can find some tutorials on how to build a DIY shutter cable here:
 
 [Nikon MC-DC2](https://www.cloudynights.com/topic/457536-usb-corded-shutter-control-for-nikon/)  
-[Canon #1](http://www.beskeen.com/projects/dslr_serial/dslr_serial.shtml)  
-[Canon #2](http://www.covingtoninnovations.com/dslr/CanonRelease.html)  
 
 Once you have built a RS232-Shutter cable you need to connect it to the PC, install drivers for your RS232 adapter and check which COM port is used for it.
 In N.I.N.A. you need to change the "Bulb Mode" setting to "Serial Port" and change the COM port to the port your RS232 cable is using.
