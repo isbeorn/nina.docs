@@ -43,6 +43,7 @@ nav:
             - Simple Sequencer: 'sequencer/simple/simple.md'
             - Advanced Advanced Sequencer:
                 - Overview: 'sequencer/advanced/advanced.md'
+                - Instructions: 'sequencer/advanced/instructions.md'
         - Advanced Topics:
             - Plate Solving: 'advanced/platesolving.md'
             - Object Browser: 'advanced/objectbrowser.md'
