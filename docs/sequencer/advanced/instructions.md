@@ -1,3 +1,34 @@
+## General
+
+### Advanced settings
+
+![Instruction Settings](../../images/sequencer/instructions/instruction_settings.png)  
+
+When clicking on the three dots on the right side of an instruction, an advanced section will appear where advanced settings for an instruction are revealed.
+
+**Number of attempts**  
+This drives how many reattempts an instruction should make in case of failure
+
+**On error**  
+When all attempts have been unsuccessful this setting will drive how to continue with the sequence.  
+- *Continue*: The sequencer will just continue with the next instruction  
+- *Skip current instruction set*: The currently running instruction set will be skipped  
+- *Abort*: The sequence will be completely stopped  
+- *Skip to end of sequence instructions*: Skip any remaining instructions from the start and target area and continue with the instructions in the sequence end area  
+
+**Reset**  
+This button will reset the state of the instruction, like progress exposures etc.
+
+**Copy**  
+Create an exact copy of the current instruction set and add it below the current instruction
+
+**Move up**  
+Moves the instruction one row above. If it is already the first instruction of an instruction set, it will move to the parent instruction set above the current instruction set instead.
+If the previous instruction is an instruction set that is not collapsed, the instruction will move to the bottom of that instruction set
+
+**Move down**  
+Moves the instruction one row below. If it is already the last instruction of an instruction set, it will move to the parent instruction set below the current instruction set instead.
+If the next instruction is an instruction set that is not collapsed, the instruction will move to the top of that instruction set
 
 ## Camera
 
@@ -18,7 +49,7 @@ Once the camera has reached the ambient temperature the cooler is turned off and
 ### Dew Heater
 ![Dew Heater](../../images/sequencer/instructions/camera_dew.png)  
 This instruction will turn on or turn off the camera dew heater  
-*Requires a camera that has controllable dew heater*
+*Requires a camera that has a controllable dew heater*
 
 ### Set Readout Mode
 ![Set Readout Mode](../../images/sequencer/instructions/camera_readout.png)  
@@ -44,20 +75,99 @@ Keep dither after exposures to 0, to skip the dither completely.
 
 ## Dome
 
+### Close Dome Shutter
+
+### Enable Dome Sync
+
+### Open Dome Shutter
+
+### Park Dome
+
 ## Filter Wheel
+
+### Switch Filter
 
 ## Flat Device
 
+
+### Close Flat Panel Cover
+
+### Open Flat Panel Cover
+
+### Set Brightness
+
+### Toggle Light
+
+### Trained Flat Exposure
+
+### Trained Dark Flat Exposure
+
 ## Focuser
+
+### Move Focuser
+
+### Move Focuser By Temp.
+
+### Move Focuser Relative
+
+### Run Autofocus
 
 ## Guider
 
+### Dither
+
+### Start Guiding
+
+### Stop Guiding
+
 ## Rotator
+
+### Rotate By Mechanical Angle
 
 ## Safety Monitor
 
+### Wait Until Safe
+
 ## Switch
+
+### Set Switch Value
 
 ## Telescope
 
+### Find Home
+
+### Park Scope
+
+### Set Tracking
+
+### Slew And Center
+
+### Slew To Alt/Az
+
+### Slew To Ra/Dec
+
+### Slew, Center And Rotate
+
+### Solve And Sync
+
+### Unpark Scope
+
 ## Utility
+
+### Annotation
+
+### External Script
+
+### Message Box
+
+### Wait For Altitude
+
+### Wait For Time
+
+### Wait For Time Span
+
+### Wait If Moon Altitude
+
+### Wait If Sun Altitude
+
+### Wait Until Above Horizon
