@@ -47,11 +47,13 @@ For further information about using the Framing Assistant refer to the [Advanced
     * When using a survey source, re-downloads an image of the region centered on the current coordinates set by the framing rectangle (15)
     * When using cached images or file source, the framing rectangle is centered on the image center 
 
-8. **Slew**
-    * Slews the mount to the coordinates of the center of the framing rectangle (16) 
+8. **Slew and center**
+    * Slews the mount to the coordinates of the center of the framing rectangle (16) and uses platesolving to recenter the mount to be precisely on target
+    * In addition when clicking on the arrow the operation can be adjusted to only slew to the target without solving or also consider the rotation (when a rotator is connected)
 
-9. **Add as Sequence**
-    * Takes the name and coordinates of the RA and Dec of the framing window and adds it as a sequence target for either the sequence builder or the sequencer using a deep sky object template
+9. **Add target to sequence**
+    * Takes the name, coordinates of the RA and Dec and the angle of the framing window and adds it as a sequence target for either the simple sequencer or the advanced sequencer using a deep sky object template
+    * In addition when clicking on the arrow and clicking on "Add target to target list", the target can be added to the advanced sequencer's target tab instead
 
 10. **Altitude browser**
     * Displays the altitude of the target over time, indicating current position and meridian 

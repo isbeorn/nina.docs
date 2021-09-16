@@ -27,7 +27,6 @@ nav:
             - Sky Atlas: 'tabs/skyatlas.md'
             - Framing Assistant: 'tabs/framing.md'
             - Flat Wizard: 'tabs/flatwizard.md'
-            - Sequence Builder: 'tabs/sequencebuilder.md'
             - Sequencer: 'tabs/sequencer.md'
             - Imaging: 'tabs/imaging.md'
             - Options:
@@ -36,6 +35,14 @@ nav:
                 - Imaging: 'tabs/options/imaging.md'
                 - Plate Solving: 'tabs/options/platesolving.md'
                 - Dome: 'tabs/options/dome.md'
+            - Plugins:
+                - Installed: 'tabs/plugins/installed.md'
+                - Available: 'tabs/plugins/available.md'
+        - Sequencer:
+            - Overview: 'sequencer/overview.md'
+            - Simple Sequencer: 'sequencer/simple/simple.md'
+            - Advanced Advanced Sequencer:
+                - Overview: 'sequencer/advanced/advanced.md'
         - Advanced Topics:
             - Plate Solving: 'advanced/platesolving.md'
             - Object Browser: 'advanced/objectbrowser.md'
