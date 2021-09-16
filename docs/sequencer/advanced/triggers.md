@@ -1,3 +1,7 @@
+
+Triggers can be identified by the highlighted lightning icon next to them in the sequencer sidebar.  
+![Triggers](../../images/sequencer/trigger/trigger.png)  
+
 ## Dome
 
 ### Synchronize Dome
