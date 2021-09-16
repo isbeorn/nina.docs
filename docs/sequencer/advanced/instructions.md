@@ -32,7 +32,7 @@ If the next instruction is an instruction set that is not collapsed, the instruc
 
 ## Camera
 
-Control basic functions of a camera. Each instruction requires at least a camera to be connected.
+Control basic functions of a camera. Each instruction in this category requires at least a camera to be connected.
 
 ### Cool Camera  
 ![Cool Camera](../../images/sequencer/instructions/camera_cool.png)  
