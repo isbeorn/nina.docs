@@ -10,10 +10,10 @@ The General Settings tab allows you to manage N.I.N.A. in terms of all general s
     * The user may add, duplicate, delete or load a profile using these buttons
     > A profile cannot be loaded if the current one has a device connected 
 
-3. **Name and Language settings**
+3. **Name, Language and Font settings**
     * Sets the name of the currently loaded and active user defined profile
     * The Language setting changes most labels, tooltips and buttons to the specified language
-    > Currently English (UK/US), German (Germany) and Italian (Italy) are supported
+    > A wide range of languages are supported. If you want to contribute to localization, check out the [localization guide](../../contributing/localization.md)
 
 4. **Auto Update Source**
     * Selects which version branch to check for updates
@@ -25,22 +25,21 @@ The General Settings tab allows you to manage N.I.N.A. in terms of all general s
     
         > Release offers the most reliability and stability for your imaging runs 
     
-5. **Update Availability Notification**
-    * If an update is out for the currently selected release branch set in (4), then this notification will display
-    * Clicking on it will download and run the update wizard
-
-6. **Sky Atlas & Survey Directory Settings**
+5. **Sky Atlas & Survey Directory Settings**
     * If the Sky Atlas images have been downloaded, N.I.N.A. must be pointed to them by setting the directory here
     * Survey images downloaded when using the framing tool are stored in this directory
 
-7. **Logging**
+6. **Logging**
     * Specifies the level of logging done by N.I.N.A for troubleshooting and debugging purposes
     * The level of logging can be set (in ascending order) to  'Error', 'Info', 'Warning', 'Debug' or 'Trace'
     * The button here opens the directory containing the logs, logs are typically located in %localappdata%\NINA\logs
     
-8. **Device Polling Interval**
+7. **Device Polling Interval**
     * This sets the interval of device polling in seconds. Default works well in most situations.
-    
+
+8. **Server enabled**
+    * N.I.N.A. offers a basic REST server to receive commands from other applications. Currently very limited to specific use cases.
+
 9. **Current UI Color Schema**
     * Enables customisation of the color scheme of N.I.N.A. 
     * Offers many different themes via the drop down menu 
@@ -63,5 +62,30 @@ The General Settings tab allows you to manage N.I.N.A. in terms of all general s
     * Loads coordinates from a user connected planetarium software
     > Planetarium can be connected in the [Planetarium menu](equipment.md)
 
-15. **Current NINA version and active Profile**
-    * The title displays the current NINA version and the active profile
+15. **Custom Horizon**
+    * To have a visual indicator about a local horizon and to also utilize a horizon for the advanced sequencer, a custom horizon file can be referenced here.
+    * The file format follows a simple style of azimuth altitude pairs to define the horizon. Gaps between azimuths are interpolated. A minimum of two azimuths altitude pairs are required for the file to work.  
+    * Here is an example of a horizon file:  
+```
+# Az Alt
+0 14
+5 69
+55 77
+90 70
+105 35
+115	10
+120 24
+135 25
+145 30
+205	20
+230 23
+235 14
+240 14
+265 33
+285 33
+350 20
+360 14
+```
+
+    * Once a horizon is specified it will be reflected in all altitude charts of the application
+![Altitude chart with horizon](../../images/tabs/altitudechartwithhorizon.png)
