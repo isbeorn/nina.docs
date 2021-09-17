@@ -1,4 +1,4 @@
-The Sky Atlas allows you to search for various objects in the sky using N.I.N.A.'s own database of deep sky objects. Filters and sorting options can be applied to search results. Additionally, you may set selected objects as a [Sequence](../tabs/sequence.md) target, or to send them to the [Framing Assistant](../tabs/framing.md).
+The Sky Atlas allows you to search for various objects in the sky using N.I.N.A.'s own database of deep sky objects. Filters and sorting options can be applied to search results. Additionally, you may set selected objects as a [Sequence](../tabs/sequencer.md) target, or to send them to the [Framing Assistant](../tabs/framing.md).
 
 For further information about the Sky Atlas, refer to the [Object Browser](../advanced/objectbrowser.md) advanced topic.
 
@@ -41,7 +41,7 @@ The Sky Atlas interface consists of following elements:
 
 8. **Set as Sequence**
 
-    Sets the selected object as a Sequence target for the sequence builder or the sequencer using a specific template based on the selection
+    Sets the selected object as a sequence target for the [simple sequencer](../sequencer/simple/simple.md) or the [advanced sequencer](../sequencer/advanced/advanced.md) using a specific template based on the selection
 
 9. **Set for Framing Assistant**
 

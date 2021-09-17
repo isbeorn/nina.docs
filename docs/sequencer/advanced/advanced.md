@@ -1,6 +1,8 @@
 The advanced sequencer makes it possible to completely plan and customize an imaging run based on specific needs for each user by giving the capability to plan on a very granular level. Equipment can be controlled step by step with various available instructions and each instruction can be further customized by specific parameters for each individual person.  
+
+## Navigating
 The main area will contain the actual instructions. There it is possible to add the instructions, customize the parameters and see the progress of the sequencer.  
-In general the sequence will be processed from the top to the bottom step by step.  
+Additionally the area is split into three sections to manage sequence start instructions, target instructions and end of sequence instructions.
   
 On the bottom left it is possible to save and load a complete sequence run while on the bottom right it is possible to start and stop a sequence.  
 The right sidebar will show all available instructions as well as templates and targets. These are described in more detail below.
@@ -9,10 +11,17 @@ The right sidebar will show all available instructions as well as templates and 
 Everything inside the advanced sequencer is enabled to use drag and drop. For example an instruction can be grabbed by holding the left mouse button and then dragged into the sequencer area to add an instruction at the mouse location.  
 However it is also possible to plan everything without using drag and drop at all using the available '+' buttons
 ![Drag & Drop](../../images/sequencer/Sequencer_DragDrop.png)
+
+## The flow of the sequencer
+
+On a high level, the concept of the advanced sequencer is quite simple. A sequence will consist of small building blocks that will execute some logic and the sequencer will execute these blocks one by one from top to bottom.  
+In addition to single building blocks so called *Instruction Sets* can be added too. Think of these as a logical group of instructions. These groups will function in the same way as the whole sequencer, as they will execute the blocks that are part of the group from top to bottom.  
+The *Instruction Sets* can contain so called *Loop Conditions* which will change the flow of operation slightly, as the Instruction Set will repeate its set of instructions for as long as all condition that these loop conditions define are met.
+![Sequencer Flow](../../images/sequencer/Sequencer_Flow.png)
     
 ## Instructions
-An instruction is a single command that the application will execute. Each instruction has a different purpose and can control various types of equipment, set parameters or are utility functions to automate the imaging process.  
-A complete list of available instructions can be found on the right side of the advanced sequencer and each instruction will have a small description as well as a tooltip of its purpose.
+An instruction is a single command that the sequencer will execute. Each instruction has a different purpose and can control various types of equipment, set parameters or are utility functions to automate the imaging process.  
+A complete list of available instructions can be found on the right side of the advanced sequencer and each instruction will have a small description as well as a tooltip of its purpose. The [Instructions page](./instructions.md) will also describe each available instruction in detail.
 Instructions can be added to the sequencer and the specific parameters can be set there. The sequencer will then go through each instruction and process them.
 From the available list, instructions can be dragged over from the right side to the left side and dropped into the sequencer.  
 ![Instructions](../../images/sequencer/Sequencer_Instructions.png)

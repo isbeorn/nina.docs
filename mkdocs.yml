@@ -24,6 +24,7 @@ nav:
                 - Flat Panel: 'tabs/equipment/flatpanel.md'
                 - Weather: 'tabs/equipment/weather.md'
                 - Dome: 'tabs/equipment/dome.md'
+                - SafetyMonitor: 'tabs/equipment/safetymonitor.md'
             - Sky Atlas: 'tabs/skyatlas.md'
             - Framing Assistant: 'tabs/framing.md'
             - Flat Wizard: 'tabs/flatwizard.md'
@@ -32,6 +33,7 @@ nav:
             - Options:
                 - General: 'tabs/options/general.md'
                 - Equipment: 'tabs/options/equipment.md'
+                - Autofocus: 'tabs/options/autofocus.md'
                 - Imaging: 'tabs/options/imaging.md'
                 - Plate Solving: 'tabs/options/platesolving.md'
                 - Dome: 'tabs/options/dome.md'
@@ -40,7 +42,9 @@ nav:
                 - Available: 'tabs/plugins/available.md'
         - Sequencer:
             - Overview: 'sequencer/overview.md'
-            - Simple Sequencer: 'sequencer/simple/simple.md'
+            - Simple Sequencer: 
+                - Overview: 'sequencer/simple/simple.md'
+                - Sequencing: 'sequencer/simple/sequencing.md'
             - Advanced Advanced Sequencer:
                 - Overview: 'sequencer/advanced/advanced.md'
                 - Instructions: 'sequencer/advanced/instructions.md'
@@ -53,7 +57,6 @@ nav:
             - Dithering: 'advanced/dithering.md'
             - Framing Assistant: 'advanced/framingassistant.md'
             - Automated Meridian Flip: 'advanced/meridianflip.md'
-            - Advanced Sequencing: 'advanced/advancedsequence.md'
             - Bulb Shutter Control: 'advanced/bulbshutter.md'
             - Auto-Focus: 'advanced/autofocus.md'
             - Focuser Backlash Measurement: 'advanced/backlashmeasurement.md'

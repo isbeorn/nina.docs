@@ -159,7 +159,7 @@ Now that the basic settings of the autofocus routine have been set, it is time t
 
 If both camera and focuser are properly connected, the "Start Autofocus" button will be available, and clicking it will launch the routine, as described in [the introduction section](#nina-autofocus).
 
-* Start autofocus as part of an imaging sequence (at start, after a certain number of frames, after a user-defined time, after worsening of HFR, etc.). This can be configured from the Sequence tab, and is described in more details in the relevant [Sequence Section](../tabs/sequence.md)
+* Start autofocus as part of an imaging sequence (at start, after a certain number of frames, after a user-defined time, after worsening of HFR, etc.). This can be configured from the sequence tab, and is described in more details in the relevant [Sequence Section](../tabs/sequencer.md)
 
 ## Advanced Options
 

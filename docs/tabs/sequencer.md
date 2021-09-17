@@ -1,4 +1,4 @@
-![The sequencing starting tab](../../images/tabs/Sequence_Empty.png)
+![The sequencing starting tab](../images/tabs/Sequence_Empty.png)
 
 1. **Add new Target**  
     Creates a new empty target and opens the [Simple Sequencer](../sequencer/simple/simple.md)

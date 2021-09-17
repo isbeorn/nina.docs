@@ -30,7 +30,7 @@ For a precise centering with a given error margin use the "Repeat until error <"
 
 ## Automatic Plate Solving
 
-Plate solving is also utilized in the [Sequence](advancedsequence.md) to center on a given target and [Automated Meridian Flip](meridianflip.md) feature to recenter the scope after a flip occurred. 
+Plate solving is also utilized in the [Sequencer](../sequencer/overview.md) to center on a given target and [Automated Meridian Flip](meridianflip.md) feature to recenter the scope after a flip occurred. 
 Here plate solving will be triggered automatically and the parameters are used from the Plate Solving Options.
 This is essential for a hands-off operation of N.I.N.A. and it is recommended that the application is set up to have a blind solver, should the preferred primary plate solver not work as expected.
 

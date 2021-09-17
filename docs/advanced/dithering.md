@@ -93,6 +93,3 @@ Regardless of the dither method in use, initiating dithering during the course o
 ![N.I.N.A. Dithering in Sequences](../images/advanced/dithering3.png)
 
 Dithering operations happen while the previous image is downloading from the camera. If you have a camera with slow download speeds, it might be that the dithering operation is completed in time for the camera to be ready for the next exposure.
-  
-!!! tip
-    If you use an LRGB rotational sequence (See Also: [Advanced Sequencing](advancedsequence.md)) you might only want to dither on every L frame. If an OSC or DSLR camera is used, it is suggested to dither after every frame, although if you are shooting very short exposures (30s, 60s) you may want to reduce the number of dithers to avoid excessive perturbation of guiding.

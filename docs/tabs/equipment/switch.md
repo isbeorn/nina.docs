@@ -1,6 +1,6 @@
-The Switch lets you connect and control  ASCOM-compatible switches. 
+The Switch lets you connect and control ASCOM-compatible switches. 
 
-![Rotator](../../images/tabs/equipment_switches.png)
+![Switch](../../images/tabs/equipment_switches.png)
 
 1. Any ASCOM-compatible devices
    

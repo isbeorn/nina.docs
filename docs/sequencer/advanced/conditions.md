@@ -31,7 +31,7 @@ Loop an instruction set until a specific point in time. The time can either be s
 
 ### Loop While Altitude Above Horizon
 ![Loop While Altitude Above Horizon](../../images/sequencer/conditions/loopwhilehorizon2.png)  
-This will loop the instruction set for as long as the specified target is above the horizon. When a [custom horizon](../../tabs/options/general.md) is set, the custom horizon will be considered as the altitude to be above. When no custom horizon is set, 0° of altitude will be considered. Furthermore an altitude offset can be specified.  
+This will loop the instruction set for as long as the specified target is above the horizon. When a [custom horizon](../../tabs/options/general.md) is set, the custom horizon will be considered as the altitude to be above of. When no custom horizon is set, 0° of altitude will be considered. Furthermore an altitude offset can be specified.  
 When this condition is part of a "Deep Sky Object Sequence" the coordinates will be inherited by this set and no coordinates need to be entered  
 ![Loop While Altitude Above Horizon](../../images/sequencer/conditions/loopwhilehorizon.png)  
 
