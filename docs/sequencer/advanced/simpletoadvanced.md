@@ -7,7 +7,7 @@ Most likely when you wanted to run a target for the night with LRGB filters you 
 The goal here is to get exposures of each filter for having usable color data and to autofocus after the filter change when the batch of exposures is completed. Furthermore the number of exposures are added based on the estimated duration to fully fill the night.
 This approach however has some downsides, which we want to fix utilizing the advanced sequencer step by step. (For simplicity the AF after HFR or other conditions is ignored, as this is dependent on the current night's conditions and not a problem of the general setup)
 
-* Problem 1: Repeating yourself - The rows 5-9 repeat the same thing that row 1-4 already defined
+* Problem 1: Repeating yourself - The rows 5-9 repeat the same thing that row 1-4 have already defined
 * Problem 2: The estimation could be off - most likely it will take longer - so you will end up with uneven amount of exposures as the last exposures will be unusable. Additionally you have to fiddle around with the amount of exposures to fill the night.
 * Problem 3: Clouds could roll in or sky conditions could worsen, resulting in further subs to be bad and having an uneven amount of good exposures
 * Problem 4: Autofocus runs are required when changing to the next filter, taking up some imaging time (7x after the initial one)
@@ -57,7 +57,7 @@ Each row of the simple sequencer will be directly translated to an instruction t
 One additional option that was enabled in the simple sequencer, was to make sure that an autofocus run is triggered when the filter changes. This is directly added to this imaging set in the form of a trigger in the *Triggers* section and it is also called the same way *AF After Filter Change* and will make sure that an autofocus is triggered when the filter changes.
 ![Target Imaging](../../images/sequencer/simpletoadvanced/targetimaging.png)
 
-Hopefully this explanation gives you a good overview about how an advanced sequencer will look like and how it will operate when directly compared to a simple sequence screen. The user interface looks quite different, but it should be much more clear about what will happen and when it will happen, as it will explicitly show all the individual steps.  
+Hopefully this explanation gives you a good overview about how an advanced sequencer will look like and how it will operate when directly compared to a simple sequence screen. The user interface looks quite different, but it should be much clearer about what will happen and when it will happen, as it will explicitly show all the individual steps.  
 **So why bother with the advanced sequencer? Well, now that we understand the basics, we can tackle the problems that were mentioned earlier.**
 
 ## Problem 1 - Stop repeating yourself
@@ -77,7 +77,7 @@ The sequence will take 4 exposures, dither, go to the next filter and for each o
 ![With Offsets](../../images/sequencer/simpletoadvanced/withoffsets.png)
 
 ## Problem 5 - Dithering too many times
-Most of the issues are resolved now and already some time has been saved by removing the intermediate autofocus runs after filter changes. What remains is the amount of dithering. This can be reduced by a factor of 4! Look again at the sequence. Each filter will take four exposures, then dither, then go to the next filter. But why do we need to dither when we switch the filter anyways? Well we don't. We would only need to dither when each set LRGB is passed. So let's do it, by setting *Dither every #* to 0 for all *Smart Exposures* and instead add a *Dither* Instruction afte rthe last *Smart Exposure*!
+Most of the issues are resolved now and already some time has been saved by removing the intermediate autofocus runs after filter changes. What remains is the amount of dithering. This can be reduced by a factor of 4! Look again at the sequence. Each filter will take four exposures, then dither, then go to the next filter. But why do we need to dither when we switch the filter anyways? Well we don't. We would only need to dither when each set of LRGB is passed. So let's do it, by setting *Dither every #* to 0 for all *Smart Exposures* and instead add a *Dither* Instruction after the last *Smart Exposure*!
 ![Better Dither](../../images/sequencer/simpletoadvanced/betterdither.png)  
 This one is a real time saver!
 
