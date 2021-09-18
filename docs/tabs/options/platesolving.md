@@ -44,7 +44,7 @@ For usage of the Plate Solver refer to [Advanced Topics: Plate Solving](../../ad
     ## Plate Solver Settings
 
 11. **Plate Solver Settings Selection**
-    * This menu displays the currently supported platesolvers in NINA
+    * This menu displays the currently supported platesolvers in N.I.N.A.
     * Clicking on each entry will display the corresponding solvers' settings to the right (10)
     
 12. **Platesolver Settings** 
