@@ -90,33 +90,63 @@ Keep dither after exposures to 0, to skip the dither completely.
     A fun fact - the "Take Many Exposures" and "Smart Exposures" are actually instruction sets with static content that is just displayed like a normal instruction and is bundling together most common imaging operations for convenience
 
 ## Dome
+Control basic functions of a [Dome](../../tabs/equipment/dome.md). Each instruction in this category requires at least a Dome to be connected.
 
 ### Close Dome Shutter
-
+![Close Dome Shutter](../../images/sequencer/instructions/dome_close.png)  
+Closes the dome shutter  
+*Requires a controllable dome shutter*
 ### Enable Dome Sync
-
+![Enable Dome Sync](../../images/sequencer/instructions/dome_sync.png)  
+Enables the automatic background synchroniztion of the telescope and the dome  
+*Requires a telescope to be connected*
 ### Open Dome Shutter
+![Open Dome Shutter](../../images/sequencer/instructions/dome_open.png)  
+Opens the dome shutter  
+*Requires a controllable dome shutter*
 
 ### Park Dome
+![Park Dome](../../images/sequencer/instructions/dome_park.png)  
+Parks the dome to its specified home positon  
+*Requires a dome driver that is capable of parking*
 
 ## Filter Wheel
+Control basic functions of a [Filter Wheel](../../tabs/equipment/filterwheel.md). Each instruction in this category requires at least a Filter Wheel to be connected.
 
 ### Switch Filter
+![Switch Filter](../../images/sequencer/instructions/filter_switch.png)  
+Switches the filter wheel filter to the specified filter. Like all filter wheel changes the focuser offset will be applied, when available.
 
-## Flat Device
-
+## Flat Panel
+Control basic functions of a [Flat Panel](../../tabs/equipment/flatpanel.md). Each instruction in this category requires at least a Flat Panel to be connected.
 
 ### Close Flat Panel Cover
+![Close Flat Panel Cover](../../images/sequencer/instructions/flat_close.png)  
+Closes the flat panel  
+*Requires a flat panel that can open and close itself*
 
 ### Open Flat Panel Cover
+![Open Flat Panel Cover](../../images/sequencer/instructions/flat_open.png)  
+Opens the flat panel  
+*Requires a flat panel that can open and close itself*
 
 ### Set Brightness
+![Set Brightness](../../images/sequencer/instructions/flat_brightness.png)  
+Sets the brightness of the panel to the specified value. (Does not turn on the panel automatically).
 
 ### Toggle Light
+![Toggle Light](../../images/sequencer/instructions/flat_light.png)  
+Turns the flat panel light on or off depending on the setting
 
 ### Trained Flat Exposure
+![Trained Flat Exposure](../../images/sequencer/instructions/flat_trainedflat.png)  
+This instruction will look up the trained flat exposures according to the specified filter, exposure time, gain and offset, close the flat panel (if available), set the flat panel brightness, turn it on, take the flat frames for the given amount, turns off the flat panel and finally opens the cover again (if available and if "keep closed" is off)  
+*Requires a camera to be connected and trained flat values being set in the [flat panel tab](../../tabs/equipment/flatpanel.md) that match the values in the instruction*
 
 ### Trained Dark Flat Exposure
+![Trained Dark Flat Exposure](../../images/sequencer/instructions/flat_traineddark.png)  
+This instruction will look up the trained flat exposures according to the specified filter, exposure time, gain and offset, close the flat panel (if available), turn it off, take the dark flat frames for the given amound and finally opens the cover again (if available and if "keep closed" is off)  
+*Requires a camera to be connected and trained flat values being set in the [flat panel tab](../../tabs/equipment/flatpanel.md) that match the values in the instruction*
 
 ## Focuser
 Control basic functions of a [Focuser](../../tabs/equipment/focuser.md). Each instruction in this category requires at least a Focuser to be connected.
