@@ -50,6 +50,7 @@ nav:
                 - Instructions: 'sequencer/advanced/instructions.md'
                 - Loop Conditions: 'sequencer/advanced/conditions.md'
                 - Triggers: 'sequencer/advanced/triggers.md'
+                - From Simple To Advanced: 'sequencer/advanced/simpletoadvanced.md'
         - Advanced Topics:
             - Plate Solving: 'advanced/platesolving.md'
             - Object Browser: 'advanced/objectbrowser.md'
