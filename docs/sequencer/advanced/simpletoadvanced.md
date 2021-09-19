@@ -61,7 +61,7 @@ Hopefully this explanation gives you a good overview about how an advanced seque
 **So why bother with the advanced sequencer? Well, now that we understand the basics, we can tackle the problems that were mentioned earlier.**
 
 ## Problem 1 - Stop repeating yourself
-The advanced sequencer can utilize [Loop Conditinos](./conditions.md) to repeat sequence blocks. These *loop conditions* have, as their name suggest, certain conditions that should be fullfilled and for as long as these conditions are fullfilled they will loop the instruction set they are placed inside.  
+The advanced sequencer can utilize [Loop Conditions](./conditions.md) to repeat sequence blocks. These *loop conditions* have, as their name suggest, certain conditions that should be fullfilled and for as long as these conditions are fullfilled they will loop the instruction set they are placed inside.  
 So for this example we could utilize a condition called *Loop for iterations* and set it to two iterations. Then we can remove 4 of the instructions without losing anything.
 ![Loop For Two](../../images/sequencer/simpletoadvanced/loopfortwo.png)
 
