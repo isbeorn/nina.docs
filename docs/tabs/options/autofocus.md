@@ -65,6 +65,9 @@ The focuser backlash in the IN (decreasing position) and OUT (increasing positio
 ### Binning
 The binning to be used for Autofocus exposures, if filter specific binnings in the list below are not set
 
+### R² Threshold
+This setting refers to the [coefficient of determination](https://en.wikipedia.org/wiki/Coefficient_of_determination) which is used to grade the [calculated fitting](./autofocus.md#af-curve-fitting) of an autofocus run to the actual datapoints. When an autofocus run leads to an R² value that is below this threshold, the autofocus run will be deemed as failed. This can happen due to bad parameters, clouds rolling in and other problems during an autofocus run. An ideal autofocus run will have an R² value that is easily beyond 0.95. 
+
 
 
 ## Autofocus filter settings

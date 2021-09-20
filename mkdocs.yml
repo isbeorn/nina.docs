@@ -34,9 +34,9 @@ nav:
                 - General: 'tabs/options/general.md'
                 - Equipment: 'tabs/options/equipment.md'
                 - Autofocus: 'tabs/options/autofocus.md'
+                - Dome: 'tabs/options/dome.md'
                 - Imaging: 'tabs/options/imaging.md'
                 - Plate Solving: 'tabs/options/platesolving.md'
-                - Dome: 'tabs/options/dome.md'
             - Plugins:
                 - Installed: 'tabs/plugins/installed.md'
                 - Available: 'tabs/plugins/available.md'

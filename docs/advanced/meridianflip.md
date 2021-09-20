@@ -22,16 +22,4 @@ Meridian flips prevent that your telescope and camera bump into the mount and do
 N.I.N.A. has built-in functionality for the automated flip, even if your mount does not support it in firmware.
 After a flip N.I.N.A. verifies that it is still imaging the desired area of sky through [Plate Solving](platesolving.md) and the imaging session continues.
 
-To enable the Automated Meridian Flip you need to enable it in the simple sequence target set options or when using the advanced sequencer, the meridian flip trigger needs to be added to the sequence.
-
-![Automated Meridian Flip Settings](../images/advanced/meridianflip.PNG)
-
-- _Minutes after meridian_: This setting defines the earliest time after passing the meridian where a meridian flip can occur.
-- _Max. minutes after meridian_: This setting defines the latest time after passing the meridian, that the flip should have occurred.
-- _Use Telescope Side of Pier_: Almost all drivers are capable of reporting the side of pier correctly. When this is enabled, N.I.N.A. can determine much more reliable if a flip is  really necessary. For example in case the scope is already flipped prior to passing the meridian, N.I.N.A. can skip the flip, as it is not necessary, or when after a slew the side of pier is incorrect, can then flip it to the correct side. **Only deactive this when your mount driver does not support this feature!**
-- _Recenter after Flip_: When enabled, N.I.N.A. will verify that the current target is still centered after the flip using [Plate Solving](platesolving.md).
-- _Scope settle time after flip (seconds)_: Determines how many seconds the mount should rest after the flip occurred.
-- _Pause before Meridian (minutes)_: For some setups the equipment can touch the tripod or pier a while before passing the meridian. This setting enables the mount to disable tracking for the defined minutes prior to reaching meridian. Once this time and the defined minutes after meridian are passed, the flip will occur normally. **Only set a pause time, when your equipment cannot pass the meridian safely. If your equipment can safely track until the meridian flip time keep this setting at 0!**
-
-!!! note
-    Some mounts require to pass the meridian by a couple of minutes, as otherwise syncs via plate solving near the meridian after a flip could be rejected by the driver, or won't flip at all as the driver considers the flip as not yet necessary.  
+To enable the Automated Meridian Flip you need to enable it in the simple sequence target set options or when using the advanced sequencer, the meridian flip trigger needs to be added to the sequence. For customizing the behavior of the meridian flip, the [meridian flip settings](../tabs/options/imaging.md#auto-meridian-flip) can be customized.

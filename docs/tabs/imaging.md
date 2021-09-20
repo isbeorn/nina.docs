@@ -12,7 +12,7 @@ The top bar is divided in two main sections: **Info** and **Tools**
 ## Info  
 These windows provide important status information about captured images and connected equipment  
 
-**A. Image**  ![imageicon](../images/tabs/imaging_imageicon.PNG)  
+### A. Image  ![imageicon](../images/tabs/imaging_imageicon.PNG)  
 The image panel is the central part of the Imaging tab and is used to display the latest captured images
 
 ![image](../images/tabs/imaging_image.png)
@@ -29,7 +29,7 @@ The image panel is the central part of the Imaging tab and is used to display th
    ![HFR](../images/tabs/imaging_HFR.PNG)
 9.   Activates the Bahtinov Analyzer aid tool for manual focusing with a Bahtinov Mask.
 
-**B. Camera** ![cameraicon](../images/tabs/imaging_cameraicon.PNG)  
+### B. Camera ![cameraicon](../images/tabs/imaging_cameraicon.PNG)  
 This panel displays the main camera and sensor properties and cooling status
 > Requires a connected camera
 
@@ -39,12 +39,12 @@ This panel displays the main camera and sensor properties and cooling status
    
 ![cameratab](../images/tabs/cameratab.png)
 
-**C. Filter Wheel** ![fwicon](../images/tabs/imaging_fwicon.PNG)  
+### C. Filter Wheel ![fwicon](../images/tabs/imaging_fwicon.PNG)  
 When a Filter Wheel is connected, this panel displays the current filter (1) and lets you manually switch filters by selecting them with the drop-down menu (2)
 
 ![image](../images/tabs/imaging_filterwheel.PNG)
 
-**D. Focuser**  ![focusericon](../images/tabs/imaging_focusericon.PNG)  
+### D. Focuser  ![focusericon](../images/tabs/imaging_focusericon.PNG)  
 This panel displays the focuser status and lets you manually move it to the desired position
 > Requires a connected focuser
 
@@ -62,7 +62,7 @@ This panel displays the focuser status and lets you manually move it to the desi
     * Double arrows <<  >> : five times the Auto Focus Step Size
 
 
-**E. Rotator** ![roticon](../images/tabs/imaging_rotatoricon.PNG)  
+### E. Rotator ![roticon](../images/tabs/imaging_rotatoricon.PNG)  
 Here you can control the Rotator
 > Requires a connected ASCOM Rotator
 
@@ -74,13 +74,13 @@ Here you can control the Rotator
 4. Moves the rotator to the Target Position
 
 
-**F. Telescope** ![telescopeicon](../images/tabs/imaging_telescopeicon.PNG)  
+### F. Telescope ![telescopeicon](../images/tabs/imaging_telescopeicon.PNG)  
 The telescope panel provides all important information about your telescope like tracking status, sidereal time, time to meridian passing and current telescope coordinates.
 > Requires a connected ASCOM telescope
 
 ![telescope](../images/tabs/imaging_telescope.PNG)
 
-**G. Guiding**  ![guideicon](../images/tabs/imaging_guideicon.PNG)  
+### G. Guiding  ![guideicon](../images/tabs/imaging_guideicon.PNG)  
 The guider panel replicates the PHD guiding graph in real time. 
 > PHD2 must be connected for the Guider to display the guiding trends and pulses (RA and DEC).
 
@@ -94,12 +94,12 @@ The guider panel replicates the PHD guiding graph in real time.
 4. Clears the chart
 5. Chart area, this is where the PHD2 graph will be visualized
 
-**H. Sequence**  ![sequenceicon](../images/tabs/imaging_sequenceicon.PNG)  
+### H. Sequence ![sequenceicon](../images/tabs/imaging_sequenceicon.PNG)  
 Sequence panel lets you start/stop imaging sequences and provides information on the sequence run in a compressed format. To learn how to set up a sequence refer to the [Sequence](sequencer.md) section.
 
 ![sequence1](../images/tabs/imaging_sequence.png)
 
-**I. Switches** ![switchesicon](../images/tabs/imaging_switchesicon.PNG)  
+### I. Switches ![switchesicon](../images/tabs/imaging_switchesicon.PNG)  
 This panel will let you control the active switches
 > Requires connected switches
 
@@ -109,13 +109,13 @@ This panel will let you control the active switches
 2. Manually select switch
 3. Toggle active switch ON/OFF
 
-**J. Weather**  ![weathericon](../images/tabs/imaging_weathericon.PNG)  
+### J. Weather  ![weathericon](../images/tabs/imaging_weathericon.PNG)  
 Weather and temperature information from OpenWeatherMap
 > OpenWeatherMap API key must be set under Options [Equipment](options/equipment.md)
 
 ![weather](../images/tabs/imaging_weather.png)
 
-**K. Statistics**  ![statsicon](../images/tabs/imaging_statsicon.PNG)  
+### K. Statistics  ![statsicon](../images/tabs/imaging_statsicon.PNG)  
 In this panel  all the important information about the last captured image are reported
 
 ![statistics](../images/tabs/imaging_statistics.png)
@@ -130,7 +130,7 @@ In this panel  all the important information about the last captured image are r
 
 2. Image histogram of the last captured image
 
-**M. HFR History**  ![HFRicon](../images/tabs/imaging_HFRicon.PNG)  
+### M. HFR History  ![HFRicon](../images/tabs/imaging_HFRicon.PNG)  
 When automatic HFR (Half-Flux-Radius) star detection is ON, this panel will diplay the history of HFR values and number of stars used to evaluate the HFR for each exposure.
 The chart is limited to displaying a moving window of the last 100 exposures. 
 
@@ -141,9 +141,9 @@ The chart is limited to displaying a moving window of the last 100 exposures.
 2. Green line: mean HFR
 3. Triangle marks: AF runs
    
-    ## Tools 
+## Tools 
 
-**N. Imaging** ![image1icon](../images/tabs/imaging_imagingicon.PNG)  
+### N. Imaging ![image1icon](../images/tabs/imaging_imagingicon.PNG)  
 The imaging panel allows you to take a single exposure or live view when supported by the camera
 
 ![image1](../images/tabs/imaging_image1.png)
@@ -156,13 +156,13 @@ The imaging panel allows you to take a single exposure or live view when support
 6. When supported by the camera, this will activate the Live View mode
 7. Takes the exposure
 
-**O. Image History** ![imagehistory](../images/tabs/imaging_historyicon.PNG)  
+### O. Image History ![imagehistory](../images/tabs/imaging_historyicon.PNG)  
 The Image History panel shows a list of thumbnalis of the current sequence captured images with basic statistics: Mean value in ADU, average HFR, Filter used, duration and capture time.
 > By double-clicking on any of the thumbnails the relative image will be opened in the Image panel (A)
 
 ![history](../images/tabs/imaging_history.png)
 
-**P. Plate Solving** ![platesolvingicon](../images/tabs/imaging_platesolveicon.PNG)  
+### P. Plate Solving ![platesolvingicon](../images/tabs/imaging_platesolveicon.PNG)  
 Platesolving is a very important step in the imaging process, for further information on the Plate Solving process refer to [Platesolving](../advanced/platesolving.md) in the advanced topics. This panel lets you perform a manual platesolving and keeps the history of all platesolving sessions.
 > Prerequisites for platesolving to work are:
 > * An external Platesolver is  defined in Options [Platesolving](options/platesolving.md)
@@ -181,7 +181,7 @@ Platesolving is a very important step in the imaging process, for further inform
 7. Captures  an image for plate solving
 8. History of plate solving sessions
 
-**Q. Polar alignment** ![polaricon](../images/tabs/imaging_polaricon.PNG)    
+### Q. Polar alignment ![polaricon](../images/tabs/imaging_polaricon.PNG)    
 The polar alignment panel gives you two ways to determine how off your polar alignment is and to improve it. One is plate solved polar alignment and the other is DARV slew.
 
 ![polaralign](../images/tabs/imaging_polaralign.png)
@@ -206,7 +206,7 @@ The polar alignment panel gives you two ways to determine how off your polar ali
 13. Initiates a DARV Slew by slewing half the specified Duration in one RA direction and then back while taking an exposure.
 
 
-**R. Auto Focus** ![AFicon](../images/tabs/imaging_aficon.PNG)  
+### R. Auto Focus ![AFicon](../images/tabs/imaging_aficon.PNG)  
 This panel lets you manually trigger an Auto Focus routine based on the Auto Focus parameters set in Options [Equipment](options/equipment.md).
 
 ![AF](../images/tabs/AF10.png)
@@ -215,7 +215,7 @@ This panel lets you manually trigger an Auto Focus routine based on the Auto Foc
 2. Last Auto Focus run parameters
 3. Starts Auto Focus routine
 
-**S. Manual Focus Targets** ![MFicon](../images/tabs/imaging_mftargetsicon.PNG)  
+### S. Manual Focus Targets ![MFicon](../images/tabs/imaging_mftargetsicon.PNG)  
 When you have to manual focus your scope this tab lets you conveniently choose among the current visible brighter stars according to your location and time.
 
 ![MFtargets](../images/tabs/imaging_mftargets.png)
@@ -224,7 +224,7 @@ When you have to manual focus your scope this tab lets you conveniently choose a
 2. Selected star properties
 3. Slews telescope to the selected star
 
-**T. Exposure Calculator** ![ExpCalcIcon](../images/tabs/imaging_expcalcicon.PNG)  
+### T. Exposure Calculator ![ExpCalcIcon](../images/tabs/imaging_expcalcicon.PNG)  
 
 This tool will suggest a recommended exposure time based on the read noise from the camera sensor and the average skyglow.
 If SharpCap is installed and a Sensor Analysis is available for the current camera, RN and FW are derived from the sensor analysis.
