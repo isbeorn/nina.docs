@@ -29,11 +29,15 @@ The Imaging options tab contains settings for file formats, save directories, Au
 * The file path where images will be saved
     
 ### Image File Pattern and Preview
-* The structure of folders and the filename can be defined by the user using the keywords listed in the table below as well as fixed text. A preview of the file pattern is also displayed.
+* The structure of folders and the filename for saved images can be adjusted here.
+* Each keyword will be replaced by its current value when the image is saved. 
+* A list of all available keywords and their usage are described in the table below the pattern
+* Static text is also possible and will be kept
+* A preview of the file pattern is also displayed below.
 
 !!! tip
     By using the backslash characters `\\` you can separate your images into various folders and sub folders.
-    For example N.I.N.A. will create separate folders on each new day and create sub folders for Lights Darks etc. and then inside these folders putting the actual image files when using a pattern like    
+    For example N.I.N.A. will create separate folders on each new session and create sub folders for Lights Darks etc. and then inside these folders putting the actual image files when using a pattern like    
     `$$DATEMINUS12$$\\$$IMAGETYPE$$\\$$EXPOSURENUMBER$$`  
     which will result in    
     `2020-01-01 -> FLAT -> 0001.fits`  
