@@ -30,7 +30,7 @@ The functionality of N.I.N.A. shines through when paired with a supporting cast 
     * [HNSKY](//www.hnsky.org/)
     * [Stellarium](//stellarium.org/)
     * [TheSky X](//www.bisque.com/sc/pages/TheSkyX-Editions.aspx)
-  * [SkyAltas image data](//nighttime-imaging.eu/downloads/SkyAtlasImageRepository/SkyAtlasImageRepository.zip) (optional)
+  * [SkyAltas image data](https://nighttime-imaging.eu/download/) (optional at the bottom of the download section)
 
 
 ## Supported Devices
