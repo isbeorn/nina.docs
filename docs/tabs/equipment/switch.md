@@ -1,4 +1,4 @@
-The Switch lets you connect and control ASCOM-compatible switches. 
+The Switch Tab lets you connect and control ASCOM-compatible switches. 
 
 ![Switch](../../images/tabs/equipment_switches.png)
 

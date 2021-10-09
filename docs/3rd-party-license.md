@@ -9,9 +9,8 @@ However it depends on various third party libraries which carry their own copyri
 | NJsonSchema              | [https://github.com/RicoSuter/NJsonSchema](https://github.com/RicoSuter/NJsonSchema) | [The MIT License](https://opensource.org/licenses/MIT)                   |
 | OxyPlot                  | [https://oxyplot.github.io/](https://oxyplot.github.io/) | [The MIT License](https://opensource.org/licenses/MIT)                   |
 | SHA3                     | [https://bitbucket.org/jdluzen/sha3](https://bitbucket.org/jdluzen/sha3) | [The MIT License](https://opensource.org/licenses/MIT)                   |
-| K4os.Compression.LZ4     | [https://github.com/MiloszKrajewski/K4os.Compression.LZ4](https://github.com/MiloszKrajewski/K4os.Compression.LZ4) | [The MIT License](https://opensource.org/licenses/MIT)  |
 | CSharpFITS               | [http://vo.iucaa.ernet.in/~voi/CSharpFITS.html](http://vo.iucaa.ernet.in/~voi/CSharpFITS.html) | [The 3-Clause BSD License](https://opensource.org/licenses/BSD-3-Clause) |
-| WPFToolkit (v3.5.0)      | [https://github.com/xceedsoftware/wpftoolkit](https://github.com/xceedsoftware/wpftoolkit) | [Microsoft Public License (MS-PL)](https://opensource.org/licenses/MS-PL) |
+| WpfExToolkit             | [https://github.com/dotnetprojects/WpfExtendedToolkit](https://github.com/dotnetprojects/WpfExtendedToolkit) | [Microsoft Public License (MS-PL)](https://opensource.org/licenses/MS-PL) |
 | EntityFramework          | [https://go.microsoft.com/fwlink/?LinkID=263480](https://go.microsoft.com/fwlink/?LinkID=263480) | [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) |
 | SharpGIS.NmeaParser      | [https://dotmorten.github.io/NmeaParser/](https://dotmorten.github.io/NmeaParser/) | [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) |
 | Accord                   | [http://accord-framework.net/](http://accord-framework.net/) | [GNU Lesser General Public License version 2.1](https://www.gnu.de/documents/lgpl-2.1.de.html) |
@@ -20,8 +19,17 @@ However it depends on various third party libraries which carry their own copyri
 | System.Data.SQLite       | [https://system.data.sqlite.org/](https://system.data.sqlite.org/) | [https://www.sqlite.org/copyright.html](https://www.sqlite.org/copyright.html)
 | zlib                     | [https://dotnetzip.codeplex.com/](https://dotnetzip.codeplex.com/) | [zlib License](https://opensource.org/licenses/Zlib) |
 | VVVV.FreeImage           | [http://freeimage.sourceforge.net/](http://freeimage.sourceforge.net/) | [FreeImage Public License - Version 1.0](http://freeimage.sourceforge.net/freeimage-license.txt) |
-| Ninject                  | [https://github.com/ninject/Ninject/](https://github.com/ninject/Ninject/) | [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) |
+| K4os.Compression.LZ4     | [https://github.com/MiloszKrajewski/K4os.Compression.LZ4](https://github.com/MiloszKrajewski/K4os.Compression.LZ4) | [The MIT License](https://opensource.org/licenses/MIT)  |
 | ToggleSwitch             | [https://archive.codeplex.com/?p=toggleswitch](https://archive.codeplex.com/?p=toggleswitch) | [Microsoft Public License (MS-PL)](https://opensource.org/licenses/MS-PL) |
+| Ninject                  | [https://github.com/ninject/Ninject/](https://github.com/ninject/Ninject/) | [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) |
+| Fastenshtein             | [https://github.com/DanHarltey/Fastenshtein](https://github.com/DanHarltey/Fastenshtein) | [The MIT License](https://opensource.org/licenses/MIT) |
+| CsvHelper                | [https://joshclose.github.io/CsvHelper/](https://joshclose.github.io/CsvHelper/) | [Microsoft Public License (MS-PL)](https://opensource.org/licenses/MS-PL) |
+| Avalondock               | [https://github.com/Dirkster99/AvalonDock](https://github.com/Dirkster99/AvalonDock) | [Microsoft Public License (MS-PL)](https://opensource.org/licenses/MS-PL) |
+| NTFS-Streams             | [https://github.com/RichardD2/NTFS-Streams](https://github.com/RichardD2/NTFS-Streams) | [The 2-Clause BSD License](https://opensource.org/licenses/BSD-2-Clause) |
+| MdXaml                   | [https://github.com/whistyun/MdXaml](https://github.com/whistyun/MdXaml) | [The MIT License](https://opensource.org/licenses/MIT) |
+| Protocol Buffers         | [https://github.com/protocolbuffers/protobuf](https://github.com/protocolbuffers/protobuf) | [Google Open Source License](https://github.com/protocolbuffers/protobuf/blob/master/LICENSE) |
+| gRPC Named Pipes         | [https://github.com/cyanfish/grpc-dotnet-namedpipes](https://github.com/cyanfish/grpc-dotnet-namedpipes) | [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) |
+| Castle Core              | [https://github.com/castleproject/Core](https://github.com/castleproject/Core) | [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) |
 
 
 
