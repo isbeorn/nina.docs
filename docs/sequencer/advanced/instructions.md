@@ -194,6 +194,11 @@ Control basic functions of a [Rotator](../../tabs/equipment/rotator.md). Each in
 ![Rotate By Mechanical Angle](../../images/sequencer/instructions/rotator_movemechanical.png)  
 Rotates the rotator to the specified mechanical absolute angle
 
+### Solve and Rotate
+![Solve and Rotate](../../images/sequencer/instructions/rotator_solveandsync.png)  
+Takes an image from the current position the telescope is pointing at, platesolves it and moves the rotator to the specified sky angle. It will repeat until the rotator is within the rotation tolerance.   
+**This instruction will not move the mount, it will just sync and move the rotator to the target sky angle!**  
+
 ## Safety Monitor
 Control basic functions of a [safety monitor](../../tabs/equipment/safetymonitor.md). Each instruction in this category requires at least a safety monitor to be connected.
 
