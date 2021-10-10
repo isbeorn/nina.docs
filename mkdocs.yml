@@ -85,6 +85,7 @@ nav:
         - Enhance documentation: 'contributing/contributing.md'
         - How to setup the development environment: 'contributing/howtosetupdev.md'
         - Localization: 'contributing/localization.md'
+        - Plugins: 'contributing/plugins.md'
 
 theme:
     name: 'material'
