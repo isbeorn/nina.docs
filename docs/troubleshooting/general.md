@@ -6,13 +6,22 @@ Log files may be found in the `%LOCALAPPDATA%\NINA\Logs\` folder.
 
 ## Installation Issues
 
-Often, Anti-Virus software can interfere with the installation of N.I.N.A. and cause either an aborted installation or an incomplete one.
+Often, Anti-Virus software can interfer with the installation of N.I.N.A. and cause either an aborted installation or an incomplete one.
 In these cases, it is advisable to disable any AV software temporarily and reattempt the installation.
 The likelihood of running into installation issues can vary with the number and types of AV software in use, as well as how strict the AV software is set to operate.
 No significant problems have been encountered on Windows 10 when using only Microsoft's built-in Windows Defender suite.
 
 ## Application Crashes
 
+### Crashdump
 In case you encounter a hard crash, Windows will create a crash dump file to investigate the problem in detail. Should you encounter such an issue, please provide this crash dump file.
 
 The crash dump may be found in the `%LOCALAPPDATA%\NINA\CrashDump\` folder.
+
+### Event Viewer  
+![Event Viewer](../images/troubleshooting/eventviewer.png)
+You can check the Windows Event Viewer for root causes of hard application crashes.  
+To open event viewer, go to the windows search bar, enter "Event Viewer" and open the app.  
+
+Once inside the app, go to the "Windows Logs -> Application" (1). Then go to "Filter Current Log..." (2) and narrow down the "Event Sources" (3) to only select ".NET Runtime" in the pop up window and click "OK".  
+After the filter is applied, you will find all event source in the list in the middle (4). There head for the message that contains "Appliction: NINA.exe" in the Detail section (5). This will show the complete stack trace of why the application crashed. This is useful information that can be posted to the contributors that can analyze this further. 
