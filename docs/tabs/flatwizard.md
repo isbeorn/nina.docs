@@ -57,6 +57,12 @@ Flat Wizard takes 3 test exposures and attempts to calculate the optimal exposur
 16. **Calculated Target Histogram Mean**
     * Once Flat Wizard determines the necessary exposure time and resulting ADU, the ADU mean will be displayed here
 
+17. **Flat Wizard Mode**
+    * The mode of operation the flat wizard should work with
+        * *Dynamic Exposure*: Determine an exposure time based on the parameters (and a fixed brightness if a flat panel is connected)
+        * *Dynamic Brightness*: Determine a flat panel brightness based on a fixed exposure time (requires a flat panel connection)
+        * *Sky Flats*: Determine an exposure time based on the parameters and compensate for the shifting sky brightness during the time of the procedure
+
 ## Multi Mode
 
 ![The Flatwizard multi mode menu](../images/tabs/flatwizard2.png)
@@ -92,7 +98,7 @@ If Flat Wizard cannot determine the necessary exposure time or there is a confli
     * Pressing this button will lead to Flat Wizard re-starting from the Flat Min Exposure as set in the settings (3)
 
 5. **Continue**
-    * This button will continue the flat capture with any new settings (3)
+    * This button will continue the flat capture with the currently determined exposure time, even if outside the defined threshold
 
 6. **Cancel Flat Wizard**
     * This button will abort Flat Wizard's sequence
