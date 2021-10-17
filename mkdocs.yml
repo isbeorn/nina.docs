@@ -45,7 +45,7 @@ nav:
             - Simple Sequencer: 
                 - Overview: 'sequencer/simple/simple.md'
                 - Sequencing: 'sequencer/simple/sequencing.md'
-            - Advanced Advanced Sequencer:
+            - Advanced Sequencer:
                 - Overview: 'sequencer/advanced/advanced.md'
                 - Instructions: 'sequencer/advanced/instructions.md'
                 - Loop Conditions: 'sequencer/advanced/conditions.md'
