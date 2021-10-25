@@ -86,6 +86,7 @@ nav:
         - How to setup the development environment: 'contributing/howtosetupdev.md'
         - Localization: 'contributing/localization.md'
         - Plugins: 'contributing/plugins.md'
+        - Ecosystem: 'contributing/ecosystem.md'
 
 theme:
     name: 'material'
