@@ -98,7 +98,7 @@ Closes the dome shutter
 *Requires a controllable dome shutter*
 ### Enable Dome Sync
 ![Enable Dome Sync](../../images/sequencer/instructions/dome_sync.png)  
-Enables the automatic background synchroniztion of the telescope and the dome  
+Enables the automatic background synchronization of the telescope and the dome  
 *Requires a telescope to be connected*
 ### Open Dome Shutter
 ![Open Dome Shutter](../../images/sequencer/instructions/dome_open.png)  
