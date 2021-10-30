@@ -31,27 +31,33 @@ pipelines:
   branches: # Pipelines that run automatically on a commit to a branch can also be triggered manually
     develop:
       - step:
-          image: squidfunk/mkdocs-material
+          image: python:3.7.3
           caches:
             - pip
           script: 
+            - apt-get update
+            - pip install mkdocs
+            - pip install mkdocs-material
             - pip install mkdocs-with-pdf
             - python -m mkdocs build
           artifacts:
             - site/**
       - step:
           name: manifest push
-          deployment: test
+          deployment: production
           image: dotsunited/git-ftp
           script:
             #- git ftp init --syncroot $BITBUCKET_CLONE_DIR/Plugins/ --user $ftp_user --passwd $ftp_pw $ftp_host
             - git ftp push --force --syncroot $BITBUCKET_CLONE_DIR/site/ --user $ftp_user --passwd $ftp_pw $ftp_host
     master:
       - step:
-          image: squidfunk/mkdocs-material
+          image: python:3.7.3
           caches:
             - pip
           script: 
+            - apt-get update
+            - pip install mkdocs
+            - pip install mkdocs-material
             - pip install mkdocs-with-pdf
             - python -m mkdocs build
           artifacts:
