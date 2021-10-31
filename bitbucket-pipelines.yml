@@ -37,11 +37,17 @@ pipelines:
             - pip
           script: 
             - apt-get update
-            - apt-get -qq install git-ftp
             - pip install mkdocs
             - pip install mkdocs-material
             - pip install mkdocs-with-pdf
             - python -m mkdocs build
+          artifacts:
+            - site/**
+      - step:
+          name: documentation push
+          deployment: test
+          image: dotsunited/git-ftp
+          script:
             #- git ftp init --syncroot $BITBUCKET_CLONE_DIR/Plugins/ --user $ftp_user --passwd $ftp_pw $ftp_host
             - git ftp push --force --syncroot $BITBUCKET_CLONE_DIR/site/ --user $ftp_user --passwd $ftp_pw $ftp_host
     master:
@@ -52,11 +58,17 @@ pipelines:
             - pip
           script: 
             - apt-get update
-            - apt-get -qq install git-ftp
             - pip install mkdocs
             - pip install mkdocs-material
             - pip install mkdocs-with-pdf
             - python -m mkdocs build
+          artifacts:
+            - site/**
+      - step:
+          name: documentation push
+          deployment: production
+          image: dotsunited/git-ftp
+          script:
             #- git ftp init --syncroot $BITBUCKET_CLONE_DIR/Plugins/ --user $ftp_user --passwd $ftp_pw $ftp_host
             - git ftp push --force --syncroot $BITBUCKET_CLONE_DIR/site/ --user $ftp_user --passwd $ftp_pw $ftp_host
 
