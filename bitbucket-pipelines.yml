@@ -36,7 +36,6 @@ pipelines:
           caches:
             - pip
           script: 
-            - apt-get update
             - pip install mkdocs
             - pip install mkdocs-material
             - pip install mkdocs-with-pdf
@@ -57,7 +56,6 @@ pipelines:
           caches:
             - pip
           script: 
-            - apt-get update
             - pip install mkdocs
             - pip install mkdocs-material
             - pip install mkdocs-with-pdf
