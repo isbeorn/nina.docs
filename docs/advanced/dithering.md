@@ -61,7 +61,7 @@ An explanation of the two most important dithering-related settings follows:
  It is usually recommended to dither a number of guide camera pixels that will shift the main imaging camera of about 10 pixels.  
    
 !!! tip
-    Let's assume to have a guide camera with a pixel size of 3.8µm and a 260mm focal length guidescope, resulting in a guide scale of about 3 arcsec/pixel. The imaging optical train is composed by a camera with a pixel size of 3.8µm and a 520mm focal length scope, resulting in an imaging scale of about 1.5 arcsec/pixel. A guide camera shift of 5 pixels corresponds to a motion of 15 arcsec or 10 pixels of shift for the main imaging camera. In this case a PHD2 Dither Pixels of 6 pixel is therefore appropriate.
+    Let's assume to have a guide camera with a pixel size of 3.8µm and a 260mm focal length guidescope, resulting in a guide scale of about 3 arcsec/pixel. The imaging optical train is composed by a camera with a pixel size of 3.8µm and a 520mm focal length scope, resulting in an imaging scale of about 1.5 arcsec/pixel. A guide camera shift of 5 pixels corresponds to a motion of 15 arcsec or 10 pixels of shift for the main imaging camera. In this case a PHD2 Dither Pixels of 5 pixels is therefore appropriate.
 
 !!! note
     The PHD2 Dither Pixel value will be multiplied by PHD2 by the "Scale" value found under Advance Setup>Dither Settings of PHD2. This value will be multiplied by the Dither Pixel set in N.I.N.A. to determine the final pixel shift amount. It is recommended to leave it at 1 and only change the amount of dither pixels in N.I.N.A.
@@ -76,7 +76,7 @@ An explanation of the two most important dithering-related settings follows:
     - you are guiding in one direction only in DEC  
 
 !!! tip
-    The pixel scale of your guide camera can be calculated using online tools. By inputting the focal length of your guiding optical train and the pixel size of your guide camera's sensor, you will know how many arcseconds of sky is covered by each pixel (arcseconds per pixel). Such a tool is the [Astronomy Tools FOV Calculator](//astronomy.tools/calculators/field_of_view/).
+    The pixel scale of your guide camera can be calculated using online tools. By inputting the focal length of your guiding optical train and the pixel size of your guide camera's sensor, you will know how many arcseconds of sky is covered by each pixel (arcseconds per pixel). Such a tool is the [CCD Resolution Calculator](//astronomy.tools/calculators/ccd).
 
 * **Dither Settle Pixel Tolerance and Settle Time**: these are important parameters that define the successful end of a dither move. When a dither is initiated by PHD2 a random move of the mount in RA/DEC is issued,  the maximum amount of the random move is defined by **PHD2 Dither Pixels**. The mount then resumes its tracking operations, but depending on the mechanical stability of the gears it might take a couple of seconds to return to its normal guiding conditions. This time represents the settle time and N.I.N.A. lets you define a **Minimum Settle Time** during which the mount has to be inside the pixel tolerance. If the mount is moving outside this tolerance during this timeframe, the minimum settle time timer will restart again. 
 The successful completion of a dither settling is achieved when guiding after a dither move remains within the tolerance defined by the **PHD2 Settle Pixel Tolerance**  expressed in guide camera pixels. Once settling is complete N.I.N.A. can continue and start a new capture.
