@@ -118,6 +118,7 @@ markdown_extensions:
     - pymdownx.tilde
     
 plugins:
+    - search
     - with-pdf:
         toc_level: 3
         output_path: pdf/Manual.pdf
