@@ -29,6 +29,15 @@ Loop an instruction set until a specific point in time. The time can either be s
 **Sunrise**: The time when the sun gets above 6° of the horizon  
 **Meridian**: When a target is set this will be the time the target will cross the meridian  
 
+!!!note
+    As there is no day attached to the condition, the roll over for a new day happens at noon (similar to the altitude charts). This brings a few advantages to not loop unexpectedly when you are already past the specified time.  
+    Examples:  
+    Current time: 18:00h | Loop until time: 19:00h -> Loop for one hour  
+    Current time: 20:00h | Loop until time: 19:00h -> Condition will be skipped  
+    Current time: 02:00h | Loop until time: 03:00h -> Loop for one hour  
+    Current time: 04:00h | Loop until time: 03:00h -> Condition will be skipped  
+    Current time: 08:00h | Loop until time: 18:00h -> **Condition will be skipped** because the roll over at noon has not happened yet  
+
 ### Loop While Altitude Above Horizon
 ![Loop While Altitude Above Horizon](../../images/sequencer/conditions/loopwhilehorizon2.png)  
 This will loop the instruction set for as long as the specified target is above the horizon. When a [custom horizon](../../tabs/options/general.md) is set, the custom horizon will be considered as the altitude to be above of. When no custom horizon is set, 0° of altitude will be considered. Furthermore an altitude offset can be specified.  
@@ -48,11 +57,11 @@ It is recommended to use this condition in conjunction with another condition, t
 *Requires a safety monitor device to be connected*
 ### Moon Altitude
 ![Moon Altitude](../../images/sequencer/conditions/moonaltitude.png)  
-Loop while the moon altitude is above or below the specified amount of degrees
+Loop for as long as the moon matches the specified parameters.
 
 ### Moon Illumination
 ![Moon Illumination](../../images/sequencer/conditions/moonillumination.png)  
-Loop while the moon illunination is above or below the specified amount of percentage
+Loop for as long as the sun matches the specified parameters.
 
 ### Sun Altitude
 ![Sun Altitude](../../images/sequencer/conditions/sunaltitude.png)  

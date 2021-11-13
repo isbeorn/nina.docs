@@ -293,17 +293,26 @@ Wait until a specific point in time. The time can either be set manually or auto
 **Sunrise**: The time when the sun gets above 6° of the horizon  
 **Meridian**: When a target is set this will be the time the target will cross the meridian  
 
+!!!note
+    As there is no day attached to the instruction, the roll over for a new day happens at noon (similar to the altitude charts). This brings a few advantages to not wait unexpectedly when you are already past the specified time.
+    Examples:  
+    Current time: 18:00h | Wait for time: 19:00h -> Wait for one hour  
+    Current time: 20:00h | Wait for time: 19:00h -> Instruction will be skipped  
+    Current time: 02:00h | Wait for time: 03:00h -> Wait for one hour  
+    Current time: 04:00h | Wait for time: 03:00h -> Instruction will be skipped  
+    Current time: 08:00h | Wait for time: 18:00h -> **Instruction will be skipped** because the roll over at noon has not happened yet  
+
 ### Wait For Time Span
 ![Wait For Time Span](../../images/sequencer/instructions/utility_waitfortimespan.png)  
 Wait for a specific period of time.
 
 ### Wait If Moon Altitude
 ![Wait If Moon Altitude](../../images/sequencer/instructions/utility_waitifmoonaltitude.png)  
-This will check the altitude of the moon and wait until the moon is above or below the specified altitude.
+Waits for as long as the moon matches the specified parameters.
 
 ### Wait If Sun Altitude
 ![Wait If Sun Altitude](../../images/sequencer/instructions/utility_waitifsunaltitude.png)  
-This will check the altitude of the sun and wait until the sun is above or below the specified altitude.
+Waits for as long as the sun matches the specified parameters.
 
 ### Wait Until Above Horizon
 ![Wait Until Above Horizon](../../images/sequencer/instructions/utility_waituntilabovehorizon.png)  
