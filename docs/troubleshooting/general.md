@@ -6,10 +6,17 @@ Log files may be found in the `%LOCALAPPDATA%\NINA\Logs\` folder.
 
 ## Installation Issues
 
+### Installation fails in general
+
 Often, Anti-Virus software can interfer with the installation of N.I.N.A. and cause either an aborted installation or an incomplete one.
 In these cases, it is advisable to disable any AV software temporarily and reattempt the installation.
 The likelihood of running into installation issues can vary with the number and types of AV software in use, as well as how strict the AV software is set to operate.
 No significant problems have been encountered on Windows 10 when using only Microsoft's built-in Windows Defender suite.
+
+### Error: "The feature you are trying to use is on a network resource that is unavailable"
+
+In case you get this error or are unable to uninstall the application, some of the registry keys got corrupted. Follow the advice on the following page to fix the corrupted keys:
+https://support.microsoft.com/en-us/topic/fix-problems-that-block-programs-from-being-installed-or-removed-cca7d1b6-65a9-3d98-426b-e9f927e1eb4d
 
 ## Application Crashes
 
