@@ -16,7 +16,7 @@ No significant problems have been encountered on Windows 10 when using only Micr
 ### Error: "The feature you are trying to use is on a network resource that is unavailable"
 
 In case you get this error or are unable to uninstall the application, some of the registry keys got corrupted. Follow the advice on the following page to fix the corrupted keys:
-https://support.microsoft.com/en-us/topic/fix-problems-that-block-programs-from-being-installed-or-removed-cca7d1b6-65a9-3d98-426b-e9f927e1eb4d
+[https://support.microsoft.com/en-us/topic/fix-problems-that-block-programs-from-being-installed-or-removed-cca7d1b6-65a9-3d98-426b-e9f927e1eb4d](https://support.microsoft.com/en-us/topic/fix-problems-that-block-programs-from-being-installed-or-removed-cca7d1b6-65a9-3d98-426b-e9f927e1eb4d)
 
 ## Application Crashes
 
