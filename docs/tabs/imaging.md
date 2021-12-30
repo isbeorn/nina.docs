@@ -181,31 +181,6 @@ Platesolving is a very important step in the imaging process, for further inform
 7. Captures  an image for plate solving
 8. History of plate solving sessions
 
-### Q. Polar alignment ![polaricon](../images/tabs/imaging_polaricon.PNG)    
-The polar alignment panel gives you two ways to determine how off your polar alignment is and to improve it. One is plate solved polar alignment and the other is DARV slew.
-
-![polaralign](../images/tabs/imaging_polaralign.png)
-
-1. Polar scope: shows position of polaris when looking through the mount’s polar scope
-    > Will not work for southern hemisphere. Uses latitude and longitude from settings.
-2. Defines the exposure time that should be used for a plate solved polar alignment measurement
-3. Filter for the alignment
-4. Camera binning
-5. Measurement location for altitude where the telescope is pointing at. Can be either east or west
-6. Measure Altitude Error: will start a platesolve of current position, then slews half a degree along RA axis, takes another platesolve and compares the result of both to measure the amount of error
-    > Telescope should point east or west at 0 declination
-7. Meridian Offset and Declination for telescope
-    > The values entered here will be saved as settings for using next time
-8. Slews mount to specified meridian offset and declination
-9. Will start a platesolve of current position, then slews half a degree along RA axis, takes another platesolve and compares the result of both to measure the amount of error
-    > Telescope should point south near meridian at 0 declination
-10. Same as Step (7) except for azimuth
-    > The values entered here will be saved as settings for using next time
-11. Same as step (8)
-12. Duration and Rate in which the scope should move for a DARV Slew
-13. Initiates a DARV Slew by slewing half the specified Duration in one RA direction and then back while taking an exposure.
-
-
 ### R. Auto Focus ![AFicon](../images/tabs/imaging_aficon.PNG)  
 This panel lets you manually trigger an Auto Focus routine based on the Auto Focus parameters set in Options [Equipment](options/equipment.md).
 
@@ -223,40 +198,6 @@ When you have to manual focus your scope this tab lets you conveniently choose a
 1. List of stars to choose from
 2. Selected star properties
 3. Slews telescope to the selected star
-
-### T. Exposure Calculator ![ExpCalcIcon](../images/tabs/imaging_expcalcicon.PNG)  
-
-This tool will suggest a recommended exposure time based on the read noise from the camera sensor and the average skyglow.
-If SharpCap is installed and a Sensor Analysis is available for the current camera, RN and FW are derived from the sensor analysis.
-
-![ExpCalc](../images/tabs/expcalc10.png)
-
-1. Exposure time. This is only used to measure the average skyglow when clicking on (8)
-2. Filter: this menu lets you choose the filter for the calculation
-    > Filters affect the  wavelength bandpass of incident light and therefore the average skyglow. The analysis should be repeated for each filter to determine an optimal exposures set.
-3. Gain: select the gain for the exposure analysis. 
-    > Camera parameters vary significantly with gain values, the analysis should be repeated for the different gain values used for imaging. A guideline to determine the optimal gain values for your imaging conditions can be found [here](https://www.youtube.com/watch?v=ub1HjvlCJ5Y&list=PLhIb8N-jSR_rNKxCFGzbd87TfmyQS4U4X&index=14)
-4. The drop-down menu lets you select available sensor analysis files from SharpCap
-   > SharpCap must be installed and you must first perform a Sensor Analysis in SharpCap following the instructions [here](http://docs.sharpcap.co.uk/3.2/19_SensorAnalysis.htm). Sensor analysis files are saved in %APPDATA%\Roaming\SharpCap\SensorCharacteristics
-5. Full Well Capacity in electrons: if known this value can be entered manually for the specified gain or retrieved automatically from the Sharpcap Sensor Analysis
-6. Read Noise in electrons: if known this value can be entered manually for the specified gain or retrieved automatically from the Sharpcap Sensor Analysis
-7. BIAS median value (in 16bit): median ADU value of a bias frame (scald to 16bit), can be entered manually or calculated automatically by covering the scope and clicking on the "Calculate Bias" button
-8. Click here to perform the exposure for the analysis
-9. The recommended exposure times are displayed in this section
-
-Recommended exposure time is calculated according to the following [formula](https://forums.sharpcap.co.uk/viewtopic.php?t=456):
-
-`Recommended Exposure Time = 10 * read noise squared / light pollution rate`
-
-where light pollution rate is defined as:
-
-`(median ADU of a subframe - median of the bias) * electrons per ADU / the length of the exposure`
-
-Further details on the theory for the optimal exposure calculation can be found [here](https://www.youtube.com/watch?v=3RH93UvP358)
-
- >  The analysis will use whatever gain is specified and linear interpolate between the values calculated by sharpcap. for example, if you have read noise in the analysis for gains 100 and 150 but specify 125, the tool will set the read noise exactly between the two.
-
- > Remember to cool down your camera to the desired temperature before using the tool, high Dark Current values may affect the results.
 
 
 

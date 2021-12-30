@@ -111,10 +111,7 @@ The Imaging options tab contains settings for file formats, save directories, Au
 ### Noise Reduction
 * This changes the amount of noise reduction performed on the image for star detection and HFR analysis
 > Only change this when the application doesn't properly recognize stars
-    
-### Sharpcap Sensor Analysis Folder
-* This is use to locate the SharpCap sensor analysis folder used in [Imaging->Exposure Calculator](../imaging.md)
-
+   
 
 ## Sequence
 
