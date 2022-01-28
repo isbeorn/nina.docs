@@ -41,11 +41,11 @@ For further information about using the Framing Assistant refer to the [Advanced
 * Rotation can be set freely and should match your camera's orientation as determined by plate solving 
 * You can specify the number of panels for an N x M size mosaic 
 * You can specify the % overlap between each panel 
+* Furthermore it is possible to enable "preserve alignment" which becomes relevant the further away from the celestial equator (declination at 0) the object is. Having this option enabled will adjust each mosaic panel separately with its own rotation to perfectly align to a big rectangle. Keep in mind that this will require separate rotation between each panel.
     ![Mosaic](../images/tabs/framing_mosaic.PNG)
 
-### Recenter Image
-* When using a survey source, re-downloads an image of the region centered on the current coordinates set by the framing rectangle (15)
-* When using cached images or file source, the framing rectangle is centered on the image center 
+### Rotation from camera
+* This will take an exposure from your connected camera, platesolve it and determine the rotation of the frame. Afterwards the rotation of the framing is updated.
 
 ### Slew and center
 * Slews the mount to the coordinates of the center of the framing rectangle (16) and uses platesolving to recenter the mount to be precisely on target
@@ -54,6 +54,7 @@ For further information about using the Framing Assistant refer to the [Advanced
 ### Add target to sequence
 * Takes the name, coordinates of the RA and Dec and the angle of the framing window and adds it as a sequence target for either the simple sequencer or the advanced sequencer using a deep sky object template
 * In addition when clicking on the arrow and clicking on "Add target to target list", the target can be added to the advanced sequencer's target tab instead
+* A third option is to click on "Update Existing Target in Sequencer" which becomes available when there is already a target inside the sequencer and the target should be updated with the new framing instead
 
 ### Altitude browser
 * Displays the altitude of the target over time, indicating current position and meridian 
@@ -64,7 +65,7 @@ For further information about using the Framing Assistant refer to the [Advanced
 * From left to right: Zoom in, zoom out, fit image to screen, show image in original resolution 
 
 ### Annotation controls
-* From left to right: Opacity of framing rectangle, constellation boundaries, constellation annotation, equatorial grid, annotate DSOs 
+* From left to right: Rotate image instead of rectangle, Opacity of framing rectangle, constellation boundaries, constellation annotation, equatorial grid, annotate DSOs 
 
 ### Image
 * The image as downloaded from the sky survey, cache, Sky Atlas or provided by **From File** 
