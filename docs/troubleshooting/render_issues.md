@@ -6,9 +6,9 @@ It has been identified that there is an audio driver service called "Nahimic ser
 Once this service is stopped, the application will render correctly again.  
   
 To disable the service:  
-- Open the Windows Run menu by holding the keys `⊞ Win` + `r` 
-- Enter "services.msc" into the window and hit "Ok"
-- A new window will open showing all available services. 
-- Check for a service called "Nahimic Service" and follow the steps in the screenshot below
+- Open the Windows Run menu by holding the keys `⊞ Win` + `r`   
+- Enter "services.msc" into the window and hit "Ok"  
+- A new window will open showing all available services.   
+- Check for a service called "Nahimic Service" and follow the steps in the screenshot below  
 
 ![Disable Nahimic Service](../images/troubleshooting/disablenahimic.png) 
