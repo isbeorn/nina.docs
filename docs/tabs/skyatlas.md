@@ -15,7 +15,13 @@ Next to the search field there is a small button to reset. This will reset all f
 
 ### Filters
 
-Filtering and modifying a search can be done by various object criteria and parameters.
+Filtering and modifying a search can be done by various object criteria and parameters. Only objects matching the filter criteria will be shown on a search.
+
+#### Observation filter
+![The SkyAtlas tab](../images/tabs/SkyAtlas_Altitude_Filter.png)  
+
+To easily find suitable targets for the current night an altitude filter can be used in conjuction with a from and through time and how long the target should be visible.  
+Using this filter can give you a great preview of what to expect for the night as you will then only see targets that are visible during the specified time range for at least the specified amount of time.  
 
 ### Search result order
 

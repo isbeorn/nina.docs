@@ -137,8 +137,9 @@ The chart is limited to displaying a moving window of the last 100 exposures.
 
 ![HFRHistory](../images/tabs/HFR2.png)
 
-1. Yellow line: number of stars used for HFR evaluation
-2. Green line: mean HFR
+By default the HFR History shows the HFR values and the number of detected stars throughout the imaging session. The fields can be changed by hovering over the panel to different statistics.
+1. Green line: Left y-axis
+2. Yellow line: right-axis
 3. Triangle marks: AF runs
    
 ## Tools 

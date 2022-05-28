@@ -15,6 +15,9 @@ For usage of the Plate Solver refer to [Advanced Topics: Plate Solving](../../ad
 * This drop down menu selects the blind solver that is used for initial solves and or backup solving
 > The blind solver will be used in the framing assistant and normal platesolving should the primary solver fail.
 
+### Use Blind Solver For Failures
+* When a plate solve fails a fallback to the blind solver is attempted. This behavior can be disabled, so that no fallback will be used. This can be useful when it is used in combination with a number of retries.  
+
 ### Exposure Time
 * The default exposure time for plate solving frames
 
