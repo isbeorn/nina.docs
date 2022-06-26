@@ -34,6 +34,7 @@ Loop an instruction set until a specific point in time. The time can either be s
     Examples:  
     Current time: 18:00h | Loop until time: 19:00h -> Loop for one hour  
     Current time: 20:00h | Loop until time: 19:00h -> Condition will be skipped  
+    Current time: 18:00h | Loop until time: 02:00h -> Loop for eight hours  
     Current time: 02:00h | Loop until time: 03:00h -> Loop for one hour  
     Current time: 04:00h | Loop until time: 03:00h -> Condition will be skipped  
     Current time: 08:00h | Loop until time: 18:00h -> **Condition will be skipped** because the roll over at noon has not happened yet  
