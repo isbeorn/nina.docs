@@ -162,6 +162,7 @@ You need to start the executable once standalone and set the catalog location of
 **Drawbacks**
 
  * Slow plate solves when the mount's location is far off the expected position and the focal length of the telescope is long
+ * The regional settings of windows need to be set to use a point as the decimal symbol
 
 **Recommendation**
 
@@ -191,6 +192,7 @@ You will also need to set your location in View - Parameters
 **Drawbacks**
 
  * A little slow to start up.
+ * The regional settings of windows need to be set to use a point as the decimal symbol
 
 **Recommendation**
 
