@@ -23,23 +23,41 @@ nav:
                 - Switch: 'tabs/equipment/switch.md'
                 - Flat Panel: 'tabs/equipment/flatpanel.md'
                 - Weather: 'tabs/equipment/weather.md'
+                - Dome: 'tabs/equipment/dome.md'
+                - SafetyMonitor: 'tabs/equipment/safetymonitor.md'
             - Sky Atlas: 'tabs/skyatlas.md'
             - Framing Assistant: 'tabs/framing.md'
             - Flat Wizard: 'tabs/flatwizard.md'
-            - Sequence: 'tabs/sequence.md'
+            - Sequencer: 'tabs/sequencer.md'
             - Imaging: 'tabs/imaging.md'
             - Options:
                 - General: 'tabs/options/general.md'
                 - Equipment: 'tabs/options/equipment.md'
+                - Autofocus: 'tabs/options/autofocus.md'
+                - Dome: 'tabs/options/dome.md'
                 - Imaging: 'tabs/options/imaging.md'
                 - Plate Solving: 'tabs/options/platesolving.md'
+            - Plugins:
+                - Installed: 'tabs/plugins/installed.md'
+                - Available: 'tabs/plugins/available.md'
+        - Sequencer:
+            - Overview: 'sequencer/overview.md'
+            - Simple Sequencer: 
+                - Overview: 'sequencer/simple/simple.md'
+                - Sequencing: 'sequencer/simple/sequencing.md'
+            - Advanced Sequencer:
+                - Overview: 'sequencer/advanced/advanced.md'
+                - Instructions: 'sequencer/advanced/instructions.md'
+                - Loop Conditions: 'sequencer/advanced/conditions.md'
+                - Triggers: 'sequencer/advanced/triggers.md'
+                - From Simple To Advanced: 'sequencer/advanced/simpletoadvanced.md'
         - Advanced Topics:
             - Plate Solving: 'advanced/platesolving.md'
             - Object Browser: 'advanced/objectbrowser.md'
+            - Guiding: 'advanced/guiding.md'
             - Dithering: 'advanced/dithering.md'
             - Framing Assistant: 'advanced/framingassistant.md'
             - Automated Meridian Flip: 'advanced/meridianflip.md'
-            - Advanced Sequencing: 'advanced/advancedsequence.md'
             - Bulb Shutter Control: 'advanced/bulbshutter.md'
             - Auto-Focus: 'advanced/autofocus.md'
             - Focuser Backlash Measurement: 'advanced/backlashmeasurement.md'
@@ -50,8 +68,11 @@ nav:
         - Troubleshooting:
             - General: 'troubleshooting/general.md'
             - iOptron Mount Setup: 'troubleshooting/ioptron.md'
+            - EQMOD Setup: 'troubleshooting/eqmod.md'
             - Altair Dual Gain: 'troubleshooting/altair_dualgain.md'
-            - Planetarium Setup: 'troubleshooting/planetarium.md'
+            - Planetarium Setup: 'troubleshooting/planetarium.md'   
+            - QHY Driver: 'troubleshooting/qhy_driver_update.md'      
+            - Display Issues: 'troubleshooting/render_issues.md'        
         - Glossary: 'glossary.md'
         - License: 'license.md'
         - 3rd-Party-Licenses: '3rd-party-license.md'
@@ -65,6 +86,8 @@ nav:
         - Enhance documentation: 'contributing/contributing.md'
         - How to setup the development environment: 'contributing/howtosetupdev.md'
         - Localization: 'contributing/localization.md'
+        - Plugins: 'contributing/plugins.md'
+        - Ecosystem: 'contributing/ecosystem.md'
 
 theme:
     name: 'material'
@@ -87,12 +110,19 @@ markdown_extensions:
     - meta
     - pymdownx.caret
     - pymdownx.critic
-    - pymdownx.details
+    - pymdownx.details    
     - pymdownx.keys
     - pymdownx.snippets
     - pymdownx.superfences
     - pymdownx.tasklist:
         custom_checkbox: true
     - pymdownx.tilde
+    
+plugins:
+    - search
+    - with-pdf:
+        toc_level: 3
+        output_path: pdf/Manual.pdf
+        cover_subtitle: An astrophotography imaging suite
 
-copyright: Copyright &copy; 2019-2020 Stefan Berg and the N.I.N.A. contributors
+copyright: Copyright &copy; 2019-2022 Stefan Berg and the N.I.N.A. contributors

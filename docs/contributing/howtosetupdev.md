@@ -23,14 +23,14 @@
 5. Enter the command that was shown in step 2.
 ![Command string to clone](../images/setup/Clone2.png)
 ```
-git clone https://<YourUserName>@bitbucket.org/<YourUserName>/<YourForkName>.git
+git clone -n https://<YourUserName>@bitbucket.org/<YourUserName>/<YourForkName>.git        <--- NOTE: the -n flag for "don't checkout the branch"
 cd <YourForkName>
 ```
 6. Navigate to the created sub folder
 7. Next you need to add a the "upstream" to the root repository (where your fork is based on). This is later required for merging from the main dev branch etc.
 ![Add upstream](../images/setup/Clone3.png)
 ```
-git remote add upstream https://<YourUserName>@bitbucket.org/Isbeorn/nina.git
+git remote add upstream https://bitbucket.org/Isbeorn/nina.git
 ```
 
 ## Fetching the Large File Storage files
@@ -38,9 +38,9 @@ git remote add upstream https://<YourUserName>@bitbucket.org/Isbeorn/nina.git
 1. Bitbucket will not automatically copy over the LFS into the fork repository. This has to be done manually
 2. Run the following commands to sync the lfs
 ```
-git lfs fetch --all upstream
-git lfs push --all origin
-git lfs pull
+git lfs fetch upstream --all
+git lfs push origin --all
+git checkout <desired branch>
 ```
 
 ## Navigation in Visual Studio

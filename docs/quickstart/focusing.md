@@ -5,7 +5,7 @@ To start imaging you first want to focus. For that, let's switch to the Imaging 
 Once there, you will be greeted with this view. 
 There is a lot of information and panels around, but in general it's divided in two spaces. 
 First, where you can view and interact with the panels (2) and a second where you can enable and disable various panels (3). 
-Since we only use a DSLR and a mount let us disable a lot of those panels to get a better overview. 
+Since we only use a One-Shot-Color camera and a mount let us disable a lot of those panels to get a better overview. 
 Feel free to enable and disable your panels at will, in this example I will disable the following panels by clicking on their icon:
 
 ![Focusing](../images/quickstart/focusing2.png)

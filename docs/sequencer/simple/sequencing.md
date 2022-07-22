@@ -7,22 +7,22 @@ Therefore N.I.N.A. offers the possibility to create a sequence template and set 
 
 To create a sequence template you just need to setup a standard sequence to your liking. In the example below I have set up a sequence for broadband. Once all sequence settings are done, just click on the save button to store the sequence xml on your hard drive. Once a template is set, each new Sequence you create will be pre-populated with this template. As you currently can only have one template for one profile, you can have two copies of your profile with different templates and take one profile for narrowband and one for broadband as an example.
 
-![Broadband](../images/advanced/sequencing/Broadband.png)
+![Broadband](../../images/advanced/sequencing/Broadband.png)
 
 This exported sequence can then be set as a template inside **Options->Imaging->Sequence**
 
-![Template](../images/advanced/sequencing/Template.png)
+![Template](../../images/advanced/sequencing/Template.png)
 
 !!! tip
     The best use for these templates are sequences created out of the Framing Assistant. For example when you have the broadband sequence set, that were mentioned earlier, you can just set up the mosaic, click "Replace Sequence" and the following sequence is created based on the template
 
-![Mosaic](../images/advanced/sequencing/Mosaic.png)
+![Mosaic](../../images/advanced/sequencing/Mosaic.png)
 
 ## Sequence Auto-Focus
 
 When having a motorized focuser, the sequence offers a variety of options to ensure that the focus is as good as possible during the sequence run. Let's look into each option and explain their usage in more depth.
 
-![AutoFocus](../images/advanced/sequencing/AutoFocus.png)
+![AutoFocus](../../images/advanced/sequencing/AutoFocus.png)
 
 *On start* - This one is rather obvious. Most of the time you want to have this on in your first target to ensure that the initial focus position is good.  
 
@@ -34,4 +34,4 @@ When having a motorized focuser, the sequence offers a variety of options to ens
 
 *After HFR increase* - This method will only trigger when the measured HFR trend is going up by a certain percentage. Having just one sub with worse focus won't necessarily trigger this, as it could just be one sub with bad guiding or worse sky conditions. In general this is a good way to ensure best Auto Focus during the run and can be used almost always. A visual representation of the HFR history can be seen in the imaging tab which is used to determine the baseline.
 
-![HFRHistory](../images/tabs/HFR2.png)
+![HFRHistory](../../images/tabs/HFR2.png)

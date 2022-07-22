@@ -5,10 +5,10 @@
 The following represents the minimum system resources required to operate N.I.N.A.
 
  * A dual-core x64 CPU
- * 2GB of RAM
- * Windows 8 (64 bit) or later, however Windows 10 is highly recommended
- * 250MB of free disk space without the optional SkyAtlas image data (1.5GB with)
- * [.NET Framework 4.7.2 Runtime](//dotnet.microsoft.com/download/dotnet-framework/net472) (included with Windows 10 April 2018 Update (build 1803) and later)
+ * 3GB of RAM
+ * Windows 8.1 (64 bit) or later, however Windows 10 is highly recommended
+ * 350MB of free disk space without the optional SkyAtlas image data (1.5GB with)
+ * [.NET Framework 4.8 Runtime](//dotnet.microsoft.com/download/dotnet-framework/net48) (included with Windows 10 May 2019 Update (build 1903) and later)
 
 !!! info
     Some users have reported successful operation of N.I.N.A. on small, low-power embedded systems such as the Intel Compute Stick and similar platforms. As expected, experiences will vary in such resource-constrained environments. Technically, N.I.N.A. should be able to run on a single core, but this will certainly lead to a *highly* undesirable experience and is certainly not recommended. However, if forced to choose between the two, more RAM is desirable over CPU power.
@@ -17,10 +17,11 @@ The following represents the minimum system resources required to operate N.I.N.
 
 The functionality of N.I.N.A. shines through when paired with a supporting cast of other applications. Please consider the items in the following lists to access the full breadth of N.I.N.A.'s capabilities.
 
-  * [ASCOM 6.4 framework](//ascom-standards.org/Downloads/Index.htm) (recommended)
-  * [PHD2 Guiding](//openphdguiding.org/downloads/) (recommended)
-  * Any of several supported [plate solving](advanced/platesolving.md) applications (recommended)
-    * [ASTAP](//www.hnsky.org/astap.htm)  
+  * [ASCOM 6.5SP1 Platform](//ascom-standards.org/Downloads/Index.htm) (recommended)
+  * [PHD2 Guiding](//openphdguiding.org/downloads/)
+  * [Metaguide Guiding](//https://www.smallstarspot.com/metaguide/)
+  * Any of several supported [plate solving applications](advanced/platesolving.md) (recommended)
+    * [ASTAP](//www.hnsky.org/astap.htm)
     * [All Sky Plate Solver](http://www.astrogb.com/astrogb/All_Sky_Plate_Solver.html)
     * [Local Astrometry.net (ansvr)](//adgsoftware.com/ansvr/)
     * [PlateSolve2](//planewave.com/downloads/software/)
@@ -42,10 +43,14 @@ N.I.N.A. can directly interface with a wide range of popular cameras without the
  * Atik
  * Canon
  * Nikon
+ * FLI
+ * Omegon
  * QHYCCD
+ * RisingCam
  * ToupTek
  * ZWO
- * FLI
+ * SVBony
+ * SBIG
 
 !!! note
     Certain older Nikon DSLRs require a serial shutter cable for bulb exposures. Please consult your camera's documentation regarding its requirements for long exposure operation using a USB or other remote cable.
@@ -59,10 +64,13 @@ Astronomy-related equipment often has an [ASCOM](//ascom-standards.org/) driver 
  * Cameras
  * Mounts (aka "Telescopes")
  * Filter Wheels
+ * Flat Panels (ASCOM Cover Calibrator) 
  * Focusers
  * Rotators
  * Weather data (ASCOM ObservingConditions)
+ * Domes
  * Switches
+ * Safety Devices
 
 !!! tip
     Be aware that ASCOM drivers that are provided by their vendor in a 32 bit-only form will **not** be accessible by a 64 bit N.I.N.A. or any other 64 bit ASCOM client application. If this is the case for you, then the 32 bit version of N.I.N.A. must be installed.
@@ -72,4 +80,9 @@ Astronomy-related equipment often has an [ASCOM](//ascom-standards.org/) driver 
 
 ### Guiding Applications
 
-N.I.N.A. supports interfacing directly with PHD2 to monitor the status of guiding and to effect actions such as dithering. Telemetry from PHD2 also can be displayed inside the Imaging tab. If desired, N.I.N.A. can automatically launch PHD2. Currently, PHD2 is the only external guiding application that N.I.N.A. supports.
+N.I.N.A. supports several guiding applications to guide, dither, and monitor tracking accuracy. Telemetry from these applications are also displayed inside of the Imaging tab. The guiding applications N.I.N.A. supports are:
+
+  * [PHD2](https://openphdguiding.org/)
+  * [MetaGuide](http://www.astrogeeks.com/Bliss/MetaGuide/)
+  * [MGEN2](https://mgen-autoguider.com/en/)
+  * [MGEN3](https://mgen-autoguider.com/en/)

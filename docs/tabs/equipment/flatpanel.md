@@ -21,13 +21,13 @@ The Focuser Tab lets you connect and control one of the following flat panels:
 Trained exposure table will automatically populate when running the [Flats Wizard](../flatwizard.md) and will report the gains/exposure times for each Filter, remembering the relative flat panel brightness.
 
 !!! tip
-    Follow these steps to fully automate the acquisition of flat frames at the end of an imaging sequence:  
+    Follow these steps to fully automate the acquisition of flat frames during an imaging session:  
     1. Populate the _Trained Exposure Times_ Table  
-    2. Create a new  sequence (or load a pre-defined sequence) in [Sequence](../sequence.md) tab at the end of the imaging sequences (let's call it "Flats").    
-    3. Populate the "Flats" sequence with the flats frames you want to take, set Type = FLATS and leave exposure Time to 0.
+    2. Create a new  sequence (or load a pre-defined sequence) in the [advanced sequencer](../../sequencer/advanced/advanced.md) and add a sequential instruction set to it (let's call it "Flats").    
+    3. Populate the instruction set with the "Trained Flat exposure" and select it for the specific filter you want to take flats for as well as the amount of flats to be taken.
 
-    When N.I.N.A. detects the image type FLATS it will automatically close the flat panel and use the Trained Exposure Times to regulate the panel brightness and exposure time
+    When N.I.N.A. runs this instruction it will look up the trained exposure time and the panel brightness to automatically set those and automate the flat taking process
 
-    ![FLATS1](../../images/tabs/equipment_flats1.PNG)
+    
 
  

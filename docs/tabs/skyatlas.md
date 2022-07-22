@@ -1,4 +1,4 @@
-The Sky Atlas allows you to search for various objects in the sky using N.I.N.A.'s own database of deep sky objects. Filters and sorting options can be applied to search results. Additionally, you may set selected objects as a [Sequence](../tabs/sequence.md) target, or to send them to the [Framing Assistant](../tabs/framing.md).
+The Sky Atlas allows you to search for various objects in the sky using N.I.N.A.'s own database of deep sky objects. Filters and sorting options can be applied to search results. Additionally, you may set selected objects as a [Sequence](../tabs/sequencer.md) target, or to send them to the [Framing Assistant](../tabs/framing.md).
 
 For further information about the Sky Atlas, refer to the [Object Browser](../advanced/objectbrowser.md) advanced topic.
 
@@ -6,47 +6,56 @@ The Sky Atlas interface consists of following elements:
 
 ![The SkyAtlas tab](../images/tabs/skyAtlas1.png)
 
-1. **Search Field**
+### Search Field
 
-    Search for the object by name or various catalog designations. Some familiar names (e.g., "Andromeda") are not implemented at the moment
+Search for the object by name or various catalog designations. Some familiar names (e.g., "Andromeda") are not implemented at the moment
 
-2. **Filters**
+### Reset
+Next to the search field there is a small button to reset. This will reset all filters that have been set.
 
-    Filtering and modifying a search can be done by various object criteria and parameters.
+### Filters
 
-3. **Search result order**
+Filtering and modifying a search can be done by various object criteria and parameters. Only objects matching the filter criteria will be shown on a search.
 
-    Search results can be ordered by one of several criteria: Size, Apparent Magnitude, Constellation, RA, Dec, Surface Brightness and Object Type.  Display order can be either Descending or Ascending, and you can specify the number the items displayed per page.
+#### Observation filter
+![The SkyAtlas tab](../images/tabs/SkyAtlas_Altitude_Filter.png)  
 
-    !!! important
-        Be aware that a large number of search results may lead to performance issues
+To easily find suitable targets for the current night an altitude filter can be used in conjuction with a from and through time and how long the target should be visible.  
+Using this filter can give you a great preview of what to expect for the night as you will then only see targets that are visible during the specified time range for at least the specified amount of time.  
 
-4. **Search**
+### Search result order
 
-    Press the Search button to initiate the search
+Search results can be ordered by one of several criteria: Size, Apparent Magnitude, Constellation, RA, Dec, Surface Brightness and Object Type.  Display order can be either Descending or Ascending, and you can specify the number the items displayed per page.
 
-5. **Moon phase and day information**
+!!! important
+    Be aware that a large number of search results may lead to performance issues
 
-    Displays the current moon phase and other day information. The accuracy of this information depends upon the correct latitude and longitude being specified under **Options > General > Astrometry**.
+### Search
 
-6. **Object information**
+Press the Search button to initiate the search
 
-    Displays various information about objects that are found by a search. The information includes the object name, RA, Dec, Type, Constellation, Apparent magnitude, surface brightness, and size.
+### Moon phase and day information
 
-    If the optional [Sky Atlas Image Repository](../requirements.md#recommended-and-optional-support-software) has been installed and the path to it specified under **Options > General > General > Sky Atlas Image Directory**, a small image of the object is displayed.
+Displays the current moon phase and other day information. The accuracy of this information depends upon the correct latitude and longitude being specified under **Options > General > Astrometry**.
 
-7. **Object altitude**
+### Object information
 
-    Displays the target object's altitude, the direction point at which it will transit, the darkness phase of the current day, and includes a vertical marker for the current time. The accuracy of the altitude curve requires that the latitude and longitude be set under **Options > General > Astrometry**.
+Displays various information about objects that are found by a search. The information includes the object name, RA, Dec, Type, Constellation, Apparent magnitude, surface brightness, and size.
 
-8. **Set as Sequence**
+If the optional [Sky Atlas Image Repository](../requirements.md#recommended-and-optional-support-software) has been installed and the path to it specified under **Options > General > General > Sky Atlas Image Directory**, a small image of the object is displayed.
 
-    Sets the selected object as a Sequence target
+### Object altitude
 
-9. **Set for Framing Assistant**
+Displays the target object's altitude, the direction point at which it will transit, the darkness phase of the current day, and includes a vertical marker for the current time. The accuracy of the altitude curve requires that the latitude and longitude be set under **Options > General > Astrometry**.
 
-    Sets the selected object as the target in the [Framing Assistant](../tabs/framing.md)
+### Set as Sequence
 
-10. **Slew**
+Sets the selected object as a sequence target for the [simple sequencer](../sequencer/simple/simple.md) or the [advanced sequencer](../sequencer/advanced/advanced.md) using a specific template based on the selection
 
-    Slews the mount to the selected object
+### Set for Framing Assistant
+
+Sets the selected object as the target in the [Framing Assistant](../tabs/framing.md)
+
+### Slew
+
+Slews the mount to the selected object
