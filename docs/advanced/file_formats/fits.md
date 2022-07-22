@@ -54,8 +54,8 @@ Requires a camera to be connected
 - CCD-TEMP: actual sensor temperature (requires a cooling unit)
 - READOUTM: Sensor readout mode
 - BAYERPAT: Sensor bayer pattern
-- XBAYEROFF: Bayer pattern X axis offset
-- YBAYEROFF: Bayer pattern Y axis offset
+- XBAYROFF: Bayer pattern X axis offset
+- YBAYROFF: Bayer pattern Y axis offset
 
 ## Telescope Headers
 Requires a telescope to be connected
