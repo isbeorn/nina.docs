@@ -80,6 +80,9 @@ The Imaging options tab contains settings for file formats, save directories, Au
 
 !!! note
     In previous versions of N.I.N.A. a switch to enable meridian flip was located here. However this approach has been changed and the meridian flip needs to be enabled on sequence level. The simple sequencer has a target set option to enable it and the advanced sequencer needs to have a meridian flip trigger added to the sequence    
+
+### Rotate image after flip
+* When enabling this option, the image inside the imaging tab will be automatically rotated by 180° after a meridian flip. This is for displaying purposes only and will not alter any raw image data.
   
 ## Image Options
 
@@ -143,3 +146,11 @@ The Imaging options tab contains settings for file formats, save directories, Au
 ## Layout
 ### Reset Layout
 * This will reset the layout of docked windows in the imaging tab
+* In case the button is greyed out, visit the imaging tab at least once for the layout to be initialized
+
+### Backup Layout
+* Backup the current layout into a separate file. This file can then be loaded in again at a later time using the "Restore Layout" button
+* In case the button is greyed out, visit the imaging tab at least once for the layout to be initialized
+
+### Restore Layout
+* Restores the docked windows layout from a backed up file
