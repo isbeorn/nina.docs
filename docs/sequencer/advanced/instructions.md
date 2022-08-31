@@ -298,6 +298,7 @@ Wait until a specific point in time. The time can either be set manually or auto
     Examples:  
     Current time: 18:00h | Wait for time: 19:00h -> Wait for one hour  
     Current time: 20:00h | Wait for time: 19:00h -> Instruction will be skipped  
+    Current time: 18:00h | Wait for time: 02:00h -> Wait for eight hours  
     Current time: 02:00h | Wait for time: 03:00h -> Wait for one hour  
     Current time: 04:00h | Wait for time: 03:00h -> Instruction will be skipped  
     Current time: 08:00h | Wait for time: 18:00h -> **Instruction will be skipped** because the roll over at noon has not happened yet  

@@ -99,7 +99,7 @@ Inside **Equipment->Rotator** you have to choose the "Manual Rotator" and connec
 
 ## Framing a Mosaic
 
-Framing a mosaic is really simple. You can follow all the previously mentioned steps to choose a good target for the framing and orientation of your mosaic. The only difference will be that you additionally set **"Horizontal Panels"** and **"Vertical Panels"** as well as the overlap percentage of these panels.
+Framing a mosaic is really simple. You can follow all the previously mentioned steps to choose a good target for the framing and orientation of your mosaic. The only difference will be that you additionally set **"Horizontal Panels"** and **"Vertical Panels"** as well as the overlap of these panels.
 When having more than one panel selected, the single rectangle gets expanded and divided into multiples using the number of panels as well as the overlap percentage. Furthermore each panel will be assigned a number.
 
 ![Mosaic](../images/advanced/framing/Mosaic.png)
