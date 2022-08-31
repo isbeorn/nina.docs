@@ -76,7 +76,11 @@ The successful completion of a dither settling is achieved when guiding after a 
 Should settling not be achieved after the period defined in **PHD2 Settle Timeout**, the settling will be declared failed and N.I.N.A. will start a new capture.  
 **PHD2 Dither Pixels** depend on your mount guiding capabilities and guiding scale and should be determined by looking at PHD2 logs. A great tool to analyze PHD2 logs is PHD2 Log Viewer that can be downloaded from [here](http://adgsoftware.com/phd2utils/)
 
-![DitherPHD](../images/advanced/Dither_PHD.PNG)
+** Example of a successful dither after one failed settle attempt **
+![Settling](../images/advanced/phd2/settling.png)
+** Example of a failed settle due to timeout **
+![Settle Timeout](../images/advanced/phd2/settle_timeout.png)
+
 
 ### Settings in Sequences
 
