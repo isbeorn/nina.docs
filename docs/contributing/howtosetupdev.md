@@ -32,7 +32,10 @@ cd <YourForkName>
 ```
 git remote add upstream https://bitbucket.org/Isbeorn/nina.git
 ```
-
+8. Fetch the submodules for the external dependencies
+```
+git submodule update --init --recursive
+```
 ## Fetching the Large File Storage files
 
 1. Bitbucket will not automatically copy over the LFS into the fork repository. This has to be done manually
