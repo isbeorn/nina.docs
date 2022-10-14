@@ -25,6 +25,7 @@
 ```
 git clone -n https://<YourUserName>@bitbucket.org/<YourUserName>/<YourForkName>.git        <--- NOTE: the -n flag for "don't checkout the branch"
 cd <YourForkName>
+  (Ignore any LFS smudge errors for now. They are not yet synced and will get synced in a later step)
 ```
 6. Navigate to the created sub folder
 7. Next you need to add a the "upstream" to the root repository (where your fork is based on). This is later required for merging from the main dev branch etc.
@@ -32,7 +33,11 @@ cd <YourForkName>
 ```
 git remote add upstream https://bitbucket.org/Isbeorn/nina.git
 ```
-
+8. Fetch the submodules for the external dependencies
+```
+git submodule add https://bitbucket.org/Isbeorn/nina.external.git NINA/External
+git submodule update --init --recursive
+```
 ## Fetching the Large File Storage files
 
 1. Bitbucket will not automatically copy over the LFS into the fork repository. This has to be done manually
