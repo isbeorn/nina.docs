@@ -152,20 +152,29 @@ This instruction will look up the trained flat exposures according to the specif
 Control basic functions of a [Focuser](../../tabs/equipment/focuser.md). Each instruction in this category requires at least a Focuser to be connected.
 
 ### Move Focuser
-![Dither](../../images/sequencer/instructions/focuser_move.png)  
+![Move Focuser](../../images/sequencer/instructions/focuser_move.png)  
 Moves the focuser to the specified absolute position
 
 ### Move Focuser By Temp.
-![Dither](../../images/sequencer/instructions/focuser_movebytemp.png)  
-Moves the focuser to a position that is calculated out of the current temperature, the slope (and intercept when absolute mode is enabled).  
+![Move Focuser By Temp](../../images/sequencer/instructions/focuser_movebytemp.png)  
+Moves the focuser to a position that is based on the temperature reported by the focuser. This can be used to "follow" the point of best focus in its temperature dependency.
 
-* *Absolute mode*: Calculated Position = Slope * Temperature + Intercept  
-* *Relative mode*: Calculated Position = Current Position + Slope * Temperature  
+The dependency is modeled with a simple linear model. This can work in two ways:
+
+* Absolute mode: New focus position = Slope * Current Temperature + Intercept
+* Relative mode: New focus position = Current focus position + Slope * (Current Temperature - Temperature at last focuser movement)
+
+When used in relative mode, if the focus position change is less than one step, the focuser doesn't actually move, but the fractional part is carried over for the next time the Move Focuser By Temp. element is executed, so that even very gradual temperature shifts are not lost due to rounding errors.
 
 *Requires a focuser with a temperature probe*
 
+!!!note  
+    To determine the slope and intercept, you can use the history of your autofocus runs and run a linear regression on these best focus points. The intercept will be the the cross of the y-axis at 0°C and the slope will be the temperature gradient.  
+    For the best fit try to only use autofocus points from a single session and make sure the telescope is cooled down fully.
+    The plugin `Autofocus Report Analysis` can help you in determining these parameters, but be careful to have good data points with a good fit, otherwise these values will be error prone.
+
 ### Move Focuser Relative
-![Dither](../../images/sequencer/instructions/focuser_moverelative.png)  
+![Move Focuser Relative](../../images/sequencer/instructions/focuser_moverelative.png)  
 Moves the focuser to a target position based on the current position and a specified amount from that position
 
 ### Run Autofocus
