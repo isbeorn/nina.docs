@@ -11,11 +11,11 @@ This is the tab where you set up all the parameters related to your equipment.
 ### Bit Depth
 * Specify the bit-depth of the images outputted by the camera in use.
     
->  For DSLRs using DCRAW set this to 16 bit. If you're using FreeImage set to match the bitdepth of the camera
+> For DSLRs using DCRAW set this to 16 bit. If you're using FreeImage set to match the bitdepth of the camera
 
-> For ZWO, QHY and Atik cameras set this to 16bit since they are rescaled by the camera drivers.
+> For ZWO, QHY, SBIG, FLI, PlayerOne and Atik cameras set this to 16bit since they are rescaled by the camera drivers.
 
-> Touptek and Altair do not scale, so set to match bit depth of the camera
+> Touptek, Risingcam, Altair, Mallincam, Omegon and SVBony do not scale, so set to match bit depth of the camera
 
 > For other CCD/CMOS cameras ask to your camera manufacturer.
 
@@ -23,7 +23,7 @@ This is the tab where you set up all the parameters related to your equipment.
 * Specify the bayer pattern for DSLR/OSC cameras. Leave it to Auto for auto-selection from camera drivers.
   
 ### Enable bit scaling
-* Indicates if data should be shifted to 16 bits. *Only relevant for Touptek, Altair and Omegon cameras*
+* Indicates if data should be shifted to 16 bits. *Only relevant for Touptek, Risingcam, Altair, Mallincam, Omegon and SVBony cameras*
 
 ### Bulb Mode
 * Allows you to change the bulb mode of the camera. Native will work in most cases.
