@@ -80,6 +80,10 @@ This instruction will take an exposure using the specified exposure time, binnin
 ![Take Many Exposures](../../images/sequencer/instructions/camera_manyexposures.png)  
 Similar to the "Take Exposure" instruction, but with the added ability to specify a number of exposures to complete before proceeding.
 
+### Take Subfame Exposure
+![Take Subframe Exposure](../../images/sequencer/instructions/take_subframe_exposure.png)
+Similar to the "Take Exposure" instruction, but with the added ability to specify a subframe percentage relative to the center.
+
 ### Smart Exposure
 ![Smart Exposure](../../images/sequencer/instructions/camera_smartexposure.png)  
 Similar to the "Take Many Exposure" instruction, but with the added ability to also specify a specific filter and to dither after a specific amount of exposures.  
@@ -100,6 +104,12 @@ Closes the dome shutter
 ![Enable Dome Sync](../../images/sequencer/instructions/dome_sync.png)  
 Enables the automatic background synchronization of the telescope and the dome  
 *Requires a telescope to be connected*
+
+### Disable Dome Sync
+![Disable Dome Sync](../../images/sequencer/instructions/disable_dome_sync.png)  
+Disables the automatic background synchronization of the telescope and the dome  
+*Requires a telescope to be connected*
+
 ### Open Dome Shutter
 ![Open Dome Shutter](../../images/sequencer/instructions/dome_open.png)  
 Opens the dome shutter  
@@ -109,6 +119,15 @@ Opens the dome shutter
 ![Park Dome](../../images/sequencer/instructions/dome_park.png)  
 Parks the dome to its specified home positon  
 *Requires a dome driver that is capable of parking*
+
+### Slew Dome Azimuth
+![Slew Dome Azimuth](../../images/sequencer/instructions/slew_dome_azimuth.png)  
+Slews the dome to a specific azimuth position  
+*Requires a dome driver that is capable of setting azimuth*
+
+### Synchronize Dome
+![Synchronize Dome](../../images/sequencer/instructions/synchronize_dome.png)  
+Synchronizes the dome to the current telescope position  
 
 ## Filter Wheel
 Control basic functions of a [Filter Wheel](../../tabs/equipment/filterwheel.md). Each instruction in this category requires at least a Filter Wheel to be connected.
@@ -212,7 +231,7 @@ Takes an image from the current position the telescope is pointing at, platesolv
 Control basic functions of a [safety monitor](../../tabs/equipment/safetymonitor.md). Each instruction in this category requires at least a safety monitor to be connected.
 
 ### Wait Until Safe
-![Safety Monitor](../../images/sequencer/instructions/safety_wait.png) 
+![Safety Monitor](../../images/sequencer/instructions/safety_wait.png)  
 Waits until the safety monitor is reporting safe conditions again
 
 ## Switch
