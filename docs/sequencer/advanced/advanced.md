@@ -32,6 +32,11 @@ Furthermore instructions can also be directly added into the sequence by clickin
 Once an instruction is part of the sequencer, it will show the specific options for each instruction to customize the behavior. For example an item can be set to cool down the camera to a specific temperature, another item set to switch to a specific filter etc.
 ![Instructions in Detail](../../images/sequencer/Sequencer_InstructionsDetails.png)
 
+### Customizing the list of instructions
+With the gears icon in the sidebar a customizing mode can be enabled. In this mode you can flag each instruction to be hidden. When it is flagged the instruction will no longer be visible in the sidebar or in the contextmenus. This is useful if you don't have a specific type of equipment for example and don't want to see instructions for it cluttering your user interface. Instructions that are part of the sequence, but are hidden from the sidebar will still be visible and active in the sequence.  
+![Disable instruction in sidebar](../../images/sequencer/sidebar_disable_instruction.png)
+
+
 ### Validations
 Each instruction is capable of doing some degree of validation and will check if the preconditions are met. A red exclamation mark will appear next to an instruction, when an issue is detected. Hover over the red indicator to get more details.  
 For example when a camera is connected without a cooling element, and a "Cool Camera" instruction is dragged into the sequence, the instruction will show a visual indicator, as well as a tooltip showing that the camera is not capable of cooling.  
