@@ -8,7 +8,9 @@ The following represents the minimum system resources required to operate N.I.N.
  * 3GB of RAM
  * Windows 10 (64 bit) or later
  * 350MB of free disk space without the optional SkyAtlas image data or framing cache data (3GB with)
- * [.NET Framework 4.8 Runtime](//dotnet.microsoft.com/download/dotnet-framework/net48) (included with Windows 10 May 2019 Update (build 1903) and later)
+ * [.NET 7.0 Runtime](//dotnet.microsoft.com/en-us/download/dotnet/7.0)
+ * [.NET 7.0 Desktop Runtime](//dotnet.microsoft.com/en-us/download/dotnet/7.0)
+ * [.NET 7.0 ASP.NET Core Runtime](//dotnet.microsoft.com/en-us/download/dotnet/7.0)
 
 !!! info
     Some users have reported successful operation of N.I.N.A. on small, low-power embedded systems such as the Intel Compute Stick and similar platforms. As expected, experiences will vary in such resource-constrained environments. Technically, N.I.N.A. should be able to run on a single core, but this will certainly lead to a *highly* undesirable experience and is certainly not recommended. However, if forced to choose between the two, more RAM is desirable over CPU power.
@@ -17,7 +19,7 @@ The following represents the minimum system resources required to operate N.I.N.
 
 The functionality of N.I.N.A. shines through when paired with a supporting cast of other applications. Please consider the items in the following lists to access the full breadth of N.I.N.A.'s capabilities.
 
-  * [ASCOM 6.5SP1 Platform](//ascom-standards.org/Downloads/Index.htm) (recommended)
+  * [ASCOM 6.6SP1 Platform](//ascom-standards.org/Downloads/Index.htm) (recommended)
   * [PHD2 Guiding](//openphdguiding.org/downloads/)
   * [Metaguide Guiding](//https://www.smallstarspot.com/metaguide/)
   * Any of several supported [plate solving applications](advanced/platesolving.md) (recommended)
