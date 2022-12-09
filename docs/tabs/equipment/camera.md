@@ -1,4 +1,4 @@
-The Filterwheel  Tab lets you connect an ASCOM-compatible filterwheel
+The Camera Tab lets you connect an ASCOM-compatible camera or one of the natively integrated drivers
 
 ![Camera](../../images/tabs/equipment_camera.png)
 
@@ -8,7 +8,7 @@ The Filterwheel  Tab lets you connect an ASCOM-compatible filterwheel
 2. **Camera Settings**
       Default camera settings. These settings are used by default if not overridden by different inputs in other parts of the application
 
-    ## Temperature control
+## Temperature control
 When a cooled camera is connected, this section allows the user to control cooling and warming
 
 3. **Info Panel**

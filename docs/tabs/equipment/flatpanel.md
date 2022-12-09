@@ -4,21 +4,20 @@ The Focuser Tab lets you connect and control one of the following flat panels:
 * Allpro Spike-a-flat
 * Artesky flat box
 * Pegasus Astro Flat Master
+* ASCOM compatible flat panel
 
 ![Flats](../../images/tabs/equipment_flats.png)
 
 
-1. Flat panel information
-2. Toggle light on/off
-3. Brightness slider to control flat panel brightness
-4. Open/Close flat panel cover if present
-5. Opens the Flat Cover when taking darks or dark flats
-6. Closes the flat panel cover when the sequence/s end
-7. Uses trained flats exposures in (9) when taking flats
-8. Clear trained exposures times
-9. Trained flats exposure times from the Flats Wizard
+1. On the left side you will find the flat device info provided by the driver
+2. To toggle the light on or off you can press the Toggle button
+3. Using the brightness slider you can specifiy a target brightness for your panel. Hit the Set button to set your panel to the chosen brightness
+4. Using the open/close button lets you open or close the panel if it supports it.
+5. On the bottom you can customize settings for your flat panel
+### Trained Flat Exposure Times
 
-Trained exposure table will automatically populate when running the [Flats Wizard](../flatwizard.md) and will report the gains/exposure times for each Filter, remembering the relative flat panel brightness.
+Trained exposure table will automatically populate when running the [Flats Wizard](../flatwizard.md) and will report the gains/exposure times for each Filter, remembering the relative flat panel brightness.  
+Furthermore you can manually add or remove columns to it by using the buttons on the bottom. Clicking into the values lets you customize the exposure time (left value) and flat panel brightness (right value) for the filter and gain.
 
 !!! tip
     Follow these steps to fully automate the acquisition of flat frames during an imaging session:  

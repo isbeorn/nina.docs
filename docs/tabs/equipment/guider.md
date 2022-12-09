@@ -4,11 +4,9 @@ The Guider Tab lets you connect to autoguiders
 
 ![Guider](../../images/tabs/equipment_guider.png)
 
-1. Guider information
-2. Guider settings - The available settings depend on the type of guider that is connected
-3. Guider Graph showing the corrections and drift of the guider
-
-When a guider is connected, the settings for this specific guider are shown on the top right.
+1. Guider information can be found on the left side. Furthermore the guide chart colors can be customized here.
+2. On the right side you can find guider specific settings. The available settings depend on the type of guider that is connected.
+3. On the bottom you can find the guider graph showing the corrections and drift of the guider
 
 ## PHD2 Setup
 ![Guider](../../images/tabs/guider_phdsetup.png)
