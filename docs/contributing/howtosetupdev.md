@@ -38,7 +38,11 @@ git remote add upstream https://bitbucket.org/Isbeorn/nina.git
 git lfs fetch upstream --all
 git lfs push origin --all
 ```
-9. Fetch the submodules for the external dependencies. These contain all third party vendor DLLs that are not part of any nuget package, e.g. Camera Drivers, VCRedist etc.  
+9. Now we need to checkout the develop branch
+```
+git checkout develop
+```
+10. Fetch the submodules for the external dependencies. These contain all third party vendor DLLs that are not part of any nuget package, e.g. Camera Drivers, VCRedist etc.  
 ```
 git submodule update --init --recursive
 ```
