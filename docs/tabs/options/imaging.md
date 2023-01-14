@@ -33,7 +33,8 @@ The Imaging options tab contains settings for file formats, save directories, Au
 * Each keyword will be replaced by its current value when the image is saved. 
 * A list of all available keywords and their usage are described in the table below the pattern
 * Static text is also possible and will be kept
-* A preview of the file pattern is also displayed below.
+* A preview of the file pattern is also displayed below
+* Furthermore you can expand this section to also specify different file patterns for FLAT, DARK BIAS and DARKFLAT images. If no pattern is specified for those, the default image pattern will be used instead
 
 !!! tip
     By using the backslash characters `\\` you can separate your images into various folders and sub folders.
