@@ -73,7 +73,7 @@ nav:
             - Planetarium Setup: 'troubleshooting/planetarium.md'   
             - QHY Driver: 'troubleshooting/qhy_driver_update.md'      
             - Display Issues: 'troubleshooting/render_issues.md'       
-            - Folder browser only showing desktop: 'troubleshooting/folder_browser_only_showing_desktop.md'
+            - Folder browser only showing desktop: 'troubleshooting/folder_browser_only_desktop.md'
         - Glossary: 'glossary.md'
         - License: 'license.md'
         - 3rd-Party-Licenses: '3rd-party-license.md'
