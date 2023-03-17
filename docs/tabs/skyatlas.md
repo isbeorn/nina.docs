@@ -34,28 +34,34 @@ Search results can be ordered by one of several criteria: Size, Apparent Magnitu
 
 Press the Search button to initiate the search
 
+!!! important
+    Utilizing the Sky Atlas requires your current location information to be set in the Astrometry settings area in the general settings. Not doing so, or inputting inaccurate information will cause Sky Atlas to display inaccurate data!
+
 ### Moon phase and day information
 
 Displays the current moon phase and other day information. The accuracy of this information depends upon the correct latitude and longitude being specified under **Options > General > Astrometry**.
 
-### Object information
+## Object List Display
 
-Displays various information about objects that are found by a search. The information includes the object name, RA, Dec, Type, Constellation, Apparent magnitude, surface brightness, and size.
+An example of a search result:
+![Sky Atlas](../images/advanced/objectbrowser2.png)
 
-If the optional [Sky Atlas Image Repository](../requirements.md#recommended-and-optional-support-software) has been installed and the path to it specified under **Options > General > General > Sky Atlas Image Directory**, a small image of the object is displayed.
+1. The name of the object in question with any available alternatives. Spoken names like "Whirlpool Galaxy" are not yet implemented
+2. The Coordinates of the object in RA and Dec, should you want to save the coordinates or manually slew to them
+3. The object type. Types are abbreviations to conserve visual space. The filter uses the full type name instead of the abbreviation
+4. The object's constellation, abbreviated
+5. Apparent magnitude of the object, if available. This determines the peak brightness
+6. Surface brightness of the object, if available. The actual full brightness of the object. A value of 99.9 indicates an unknown surface brightness
+7. Apparent size of the object, if available. Shows you the apparent size in arcminutes or degrees, depending on size.
+8. Displays the target object's altitude, the direction point at which it will transit, the darkness phase of the current day, and includes a vertical marker for the current time. The accuracy of the altitude curve requires that the latitude and longitude be set under **Options > General > Astrometry**.
+    * Tthe line with a specific peak is the actual altitude of the object at any given time, generally: the higher, the better. Transit north or south tells you whether the object will pass to your south or north.
+    * The Now line shows you your current time so you can cross reference the current altitude of the object.
+    * The darker lines show you the start of the nautical and astro dark.
+    * Furthermore a custom horizon will be displayed if it is set in the Astrometry settings
+9. Sets the selected object as a sequence target for the [simple sequencer](../sequencer/simple/simple.md) or the [advanced sequencer](../sequencer/advanced/advanced.md) using a specific template based on the selection
+10. Sets the selected object as the target in the [Framing Assistant](../tabs/framing.md)
+11. Slew to the targetSlews the mount to the selected object
 
-### Object altitude
 
-Displays the target object's altitude, the direction point at which it will transit, the darkness phase of the current day, and includes a vertical marker for the current time. The accuracy of the altitude curve requires that the latitude and longitude be set under **Options > General > Astrometry**.
-
-### Set as Sequence
-
-Sets the selected object as a sequence target for the [simple sequencer](../sequencer/simple/simple.md) or the [advanced sequencer](../sequencer/advanced/advanced.md) using a specific template based on the selection
-
-### Set for Framing Assistant
-
-Sets the selected object as the target in the [Framing Assistant](../tabs/framing.md)
-
-### Slew
-
-Slews the mount to the selected object
+!!! tip
+    If the optional [Sky Atlas Image Repository](../requirements.md#recommended-and-optional-support-software) has been installed and the path to it specified under **Options > General > General > Sky Atlas Image Directory**, a small image of the object is displayed.
