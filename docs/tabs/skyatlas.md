@@ -1,7 +1,5 @@
 The Sky Atlas allows you to search for various objects in the sky using N.I.N.A.'s own database of deep sky objects. Filters and sorting options can be applied to search results. Additionally, you may set selected objects as a [Sequence](../tabs/sequencer.md) target, or to send them to the [Framing Assistant](../tabs/framing.md).
 
-For further information about the Sky Atlas, refer to the [Object Browser](../advanced/objectbrowser.md) advanced topic.
-
 The Sky Atlas interface consists of following elements:
 
 ![The SkyAtlas tab](../images/tabs/skyAtlas1.png)
