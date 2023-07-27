@@ -36,6 +36,10 @@ The Imaging options tab contains settings for file formats, save directories, Au
 * A preview of the file pattern is also displayed below
 * Furthermore you can expand this section to also specify different file patterns for FLAT, DARK BIAS and DARKFLAT images. If no pattern is specified for those, the default image pattern will be used instead
 
+!!! note
+    You should avoid using non-ascii characters when filling the Target Name value in `FlatWizard`, `Legacy Sequencer`, `Advanced Sequencer` or `Imaging Snapshot`. Value in these fields will be passed to file pattern `$$TARGETNAME$$`. Due to compatibility requirements on FITS format and other image processing software, `$$TARGETNAME$$` does not allow non-ascii characters. Greek characters are replaced using a special translation table, and other non-ascii characters are replaced with "_", for example   
+    `织女, Vega, α Lyr, BD +38°3238 -> __, Vega, alf Lyr, BD +38_3238`
+
 !!! tip
     By using the backslash characters `\\` you can separate your images into various folders and sub folders.
     For example N.I.N.A. will create separate folders on each new session and create sub folders for Lights Darks etc. and then inside these folders putting the actual image files when using a pattern like    
