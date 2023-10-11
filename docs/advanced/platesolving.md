@@ -18,7 +18,8 @@ Thus, the Blind Solver acts as a back up method.
 Before being able to plate solve N.I.N.A., any setup that the primary and blind solvers require must be done in accordance with their respective instructions.
 
 !!! tip
-    In the event that both the Primary and Blind plate solving applications fail to produce a result, please verify that your image is in focus and, if necessary, increase the exposure time or change the filter type to allow more stars to be adequately exposed.
+    In the event that both the Primary and Blind plate solving applications fail to produce a result, please verify that your image is in focus and, if necessary, increase the exposure time or change the filter type to allow more stars to be adequately exposed.  
+    Furthermore the last failure is stored in `%LOCALAPPDATA%\NINA\PlateSolver\Failed` to analyze why it failed
 
 To apply the plate solving results to your mount, you need to enable the Sync option and, if desired, the Reslew To Target option in the Plate Solving panel.
 The former will synchronize your mount's notion of its pointing position to the position that the plate solver has determined is it pointed.
