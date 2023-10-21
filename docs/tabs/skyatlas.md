@@ -56,7 +56,7 @@ An example of a search result:
     * The Now line shows you your current time so you can cross reference the current altitude of the object.
     * The darker lines show you the start of the nautical and astro dark.
     * Furthermore a custom horizon will be displayed if it is set in the Astrometry settings
-9. Sets the selected object as a sequence target for the [simple sequencer](../sequencer/simple/simple.md) or the [advanced sequencer](../sequencer/advanced/advanced.md) using a specific template based on the selection
+9. Sets the selected object as a sequence target for the [legacy sequencer](../sequencer/simple/simple.md) or the [advanced sequencer](../sequencer/advanced/advanced.md) using a specific template based on the selection
 10. Sets the selected object as the target in the [Framing Assistant](../tabs/framing.md)
 11. Slew to the targetSlews the mount to the selected object
 
