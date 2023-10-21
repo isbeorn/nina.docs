@@ -1,8 +1,8 @@
-This page is intended to give some hints in how to transition from the simple sequence to the advanced sequence as well as optimizing the imaging run using the capabilities of the advanced sequencer.  
+This page is intended to give some hints in how to transition from the legacy sequence to the advanced sequence as well as optimizing the imaging run using the capabilities of the advanced sequencer.  
 In this section we will cover a single target for the night and we will utilize the capabilities of a camera, a goto mount, a filter wheel and a focuser.  
  
 Most likely when you wanted to run a target for the night with LRGB filters you would have set up a sequence like this.
-![LRGB Simple Sequence](../../images/sequencer/simpletoadvanced/simplesequence.png)
+![LRGB Legacy Sequence](../../images/sequencer/simpletoadvanced/simplesequence.png)
 
 The goal here is to get exposures of each filter for having usable color data and to autofocus after the filter change when the batch of exposures is completed. Furthermore the number of exposures are added based on the estimated duration to fully fill the night.
 This approach however has some downsides, which we want to fix utilizing the advanced sequencer step by step. (For simplicity the AF after HFR or other conditions is ignored, as this is dependent on the current night's conditions and not a problem of the general setup)
@@ -15,17 +15,17 @@ This approach however has some downsides, which we want to fix utilizing the adv
 
 ## Transforming to an advanced sequence
 
-To get rolling with the advanced sequencer, there is a tool button on the bottom right to easily generate an advanced sequence out of the simple sequence.
+To get rolling with the advanced sequencer, there is a tool button on the bottom right to easily generate an advanced sequence out of the legacy sequence.
 ![Transform](../../images/sequencer/simpletoadvanced/transform.png)
 
 !!!note
-    **Did you know?** The simple sequencer is actually running an advanced sequence behind the scenes. The User Interface is just wrapped around to give the traditional experience of the simple sequence. This will ensure that the effort to maintain the code for the sequencer is not doubled and that everything is working the same way. This approach also makes it possible to keep the simple sequencer alive.
+    **Did you know?** The legacy sequencer is actually running an advanced sequence behind the scenes. The User Interface is just wrapped around to give the traditional experience of the legacy sequence. This will ensure that the effort to maintain the code for the sequencer is not doubled and that everything is working the same way. This approach also makes it possible to keep the legacy sequencer alive.
 
 Let's break apart how the sequence will look compared to the advanced sequence. Remember that on a high level the advanced sequencer will run the instructions from top to bottom.
 
 ### Target Set Start Options -> Start Area  
 
-The simple sequence had toggles set to on for *Cool Camera*, *Unpark Mount* and to perform *Meridian Flips*. These options will be put into the topmost section of the advanced sequence.
+The legacy sequence had toggles set to on for *Cool Camera*, *Unpark Mount* and to perform *Meridian Flips*. These options will be put into the topmost section of the advanced sequence.
 
 * Meridian Flip: This options is basically a trigger. As the meridian flip is always relevant it is put into the *Global Trigger* section. This means that the trigger will watch for the whole sequence run if a meridian flip should be performed or not.
 * *Cool Camera* and *Unpark Mount* are put into the start area on the top of the sequencer. These will be executed as the first action.
@@ -33,7 +33,7 @@ The simple sequence had toggles set to on for *Cool Camera*, *Unpark Mount* and 
 
 ### Target Set End Options -> End Area
 
-Just like the start options, the end options will be put into the bottom most part of the sequencer. For the end options the simple sequence had *Warm Camera* as well as *Park Mount* enabled.
+Just like the start options, the end options will be put into the bottom most part of the sequencer. For the end options the legacy sequence had *Warm Camera* as well as *Park Mount* enabled.
 
 * *Warm Camera* and *Park Mount* will just be put into the bottom. Also these operations can run in parallel, that's why these are inside a *Parallel Instruction Set*.
 ![End Area](../../images/sequencer/simpletoadvanced/startarea.png)
@@ -44,20 +44,20 @@ To show a high level view of the target, the next screenshot shows the internal 
 ![Target Area](../../images/sequencer/simpletoadvanced/targetarea.png)
 
 ### Target Options -> Target preparation instructions
-When starting the target, the target options from the simple sequencer are put into this *Target preparation instructions* area. In the simple seuquencer it was enabled to slew, center & rotate, to start guiding and to start autofocus on start. The first imaging instruction was set to the L filter, so the start needs to switch to that filter too. These options are directly translated into the preparation block.
+When starting the target, the target options from the legacy sequencer are put into this *Target preparation instructions* area. In the simple seuquencer it was enabled to slew, center & rotate, to start guiding and to start autofocus on start. The first imaging instruction was set to the L filter, so the start needs to switch to that filter too. These options are directly translated into the preparation block.
 ![Target Preparation](../../images/sequencer/simpletoadvanced/targetpreparation.png)
 
 ### Target closure instructions
-This one is an implicit instruction from the simple sequencer, as there was no toggle to do it there and it will only contain the *Stop Guiding* instruction. The reason is that when a target is finished, that guiding is no longer necessary as you will most likely park the mount or slew to a different target. It will just be added at the closure of the target to be safe.
+This one is an implicit instruction from the legacy sequencer, as there was no toggle to do it there and it will only contain the *Stop Guiding* instruction. The reason is that when a target is finished, that guiding is no longer necessary as you will most likely park the mount or slew to a different target. It will just be added at the closure of the target to be safe.
 ![Target Preparation](../../images/sequencer/simpletoadvanced/targetclosure.png)
 
 ### Exposure Rows -> Target imaging instructions
 Now let's finally look into the important part which is the actual gathering of light frames.
-Each row of the simple sequencer will be directly translated to an instruction that is called *Smart Exposure*. This instruction should look quite familiar to you, as it contains all the same information as the rows of the simple sequencer.  
-One additional option that was enabled in the simple sequencer, was to make sure that an autofocus run is triggered when the filter changes. This is directly added to this imaging set in the form of a trigger in the *Triggers* section and it is also called the same way *AF After Filter Change* and will make sure that an autofocus is triggered when the filter changes.
+Each row of the legacy sequencer will be directly translated to an instruction that is called *Smart Exposure*. This instruction should look quite familiar to you, as it contains all the same information as the rows of the legacy sequencer.  
+One additional option that was enabled in the legacy sequencer, was to make sure that an autofocus run is triggered when the filter changes. This is directly added to this imaging set in the form of a trigger in the *Triggers* section and it is also called the same way *AF After Filter Change* and will make sure that an autofocus is triggered when the filter changes.
 ![Target Imaging](../../images/sequencer/simpletoadvanced/targetimaging.png)
 
-Hopefully this explanation gives you a good overview about how an advanced sequencer will look like and how it will operate when directly compared to a simple sequence screen. The user interface looks quite different, but it should be much clearer about what will happen and when it will happen, as it will explicitly show all the individual steps.  
+Hopefully this explanation gives you a good overview about how an advanced sequencer will look like and how it will operate when directly compared to a legacy sequence screen. The user interface looks quite different, but it should be much clearer about what will happen and when it will happen, as it will explicitly show all the individual steps.  
 **So why bother with the advanced sequencer? Well, now that we understand the basics, we can tackle the problems that were mentioned earlier.**
 
 ## Problem 1 - Stop repeating yourself
@@ -82,7 +82,7 @@ Most of the issues are resolved now and already some time has been saved by remo
 This one is a real time saver!
 
 ## Summary
-So to sum it up, we went from a simple sequence and having to calculate how many exposures *could* potentiall fit into a night worth of imaging to a highly optimized sequence, that will run a loop of LRGB filters for the whole night and will get as many frames as possible for the duration of the complete night. We don't have to worry about the amount of subs being taken and will always end up with a set of images to create a full color LRGB image. In addition to that we drastically reduced the amount of dithering required, giving us back at least 20 minutes of imaging time.
+So to sum it up, we went from a legacy sequence and having to calculate how many exposures *could* potentiall fit into a night worth of imaging to a highly optimized sequence, that will run a loop of LRGB filters for the whole night and will get as many frames as possible for the duration of the complete night. We don't have to worry about the amount of subs being taken and will always end up with a set of images to create a full color LRGB image. In addition to that we drastically reduced the amount of dithering required, giving us back at least 20 minutes of imaging time.
 
 !!!note
     Hopefully this guide will help you reduce the fear of using the advanced sequencer and also give you the confidence and tools to create highly optimized sequences. This set of examples is only the beginning and the capabilities to optimize even further and adjust it to your specialized needs and equipment is now possible!

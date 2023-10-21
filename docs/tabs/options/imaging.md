@@ -84,7 +84,7 @@ The Imaging options tab contains settings for file formats, save directories, Au
 > Useful for scopes with mirror flop or focus shift after Meridian Flip.
 
 !!! note
-    In previous versions of N.I.N.A. a switch to enable meridian flip was located here. However this approach has been changed and the meridian flip needs to be enabled on sequence level. The simple sequencer has a target set option to enable it and the advanced sequencer needs to have a meridian flip trigger added to the sequence    
+    In previous versions of N.I.N.A. a switch to enable meridian flip was located here. However this approach has been changed and the meridian flip needs to be enabled on sequence level. The legacy sequencer has a target set option to enable it and the advanced sequencer needs to have a meridian flip trigger added to the sequence    
 
 ### Rotate image after flip
 * When enabling this option, the image inside the imaging tab will be automatically rotated by 180° after a meridian flip. This is for displaying purposes only and will not alter any raw image data.
@@ -129,9 +129,9 @@ The Imaging options tab contains settings for file formats, save directories, Au
 ### Sequence Template Folder
 * The user can set a default folder where sequence templates should be stored
 
-### Simple Sequencer Template
-* The user can set a default user defined simple sequence template here. When a template is defined adding a new target to the simple sequencer will use the template to prepopulate the values like centering, exposures etc.
-> Templates can be made with the 'Save template as xml' button in the simple sequence tab
+### Legacy Sequencer Template
+* The user can set a default user defined legacy sequence template here. When a template is defined adding a new target to the legacy sequencer will use the template to prepopulate the values like centering, exposures etc.
+> Templates can be made with the 'Save template as xml' button in the legacy sequence tab
 
 ### Startup Sequence Template (Adv. Sequencer)
 * A full saved advanced sequence that will pre-populate the advanced sequencer on application start. This is useful for startup and end instructions that you want to do each time in the same manner.
@@ -142,8 +142,8 @@ The Imaging options tab contains settings for file formats, save directories, Au
 ### Collapse sequence templates by default (Adv. Sequencer)
 * When enabled, templates that will be dragged into the sequencer will be collapsed by default
 
-### Disable Simple Sequencer
-* This will remove the simple sequencer from the UI. Useful if you don't use the simple sequencer at all and want to remove the then unnecessary decisions between the two sequencers.
+### Disable Legacy Sequencer
+* This will remove the legacy sequencer from the UI. Useful if you don't use the legacy sequencer at all and want to remove the then unnecessary decisions between the two sequencers.
 
 !!! note
     In previous versions of N.I.N.A. some options where available to run end of sequence options. These have been moved into the sequencer.

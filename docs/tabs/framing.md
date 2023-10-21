@@ -54,7 +54,7 @@ For further information about using the Framing Assistant refer to the [Advanced
 * In addition when clicking on the arrow the operation can be adjusted to only slew to the target without solving or also consider the rotation (when a rotator is connected)
 
 ### Add target to sequence
-* Takes the name, coordinates of the RA and Dec and the angle of the framing window and adds it as a sequence target for either the simple sequencer or the advanced sequencer using a deep sky object template
+* Takes the name, coordinates of the RA and Dec and the angle of the framing window and adds it as a sequence target for either the legacy sequencer or the advanced sequencer using a deep sky object template
 * In addition when clicking on the arrow and clicking on "Add target to target list", the target can be added to the advanced sequencer's target tab instead
 * A third option is to click on "Update Existing Target in Sequencer" which becomes available when there is already a target inside the sequencer and the target should be updated with the new framing instead
 

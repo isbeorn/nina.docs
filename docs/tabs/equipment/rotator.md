@@ -19,7 +19,7 @@ To enable manual rotator you must:
 1. Define a _Rotator Tolerance_ in [Options->Platesolving](../options/platesolving.md)
 2. Connect the manual rotator in the Rotator tab
 3. Frame your object in [Framing](../framing.md) and Add as Sequence Target
-4. Enable _Rotate Target_ in [simple sequencer](../../sequencer/simple/simple.md) or use the _Slew, center & rotate_ instruction in the [advanced sequencer](../../sequencer/advanced/advanced.md)
+4. Enable _Rotate Target_ in [legacy sequencer](../../sequencer/simple/simple.md) or use the _Slew, center & rotate_ instruction in the [advanced sequencer](../../sequencer/advanced/advanced.md)
 5. Start the sequence
 
 Once the sequence is started and the mount has finished slewing to the target, N.I.N.A. will perform a platesolving to determine the current framing coordinates and rotation angle. If the difference between the angle determined by the platesolving and the angle specified in _Sequence ->Rotation_  is above the _Rotator Tolerance_, a pop-up will appear indicating the degrees and direction you need to rotate the camera.

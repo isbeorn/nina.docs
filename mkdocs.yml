@@ -42,7 +42,7 @@ nav:
                 - Available: 'tabs/plugins/available.md'
         - Sequencer:
             - Overview: 'sequencer/overview.md'
-            - Simple Sequencer: 
+            - Legacy Sequencer: 
                 - Overview: 'sequencer/simple/simple.md'
                 - Sequencing: 'sequencer/simple/sequencing.md'
             - Advanced Sequencer:
@@ -50,7 +50,7 @@ nav:
                 - Instructions: 'sequencer/advanced/instructions.md'
                 - Loop Conditions: 'sequencer/advanced/conditions.md'
                 - Triggers: 'sequencer/advanced/triggers.md'
-                - From Simple To Advanced: 'sequencer/advanced/simpletoadvanced.md'
+                - From Legacy To Advanced: 'sequencer/advanced/simpletoadvanced.md'
         - Advanced Topics:
             - Auto-Focus: 'advanced/autofocus.md'
             - Automated Meridian Flip: 'advanced/meridianflip.md'
