@@ -7,8 +7,7 @@ The following represents the minimum system resources required to operate N.I.N.
  * A dual-core x64 CPU
  * 3GB of RAM
  * Windows 10 (64 bit) or later
- * 350MB of free disk space without the optional SkyAtlas image data or framing cache data (3GB with)
- * [.NET 7.0 Desktop Runtime](//dotnet.microsoft.com/en-us/download/dotnet/7.0) 
+ * 500MB of free disk space without the optional SkyAtlas image data or framing cache data (3GB with)
 
 !!! info
     Some users have reported successful operation of N.I.N.A. on small, low-power embedded systems such as the Intel Compute Stick and similar platforms. As expected, experiences will vary in such resource-constrained environments. Technically, N.I.N.A. should be able to run on a single core, but this will certainly lead to a *highly* undesirable experience and is certainly not recommended. However, if forced to choose between the two, more RAM is desirable over CPU power.
