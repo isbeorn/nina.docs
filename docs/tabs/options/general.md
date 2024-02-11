@@ -32,7 +32,7 @@ The General Settings tab allows you to manage N.I.N.A. in terms of all general s
 
 ### Logging
 * Specifies the level of logging done by N.I.N.A for troubleshooting and debugging purposes
-* The level of logging can be set (in ascending order) to  'Error', 'Info', 'Warning', 'Debug' or 'Trace'
+* The level of logging can be set (in ascending order) to  'Error', 'Warning', 'Info', 'Debug' or 'Trace'
 * The button here opens the directory containing the logs, logs are typically located in %localappdata%\NINA\logs
 
 ### Device Polling Interval
