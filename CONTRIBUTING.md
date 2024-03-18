@@ -7,8 +7,7 @@ The documentation is using MkDocs. A in-depth guide on how to set it up and how 
 In summary you need:  
 - [Python](https://www.python.org/)  
   - Pip `pip install --upgrade pip`  
-- MkDocs `pip install mkdocs`  
-- MkDocs Material `pip install mkdocs-material`  
+- Install MkDocs and needed plugins: `pip install mkdocs mkdocs-material mkdocs-with-pdf`  
 - A markdown editor of your choice  
 
 ## Building the docs

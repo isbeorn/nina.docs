@@ -7,8 +7,7 @@ The following represents the minimum system resources required to operate N.I.N.
  * A dual-core x64 CPU
  * 3GB of RAM
  * Windows 10 (64 bit) or later
- * 350MB of free disk space without the optional SkyAtlas image data or framing cache data (3GB with)
- * [.NET Framework 4.8 Runtime](//dotnet.microsoft.com/download/dotnet-framework/net48) (included with Windows 10 May 2019 Update (build 1903) and later)
+ * 500MB of free disk space without the optional SkyAtlas image data or framing cache data (3GB with)
 
 !!! info
     Some users have reported successful operation of N.I.N.A. on small, low-power embedded systems such as the Intel Compute Stick and similar platforms. As expected, experiences will vary in such resource-constrained environments. Technically, N.I.N.A. should be able to run on a single core, but this will certainly lead to a *highly* undesirable experience and is certainly not recommended. However, if forced to choose between the two, more RAM is desirable over CPU power.
@@ -17,7 +16,7 @@ The following represents the minimum system resources required to operate N.I.N.
 
 The functionality of N.I.N.A. shines through when paired with a supporting cast of other applications. Please consider the items in the following lists to access the full breadth of N.I.N.A.'s capabilities.
 
-  * [ASCOM 6.5SP1 Platform](//ascom-standards.org/Downloads/Index.htm) (recommended)
+  * [ASCOM Platform](//ascom-standards.org/Downloads/Index.htm) (recommended)
   * [PHD2 Guiding](//openphdguiding.org/downloads/)
   * [Metaguide Guiding](//https://www.smallstarspot.com/metaguide/)
   * Any of several supported [plate solving applications](advanced/platesolving.md) (recommended)
@@ -25,11 +24,16 @@ The functionality of N.I.N.A. shines through when paired with a supporting cast 
     * [All Sky Plate Solver](http://www.astrogb.com/astrogb/All_Sky_Plate_Solver.html)
     * [Local Astrometry.net (ansvr)](//adgsoftware.com/ansvr/)
     * [PlateSolve2](//planewave.com/downloads/software/)
+    * [PlateSolve3](//planewave.com/downloads/software/)
+    * [TheSkyX ImageLink](//www.bisque.com/)
+    * [PinPoint](//diffractionlimited.com/)
   * Any of several supported planetarium applications (optional)
     * [Cartes du Ciel](//www.ap-i.net/skychart/)
     * [HNSKY](//www.hnsky.org/)
     * [Stellarium](//stellarium.org/)
     * [TheSky X](//www.bisque.com/sc/pages/TheSkyX-Editions.aspx)
+    * [C2A](//www.astrosurf.com/c2a/english/download.htm)
+    * [SkyTechX](//www.skytechx.eu/)
   * [SkyAltas image data](https://nighttime-imaging.eu/download/) (optional at the bottom of the download section)
 
 
@@ -41,16 +45,20 @@ N.I.N.A. can directly interface with a wide range of popular cameras without the
 
  * Altair
  * Atik
+ * AstcamPan
  * Canon
- * Nikon
  * FLI
+ * MallinCam
+ * Nikon
+ * PlayerOne
+ * OGMA
  * Omegon
  * QHYCCD
  * RisingCam
  * ToupTek
- * ZWO
- * SVBony
  * SBIG
+ * SVBony 
+ * ZWO
 
 !!! note
     Certain older Nikon DSLRs require a serial shutter cable for bulb exposures. Please consult your camera's documentation regarding its requirements for long exposure operation using a USB or other remote cable.
@@ -86,3 +94,4 @@ N.I.N.A. supports several guiding applications to guide, dither, and monitor tra
   * [MetaGuide](http://www.astrogeeks.com/Bliss/MetaGuide/)
   * [MGEN2](https://mgen-autoguider.com/en/)
   * [MGEN3](https://mgen-autoguider.com/en/)
+  * [SkyGuard](https://www.innovationsforesight.com/)
