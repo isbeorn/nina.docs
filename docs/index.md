@@ -10,11 +10,7 @@ The N.I.N.A project is also a [FOSS](//en.wikipedia.org/wiki/Free_and_open-sourc
 
 ## About this Documentation
 
-This document aims to describe the functionality of N.I.N.A. so you can utilize it to its full potential. It is divided into three main chapters:
-
-1. A [Quick Start Guide](quickstart/uioverview.md) to quickly get started.
-2. Detailed explanation of the various [Tabs](tabs/overview.md) and their purposes.
-3. [Advanced Topics](advanced/platesolving.md) which covers everything you need to know to effectively run the software.
+This document aims to describe the functionality of N.I.N.A. so you can utilize it to its full potential.
 
 !!! tip
     Important notes will appear in boxes similar to this throughout the documentation. If you see one, do not skip over it!
