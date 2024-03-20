@@ -11,9 +11,8 @@ nav:
         - Introduction: 'index.md'
         - Requirements: 'requirements.md'        
         - Tabs:
-            - Overview: 'tabs/overview.md'
+            - Overview: 'tabs/equipment/equipment.md'
             - Equipment: 
-                - Equipment: 'tabs/equipment/equipment.md'
                 - Camera: 'tabs/equipment/camera.md'
                 - Filterwheel: 'tabs/equipment/filterwheel.md'
                 - Focuser: 'tabs/equipment/focuser.md'
