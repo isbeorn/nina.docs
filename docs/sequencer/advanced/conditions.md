@@ -30,6 +30,7 @@ Loop an instruction set until a specific point in time. The time can either be s
 **Meridian**: When a target is set this will be the time the target will cross the meridian  
 
 !!!note
+    **When using a manual time:**  
     As there is no day attached to the condition, the roll over for a new day happens at noon (similar to the altitude charts). This brings a few advantages to not loop unexpectedly when you are already past the specified time.  
     Examples:  
     Current time: 18:00h | Loop until time: 19:00h -> Loop for one hour  
@@ -38,6 +39,11 @@ Loop an instruction set until a specific point in time. The time can either be s
     Current time: 02:00h | Loop until time: 03:00h -> Loop for one hour  
     Current time: 04:00h | Loop until time: 03:00h -> Condition will be skipped  
     Current time: 08:00h | Loop until time: 18:00h -> **Condition will be skipped** because the roll over at noon has not happened yet  
+
+    **When using calculated times for dawn and dusk:**  
+    Instead of using noon to roll over to the next day the rollover will instead happen at the "opposite" side of the condition. For example when you loop until dawn, the roll over will be at sunset
+
+
 
 ### Loop While Altitude Above Horizon
 ![Loop While Altitude Above Horizon](../../images/sequencer/conditions/loopwhilehorizon2.png)  
