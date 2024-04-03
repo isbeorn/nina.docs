@@ -322,6 +322,7 @@ Wait until a specific point in time. The time can either be set manually or auto
 **Meridian**: When a target is set this will be the time the target will cross the meridian  
 
 !!!note
+    **When using a manual time:**  
     As there is no day attached to the instruction, the roll over for a new day happens at noon (similar to the altitude charts). This brings a few advantages to not wait unexpectedly when you are already past the specified time.
     Examples:  
     Current time: 18:00h | Wait for time: 19:00h -> Wait for one hour  
@@ -330,6 +331,9 @@ Wait until a specific point in time. The time can either be set manually or auto
     Current time: 02:00h | Wait for time: 03:00h -> Wait for one hour  
     Current time: 04:00h | Wait for time: 03:00h -> Instruction will be skipped  
     Current time: 08:00h | Wait for time: 18:00h -> **Instruction will be skipped** because the roll over at noon has not happened yet  
+
+    **When using calculated times for dawn and dusk:**  
+    Instead of using noon to roll over to the next day the rollover will instead happen at the "opposite" side of the instruction. For example when you wait until dusk, the roll over will be at sunrise
 
 ### Wait For Time Span
 ![Wait For Time Span](../../images/sequencer/instructions/utility_waitfortimespan.png)  
