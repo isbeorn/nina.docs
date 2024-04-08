@@ -65,7 +65,7 @@ N.I.N.A. can directly interface with a wide range of popular cameras without the
 
 The list of supported cameras can change and expand as N.I.N.A. developers gain access to relevant hardware or support is contributed.
 
-### ASCOM Device Support
+### [ASCOM Standard](https://ascom-standards.org/)
 
 Astronomy-related equipment often has an [ASCOM](//ascom-standards.org/) driver for it. N.I.N.A. supports accessing the following types of devices through their associated ASCOM drivers, as long as the drivers are fully compliant with the relevant ASCOM frameworks. Cameras that lack direct support in N.I.N.A. but *do* have an ASCOM driver may also be utilized this way. The following ASCOM device classes are supported:
 
@@ -85,6 +85,17 @@ Astronomy-related equipment often has an [ASCOM](//ascom-standards.org/) driver 
 
 !!! info "A note to ASCOM driver developers"
 	If it has not already been done, please consider making both 32 and 64 bit varieties of your driver(s) available to your users or customers, and ensure that the driver passes all [ASCOM Conformance](//ascom-standards.org/Developer/Conformance.htm) tests. Please refer to the [relevant documentation](//ascom-standards.org/Developer/DevFor32And64Bits.htm) on ASCOM's website for more information.
+
+### [ASCOM Alpaca](https://www.ascom-alpaca.org/)
+
+Similar to the ASCOM support N.I.N.A. also offers ASCOM Alpaca device discovery and direct connection to ASCOM Alpaca devices through the network. All types of devices that are mentioned in the ASCOM Standard section are also supported via the ASCOM Alpaca protocol.
+
+### Additional Device Support
+
+While N.I.N.A. offers extensive support for a wide range of devices directly and through ASCOM drivers, there are [plugins]((tabs/plugins/available.md)) available that can directly or indirectly integrate other devices, providing even more flexibility and options.
+
+* [AstronSCIENTIFIC Rotarion System](https://www.astronscientific.com/tech-info/)
+    * Although Rotarion is not directly integrated into the application, it can be fully controlled using the available ASCOM drivers as well as the [Connector Plugin](tabs/plugins/available.md) to switch between different profiles that are set up for the different instruments that are attached to the Rotarion system
 
 ### Guiding Applications
 
