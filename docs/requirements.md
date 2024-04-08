@@ -81,7 +81,7 @@ Astronomy-related equipment often has an [ASCOM](//ascom-standards.org/) driver 
  * Safety Devices
 
 !!! tip
-    Be aware that ASCOM drivers that are provided by their vendor in a 32 bit-only form will **not** be accessible by a 64 bit N.I.N.A. or any other 64 bit ASCOM client application. If this is the case for you, then the 32 bit version of N.I.N.A. must be installed.
+    Be aware that ASCOM drivers that are provided by their vendor in a 32 bit-only form will **not** be directly accessible by a 64 bit N.I.N.A. or any other 64 bit ASCOM client application. If this is the case for you, try to connect via the ASCOM Device Hub instead
 
 !!! info "A note to ASCOM driver developers"
 	If it has not already been done, please consider making both 32 and 64 bit varieties of your driver(s) available to your users or customers, and ensure that the driver passes all [ASCOM Conformance](//ascom-standards.org/Developer/Conformance.htm) tests. Please refer to the [relevant documentation](//ascom-standards.org/Developer/DevFor32And64Bits.htm) on ASCOM's website for more information.
