@@ -43,22 +43,22 @@ The functionality of N.I.N.A. shines through when paired with a supporting cast 
 
 N.I.N.A. can directly interface with a wide range of popular cameras without the need for an intermediate ASCOM driver. Direct camera control is recommended over accessing the camera through ASCOM for performance reasons and to access additional camera controls that cannot be manipulated through ASCOM.
 
- * Altair
- * Atik
- * AstcamPan
- * Canon
- * FLI
- * MallinCam
- * Nikon
- * PlayerOne
- * OGMA
- * Omegon
- * QHYCCD
- * RisingCam
- * ToupTek
- * SBIG
- * SVBony 
- * ZWO
+ * [Altair](//www.altairastro.com/)
+ * [Atik](//www.atik-cameras.com/)
+ * [AstcamPan](//microscope-cameras.com/)
+ * [Canon](//global.canon/)
+ * [FLI](//www.flicamera.com/)
+ * [MallinCam](//www.mallincam.net/)
+ * [Nikon](//www.nikon.com)
+ * [PlayerOne](//player-one-astronomy.com/)
+ * [OGMA](//getogma.com/)
+ * [Omegon](//www.omegon.eu)
+ * [QHYCCD](//www.qhyccd.com)
+ * [RisingCam](//risingcam.aliexpress.com/store/1918400)
+ * [ToupTek](//www.touptek-astro.com)
+ * [SBIG](//diffractionlimited.com)
+ * [SVBony](//www.svbony.com)
+ * [ZWO](//www.zwoastro.com)
 
 !!! note
     Certain older Nikon DSLRs require a serial shutter cable for bulb exposures. Please consult your camera's documentation regarding its requirements for long exposure operation using a USB or other remote cable.
@@ -86,7 +86,7 @@ Astronomy-related equipment often has an [ASCOM](//ascom-standards.org/) driver 
 !!! info "A note to ASCOM driver developers"
 	If it has not already been done, please consider making both 32 and 64 bit varieties of your driver(s) available to your users or customers, and ensure that the driver passes all [ASCOM Conformance](//ascom-standards.org/Developer/Conformance.htm) tests. Please refer to the [relevant documentation](//ascom-standards.org/Developer/DevFor32And64Bits.htm) on ASCOM's website for more information.
 
-### [ASCOM Alpaca](https://www.ascom-alpaca.org/)
+### [ASCOM Alpaca](//www.ascom-alpaca.org/)
 
 Similar to the ASCOM support N.I.N.A. also offers ASCOM Alpaca device discovery and direct connection to ASCOM Alpaca devices through the network. All types of devices that are mentioned in the ASCOM Standard section are also supported via the ASCOM Alpaca protocol.
 
@@ -94,15 +94,15 @@ Similar to the ASCOM support N.I.N.A. also offers ASCOM Alpaca device discovery 
 
 While N.I.N.A. offers extensive support for a wide range of devices directly and through ASCOM drivers, there are [plugins]((tabs/plugins/available.md)) available that can directly or indirectly integrate other devices, providing even more flexibility and options.
 
-* [AstronSCIENTIFIC Rotarion System](https://www.astronscientific.com/tech-info/)
+* [AstronSCIENTIFIC Rotarion System](//www.astronscientific.com/tech-info/)
     * Although Rotarion is not directly integrated into the application, it can be fully controlled using the available ASCOM drivers as well as the [Connector Plugin](tabs/plugins/available.md) to switch between different profiles that are set up for the different instruments that are attached to the Rotarion system
 
 ### Guiding Applications
 
 N.I.N.A. supports several guiding applications to guide, dither, and monitor tracking accuracy. Telemetry from these applications are also displayed inside of the Imaging tab. The guiding applications N.I.N.A. supports are:
 
-  * [PHD2](https://openphdguiding.org/)
-  * [MetaGuide](http://www.astrogeeks.com/Bliss/MetaGuide/)
-  * [MGEN2](https://mgen-autoguider.com/en/)
-  * [MGEN3](https://mgen-autoguider.com/en/)
-  * [SkyGuard](https://www.innovationsforesight.com/)
+  * [PHD2](//openphdguiding.org/)
+  * [MetaGuide](//www.astrogeeks.com/Bliss/MetaGuide/)
+  * [MGEN2](//mgen-autoguider.com/en/)
+  * [MGEN3](//mgen-autoguider.com/en/)
+  * [SkyGuard](//www.innovationsforesight.com/)
