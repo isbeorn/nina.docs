@@ -16,7 +16,7 @@ N.I.N.A. presents Camera Gain to the user in exactly the format that the camera 
 
 There is one major piece of imaging software which does not present a manual switch: SharpCap. In order to try and be consistent with the other brands of camera that automatically switch their dual-gain sensors from LCG to HCG, SharpCap implements logic to automatically perform the switch. The way it does this is to present a single scale with the multiplier, above which point HCG is automatically enabled. This is best explained by means of an example.
 
-## Example: The Altiar 269C
+## Example: The Altair 269C
 
 Let's take as our example the Altair 269C, a camera which uses the dual gain IMX269 chip from Sony. This camera has a HCG/LCG switch with a multiplier of x2 and reports gain values of 100-2000.  Sharpcap performs the following logic:
 
