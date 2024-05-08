@@ -26,17 +26,17 @@ This mode will switch the operational behavior for the flat wizard for different
 
 - Dynamic Exposure
     - In this mode the flat wizard will try to find an exposure time (for a fixed panel brightness if a flat panel is connected)
-    - The algorithm will start with an exposure time of `((Max Exposure Time - Min Exposure Time) / 2)`
+    - The algorithm will start with an exposure time of `((Max Exposure Time + Min Exposure Time) / 2)`
         - If the exposure is too bright the algorithm will use this exposure time as the new maximum and repeat
         - If the exposure is too dim the algorithm will use this exposure time as the new minimum and repeat
 - Dynamic Brightness
     - For a fixed exposure time the flat wizard will try to find a flat panel brightness to match the desired exposure time. This requires a controllable flat panel to be connected.    
-    - The algorithm will start with an exposure time of `((Max Panel Brightness - Min Panel Brightness) / 2)`
+    - The algorithm will start with an exposure time of `((Max Panel Brightness + Min Panel Brightness) / 2)`
         - If the exposure is too bright the algorithm will use this panel brightness as the new maximum and repeat
         - If the exposure is too dim the algorithm will use this panel brightness as the new minimum and repeat
 - Sky Flats
     - A mode when no flat panel is available, but rather the sky at dusk or dawn should be used to take flat exposures. During the runtime of the flat wizard the exposure time will be constantly adjusted for the changing sky brightness, so the exposures will all have a different exposure time
-    - The algorithm will start with an exposure time of `((Max Exposure Time - Min Exposure Time) / 2)`
+    - The algorithm will start with an exposure time of `((Max Exposure Time + Min Exposure Time) / 2)`
         - If the exposure is too bright the algorithm will use this exposure time as the new maximum and repeat
         - If the exposure is too dim the algorithm will use this exposure time as the new minimum and repeat
     - Once an exposure time is found it will calculate the sky flux change between the exposures and adjust the time for the new exposure accordingly. If the new exposure is not within tolerance, the process repeats again by finding an initial exposure time again.
