@@ -11,7 +11,7 @@ For further information about using the Framing Assistant refer to the [Advanced
     * **Digital Sky Survey**: Fetch an image of the object from a sky survey server. This requires an internet connection
     * **Offline Sky Map**: N.I.N.A.'s own database of objects. Circles representing approximate target sizes will be displayed
         * If you have images in your Sky Survey Cache, they will be shown in the offline sky map
-        * A prerendered cache of cache images spanning the whole sky can be downloaded on the homepage. This cache can be used to have a fast and complete offline framing tool.
+        * A pre-rendered cache of cache images spanning the whole sky can be downloaded on the homepage. This cache can be used to have a fast and complete offline framing tool.
     * **From File**: Load an existing JPEG, GIF, PNG or TIFF image of an object. When an image is provided through **From File**, the configured [Solver](../advanced/platesolving.md) is used to determine the coordinates and orientation of the image. Alternatively, for FITS and XSIF files the WCS header coordinates are used if present.
     * **Cache**: Load images directly from a local cache of images that have already been downloaded from one of the Digital Sky Survey servers or loaded in from files
 * Successfully-solved or downloaded local and sky survey images are cached automatically

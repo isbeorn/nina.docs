@@ -11,7 +11,7 @@ The software can be found at
 1. Visit the project's localization overview via the link above and click on "Translate" ![N.I.N.A Projects](../images/contributing/crowdin-projects.png)
 2. You will see an overview of all currently available languages where you can add new or improved translations 
 3. Hover over the language where you want to start and click on "Translate" ![N.I.N.A. Language Overview](../images/contributing/crowdin-language-overview.png)
-4. In case you are not logged in yet, you need to log into Crowdin now. Either register a new user or use one of the alternative OAauth logins ![Crowdin Login](../images/contributing/crowdin-login.png)
+4. In case you are not logged in yet, you need to log into Crowdin now. Either register a new user or use one of the alternative OAuth logins ![Crowdin Login](../images/contributing/crowdin-login.png)
 5. The next screen will greet you with the actual translation interface and you can now start your translations ![Crowdin Translation Suite](../images/contributing/crowdin-translation-ui.png)
    1. On the left side you can find a list of all available Labels. A red box indicates if no good translation is available yet and these are shown first by default.
    2. In the top middle section you will see the original Text of the label for the default language as well as the label code

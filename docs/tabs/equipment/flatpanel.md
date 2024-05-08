@@ -11,7 +11,7 @@ The Focuser Tab lets you connect and control one of the following flat panels:
 
 1. On the left side you will find the flat device info provided by the driver
 2. To toggle the light on or off you can press the Toggle button
-3. Using the brightness slider you can specifiy a target brightness for your panel. Hit the Set button to set your panel to the chosen brightness
+3. Using the brightness slider you can specify a target brightness for your panel. Hit the Set button to set your panel to the chosen brightness
 4. Using the open/close button lets you open or close the panel if it supports it.
 5. On the bottom you can customize settings for your flat panel
 ### Trained Flat Exposure Times

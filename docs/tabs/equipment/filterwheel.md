@@ -1,6 +1,6 @@
-The Filter Weel Tab lets you connect an ASCOM-compatible filterwheel
+The Filter Wheel Tab lets you connect an ASCOM-compatible filter wheel
 
-![Filterwheel](../../images/tabs/equipments_fw.png)
+![Filter_wheel](../../images/tabs/equipments_fw.png)
 
 1. Filter Wheel information
 2. Select a filter from the combobox you want to switch to and select the change filter button afterwards

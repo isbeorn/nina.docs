@@ -7,19 +7,16 @@ Flat Wizard takes 3 test exposures and attempts to calculate the optimal exposur
 ## Settings
 
 ### Target Name
-When using the image file pattern $$TARGETNAME$$ this field can be used to control how the pattern will be filled for the FLAT and DARKFLAT frames
+When using the image file pattern $$TARGETNAME$$ this field can be used to control how the pattern will be filled for the FLAT DARK frames
 
 ### Flats to take
 The number of flats to take for each filter
 
-### Dark flats to take
-The number of dark flats to take for each exposure time
+### Darks to take
+The number of darks to take for each exposure time
 
-### Binning
-Which binning mode should be used for taking the flats
-
-### Gain
-Determines the camera gain to be used during flat exposure
+!!! note
+    Taking darks is not available for "Sky Flats" mode, as the exposure time for flats in this mode varies between each frame
 
 ### Slew To Zenith
 Depending on the selected value inside the combobox next to the button the telescope will slew to zenith with pier side east or west
@@ -29,18 +26,25 @@ This mode will switch the operational behavior for the flat wizard for different
 
 - Dynamic Exposure
     - In this mode the flat wizard will try to find an exposure time (for a fixed panel brightness if a flat panel is connected)
+    - The algorithm will start with an exposure time of `((Max Exposure Time - Min Exposure Time) / 2)`
+        - If the exposure is too bright the algorithm will use this exposure time as the new maximum and repeat
+        - If the exposure is too dim the algorithm will use this exposure time as the new minimum and repeat
 - Dynamic Brightness
-    - For a fixed exposure time the flat wizard will try to find a flat panel brightness to match the desired exposure time. This requires a controllable flat panel to be connected.
+    - For a fixed exposure time the flat wizard will try to find a flat panel brightness to match the desired exposure time. This requires a controllable flat panel to be connected.    
+    - The algorithm will start with an exposure time of `((Max Panel Brightness - Min Panel Brightness) / 2)`
+        - If the exposure is too bright the algorithm will use this panel brightness as the new maximum and repeat
+        - If the exposure is too dim the algorithm will use this panel brightness as the new minimum and repeat
 - Sky Flats
-    - A mode when no flat panel is available, but rather the sky at dusk or dawn should be used to take flat exposures. During the runtime of the flat wizard the exposure time will be constantly adjusted for the changing sky brightnes, so the exposures will all have a different exposure time
+    - A mode when no flat panel is available, but rather the sky at dusk or dawn should be used to take flat exposures. During the runtime of the flat wizard the exposure time will be constantly adjusted for the changing sky brightness, so the exposures will all have a different exposure time
+    - The algorithm will start with an exposure time of `((Max Exposure Time - Min Exposure Time) / 2)`
+        - If the exposure is too bright the algorithm will use this exposure time as the new maximum and repeat
+        - If the exposure is too dim the algorithm will use this exposure time as the new minimum and repeat
+    - Once an exposure time is found it will calculate the sky flux change between the exposures and adjust the time for the new exposure accordingly. If the new exposure is not within tolerance, the process repeats again by finding an initial exposure time again.
 
 ## Single Mode
 
-### Image Preview
--  The most recent flat image is displayed in this area while determining the optimal flat exposure time. Note that this area will not be updated once the optimal exposure time is determined. This is to speed up the flat acquisition process.
-
-### Flats & Dark Flats to take
--  The number of flats and dark flats the wizard should capture
+### Filter
+-  If a filter wheel is connected, a filter can be chosen for single mode
 
 ### Binning
 -  Sets camera binning level for the exposures
@@ -48,26 +52,14 @@ This mode will switch the operational behavior for the flat wizard for different
 ### Gain
 -  Sets the gain of the camera to use for the exposures. The camera and driver needs to support gain control
 
-### Zenith Slew
--  Slews scope to point at zenith on either east or west side
+### Offset
+-  Sets the offset of the camera to use for the exposures. The camera and driver needs to support offset control
 
-### Single Mode
--  The mode to take flats for a single filter or no filter at all
+### Flat Min Exposure / Min. flat panel brightness
+-  The minimum exposure time Flat Wizard should use or the minimum flat panel brightness (depending on the selected mode)
 
-### Multi Mode
--  The mode to take flats for multiple filters
-
-### Filter
--  If a filter wheel is connected, a filter can be chosen for single mode
-
-### Flat Min Exposure
--  The minimum exposure time Flat Wizard should use
-
-### Flat Max Exposure
--  The maximum exposure time Flat Wizard should use
-
-### Flat Step Size
--  Sets the step size (in seconds) that Flat Wizard should use when comparing test flats while determining the optimal exposure time
+### Flat Max Exposure / Max. flat panel brightness
+-  The maximum exposure time Flat Wizard should use or the maximum flat panel brightness (depending on the selected mode)
 
 ### Histogram Mean Target
 -  Sets the mean ADU that the flat image histogram should use.
@@ -79,7 +71,10 @@ This mode will switch the operational behavior for the flat wizard for different
 
 ### Start Flat Wizard
 -  This button starts the flat acquisition process using the current settings
--  First, Flat Wizard will calculate the optimal exposure time using test exposures, and then take flat the full course of flats as set in (2). You will be prompted to extinguish any light source prior to taking Dark Flats.
+-  First, Flat Wizard will calculate the optimal exposure time using test exposures, and then take flat the full course of flats as set in (2). You will be prompted to extinguish any light source prior to taking Darks.
+
+### Image Preview
+-  On the right side the most recent flat image is displayed in this area while determining the optimal flat exposure time. Note that this area will not be updated once the optimal exposure time is determined. This is to speed up the flat acquisition process.
 
 ### Calculated Target Exposure Time
 -  Once Flat Wizard determines the necessary exposure time, it will use that to take all flats
@@ -100,29 +95,3 @@ In Multi Mode, Flat Wizard settings are saved on a per-filter basis and do not t
 
 ### Filter List
 - Displays all available filters by name and can be expanded by clicking the > icon
-
-## Error Handling
-
-![The Flatwizard error window](../images/tabs/flatwizard3.png)
-
-If Flat Wizard cannot determine the necessary exposure time or there is a conflict with the specified settings, it will display this dialog.
-
-### Error message
-- Flat Wizard will display what the issue with the current configuration is and what should be done to fix the issue
-
-### Current Exposure Calculations
-- Flat Wizard will display current calculated metrics, as the current mean, the maximum bit depth of the camera in ADU and the estimated exposure time
-- Use those to adjust the values in (3)
-
-### Flat Wizard Settings
-- Specify settings for the current flat capture to get successful flats
-- For further detail, see the description of the settings in the [Single Mode](flatwizard.md#single-mode) section
-
-### Reset and Continue
-- Pressing this button will lead to Flat Wizard re-starting from the Flat Min Exposure as set in the settings (3)
-
-### Continue
-- This button will continue the flat capture with the currently determined exposure time, even if outside the defined threshold
-
-### Cancel Flat Wizard
-- This button will abort Flat Wizard's sequence

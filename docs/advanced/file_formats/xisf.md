@@ -34,7 +34,7 @@ Available when a target is set inside a sequence.
 - RA: Right ascension of target
 - Dec: Declination of target
 
-### Meterology
+### Meteorology
 Requires a weather data source to be connected
 
 - RelativeHumidity: Relative humidity percentage
@@ -59,8 +59,8 @@ Requires a camera to be connected
 Requires a camera to be connected
 
 - Temperature: actual sensor temperature (requires a cooling unit)
-- XPixelSize: Pixelsize
-- YPixelSize: Pixelsize
+- XPixelSize: Pixel size
+- YPixelSize: Pixel size
 
 ### Telescope
 Requires a telescope to be connected
@@ -70,7 +70,7 @@ Requires a telescope to be connected
 - Aperture: Focal length / Focal ratio (taken from equipment options)
 
 ### Filter
-Requires a filterwheel to be connected
+Requires a filter wheel to be connected
 
 - Name: Current active filter
 

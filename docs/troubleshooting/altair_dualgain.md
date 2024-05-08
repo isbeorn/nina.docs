@@ -1,6 +1,6 @@
 ## Introduction
 
-Dual gain cameras from Altair include the 294C and the new 269C. These cameras have two gain settings, LCG (Low Conversion Gain) and HCG (High Conversion Gain). The High Conversion Gain mode effectively gives a gain boost, by a multiplier (usually x2). Cameras using the same dual-gain sensors from most other manufacturers have these settings hidden in their driver; they automatically switch at a certain gain setting, and if you analyse the sensor you can see where it happens. Altair cameras do not make this switch automatically, which is why this technote exists.
+Dual gain cameras from Altair include the 294C and the new 269C. These cameras have two gain settings, LCG (Low Conversion Gain) and HCG (High Conversion Gain). The High Conversion Gain mode effectively gives a gain boost, by a multiplier (usually x2). Cameras using the same dual-gain sensors from most other manufacturers have these settings hidden in their driver; they automatically switch at a certain gain setting, and if you analyze the sensor you can see where it happens. Altair cameras do not make this switch automatically, which is why this tech note exists.
 
 ## Configuration
 

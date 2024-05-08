@@ -26,7 +26,7 @@ When having a motorized focuser, the sequence offers a variety of options to ens
 
 *On start* - This one is rather obvious. Most of the time you want to have this on in your first target to ensure that the initial focus position is good.  
 
-*On filter change* - This option is useful when you don't know or don't have your filter offsets set and your filters aren't parfocals and thus having a different focus position. This is a good option when you only have a few filter changes during the course of the night. Otherwise it is beneficial to measure and set filter offsets instead.  
+*On filter change* - This option is useful when you don't know or don't have your filter offsets set and your filters aren't parfocal and thus having a different focus position. This is a good option when you only have a few filter changes during the course of the night. Otherwise it is beneficial to measure and set filter offsets instead.  
 
 *After elapsed time* - Triggering an autofocus after an elapsed time is almost always just a guesstimate and should be avoided. A better metric is the option to focus after an HFR increase.  
 

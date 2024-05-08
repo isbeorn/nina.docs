@@ -12,7 +12,7 @@ For more advanced use cases refer to the [advanced sequencer](../advanced/advanc
 In this section you can adjust which instructions should be considered for the complete set of targets.   
 When *Cool Camera* and *Unpark Mount* are enabled, these instructions will be executed before the *first* target.  
 The same applies to the *Warm Camera* and the *Park Mount* option, except that they will be run after the *last* target.  
-In additon to that there is the option to enable the [auto meridian flip](../../advanced/meridianflip.md) feature that will be enabled for the complete sequence run.  
+In addition to that there is the option to enable the [auto meridian flip](../../advanced/meridianflip.md) feature that will be enabled for the complete sequence run.  
 
 
 ### Sequence Target Tab List  
@@ -140,7 +140,7 @@ On the bottom left area the target specific buttons can be found. Explained from
 5. Moves the selected entry up  
 6. Moves the selected entry down  
 7. Saves target to the previous location
-8. Saves target as a XML file in the specifed folder  
+8. Saves target as a XML file in the specified folder  
 9. Loads a saved Sequence. The opened sequence's settings will overwrite all settings in the current sequence.  
 
 On the bottom right are the target set buttons.
@@ -150,7 +150,7 @@ On the bottom right are the target set buttons.
     Pressing this button will generate an advanced sequence and send it to the [advanced sequencer](../advanced/advanced.md). This will allow a much more granular adjustment of the sequence.
 
     !!! note
-        Pressing the build sequence button after having changed something on the advanced sequencer will overwrite the whole advanced sequence that was already present in the advaanced sequencer tab!
+        Pressing the build sequence button after having changed something on the advanced sequencer will overwrite the whole advanced sequence that was already present in the advanced sequencer tab!
 
 2. **Start Sequence**
 

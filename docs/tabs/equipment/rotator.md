@@ -1,5 +1,5 @@
 The Rotator Tab lets you connect an ASCOM-compatible rotator. 
-A Manual Rotato option is also available
+A Manual Rotator option is also available
 
 ![Rotator](../../images/tabs/equipment_rotator.png)
 
