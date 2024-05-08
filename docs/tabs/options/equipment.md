@@ -63,16 +63,16 @@ FreeImage will deliver the frame exactly as your camera provided it and can be s
 * Input your personal API key for the various weather sources.
 > Click on the question mark to open the respective page for the API key
 
-## Filterwheel
+## Filter wheel
 
-### Filterwheel
+### Filter wheel
 * If a Filter Wheel is connected in [Equipment](../equipment/equipment.md) this window lists the available filters and names.
     * Position: filter position
     * Name: name of the filter as imported from ASCOm driver
     * Focus Offset: offset values that are used at each filter change if "Use FilterWheel Offset" is enabled  
     * Auto Focus Exposure Time: it is possible to specify an AF exposure time for each filter 
 ### Filter + - Buttons
-    * These buttons add and remove filters from the filterwheel list (24)
+    * These buttons add and remove filters from the filter wheel list (24)
 
 ### Filter Wheel Configuration
 
@@ -107,7 +107,7 @@ then the screen should be configured as per the screenshot above, starting with 
 ## Planetarium Settings
 The Planetarium section contains settings for each of the 4 supported planetarium programs.
 Currently N.I.N.A. supports Stellarium, Cartes du Ciel, TheSkyX and HNSKY.
-The connection allows a one way communication of coordaintes from the planetarium software to N.I.N.A. 
+The connection allows a one way communication of coordinates from the planetarium software to N.I.N.A. 
 
 If a planetarium program is configured, coordinates can be imported anywhere in the program that has the Planetarium Sync Button.
 

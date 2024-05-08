@@ -92,7 +92,7 @@ Similar to the ASCOM support N.I.N.A. also offers ASCOM Alpaca device discovery 
 
 ### Additional Device Support
 
-While N.I.N.A. offers extensive support for a wide range of devices directly and through ASCOM drivers, there are [plugins]((tabs/plugins/available.md)) available that can directly or indirectly integrate other devices, providing even more flexibility and options.
+While N.I.N.A. offers extensive support for a wide range of devices directly and through ASCOM drivers, there are [plugins](tabs/plugins/available.md) available that can directly or indirectly integrate other devices, providing even more flexibility and options.
 
 * [AstronSCIENTIFIC Rotarion System](//www.astronscientific.com/tech-info/)
     * Although Rotarion is not directly integrated into the application, it can be fully controlled using the available ASCOM drivers as well as the [Connector Plugin](tabs/plugins/available.md) to switch between different profiles that are set up for the different instruments that are attached to the Rotarion system

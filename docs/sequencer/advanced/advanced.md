@@ -16,7 +16,7 @@ However it is also possible to plan everything without using drag and drop at al
 
 On a high level, the concept of the advanced sequencer is quite simple. A sequence will consist of small building blocks that will execute some logic and the sequencer will execute these blocks one by one from top to bottom.  
 In addition to single building blocks so called *Instruction Sets* can be added too. Think of these as a logical group of instructions. These groups will function in the same way as the whole sequencer, as they will execute the blocks that are part of the group from top to bottom.  
-The *Instruction Sets* can contain so called *Loop Conditions* which will change the flow of operation slightly, as the Instruction Set will repeate its set of instructions for as long as all condition that these loop conditions define are met.
+The *Instruction Sets* can contain so called *Loop Conditions* which will change the flow of operation slightly, as the Instruction Set will repeat its set of instructions for as long as all condition that these loop conditions define are met.
 ![Sequencer Flow](../../images/sequencer/Sequencer_Flow.png)
     
 ## Instructions
@@ -33,7 +33,7 @@ Once an instruction is part of the sequencer, it will show the specific options 
 ![Instructions in Detail](../../images/sequencer/Sequencer_InstructionsDetails.png)
 
 ### Customizing the list of instructions
-With the gears icon in the sidebar a customizing mode can be enabled. In this mode you can flag each instruction to be hidden. When it is flagged the instruction will no longer be visible in the sidebar or in the contextmenus. This is useful if you don't have a specific type of equipment for example and don't want to see instructions for it cluttering your user interface. Instructions that are part of the sequence, but are hidden from the sidebar will still be visible and active in the sequence.  
+With the gears icon in the sidebar a customizing mode can be enabled. In this mode you can flag each instruction to be hidden. When it is flagged the instruction will no longer be visible in the sidebar or in the context menus. This is useful if you don't have a specific type of equipment for example and don't want to see instructions for it cluttering your user interface. Instructions that are part of the sequence, but are hidden from the sidebar will still be visible and active in the sequence.  
 ![Disable instruction in sidebar](../../images/sequencer/sidebar_disable_instruction.png)
 
 
@@ -60,7 +60,7 @@ This special set of instructions behaves similar to a sequential instruction set
 ![Deep Sky Object Set](../../images/sequencer/Sequencer_DSOSet.png)
 
 ## Loop Conditions
-Loop conditions will drive the behavior of an instruction set. Without a condition, an instruction set will just process each sequence item inside once and is finished. This behavior will be changed, when loop conditions are attached. When an instruction set has a loop condition attached, it will process its items and loop itself again as long as the attached loop conditions are fullfilled. Once at least one of these loop conditions is not fullfilled anymore (e.g. a condition to loop until a specific time and the time has passed) the current instruction will be finished and afterwards the rest of the instructions inside this set will be skipped as well as the instruction set marked as finished. Conditions will be evaluated after each instruction.
+Loop conditions will drive the behavior of an instruction set. Without a condition, an instruction set will just process each sequence item inside once and is finished. This behavior will be changed, when loop conditions are attached. When an instruction set has a loop condition attached, it will process its items and loop itself again as long as the attached loop conditions are fulfilled. Once at least one of these loop conditions is not fulfilled anymore (e.g. a condition to loop until a specific time and the time has passed) the current instruction will be finished and afterwards the rest of the instructions inside this set will be skipped as well as the instruction set marked as finished. Conditions will be evaluated after each instruction.
 These conditions can be dragged and dropped into the loop condition section inside an instruction set.
 ![Loop Conditions](../../images/sequencer/Sequencer_LoopConditions.png)
 Loop conditions can also be directly attached to an instruction set by clicking the + icon next to the loop conditions section inside an instruction set.  
@@ -97,14 +97,14 @@ User specific templates are listed below the basic templates.
 To create a user template an instruction needs to be added to the sequencer. Then the desired instructions, triggers and loop conditions should be added to the instruction set. Once the instruction set is set up with all desired parameters a click on the save button next to the instruction set will save it as a template. Then the name of the instruction set will be taken for the template name and a new template will be shown in the sidebar. When a name is already taken, the application will ask if the existing template should be overwritten.
 ![Save As Template](../../images/sequencer/Sequencer_SaveAsTemplate.png)
 
-Furthermore it is possbile to just drag and drop the instruction set into the template area to create a new one.
+Furthermore it is possible to just drag and drop the instruction set into the template area to create a new one.
 ![Save As Template Drag Drop](../../images/sequencer/Sequencer_SaveAsTemplateDragDrop.png)
 
 !!! tip
     Templates using a Deep Sky Object Set will be available for selection in the sky atlas and framing assistant to be used to add targets to a sequence
 
 ## Targets
-The targets tab offers the ability to store targets for later use. They contain a deep sky object sequence and can be dragged and dropped into the sequencer just like templates. In contrast to templates, these deep sky object sequences will auto populate the target coordiantes and rotation info as they were saved.  
+The targets tab offers the ability to store targets for later use. They contain a deep sky object sequence and can be dragged and dropped into the sequencer just like templates. In contrast to templates, these deep sky object sequences will auto populate the target coordinates and rotation info as they were saved.  
 ![Templates](../../images/sequencer/Sequencer_TargetsTab.png)
 
 To use a target, simply drag it into the sequencer. Its underlying instructions will then be loaded into the sequencer.

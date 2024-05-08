@@ -19,16 +19,16 @@ A trigger to simply run an autofocus after a set amount of exposures. As the amo
 
 ### AF After Filter Change
 ![AF After Filter Change](../../images/sequencer/trigger/afafterfilter.png)  
-When the filter wheel changes its filters and no filter offsets have been calcualted to automatically adjust the focuser position for the change of focus due to the filter shift, this trigger can help to mitigate the problem by running an auto focus run when a filter changes during imaging.
+When the filter wheel changes its filters and no filter offsets have been calculated to automatically adjust the focuser position for the change of focus due to the filter shift, this trigger can help to mitigate the problem by running an auto focus run when a filter changes during imaging.
 
 ### AF After HFR Increase
 ![AF After HFR Increase](../../images/sequencer/trigger/afafterhfr.png)  
-This trigger will monitor the history of images done during the sequence. It will take all exposures up until the last autofocus (or all if no autofocus has happened yet) and filter them for the currently active filter. The first point after the autofocus will be taken as reference point as well as the last n points, where n is the specified sample size. Out of the last n points the trend will be determined and compared to the reference point. If the trend is above the specified amount of percentage an autofocus will be triggerd.  
+This trigger will monitor the history of images done during the sequence. It will take all exposures up until the last autofocus (or all if no autofocus has happened yet) and filter them for the currently active filter. The first point after the autofocus will be taken as reference point as well as the last n points, where n is the specified sample size. Out of the last n points the trend will be determined and compared to the reference point. If the trend is above the specified amount of percentage an autofocus will be triggered.  
 This is a decent generic trigger if you don't know about the temperature sensitivity of your equipment, but it requires that your autofocus results are consistent and that the seeing is not bad.
 
 ### AF After Temperature Change
 ![AF After Temperature Change](../../images/sequencer/trigger/afaftertemp.png)  
-When the temperature rises or falls most equipment will slightly shift its focus. When you roughly know at which temperature your equipment shifts focus enough to be out of the critical focus zone, this trigger can help you to automatically run the autofocus run when a specifed amount of temperature drift has happened.
+When the temperature rises or falls most equipment will slightly shift its focus. When you roughly know at which temperature your equipment shifts focus enough to be out of the critical focus zone, this trigger can help you to automatically run the autofocus run when a specified amount of temperature drift has happened.
 *Requires a focuser with a temperature probe*
 
 ### AF After Time

@@ -15,10 +15,10 @@ The number of focus points that will be used on each side of perfect focus by th
 The exposure time in seconds that will be used by autofocus, if filter specific times in the list below are not set
 
 ### AF Method
-Method used to detect datapoints for autofocus.  
+Method used to detect data points for autofocus.  
 
 * Star HFR: This is the default method that will work reliably with images containing stars  
-* Contrast Detection: An alternative method to focus on terrestial objects or planets  
+* Contrast Detection: An alternative method to focus on terrestrial objects or planets  
 
 ### AF disable Guiding
 Activate to pause guiding during AF routines. Enable this setting when using an Off-Axis Guider. For Guidescopes it is recommended to be left off.
@@ -63,10 +63,10 @@ The focuser backlash in the IN (decreasing position) and OUT (increasing positio
     The recommended direction is OUT, as then the autofocus routine will need less compensation. Use IN only when your equipment requires this direction to work properly.
 
 ### Binning
-The binning to be used for Autofocus exposures, if filter specific binnings in the list below are not set
+The binning to be used for Autofocus exposures, if filter specific binning in the list below is not set
 
 ### R² Threshold
-This setting refers to the [coefficient of determination](https://en.wikipedia.org/wiki/Coefficient_of_determination) which is used to grade the [calculated fitting](./autofocus.md#af-curve-fitting) of an autofocus run to the actual datapoints. When an autofocus run leads to an R² value that is below this threshold, the autofocus run will be deemed as failed. This can happen due to bad parameters, clouds rolling in and other problems during an autofocus run. An ideal autofocus run will have an R² value that is easily beyond 0.95. 
+This setting refers to the [coefficient of determination](https://en.wikipedia.org/wiki/Coefficient_of_determination) which is used to grade the [calculated fitting](./autofocus.md#af-curve-fitting) of an autofocus run to the actual data points. When an autofocus run leads to an R² value that is below this threshold, the autofocus run will be deemed as failed. This can happen due to bad parameters, clouds rolling in and other problems during an autofocus run. An ideal autofocus run will have an R² value that is easily beyond 0.95. 
 
 
 

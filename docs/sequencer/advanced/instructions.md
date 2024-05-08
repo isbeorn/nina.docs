@@ -80,7 +80,7 @@ This instruction will take an exposure using the specified exposure time, binnin
 ![Take Many Exposures](../../images/sequencer/instructions/camera_manyexposures.png)  
 Similar to the "Take Exposure" instruction, but with the added ability to specify a number of exposures to complete before proceeding.
 
-### Take Subfame Exposure
+### Take Subframe Exposure
 ![Take Subframe Exposure](../../images/sequencer/instructions/take_subframe_exposure.png)
 Similar to the "Take Exposure" instruction, but with the added ability to specify a subframe percentage relative to the center.
 
@@ -117,7 +117,7 @@ Opens the dome shutter
 
 ### Park Dome
 ![Park Dome](../../images/sequencer/instructions/dome_park.png)  
-Parks the dome to its specified home positon  
+Parks the dome to its specified home position  
 *Requires a dome driver that is capable of parking*
 
 ### Slew Dome Azimuth
@@ -162,9 +162,9 @@ Turns the flat panel light on or off depending on the setting
 This instruction will look up the trained flat exposures according to the specified filter, exposure time, gain and offset, close the flat panel (if available), set the flat panel brightness, turn it on, take the flat frames for the given amount, turns off the flat panel and finally opens the cover again (if available and if "keep closed" is off)  
 *Requires a camera to be connected and trained flat values being set in the [flat panel tab](../../tabs/equipment/flatpanel.md) that match the values in the instruction*
 
-### Trained Dark Flat Exposure
-![Trained Dark Flat Exposure](../../images/sequencer/instructions/flat_traineddark.png)  
-This instruction will look up the trained flat exposures according to the specified filter, exposure time, gain and offset, close the flat panel (if available), turn it off, take the dark flat frames for the given amound and finally opens the cover again (if available and if "keep closed" is off)  
+### Trained Dark Exposure
+![Trained Dark Exposure](../../images/sequencer/instructions/flat_traineddark.png)  
+This instruction will look up the trained flat exposures according to the specified filter, exposure time, gain and offset, close the flat panel (if available), turn it off, take the dark frames for the given amount and finally opens the cover again (if available and if "keep closed" is off)  
 *Requires a camera to be connected and trained flat values being set in the [flat panel tab](../../tabs/equipment/flatpanel.md) that match the values in the instruction*
 
 ## Focuser
@@ -209,7 +209,7 @@ Issues the guider to [dither](../../advanced/dithering.md)
 
 ### Start Guiding
 ![Start Guiding](../../images/sequencer/instructions/guider_start.png)  
-Starts guiding if not already started. In addition a toggle to force the calibration can be enabled. Then the guider will be forced to run a calibartion, even if a valid calibration is already available. When this toggle is off, the guider will determine by itself if calibration is necessary.
+Starts guiding if not already started. In addition a toggle to force the calibration can be enabled. Then the guider will be forced to run a calibration, even if a valid calibration is already available. When this toggle is off, the guider will determine by itself if calibration is necessary.
 
 ### Stop Guiding
 ![Stop Guiding](../../images/sequencer/instructions/guider_stop.png)  

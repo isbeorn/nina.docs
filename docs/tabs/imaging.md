@@ -62,7 +62,7 @@ This panel displays the focuser status and lets you manually move it to the desi
     * Double arrows <<  >> : five times the Auto Focus Step Size
 
 
-### E. Rotator ![roticon](../images/tabs/imaging_rotatoricon.PNG)  
+### E. Rotator ![rotatoricon](../images/tabs/imaging_rotatoricon.PNG)  
 Here you can control the Rotator
 > Requires a connected ASCOM Rotator
 
@@ -131,7 +131,7 @@ In this panel  all the important information about the last captured image are r
 2. Image histogram of the last captured image
 
 ### M. HFR History  ![HFRicon](../images/tabs/imaging_HFRicon.PNG)  
-When automatic HFR (Half-Flux-Radius) star detection is ON, this panel will diplay the history of HFR values and number of stars used to evaluate the HFR for each exposure.
+When automatic HFR (Half-Flux-Radius) star detection is ON, this panel will display the history of HFR values and number of stars used to evaluate the HFR for each exposure.
 The chart is limited to displaying a moving window of the last 100 exposures. 
 
 
@@ -158,7 +158,7 @@ The imaging panel allows you to take a single exposure or live view when support
 7. Takes the exposure
 
 ### O. Image History ![imagehistory](../images/tabs/imaging_historyicon.PNG)  
-The Image History panel shows a list of thumbnalis of the current sequence captured images with basic statistics: Mean value in ADU, average HFR, Filter used, duration and capture time.
+The Image History panel shows a list of thumbnails of the current sequence captured images with basic statistics: Mean value in ADU, average HFR, Filter used, duration and capture time.
 > By double-clicking on any of the thumbnails the relative image will be opened in the Image panel (A)
 
 ![history](../images/tabs/imaging_history.png)

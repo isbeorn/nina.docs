@@ -18,7 +18,7 @@ Filtering and modifying a search can be done by various object criteria and para
 #### Observation filter
 ![The SkyAtlas tab](../images/tabs/SkyAtlas_Altitude_Filter.png)  
 
-To easily find suitable targets for the current night an altitude filter can be used in conjuction with a from and through time and how long the target should be visible.  
+To easily find suitable targets for the current night an altitude filter can be used in conjunction with a from and through time and how long the target should be visible.  
 Using this filter can give you a great preview of what to expect for the night as you will then only see targets that are visible during the specified time range for at least the specified amount of time.  
 
 ### Search result order
@@ -52,7 +52,7 @@ An example of a search result:
 6. Surface brightness of the object, if available. The actual full brightness of the object. A value of 99.9 indicates an unknown surface brightness
 7. Apparent size of the object, if available. Shows you the apparent size in arcminutes or degrees, depending on size.
 8. Displays the target object's altitude, the direction point at which it will transit, the darkness phase of the current day, and includes a vertical marker for the current time. The accuracy of the altitude curve requires that the latitude and longitude be set under **Options > General > Astrometry**.
-    * Tthe line with a specific peak is the actual altitude of the object at any given time, generally: the higher, the better. Transit north or south tells you whether the object will pass to your south or north.
+    * The line with a specific peak is the actual altitude of the object at any given time, generally: the higher, the better. Transit north or south tells you whether the object will pass to your south or north.
     * The Now line shows you your current time so you can cross reference the current altitude of the object.
     * The darker lines show you the start of the nautical and astro dark.
     * Furthermore a custom horizon will be displayed if it is set in the Astrometry settings

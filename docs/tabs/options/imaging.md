@@ -34,7 +34,7 @@ The Imaging options tab contains settings for file formats, save directories, Au
 * A list of all available keywords and their usage are described in the table below the pattern
 * Static text is also possible and will be kept
 * A preview of the file pattern is also displayed below
-* Furthermore you can expand this section to also specify different file patterns for FLAT, DARK BIAS and DARKFLAT images. If no pattern is specified for those, the default image pattern will be used instead
+* Furthermore you can expand this section to also specify different file patterns for FLAT, DARK and BIAS images. If no pattern is specified for those, the default image pattern will be used instead
 
 !!! note
     You should avoid using non-ascii characters when filling the Target Name value in `FlatWizard`, `Legacy Sequencer`, `Advanced Sequencer` or `Imaging Snapshot`. Value in these fields will be passed to file pattern `$$TARGETNAME$$`. Due to compatibility requirements on FITS format and other image processing software, `$$TARGETNAME$$` does not allow non-ascii characters. Greek characters are replaced using a special translation table, and other non-ascii characters are replaced with "_", for example   
@@ -60,8 +60,8 @@ The Imaging options tab contains settings for file formats, save directories, Au
 
 
 !!! tip
-    When you span a time range with *Mintues after Meridian* and *Max. Minutes after Meridian* it is possible to immediately flip without losing any time to waiting.
-    E.g. you set it to 5 Minutes and 10 Max Minutes, and when an exposure finishes in between this time range the application can immediately flip the scope instead of having to wait for the remaining time where an expsoure would not fit in.
+    When you span a time range with *Minutes after Meridian* and *Max. Minutes after Meridian* it is possible to immediately flip without losing any time to waiting.
+    E.g. you set it to 5 Minutes and 10 Max Minutes, and when an exposure finishes in between this time range the application can immediately flip the scope instead of having to wait for the remaining time where an exposure would not fit in.
     
 ### Use Telescope Side of Pier
 * Almost all mount drivers can tell N.I.N.A which side of the pier/tripod the telescope is on which is either west or east. Having this enabled will make the flip determination logic much more reliable and robust, as no assumptions about the pier state have to be made.  
@@ -108,8 +108,8 @@ The Imaging options tab contains settings for file formats, save directories, Au
 
 ### Unlinked Stretch
 * When a OSC camera is used, debayering the image generates 3 channels R,G and B
-* By default the autostretch in imaging is linked and may result in unbalanced colour channels
-* Enabling this will enable debayer image, and should result in balanced colour channels when stretching
+* By default the autostretch in imaging is linked and may result in unbalanced color channels
+* Enabling this will enable debayer image, and should result in balanced color channels when stretching
 *This setting is the memory and processing heavy and should not be activated for resource restricted machines*
     
 ### Star Sensitivity

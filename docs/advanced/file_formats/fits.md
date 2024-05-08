@@ -48,8 +48,8 @@ Requires a camera to be connected
 - GAIN: Gain
 - OFFSET: Offset (if camera can set an offset)
 - EGAIN: Electrons per A/D unit (only available for some cameras)
-- XPIXSZ: X-Pixelsize
-- YPIXSZ: Y-Pixelsize
+- XPIXSZ: X-Pixel size
+- YPIXSZ: Y-Pixel size
 - SET-TEMP: temperature set point (requires a cooling unit)
 - CCD-TEMP: actual sensor temperature (requires a cooling unit)
 - READOUTM: Sensor readout mode
@@ -67,10 +67,10 @@ Requires a telescope to be connected
 - DEC: Current telescope's declination coordinates
 
 
-## Filterwheel Headers
-Requires a filterwheel to be connected
+## Filter wheel Headers
+Requires a filter wheel to be connected
 
-- FWHEEL: Name of filterwheel
+- FWHEEL: Name of filter wheel
 - FILTER: Current active filter
 
 ## Focuser Headers

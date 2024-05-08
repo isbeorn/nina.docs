@@ -55,7 +55,7 @@ Some additional parameters are available:
 * Use FilterWheel Offsets (which does not directly affect auto-focus)
 
 !!! Note
-	The Default Auto Focus Exposure Time won't be used if a filter wheel is connected, and Auto Focus Exposure Times have been set up in the Filterwheel section of the Options -> Equipment view. Instead, the per-filter exposure times will be used depending on the filter set at the time. This can be very convenient for imagers doing both broadband and narrowband (such as HaRGB). More details on how to set this up are available in the [Equipment Options Section](../tabs/options/equipment.md#filter-wheel-configuration).
+	The Default Auto Focus Exposure Time won't be used if a filter wheel is connected, and Auto Focus Exposure Times have been set up in the Filter wheel section of the Options -> Equipment view. Instead, the per-filter exposure times will be used depending on the filter set at the time. This can be very convenient for imagers doing both broadband and narrowband (such as HaRGB). More details on how to set this up are available in the [Equipment Options Section](../tabs/options/equipment.md#filter-wheel-configuration).
 
 ## Auto-Focus algorithm
 

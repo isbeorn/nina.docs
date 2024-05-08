@@ -43,9 +43,9 @@ The General Settings tab allows you to manage N.I.N.A. in terms of all general s
 
 ## Color Schemes
 ### Current UI Color Scheme
-* Enables customisation of the color scheme of N.I.N.A. 
+* Enables customization of the color scheme of N.I.N.A. 
 * Offers many different themes via the drop down menu 
-* Alternatively, the user can define each colour for each specific element and save to the custom theme by clicking the button
+* Alternatively, the user can define each color for each specific element and save to the custom theme by clicking the button
 
 ### Alternative UI Color Scheme
 * Identical functionality to (9) however this scheme is intended for use in the dark (i.e. a black/red theme to preserve night vision)

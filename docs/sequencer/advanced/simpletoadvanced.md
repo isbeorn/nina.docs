@@ -40,11 +40,11 @@ Just like the start options, the end options will be put into the bottom most pa
 
 ### Target -> Target Area
 What's left now is in the middle section of the sequencer. This area is reserved for all the targets that you want to image. A *deep sky object sequence* per target will be generated here containing all imaging instructions as well as instructions to prepare the target, e.g. centering the target, starting guiding and running an initial autofocus.
-To show a high level view of the target, the next screenshot shows the internal instructions collapsed for a better overview. Simply said, a target has a similar structure like the outer seqeunce, as it has start instructions, imaging instructions and end instructions.
+To show a high level view of the target, the next screenshot shows the internal instructions collapsed for a better overview. Simply said, a target has a similar structure like the outer sequence, as it has start instructions, imaging instructions and end instructions.
 ![Target Area](../../images/sequencer/simpletoadvanced/targetarea.png)
 
 ### Target Options -> Target preparation instructions
-When starting the target, the target options from the legacy sequencer are put into this *Target preparation instructions* area. In the simple seuquencer it was enabled to slew, center & rotate, to start guiding and to start autofocus on start. The first imaging instruction was set to the L filter, so the start needs to switch to that filter too. These options are directly translated into the preparation block.
+When starting the target, the target options from the legacy sequencer are put into this *Target preparation instructions* area. In the simple sequencer it was enabled to slew, center & rotate, to start guiding and to start autofocus on start. The first imaging instruction was set to the L filter, so the start needs to switch to that filter too. These options are directly translated into the preparation block.
 ![Target Preparation](../../images/sequencer/simpletoadvanced/targetpreparation.png)
 
 ### Target closure instructions
@@ -61,7 +61,7 @@ Hopefully this explanation gives you a good overview about how an advanced seque
 **So why bother with the advanced sequencer? Well, now that we understand the basics, we can tackle the problems that were mentioned earlier.**
 
 ## Problem 1 - Stop repeating yourself
-The advanced sequencer can utilize [Loop Conditions](./conditions.md) to repeat sequence blocks. These *loop conditions* have, as their name suggest, certain conditions that should be fullfilled and for as long as these conditions are fullfilled they will loop the instruction set they are placed inside.  
+The advanced sequencer can utilize [Loop Conditions](./conditions.md) to repeat sequence blocks. These *loop conditions* have, as their name suggest, certain conditions that should be fulfilled and for as long as these conditions are fulfilled they will loop the instruction set they are placed inside.  
 So for this example we could utilize a condition called *Loop for iterations* and set it to two iterations. Then we can remove 4 of the instructions without losing anything.
 ![Loop For Two](../../images/sequencer/simpletoadvanced/loopfortwo.png)
 
@@ -73,7 +73,7 @@ While the imaging loop runs the time to take these exposures might still exceed 
 To solve Problem 3, we also need to solve Problem 4. This can be solved by setting up [filter offsets](../../tabs/options/autofocus.md#filter-offsets). Filter offsets are a very powerful feature and with these it will no longer be necessary to re-focus when switching between filters, as the focus shift due to slightly different optical paths with different filters will be counteracted by these.  
 Setting these up is explained in detail on the linked page, so before continuing please determine the offsets and maintain these in the [autofocus options](../../tabs/options/autofocus.md).  
 Now that filter offsets are set up, the *AF After Filter Change* can be removed. What can also be removed now is the amount of exposures per *Smart Exposure*. This can be safely turned to four exposure each now. Furthermore the *Loop For Iterations* can be removed, as the *Loop Until Time* is sufficient.
-The sequence will take 4 exposures, dither, go to the next filter and for each of the filters and then repeat it again and again until *(Nautical) Dawn*. As the individual instructions take only four images and continue, the chances of having a big discrepency in amount of exposures for a filter is minimized.
+The sequence will take 4 exposures, dither, go to the next filter and for each of the filters and then repeat it again and again until *(Nautical) Dawn*. As the individual instructions take only four images and continue, the chances of having a big discrepancy in amount of exposures for a filter is minimized.
 ![With Offsets](../../images/sequencer/simpletoadvanced/withoffsets.png)
 
 ## Problem 5 - Dithering too many times
@@ -82,7 +82,7 @@ Most of the issues are resolved now and already some time has been saved by remo
 This one is a real time saver!
 
 ## Summary
-So to sum it up, we went from a legacy sequence and having to calculate how many exposures *could* potentiall fit into a night worth of imaging to a highly optimized sequence, that will run a loop of LRGB filters for the whole night and will get as many frames as possible for the duration of the complete night. We don't have to worry about the amount of subs being taken and will always end up with a set of images to create a full color LRGB image. In addition to that we drastically reduced the amount of dithering required, giving us back at least 20 minutes of imaging time.
+So to sum it up, we went from a legacy sequence and having to calculate how many exposures *could* potential fit into a night worth of imaging to a highly optimized sequence, that will run a loop of LRGB filters for the whole night and will get as many frames as possible for the duration of the complete night. We don't have to worry about the amount of subs being taken and will always end up with a set of images to create a full color LRGB image. In addition to that we drastically reduced the amount of dithering required, giving us back at least 20 minutes of imaging time.
 
 !!!note
     Hopefully this guide will help you reduce the fear of using the advanced sequencer and also give you the confidence and tools to create highly optimized sequences. This set of examples is only the beginning and the capabilities to optimize even further and adjust it to your specialized needs and equipment is now possible!
