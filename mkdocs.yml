@@ -120,9 +120,9 @@ markdown_extensions:
     
 plugins:
     - search
-    # - with-pdf:
-    #     toc_level: 3
-    #     output_path: pdf/Manual.pdf
-    #     cover_subtitle: An astrophotography imaging suite
+    - with-pdf:
+        toc_level: 3
+        output_path: pdf/Manual.pdf
+        cover_subtitle: An astrophotography imaging suite
 
 copyright: Copyright &copy; 2019-2024 Stefan Berg and the N.I.N.A. contributors
