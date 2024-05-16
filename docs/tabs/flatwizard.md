@@ -7,7 +7,7 @@ Flat Wizard takes 3 test exposures and attempts to calculate the optimal exposur
 ## Settings
 
 ### Target Name
-When using the image file pattern $$TARGETNAME$$ this field can be used to control how the pattern will be filled for the FLAT DARK frames
+You can manually specify a name in this field and that name will then be used to populate the image file pattern $$TARGETNAME$$ for the FLAT and DARK frames
 
 ### Flats to take
 The number of flats to take for each filter
