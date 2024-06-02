@@ -1,4 +1,4 @@
-![N.I.N.A. Logo](./images/nina-logo-bright.png)
+![N.I.N.A. Logo](./images/nina-logo.png)
 
 ## About N.I.N.A.
 
