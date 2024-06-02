@@ -128,6 +128,8 @@ markdown_extensions:
     
 plugins:
     - search
+    - offline:
+        enabled: !ENV [OFFLINE, false]
     - with-pdf:
         toc_level: 3
         output_path: pdf/Manual.pdf
