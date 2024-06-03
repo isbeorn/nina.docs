@@ -66,6 +66,7 @@ nav:
             - Plate Solving: 'advanced/platesolving.md'       
         - Troubleshooting:
             - General: 'troubleshooting/general.md'
+            - ASCOM Connection Issues: 'troubleshooting/ascom_connection_issues.md'
             - iOptron Mount Setup: 'troubleshooting/ioptron.md'
             - EQMOD Setup: 'troubleshooting/eqmod.md'
             - Altair Dual Gain: 'troubleshooting/altair_dualgain.md'
@@ -128,6 +129,8 @@ markdown_extensions:
     
 plugins:
     - search
+    - offline:
+        enabled: !ENV [OFFLINE, false]
     - with-pdf:
         toc_level: 3
         output_path: pdf/Manual.pdf
