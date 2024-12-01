@@ -46,22 +46,15 @@ git checkout develop
 ```
 git submodule update --init --recursive
 ```
-## Navigation in Visual Studio
+## Keeping your repository up-to-date with the upstream root repository
 
-1. Navigate to your local clone and open "NINA.sln"
-![Navigate to solution file](../images/setup/Clone4.png)
-2. Visual studio has a built in git UI, which you can find on the lower right called "Team Explorer"
-![Visual Studio Overview](../images/setup/VisualStudio1.png)
-3. Inside the Team Explorer you can get a visual list of all available branches
-![Team Explorer](../images/setup/VisualStudio2.png)
-4. Here you can see all branches of your forked repository. Note that the upstream we added earlier is not yet displayed.4. Expand "remotes\origin" and double click on "develop" to switch to this branch
-![Branches](../images/setup/VisualStudio3.png)
-5. Click the back button (top left) and click on "Sync"
-![Sync](../images/setup/VisualStudio4.png)
-6. Click on "Fetch" and select "upstream" to fetch all branches that are inside "upstream", which is the root repository
-![Fetch](../images/setup/VisualStudio5.png)
-7. Now navigate back and select the "Branches" again. Now the "upstream" branches are also available.
-![See branches and remotes](../images/setup/VisualStudio6.png)
-8. To fetch and merge the latest code of the root repository you can right click on "develop", click on "fetch" and "Merge from..." afterwards.
-9. Now your branch is up to date and you can start coding.
-![Fetch code](../images/setup/VisualStudio7.png)
+1. Open command line and navigate to your project folder
+2. Fetch changes from the upstream repository
+```
+git fetch upstream
+```
+3. Merge incoming changes from the upstream develop branch into your develop branch
+```
+git merge upstream develop
+```
+4. In case you run into unresolvable merge conflicts you have to solve these in your favorite merge tool
