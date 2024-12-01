@@ -55,6 +55,6 @@ git fetch upstream
 ```
 3. Merge incoming changes from the upstream develop branch into your develop branch
 ```
-git merge upstream develop
+git merge upstream/develop
 ```
 4. In case you run into unresolvable merge conflicts you have to solve these in your favorite merge tool
