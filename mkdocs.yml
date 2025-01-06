@@ -137,4 +137,4 @@ plugins:
         cover_subtitle: An astrophotography imaging suite
         enabled_if_env: ENABLE_PDF_EXPORT
 
-copyright: Copyright &copy; 2019-2024 Stefan Berg and the N.I.N.A. contributors
+copyright: Copyright &copy; 2019-2025 Stefan Berg and the N.I.N.A. contributors
