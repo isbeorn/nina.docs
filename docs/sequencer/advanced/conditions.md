@@ -41,7 +41,7 @@ Loop an instruction set until a specific point in time. The time can either be s
     Current time: 08:00h | Loop until time: 18:00h -> **Condition will be skipped** because the roll over at noon has not happened yet  
 
     **When using calculated times for dawn and dusk:**  
-    Instead of using noon to roll over to the next day the rollover will instead happen at the "opposite" side of the condition. For example when you loop until dawn, the roll over will be at sunset
+    Instead of using noon to roll over to the next day the rollover will instead happen at the "opposite" side of the condition at dawn or dusk. For example when you loop until astronomical dawn, the roll over will be at dusk
 
 
 

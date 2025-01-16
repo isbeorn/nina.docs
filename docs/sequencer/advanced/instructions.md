@@ -333,7 +333,7 @@ Wait until a specific point in time. The time can either be set manually or auto
     Current time: 08:00h | Wait for time: 18:00h -> **Instruction will be skipped** because the roll over at noon has not happened yet  
 
     **When using calculated times for dawn and dusk:**  
-    Instead of using noon to roll over to the next day the rollover will instead happen at the "opposite" side of the instruction. For example when you wait until dusk, the roll over will be at sunrise
+    Instead of using noon to roll over to the next day the rollover will instead happen at the "opposite" side of the instruction at dawn or dusk. For example when you wait until astronomical dawn, the roll over will be at dusk
 
 ### Wait For Time Span
 ![Wait For Time Span](../../images/sequencer/instructions/utility_waitfortimespan.png)  
