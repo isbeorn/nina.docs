@@ -55,7 +55,7 @@ The General Settings tab allows you to manage N.I.N.A. in terms of all general s
 > This can be done from anywhere in the application
 
 ## Astrometry Settings
-* Hemisphere, Latitude and Longitude can be set here
+* Hemisphere, Latitude and Longitude can be set here as well as Observer name, Observatory name and Site name
 
 ### NMEA GPS Button
 * Loads coordinates from a NMEA GPS device if connected

@@ -16,10 +16,14 @@ Many applications can make use of these headers (e.g. PixInsight during processi
 ### Time
 - Start: UTC time at exposure start
 
+## Observer
+- Name: Observer name specified in astrometry options
+
 ### Location
 - Elevation: Elevation (currently taken from a connected telescope)
 - Latitude: Latitude taken from the astrometry settings
 - Longitude: Longitude taken from the astrometry settings
+- Name: Site name specified in astrometry options
 
 ### Center
 Requires a telescope to be connected
