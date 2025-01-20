@@ -4,7 +4,7 @@ The advanced sequencer makes it possible to completely plan and customize an ima
 The main area will contain the actual instructions. There it is possible to add the instructions, customize the parameters and see the progress of the sequencer.  
 Additionally the area is split into three sections to manage sequence start instructions, target instructions and end of sequence instructions.
   
-On the bottom left it is possible to save and load a complete sequence run while on the bottom right it is possible to start and stop a sequence.  
+On the bottom left it is possible to lock the sequencer from any manual input, disable the drag & drop as well as save and load a complete sequence run. On the bottom right it is possible to start and stop a sequence.  
 The right sidebar will show all available instructions as well as templates and targets. These are described in more detail below.
 ![Overview](../../images/sequencer/Sequencer_Overview.png)
 
