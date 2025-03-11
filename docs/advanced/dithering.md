@@ -10,7 +10,7 @@ Because dithering is an operation that must be coordinated with guiding (remembe
 N.I.N.A. offers three different ways to perform dithering:
 
 1. Standard dithering through PHD2, MGEN2, or MetaGuide
-2. Built-in dithering using N.I.N.A.'s Direct Guider function
+2. Built-in dithering using N.I.N.A.'s Mount Dither function
 
 The desired way of dithering is based on the connected device in the **Equipment > Guider** tab.
 
@@ -20,7 +20,7 @@ This is the typical scenario for most users. The user has a single main camera, 
 
 ### Built-in Dithering
 
-There are some cases where guiding equipment isn't needed or available, but you still want to dither. This can happen if you have a very high end mount with encoders or with small portable setups. N.I.N.A. can perform dithers directly via its **Direct Guider** which manually slews the telescope very small distances.
+There are some cases where guiding equipment isn't needed or available, but you still want to dither. This can happen if you have a very high end mount with encoders or with small portable setups. N.I.N.A. can perform dithers directly via its **Mount Dither** which manually slews the telescope very small distances.
 
 ## Requirements
 
