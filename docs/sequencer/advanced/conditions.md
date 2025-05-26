@@ -22,10 +22,12 @@ When this condition is part of a "Deep Sky Object Sequence" the coordinates will
 Loop an instruction set until a specific point in time. The time can either be set manually or automatically determined based on criteria and an offset specified in minutes.  
 **Time**: Manually entered time  
 **Sunset**:  The time when the sun gets below 0° of the horizon  
+**Civil Dusk**: The time when the sun gets below 6° of the horizon  
 **Nautical Dusk**: The time when the sun gets below 12° of the horizon  
 **Astronomical Dusk**: The time when the sun gets below 18° of the horizon  
 **Astronomical Dawn**: The time when the sun gets above 18° of the horizon  
 **Nautical Dawn**: The time when the sun gets above 12° of the horizon  
+**Civil Dawn**: The time when the sun gets above 6° of the horizon  
 **Sunrise**: The time when the sun gets above 0° of the horizon  
 **Meridian**: When a target is set this will be the time the target will cross the meridian  
 
