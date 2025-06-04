@@ -1,4 +1,4 @@
-On the available plugins tab all plugins that have been pushed into the [Plugin Manifest Repository](https://bitbucket.org/Isbeorn/nina.plugin.manifests) will be displayed. (Requires Internet connection). 
+On the available plugins tab all plugins that have been pushed into the [Plugin Manifest Repository](https://github.com/isbeorn/nina.plugin.manifests) will be displayed. (Requires Internet connection). 
 For each plugin you will see detailed information about the author, the homepage, what the plugin is about and the source code location of it. Optionally some screenshots can be seen too.  
 
 Furthermore you can manage your plugins here by easily installing the plugins as well as updating those that have a new version.

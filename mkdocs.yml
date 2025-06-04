@@ -3,8 +3,8 @@ site_url: https://www.nighttime-imaging.eu
 site_description: An astrophotography suite designed for all DSO imagers.
 site_author: N.I.N.A. contributors
 
-repo_url: https://bitbucket.org/Isbeorn/nina/
-repo_name: Bitbucket
+repo_url: https://github.com/isbeorn/nina/
+repo_name: Github
 
 nav:
     - Documentation:
