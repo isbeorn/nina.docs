@@ -39,6 +39,8 @@ jobs:
     runs-on: ubuntu-latest
     name: Deploy to FTP
     if: github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/master'
+    environment:
+      name: ${{ github.ref == 'refs/heads/develop' && 'test' || 'production' }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -57,7 +59,6 @@ jobs:
           FTP_USER: ${{ secrets.FTP_USER }}
           FTP_PW: ${{ secrets.FTP_PW }}
           FTP_HOST: ${{ secrets.FTP_HOST }}
-          ENABLE_PDF_EXPORT: "1"
         run: |
           git config --global user.email "github-actions@users.noreply.github.com"
           git config --global user.name "github-actions"
