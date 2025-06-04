@@ -1,0 +1,64 @@
+name: Build and Deploy Documentation
+
+on:
+  push:
+    branches:
+      - develop
+      - master
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Build MkDocs Documentation
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Upgrade pip and install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install mkdocs mkdocs-material mkdocs-with-pdf
+
+      - name: Build MkDocs site
+        run: |
+          python -m mkdocs build
+
+      - name: Upload site as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: site
+          path: site/
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    name: Deploy to FTP
+    if: github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/master'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Download site artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: site
+          path: site/
+
+      - name: Install git-ftp
+        run: sudo apt-get update && sudo apt-get install -y git-ftp
+
+      - name: Deploy via git-ftp
+        env:
+          FTP_USER: ${{ secrets.FTP_USER }}
+          FTP_PW: ${{ secrets.FTP_PW }}
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          ENABLE_PDF_EXPORT: "1"
+        run: |
+          git config --global user.email "github-actions@users.noreply.github.com"
+          git config --global user.name "github-actions"
+          git ftp push --force --syncroot site/ --user "$FTP_USER" --passwd "$FTP_PW" "$FTP_HOST"
