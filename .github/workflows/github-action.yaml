@@ -62,4 +62,4 @@ jobs:
         run: |
           git config --global user.email "github-actions@users.noreply.github.com"
           git config --global user.name "github-actions"
-          git ftp push --force --syncroot site/ --user "$FTP_USER" --passwd "$FTP_PW" "$FTP_HOST"
+          git ftp push --force --syncroot site/ --user "$FTP_USER" --passwd "$FTP_PW" "$FTP_HOST/site"
