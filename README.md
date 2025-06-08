@@ -46,15 +46,8 @@ To get started locally, follow these steps:
 ---
 
 ## 🌿 Branching Model
-
-We follow the [Git Flow](https://nvie.com/posts/a-successful-git-branching-model/) model:
-
 - `master`: live documentation for the latest **stable release**
 - `develop`: live documentation for the **nightly builds**
-- `feature/<name>`: new features targeting `develop`
-- `bugfix/<name>`: fixes targeting `develop`
-- `release/<version>`: release preparation
-- `hotfix/<name>`: fixes targeting `master`
 
 Documentation updates are deployed automatically via GitHub Actions when pull requests are merged into `master` or `develop`.
 
