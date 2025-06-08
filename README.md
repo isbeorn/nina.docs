@@ -13,7 +13,7 @@ This repository contains the source files for the documentation of **N.I.N.A. �
 
 ## ✍️ Contributing
 
-We welcome all contributions — from fixing typos to writing new guides or documenting upcoming features.
+We welcome all contributions - from fixing typos to writing new guides or documenting upcoming features.
 
 Please read our [Contributing Guide](CONTRIBUTING.md) for full details on:
 
