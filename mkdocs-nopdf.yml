@@ -1,0 +1,135 @@
+site_name: Nighttime Imaging 'N' Astronomy
+site_url: https://www.nighttime-imaging.eu
+site_description: An astrophotography suite designed for all DSO imagers.
+site_author: N.I.N.A. contributors
+
+repo_url: https://github.com/isbeorn/nina/
+repo_name: Github
+
+nav:
+    - Documentation:
+        - Introduction: 'index.md'
+        - Requirements: 'requirements.md'        
+        - Tabs:
+            - Overview: 'tabs/equipment/equipment.md'
+            - Equipment: 
+                - Camera: 'tabs/equipment/camera.md'
+                - Filterwheel: 'tabs/equipment/filterwheel.md'
+                - Focuser: 'tabs/equipment/focuser.md'
+                - Rotator: 'tabs/equipment/rotator.md'
+                - Telescope: 'tabs/equipment/telescope.md'
+                - Guider: 'tabs/equipment/guider.md'
+                - Switch: 'tabs/equipment/switch.md'
+                - Flat Panel: 'tabs/equipment/flatpanel.md'
+                - Weather: 'tabs/equipment/weather.md'
+                - Dome: 'tabs/equipment/dome.md'
+                - SafetyMonitor: 'tabs/equipment/safetymonitor.md'
+            - Sky Atlas: 'tabs/skyatlas.md'
+            - Framing Assistant: 'tabs/framing.md'
+            - Flat Wizard: 'tabs/flatwizard.md'
+            - Sequencer: 'tabs/sequencer.md'
+            - Imaging: 'tabs/imaging.md'
+            - Options:
+                - General: 'tabs/options/general.md'
+                - Equipment: 'tabs/options/equipment.md'
+                - Autofocus: 'tabs/options/autofocus.md'
+                - Dome: 'tabs/options/dome.md'
+                - Imaging: 'tabs/options/imaging.md'
+                - Plate Solving: 'tabs/options/platesolving.md'
+            - Plugins:
+                - Installed: 'tabs/plugins/installed.md'
+                - Available: 'tabs/plugins/available.md'
+        - Sequencer:
+            - Overview: 'sequencer/overview.md'
+            - Legacy Sequencer: 
+                - Overview: 'sequencer/simple/simple.md'
+                - Sequencing: 'sequencer/simple/sequencing.md'
+            - Advanced Sequencer:
+                - Overview: 'sequencer/advanced/advanced.md'
+                - Instructions: 'sequencer/advanced/instructions.md'
+                - Loop Conditions: 'sequencer/advanced/conditions.md'
+                - Triggers: 'sequencer/advanced/triggers.md'
+                - From Legacy To Advanced: 'sequencer/advanced/simpletoadvanced.md'
+        - Advanced Topics:
+            - Auto-Focus: 'advanced/autofocus.md'
+            - Automated Meridian Flip: 'advanced/meridianflip.md'
+            - Camera Simulator: 'advanced/camerasimulator.md'
+            - Bulb Shutter Control: 'advanced/bulbshutter.md'
+            - Dithering: 'advanced/dithering.md'
+            - Focuser Backlash Measurement: 'advanced/backlashmeasurement.md'
+            - Framing Assistant: 'advanced/framingassistant.md'
+            - File Formats:
+                - TIFF: 'advanced/file_formats/tiff.md'
+                - FITS: 'advanced/file_formats/fits.md'
+                - XISF: 'advanced/file_formats/xisf.md'     
+            - Guiding: 'advanced/guiding.md'
+            - Plate Solving: 'advanced/platesolving.md'       
+        - Troubleshooting:
+            - General: 'troubleshooting/general.md'
+            - ASCOM Connection Issues: 'troubleshooting/ascom_connection_issues.md'
+            - iOptron Mount Setup: 'troubleshooting/ioptron.md'
+            - EQMOD Setup: 'troubleshooting/eqmod.md'
+            - Altair Dual Gain: 'troubleshooting/altair_dualgain.md'
+            - Planetarium Setup: 'troubleshooting/planetarium.md'   
+            - QHY Driver: 'troubleshooting/qhy_driver_update.md'      
+            - Display Issues: 'troubleshooting/render_issues.md'       
+            - Folder browser only showing desktop: 'troubleshooting/folder_browser_only_desktop.md'
+        - Glossary: 'glossary.md'
+        - License: 'license.md'
+        - 3rd-Party-Licenses: '3rd-party-license.md'
+    - Quick Start:
+        - UI Overview: 'quickstart/uioverview.md'
+        - Connecting Your Equipment: 'quickstart/equipment.md'
+        - Finalizing Settings: 'quickstart/settings.md'
+        - Focusing: 'quickstart/focusing.md'
+        - Starting a Sequence: 'quickstart/sequence.md'
+    - Contributing:
+        - Enhance documentation: 'contributing/contributing.md'
+        - How to setup the development environment: 'contributing/howtosetupdev.md'
+        - Localization: 'contributing/localization.md'
+        - Plugins: 'contributing/plugins.md'
+        - Ecosystem: 'contributing/ecosystem.md'
+
+theme:
+    name: 'material'
+    logo: 'images/nina-icon.png'
+    palette:
+        - scheme: slate
+          primary: black
+          toggle:
+            icon: material/brightness-4
+            name: Switch to light mode
+        - scheme: default
+          primary: black
+          toggle:
+            icon: material/brightness-7
+            name: Switch to dark mode
+    feature:
+        tabs: true
+
+markdown_extensions:
+    - toc:
+        permalink: '#'
+    - admonition
+    - attr_list
+    - codehilite:
+        guess_lang: false
+    - def_list
+    - footnotes
+    - meta
+    - pymdownx.caret
+    - pymdownx.critic
+    - pymdownx.details    
+    - pymdownx.keys
+    - pymdownx.snippets
+    - pymdownx.superfences
+    - pymdownx.tasklist:
+        custom_checkbox: true
+    - pymdownx.tilde
+    
+plugins:
+    - search
+    - offline:
+        enabled: !ENV [OFFLINE, false]
+
+copyright: Copyright &copy; 2019-2025 Stefan Berg and the N.I.N.A. contributors
