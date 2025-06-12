@@ -5,6 +5,7 @@ site_author: N.I.N.A. contributors
 
 repo_url: https://github.com/isbeorn/nina/
 repo_name: Github
+use_directory_urls: false
 
 nav:
     - Documentation:
