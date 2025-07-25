@@ -38,9 +38,6 @@ The General Settings tab allows you to manage N.I.N.A. in terms of all general s
 ### Device Polling Interval
 * This sets the interval of device polling in seconds. Default works well in most situations.
 
-### Server enabled
-* N.I.N.A. offers a basic REST server to receive commands from other applications. Currently very limited to specific use cases.
-
 ## Color Schemes
 ### Current UI Color Scheme
 * Enables customization of the color scheme of N.I.N.A. 
