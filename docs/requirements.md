@@ -98,7 +98,7 @@ While N.I.N.A. offers extensive support for a wide range of devices directly and
     * Although Rotarion is not directly integrated into the application, it can be fully controlled using the available ASCOM drivers as well as the [Connector Plugin](tabs/plugins/available.md) to switch between different profiles that are set up for the different instruments that are attached to the Rotarion system
 
 ### Guiding Applications
-
+1
 N.I.N.A. supports several guiding applications to guide, dither, and monitor tracking accuracy. Telemetry from these applications are also displayed inside of the Imaging tab. The guiding applications N.I.N.A. supports are:
 
   * [PHD2](//openphdguiding.org/)

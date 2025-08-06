@@ -5,7 +5,7 @@
 3. Click "Fork"
 ![Fork this repository](../images/setup/Fork2.png)
 4. You will see a configuration wizard for your fork.
-5. Enter a name for your forked repository. (This guide will use "ninaexamplefork" for reference)
+5. Enter a name for your forked repository.  
 6. Give a short description what your intention is with this fork (optional)
 7. Click on "Create fork"
 9. You will be navigated to your new repository at https://github.com/\<your\_username\>/\<your\_fork's\_name\>/
