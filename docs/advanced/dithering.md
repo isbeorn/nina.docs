@@ -46,7 +46,7 @@ In order for N.I.N.A. to communicate with PHD2 and command operations such as di
 
 Settings related to guiding and dithering can be found in the **Equipment > Guider** tab by clicking on the ⚙️ Gears button. The defaults are suitable for most cases. You will need to specify the full path to `phd2.exe` if PHD2 was installed in a non-standard location. This is so N.I.N.A. can automatically start PHD2 as a part of the equipment connection process.
 
-![N.I.N.A. PHD2 Settings](../../images/tabs/guider_phdsetup.png)
+![N.I.N.A. PHD2 Settings](../images/tabs/guider_phdsetup.png)
 
 An explanation of the two most important dithering-related settings follows:
 
