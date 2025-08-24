@@ -54,6 +54,14 @@ This instruction set will process the instructions one after the other, from top
 ![Sequential Instruction Set](../../images/sequencer/Sequencer_SequentialInstructions.png)
 ### Parallel Instruction Set
 All instructions inside this special instruction set will be processed in parallel. As everything will run in parallel there are no conditions or triggers available for this set.
+Order of instructions within the Parallel Instruction Set is not defined or implied.
+
+- Note: <br>
+   Multiple instructions for the same equipment should generally not be used in the same parallel instruction set. <br>
+   example: Park Scope and Find Home will be executed in parallel and which one is executed first is not constant. <br>
+   Wait instructions are executed in parallel with all other instructions so will not force an order to instruction execution. <br>
+   Shutdown PC and Shutdown N.I.N.A instructions generally are not wise to use inside a Parallel Instruction Sets. <br>
+        
 ![Parallel Instruction Set](../../images/sequencer/Sequencer_ParallelInstructions.png)
 ### Deep Sky Object Set
 This special set of instructions behaves similar to a sequential instruction set. The main difference here is, that a specific target can be specified with coordinates and rotation and then all instructions that are dependent on coordinates or rotation will pick up these coordinates automatically, so a user does not need to enter these coordinates multiple times.
