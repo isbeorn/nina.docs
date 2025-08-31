@@ -31,16 +31,30 @@ Loop an instruction set until a specific point in time. The time can either be s
 **Sunrise**: The time when the sun gets above 0° of the horizon  
 **Meridian**: When a target is set this will be the time the target will cross the meridian  
 
+| Time source         | Rollover time |
+|---------------------|---------------|
+| Time                | Sunrise       |
+| Sunset              | Sunrise       |
+| Civil Dusk          | Sunrise       |
+| Nautical Dusk       | Sunrise       |
+| Astronomical Dusk   | Sunrise       |
+| Astronomical Dawn   | Sunset        |
+| Nautical Dawn       | Sunset        |
+| Civil Dawn          | Sunset        |
+| Sunrise             | Sunset        |
+| Meridian            | Meridian + 12 |
+
 !!!note
     **When using a manual time:**  
-    As there is no day attached to the condition, the roll over for a new day happens at noon (similar to the altitude charts). This brings a few advantages to not loop unexpectedly when you are already past the specified time.  
+    As there is no day attached to the condition, the roll over for a new day happens at noon (similar to the altitude charts). This brings a few advantages to not loop unexpectedly when you are already past the specified time. 
     Examples:  
-    Current time: 18:00h | Loop until time: 19:00h -> Loop for one hour  
-    Current time: 20:00h | Loop until time: 19:00h -> Condition will be skipped  
-    Current time: 18:00h | Loop until time: 02:00h -> Loop for eight hours  
-    Current time: 02:00h | Loop until time: 03:00h -> Loop for one hour  
-    Current time: 04:00h | Loop until time: 03:00h -> Condition will be skipped  
-    Current time: 08:00h | Loop until time: 18:00h -> **Condition will be skipped** because the roll over at noon has not happened yet  
+    Sunrise is at 09:00h  
+    Current time: 18:00h | Loop for time: 19:00h -> Loop for one hour  
+    Current time: 20:00h | Loop for time: 19:00h -> Condition will be skipped  
+    Current time: 18:00h | Loop for time: 02:00h -> Loop for eight hours  
+    Current time: 02:00h | Loop for time: 03:00h -> Loop for one hour  
+    Current time: 04:00h | Loop for time: 03:00h -> Condition will be skipped  
+    Current time: 08:00h | Loop for time: 18:00h -> **Condition will be skipped** because the roll over at 09:00 has not happened yet   
 
     **When using calculated times for dawn and dusk:**  
     Instead of using noon to roll over to the next day the rollover will instead happen at the "opposite" side of the condition at dawn or dusk. For example when you loop until astronomical dawn, the roll over will be at dusk
