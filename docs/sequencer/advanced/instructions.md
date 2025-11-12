@@ -314,26 +314,40 @@ When this instruction is part of a "Deep Sky Object Sequence" the coordinates wi
 Wait until a specific point in time. The time can either be set manually or automatically determined based on criteria as well as an offset specified in minutes.  
 **Time**: Manually entered time  
 **Sunset**:  The time when the sun gets below 0° of the horizon  
+**Civil Dusk**: The time when the sun gets below 6° of the horizon  
 **Nautical Dusk**: The time when the sun gets below 12° of the horizon  
 **Astronomical Dusk**: The time when the sun gets below 18° of the horizon  
 **Astronomical Dawn**: The time when the sun gets above 18° of the horizon  
 **Nautical Dawn**: The time when the sun gets above 12° of the horizon  
+**Civil Dawn**: The time when the sun gets above 6° of the horizon  
 **Sunrise**: The time when the sun gets above 0° of the horizon  
 **Meridian**: When a target is set this will be the time the target will cross the meridian  
+
+| Time source         | Rollover time |
+|---------------------|---------------|
+| Time                | Sunrise       |
+| Sunset              | Sunrise       |
+| Civil Dusk          | Sunrise       |
+| Nautical Dusk       | Sunrise       |
+| Astronomical Dusk   | Sunrise       |
+| Astronomical Dawn   | Sunset        |
+| Nautical Dawn       | Sunset        |
+| Civil Dawn          | Sunset        |
+| Sunrise             | Sunset        |
+| Meridian            | Meridian + 12 |
 
 !!!note
     **When using a manual time:**  
     As there is no day attached to the instruction, the roll over for a new day happens at noon (similar to the altitude charts). This brings a few advantages to not wait unexpectedly when you are already past the specified time.
     Examples:  
+    Sunrise is at 09:00h
     Current time: 18:00h | Wait for time: 19:00h -> Wait for one hour  
     Current time: 20:00h | Wait for time: 19:00h -> Instruction will be skipped  
     Current time: 18:00h | Wait for time: 02:00h -> Wait for eight hours  
     Current time: 02:00h | Wait for time: 03:00h -> Wait for one hour  
     Current time: 04:00h | Wait for time: 03:00h -> Instruction will be skipped  
-    Current time: 08:00h | Wait for time: 18:00h -> **Instruction will be skipped** because the roll over at noon has not happened yet  
-
-    **When using calculated times for dawn and dusk:**  
-    Instead of using noon to roll over to the next day the rollover will instead happen at the "opposite" side of the instruction at dawn or dusk. For example when you wait until astronomical dawn, the roll over will be at dusk
+    Current time: 08:00h | Wait for time: 18:00h -> **Instruction will be skipped** because the roll over at 09:00 has not happened yet  
+    
 
 ### Wait For Time Span
 ![Wait For Time Span](../../images/sequencer/instructions/utility_waitfortimespan.png)  

@@ -23,14 +23,18 @@ Many applications can make use of these headers (e.g. PixInsight during processi
 - EXPTIME: Exposure duration in seconds
 - DATE-LOC: Locale time at exposure start
 - DATE-UTC: UTC time at exposure start
+- DATE-AVG: Averaged midpoint time (UTC)
 - ROWORDER: TOP-DOWN orientation of the image starting point. [Details at free-astro.org](https://free-astro.org/index.php?title=Siril:FITS_orientation)
 
 ## Observer Headers
 Taken from the Astrometry Options
 
 - SITEELEV: Elevation (currently taken from a connected telescope)
-- SITELAT: Latitude 
-- SITELONG: Longitude
+- SITELAT: Latitude specified in astrometry options
+- SITELONG: Longitude specified in astrometry options
+- OBSERVER: Observer name specified in astrometry options
+- OBSERVAT: Observatory name specified in astrometry options
+- SITENAME: Site name specified in astrometry options
 
 ## Target Headers
 Available when a target is set inside a sequence.
@@ -38,10 +42,12 @@ Available when a target is set inside a sequence.
 - OBJECT: Name of object
 - OBJCTRA: Right ascension of target
 - OBJCTDEC: Declination of target
+- OBJCTROT: Planned rotation of imaged object
 
 ## Camera Headers
 Requires a camera to be connected
 
+- CAMERAID: The camera id provided by the driver
 - INSTRUME: Name of camera
 - XBINNING: X binning factor
 - YBINNING: Y binning factor
@@ -65,6 +71,7 @@ Requires a telescope to be connected
 - FOCRATIO: Focal ratio (taken from equipment options)
 - RA: Current telescope's right ascension coordinates
 - DEC: Current telescope's declination coordinates
+- PIERSIDE: The side of pier reported by the driver
 
 
 ## Filter wheel Headers

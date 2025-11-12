@@ -3,12 +3,12 @@
 
 The ecosystem of N.I.N.A. consists of a whole lot more than just the main application. There is quite a bit of orchestration done in the background to be able to build the application as it is today.
 
-## Bitbucket Repositories
-[Main application](https://bitbucket.org/Isbeorn/nina/src/master/) - The main application source code  
-[Plugin Manifests](https://bitbucket.org/Isbeorn/nina.plugin.manifests/src/main/) - Meta Definition files for plugins can be pushed here   
-[Plugin Template](https://bitbucket.org/Isbeorn/nina.plugin.template/src/master/) - Serves as a starting point for plugin developers  
-[Documentation](https://bitbucket.org/Isbeorn/nina.docs/src/master/) - Using mkdocs to define the documentation  
-[Discord Chat Bot](https://bitbucket.org/Isbeorn/nina.bot/src/master/) - A bot to make life easier inside the discord chat  
+## Code Repositories
+[Main application](https://github.com/isbeorn/nina/) - The main application source code  
+[Plugin Manifests](https://github.com/isbeorn/nina.plugin.manifests) - Meta Definition files for plugins can be pushed here   
+[Plugin Template](https://github.com/isbeorn/nina.plugin.template) - Serves as a starting point for plugin developers  
+[Documentation](https://github.com/isbeorn/nina.docs) - Using mkdocs to define the documentation  
+[Discord Chat Bot](https://github.com/isbeorn/nina.bot) - A bot to make life easier inside the discord chat  
 
 ## Crowdin
 [Crowdin Localization Management](https://nina.crowdin.com/)  

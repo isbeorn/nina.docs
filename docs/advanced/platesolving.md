@@ -147,6 +147,33 @@ This application is basically a wrapper for the local astrometry.net client.
 
 ---
 
+### PlateSolve3.80
+Author: PlaneWave Instruments (Dave Rowe)
+URL: [PlateSolve 3.80](https://drive.google.com/drive/folders/1JCgzmSJGBXOtfYrqpG5Jvp_Dr_gvEOgt)
+
+N.I.N.A. was kindly selected to include the improved PlateSolve3.80 to its arsenal of platesolvers, courtesy of Dave Rowe of PlaneWave Instruments
+PlateSolve3 is a standalone executable. It handles longer focal lengths and small FOVs, and solves quickly with few stars (<10).
+
+Platesolve3.80's catalogs are included in the zip file. They must be installed before plate solving.
+Run Platesolve3.80, then go to the File menu and click on "Configure Directory...". For the UCAC4 catalog, select the Kepler directory, and for the GaiaDR2 catalog, select the UD Catalog directory. Close the application.
+
+**Benefits**
+
+* Reliable with long focal lengths and small FOVs (tested up to 24000mm)
+* Very fast blind solving
+* Few stars required; stars can be moderately elongated/distorted
+* Does not require an Internet connection
+
+**Drawbacks**
+
+* The regional settings of windows must be set to use a point as the decimal symbol
+
+**Recommendation**
+
+* Primary Solver: Recommended
+* Blind Solver: Recommended
+
+---
 ### PlateSolve2
 Author: PlaneWave Instruments  
 URL: [planewave.com/downloads/software/](//planewave.com/downloads/software/)
@@ -169,33 +196,3 @@ You need to start the executable once standalone and set the catalog location of
 
  * Primary Solver: Recommended
  * Blind Solver: use as a Blind Solver is not possible
- 
----
-
-### PlateSolve3
-Author: PlaneWave Instruments (Dave Rowe) 
-URL: [PlateSolve 3.80 5GB](//www.dropbox.com/sh/rn4uzqbs9q91q1z/AADmFhSzI_LsQUIHNCKSbm4xa?dl=1)
-
-Nina has kindly been selected to add the new PlateSolve3 program to its arsenal of platesolvers, courtesy of Dave Rowe.
-PlateSolve3 is a standalone executable which has been improved to work with longer focal lengths and smaller FOVs with fewer stars.
-This download has the necessary catalogues already added. Just unpack it into a directory of your choosing and point to it in Nina platesolving options.  
-You need to start the executable once standalone and select File - Configure directory.  
-Set the GaiaDr2 location to the 'UD Catalog' directory in the unpacked PlateSolve3.80 directory.  
-Then set the UCAC4 location to the 'Kepler' directory in the same unpacked directory.
-You will also need to set your location in View - Parameters
-
-**Benefits**
-
- * Works really well with long focal lengths and small FOVs. Tested up to 12000mm.
- * Very fast (blind) solver
- * Does not require an Internet connection
-
-**Drawbacks**
-
- * A little slow to start up.
- * The regional settings of windows need to be set to use a point as the decimal symbol
-
-**Recommendation**
-
- * Primary Solver: Recommended
- * Blind Solver: Recommended

@@ -10,7 +10,7 @@ Because dithering is an operation that must be coordinated with guiding (remembe
 N.I.N.A. offers three different ways to perform dithering:
 
 1. Standard dithering through PHD2, MGEN2, or MetaGuide
-2. Built-in dithering using N.I.N.A.'s Direct Guider function
+2. Built-in dithering using N.I.N.A.'s Mount Dither function
 
 The desired way of dithering is based on the connected device in the **Equipment > Guider** tab.
 
@@ -20,7 +20,7 @@ This is the typical scenario for most users. The user has a single main camera, 
 
 ### Built-in Dithering
 
-There are some cases where guiding equipment isn't needed or available, but you still want to dither. This can happen if you have a very high end mount with encoders or with small portable setups. N.I.N.A. can perform dithers directly via its **Direct Guider** which manually slews the telescope very small distances.
+There are some cases where guiding equipment isn't needed or available, but you still want to dither. This can happen if you have a very high end mount with encoders or with small portable setups. N.I.N.A. can perform dithers directly via its **Mount Dither** which manually slews the telescope very small distances.
 
 ## Requirements
 
@@ -44,9 +44,9 @@ In order for N.I.N.A. to communicate with PHD2 and command operations such as di
 
 ### Settings for PHD2
 
-Settings related to guiding and dithering can be found in the **Options > Equipment** tab. The defaults are suitable for most cases. You will need to specify the full path to `phd2.exe` if PHD2 was installed in a non-standard location. This is so N.I.N.A. can automatically start PHD2 as a part of the equipment connection process.
+Settings related to guiding and dithering can be found in the **Equipment > Guider** tab by clicking on the ⚙️ Gears button. The defaults are suitable for most cases. You will need to specify the full path to `phd2.exe` if PHD2 was installed in a non-standard location. This is so N.I.N.A. can automatically start PHD2 as a part of the equipment connection process.
 
-![N.I.N.A. PHD2 Settings](../images/advanced/dithering2.png)
+![N.I.N.A. PHD2 Settings](../images/tabs/guider_phdsetup.png)
 
 An explanation of the two most important dithering-related settings follows:
 

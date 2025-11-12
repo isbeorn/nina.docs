@@ -4,7 +4,7 @@ The advanced sequencer makes it possible to completely plan and customize an ima
 The main area will contain the actual instructions. There it is possible to add the instructions, customize the parameters and see the progress of the sequencer.  
 Additionally the area is split into three sections to manage sequence start instructions, target instructions and end of sequence instructions.
   
-On the bottom left it is possible to save and load a complete sequence run while on the bottom right it is possible to start and stop a sequence.  
+On the bottom left it is possible to lock the sequencer from any manual input, disable the drag & drop as well as save and load a complete sequence run. On the bottom right it is possible to start and stop a sequence.  
 The right sidebar will show all available instructions as well as templates and targets. These are described in more detail below.
 ![Overview](../../images/sequencer/Sequencer_Overview.png)
 
@@ -54,6 +54,14 @@ This instruction set will process the instructions one after the other, from top
 ![Sequential Instruction Set](../../images/sequencer/Sequencer_SequentialInstructions.png)
 ### Parallel Instruction Set
 All instructions inside this special instruction set will be processed in parallel. As everything will run in parallel there are no conditions or triggers available for this set.
+Order of instructions within the Parallel Instruction Set is not defined or implied.
+
+- Note: <br>
+   Multiple instructions for the same equipment should generally not be used in the same parallel instruction set. <br>
+   example: Park Scope and Find Home will be executed in parallel and which one is executed first is not constant. <br>
+   Wait instructions are executed in parallel with all other instructions so will not force an order to instruction execution. <br>
+   Shutdown PC and Shutdown N.I.N.A instructions generally are not wise to use inside a Parallel Instruction Sets. <br>
+        
 ![Parallel Instruction Set](../../images/sequencer/Sequencer_ParallelInstructions.png)
 ### Deep Sky Object Set
 This special set of instructions behaves similar to a sequential instruction set. The main difference here is, that a specific target can be specified with coordinates and rotation and then all instructions that are dependent on coordinates or rotation will pick up these coordinates automatically, so a user does not need to enter these coordinates multiple times.

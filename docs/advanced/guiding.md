@@ -8,7 +8,7 @@ One way of countering these issues to improve long exposure quality is to use a 
   * PHD2
   * MGEN2
   * MetaGuide
-  * Direct Guider
+  * Mount Dither
 
 ## PHD2
 PHD2 is the most commonly used guiding application. It is free and open source, and can be found [here](https://openphdguiding.org/).

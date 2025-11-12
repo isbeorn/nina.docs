@@ -39,5 +39,5 @@ This enables users that will use for example the released version of N.I.N.A. to
 * Create your pull requests for new features only against the **develop** branch  
 
 ## Updating the homepage
-The documentation on the homepage is updated automatically via bitbucket pipelines. Each time a pull request is complete, the pipeline will build the docs and upload the changes to the homepage.
+The documentation on the homepage is updated automatically via github actions. Each time a pull request is complete, the pipeline will build the docs and upload the changes to the homepage.
 There is no action required by a contributor for this.

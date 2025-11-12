@@ -22,7 +22,7 @@ The software can be found at
 
 ## Integration into N.I.N.A.
 
-The crowdin platform offers an automatic synchronization into the project's bitbucket repository.
+The crowdin platform offers an automatic synchronization into the project's code repository.
 Every *30 minutes* a sync is triggered and new translations will be pushed into a separate branch inside N.I.N.A.'s repository and a pull request will be opened to be reviewed.
 Once that pull request is approved and the new version is installed, all the translations will be reflected inside the User Interface
 

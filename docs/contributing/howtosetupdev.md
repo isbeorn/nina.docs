@@ -1,17 +1,14 @@
 ## Forking the repository
 
-1. Login to your bitbucket account
-2. Navigate to [N.I.N.A.'s main repository](https://bitbucket.org/Isbeorn/nina/) and click on the big plus
-![Bitbucket Plus Sign](../images/setup/Fork1.png)
-3. Click "Fork this repository"
+1. Login to your github account
+2. Navigate to [N.I.N.A.'s main repository](https://github.com/isbeorn/nina)
+3. Click "Fork"
 ![Fork this repository](../images/setup/Fork2.png)
 4. You will see a configuration wizard for your fork.
-5. Enter a name for your forked repository. (This guide will use "ninaexamplefork" for reference)
+5. Enter a name for your forked repository.  
 6. Give a short description what your intention is with this fork (optional)
-7. Uncheck Issue tracking and Wiki as you don't need this in your fork.
-8. Click on "Fork repository"
-![Fork settings](../images/setup/Fork3.png)
-9. You will be navigated to your new repository at https://bitbucket.org/\<your\_username\>/\<your\_fork's\_name\>/
+7. Click on "Create fork"
+9. You will be navigated to your new repository at https://github.com/\<your\_username\>/\<your\_fork's\_name\>/
 
 ## Cloning Repository
 
@@ -21,7 +18,7 @@
 4. Navigate to the folder where you want your repository folder to be created in
 5. Enter the command that was shown in step 2.
 ```bash
-git clone -n -b develop https://<YourUserName>@bitbucket.org/<YourUserName>/<YourForkName>.git
+git clone -n -b develop https://<YourUserName>@github.com/<YourUserName>/<YourForkName>.git
 # NOTE: the -n flag for "don't checkout the branch"
 # Ignore any LFS smudge errors for now. They are not yet synced and will get synced in a later step
 ```
@@ -31,9 +28,9 @@ cd <YourForkName>
 ```
 7. Next you need to add the "upstream" to the root repository (where your fork is based on). This is later required for merging from the main dev branch etc.
 ```bash
-git remote add upstream https://bitbucket.org/Isbeorn/nina.git
+git remote add upstream https://github.com/isbeorn/nina.git
 ```
-8. Bitbucket will not automatically copy over the LFS into the fork repository. This has to be done manually. Run the following commands to sync the lfs
+8. Github will not automatically copy over the LFS into the fork repository. This has to be done manually. Run the following commands to sync the lfs
 ```
 git lfs fetch upstream --all
 git lfs push origin --all

@@ -1,6 +1,6 @@
 ## General Troubleshooting
 
-Should you encounter any bugs during your usage of N.I.N.A, please report them on the project's [Issue Tracker](//bitbucket.org/Isbeorn/nina/issues?status=new&status=open) or directly to the team on the [Discord chat](//discord.gg/fwpmHU4). If possible, attach the latest log file. It is also helpful to increase the application's logging verbosity to **Debug** or **Trace** under **Options > Log Level**. The logging level of **Trace* includes the most information and may lead to the accumulation of large log files. Therefore, it is not recommended to leave that level specified under normal conditions.
+Should you encounter any bugs during your usage of N.I.N.A, please report them on the project's [Issue Tracker](https://github.com/isbeorn/nina/issues) or directly to the team on the [Discord chat](//discord.gg/fwpmHU4). If possible, attach the latest log file. It is also helpful to increase the application's logging verbosity to **Debug** or **Trace** under **Options > Log Level**. The logging level of **Trace* includes the most information and may lead to the accumulation of large log files. Therefore, it is not recommended to leave that level specified under normal conditions.
 
 Log files may be found in the `%LOCALAPPDATA%\NINA\Logs\` folder.
 
