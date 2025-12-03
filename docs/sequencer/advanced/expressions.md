@@ -69,4 +69,9 @@ In this example, there is an orange warning triangle; this is just to alert you 
 
 ![Warning](../../images/sequencer/Sequencer_ExpressionWarning.png)
 
+Here's how these same two instructions look after they have been run in the sequencer.  Note two things: first, the Define Variable instruction now shows the *current* value of the Variable (in this case, 100); and second, the warning triangle is gone in the Take Exposure instruction and CameraGain now shows a value in curly braces.
+
+![Warning Gone](../../images/sequencer/Sequencer_ExpressionWarningGone.png)
+
+
 
