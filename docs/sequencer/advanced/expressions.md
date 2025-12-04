@@ -26,8 +26,10 @@ Data are *read-only* Symbols (i.e. you cannot modify them) that are created eith
 
 ![Symbols](../../images/sequencer/Sequencer_Symbols.png)
 
+!!! tip "Variables and Scope"
+    Variables in NINA have a property called *scope* (a computer programming term; sorry!).  In simple terms, scope defines *where* within a sequence the Variable is *visible* (i.e. where it can be used).  For the sake of simplicity, the Define Variable instruction creates a Variable with *global scope*, meaning that it can be used *anywhere* in a sequence (once the Define Variable instruction has been run).
 
-### Operators
+    There are times, however, when you might want the visibility of a Variable to be limited to a specific instruction set or Template.  To do this, use the Define Scoped Variable instruction.
 
 If Symbols are the *nouns* of an Expression, then Operators are the verbs. They describe how the values interact - add, compare, combine, choose, etc.  There are arithmetic, comparison, logical, and bitwise operators (the first two are the sorts of things that you would have learned in grade school).  Parentheses can also be used in Expressions.  Here are the Operators you can use in Expressions:
 
@@ -57,7 +59,7 @@ The current value of an Expression is shown in curly brackets (braces)
 
 ![Expression Example](../../images/sequencer/Sequencer_ExpressionValue.png)
 
-If you hover over the Expression itself, you'll see how each of the Symbols in the Expression is evaluated.  In this example, the values of ExposureTime and FudgeFactor are shown
+If you hover over the Expression itself, you'll see how each of the Symbols in the Expression is evaluated.  In this example, the values of ExposureTime and FudgeFactor are shown.
 
 ![Expression Errors](../../images/sequencer/Sequencer_SymbolValues.png)
 
@@ -73,5 +75,14 @@ Here's how these same two instructions look after they have been run in the sequ
 
 ![Warning Gone](../../images/sequencer/Sequencer_ExpressionWarningGone.png)
 
+### Instructions Updated for NINA 3.3
 
+Instructions that use celestial coordinates look a little different in NINA 3.3; there is now the ability to enter those coordinates in decimal format (in addition to hours-minutes-seconds or degrees-minutes-seconds). Changing the decimal value will automatically update H-M-S/D-M-S values, and vice versa.  You can also use Expressions in place of a decimal value.
+
+![Slew To Ra/Dec](../../images/sequencer/Sequencer_SlewToRaDec.png)  
+
+
+### Conditional Execution
+
+Currently, NINA does not have instructions for conditional execution using Expressions (things like "If" and "If-Then-Else").  To gain this functionality (and much more), use the Sequencer Powerups plugin.
 
