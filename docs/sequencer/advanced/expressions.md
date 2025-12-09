@@ -2,8 +2,6 @@
 
 NINA 3.3 adds the ability to use Expressions, in addition to numeric values, to customize instruction options.  Expressions are strings of text that represent something to be *calculated* or *evaluated*; the result of this evaluation must be a valid option for the instruction.   Expressions can include numeric values, Symbols (defined below), mathematical, bitwise, and logical operators (e.g. +, -, |, &, ||, &&), and functions (e.g. if, floor, between); in specific places, a string (text surrounded by single quotes) can also be part of an Expression.
 
-Here are some examples of valid Expressions:   xxxxx
-
 ### Symbols
 
 Symbols are names of things that have a value. These names must be made up of numbers, letters, and the underscore character, and must begin with a letter. Fooble, fooble, foo_ble, and fooble11 are all valid Symbols; 7fooble and foo#ble are not. In NINA, there are three basic kinds of Symbols:
