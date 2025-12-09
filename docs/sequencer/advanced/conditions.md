@@ -78,6 +78,11 @@ It is recommended to use this condition in conjunction with another condition, t
 Loop for as long as the safety monitor is reporting unsafe conditions. When the state of the safety monitor switches to safe, the currently running instruction will be cancelled and the rest of the instruction set will be skipped.  
 It is recommended to use this condition in conjunction with another condition, to not run in an endless loop when the safety monitor is reporting unsafe conditions for the whole time.  
 *Requires a safety monitor device to be connected*
+
+### Loop While (NINA 3.3)
+![Sun Altitude](../../images/sequencer/conditions/loopwhile.png)  
+Loop while the Expression is True
+
 ### Moon Altitude
 ![Moon Altitude](../../images/sequencer/conditions/moonaltitude.png)  
 Loop for as long as the moon matches the specified parameters.
@@ -89,3 +94,5 @@ Loop for as long as the sun matches the specified parameters.
 ### Sun Altitude
 ![Sun Altitude](../../images/sequencer/conditions/sunaltitude.png)  
 Loop while the sun altitude is above or below the specified amount of degrees
+
+
