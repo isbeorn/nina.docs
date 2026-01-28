@@ -40,7 +40,7 @@ In case your mount is having a snap port and there is some way to trigger it usi
 To enable using the snap port you need to change the "Bulb Mode" setting to "Telescope Snap Port".
 
 !!! notice
-    Currently confirmed and tested mounts for Mount Bulb Shutter are the SkyWatcher NEQ6-R and AZ-EQ-6-GT using EQMOD V200q
+    Currently confirmed and tested mounts for Mount Bulb Shutter are the SkyWatcher NEQ6-R and AZ-EQ-6-GT using EQMOD V200q, and a SkyWatcher Star Adventurer GTI using GSS.
 
 ![N.I.N.A. Mount Snap Port](../images/advanced/bulbshutter/usage-bulbshutter-mountsnapport.png)
 
@@ -56,7 +56,21 @@ The next step is to set up the command string to communicate with the snap port.
 The default settings might already work for you, so feel free to try and take a snap shot that is longer than 30s in N.I.N.A..
 If the shutter is triggered, you are done and can take longer exposures than 30s now.
 
-!!! notice
-    Command strings for EQMOD are explained [here](http://eq-mod.sourceforge.net/docs/EQASCOM_compliancy.pdf)
+### EQMOD
+By default, the Snap Port start and stop commands are specified using EQMOD standard explained [here](http://eq-mod.sourceforge.net/docs/EQASCOM_compliancy.pdf)
+
+|                 | On\Start  | Off\Stop  |
+| :-------------- | :------:  | :------:  |
+| **Snap port 1** | :SNAP1,1# | :SNAP1,0# |
+| **Snap port 2** | :SNAP2,1# | :SNAP2,0# |
+
+### Green Swamp Server (GSS)
+For GSS, you can find the Snap port commands [here](https://greenswamp.org/?docs=gs-server-overview/snap-tab)
+
+|                 | On\Start | Off\Stop |
+| :-------------- | :------: | :------: |
+| **Snap port 1** | :O11     | :O10     |
+| **Snap port 2** | :O21     | :O20     |
+
 
 Should your bulb exposure still not trigger please contact us on our [Discord](http://discord.gg/fwpmHU4).
