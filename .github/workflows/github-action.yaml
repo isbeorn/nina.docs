@@ -26,7 +26,7 @@ jobs:
 
       - name: Build MkDocs site
         env:
-          ENABLE_PDF_EXPORT: true
+          ENABLE_PDF_EXPORT: 1
         run: |
           python -m mkdocs build
 
