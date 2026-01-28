@@ -10,8 +10,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     name: Build MkDocs Documentation
-    environment:
-      name: ${{ github.ref == 'refs/heads/develop' && 'test' || 'production' }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -27,6 +25,8 @@ jobs:
           pip install mkdocs mkdocs-material mkdocs-with-pdf
 
       - name: Build MkDocs site
+        env:
+          ENABLE_PDF_EXPORT: true
         run: |
           python -m mkdocs build
 
