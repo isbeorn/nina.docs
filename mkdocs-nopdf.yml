@@ -133,4 +133,4 @@ plugins:
     - offline:
         enabled: !ENV [OFFLINE, false]
 
-copyright: Copyright &copy; 2019-2025 Stefan Berg and the N.I.N.A. contributors
+copyright: Copyright &copy; 2019-2026 Stefan Berg and the N.I.N.A. contributors
