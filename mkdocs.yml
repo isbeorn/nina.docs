@@ -50,6 +50,7 @@ nav:
                 - Instructions: 'sequencer/advanced/instructions.md'
                 - Loop Conditions: 'sequencer/advanced/conditions.md'
                 - Triggers: 'sequencer/advanced/triggers.md'
+                - Expressions (NINA 3.3): 'sequencer/advanced/expressions.md'
                 - From Legacy To Advanced: 'sequencer/advanced/simpletoadvanced.md'
         - Advanced Topics:
             - Auto-Focus: 'advanced/autofocus.md'

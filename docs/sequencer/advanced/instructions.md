@@ -361,7 +361,12 @@ Waits for as long as the moon matches the specified parameters.
 ![Wait If Sun Altitude](../../images/sequencer/instructions/utility_waitifsunaltitude.png)  
 Waits for as long as the sun matches the specified parameters.
 
+### Wait Until (NINA 3.3)
+![Wait Until](../../images/sequencer/instructions/utility_waituntil.png)
+
+This will wait until the Expression becomes True.
 ### Wait Until Above Horizon
 ![Wait Until Above Horizon](../../images/sequencer/instructions/utility_waituntilabovehorizon.png)  
 This will wait for as long as the specified target is below the horizon. When a [custom horizon](../../tabs/options/general.md) is set, the custom horizon will be considered as the altitude to be above of. When no custom horizon is set, 0° of altitude will be considered. Furthermore an altitude offset can be specified.  
-When this instruction is part of a "Deep Sky Object Sequence" the coordinates will be inherited and no coordinates need to be entered here  
+When this instruction is part of a "Deep Sky Object Sequence" the coordinates will be inherited and no coordinates need to be entered here 
+

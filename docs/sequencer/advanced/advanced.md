@@ -32,6 +32,9 @@ Furthermore instructions can also be directly added into the sequence by clickin
 Once an instruction is part of the sequencer, it will show the specific options for each instruction to customize the behavior. For example an item can be set to cool down the camera to a specific temperature, another item set to switch to a specific filter etc.
 ![Instructions in Detail](../../images/sequencer/Sequencer_InstructionsDetails.png)
 
+### Expressions (NINA 3.3)
+NINA 3.3 adds the ability to use Expressions, in addition to numeric values, to customize instruction options.  Expressions are strings of text that represent something to be *calculated* or *evaluated*; the result of this evaluation must be a valid option for the instruction.   Expressions can include numeric values, Symbols (defined below), mathematical, bitwise, and logical operators (e.g. +, -, |, &, ||, &&), and functions (e.g. if, floor, between); in specific places, a string (text surrounded by single quotes) can also be part of an Expression.  Please see [Expressions](../advanced/expressions.md) for further details.
+
 ### Customizing the list of instructions
 With the gears icon in the sidebar a customizing mode can be enabled. In this mode you can flag each instruction to be hidden. When it is flagged the instruction will no longer be visible in the sidebar or in the context menus. This is useful if you don't have a specific type of equipment for example and don't want to see instructions for it cluttering your user interface. Instructions that are part of the sequence, but are hidden from the sidebar will still be visible and active in the sequence.  
 ![Disable instruction in sidebar](../../images/sequencer/sidebar_disable_instruction.png)
