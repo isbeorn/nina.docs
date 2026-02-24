@@ -1,10 +1,4 @@
-The Focuser Tab lets you connect and control one of the following flat panels:
-
-* Alnitak Flip-Flat
-* Allpro Spike-a-flat
-* Artesky flat box
-* Pegasus Astro Flat Master
-* ASCOM compatible flat panel
+The Flat PanelFocuser Tab lets you connect and control compatible flat panels:
 
 ![Flats](../../images/tabs/equipment_flats.png)
 
