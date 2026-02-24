@@ -1,4 +1,4 @@
-The Flat PanelFocuser Tab lets you connect and control compatible flat panels:
+The Flat Panel Tab lets you connect and control compatible flat panels:
 
 ![Flats](../../images/tabs/equipment_flats.png)
 
