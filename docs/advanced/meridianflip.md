@@ -20,7 +20,7 @@ Every situation is different, so it is up to the user to know when a meridian fl
 An Automatic Meridian Flip operation swaps the telescope to the west side of the mount.
 Meridian flips prevent that your telescope and camera bump into the mount and do major damage to your equipment.
 N.I.N.A. has built-in functionality for the automated flip, even if your mount does not support it in firmware.
-After a flip N.I.N.A. verifies that it is still imaging the desired area of sky through [Plate Solving](platesolving.md) and the imaging session continues.
+After a flip, N.I.N.A. verifies that it is still imaging the desired area of sky through [Plate Solving](platesolving.md), and the imaging session continues.
 
 To enable the Automated Meridian Flip you need to enable it in the legacy sequence target set options or when using the advanced sequencer, the meridian flip trigger needs to be added to the sequence. For customizing the behavior of the meridian flip, the [meridian flip settings](../tabs/options/imaging.md#auto-meridian-flip) can be customized.
 

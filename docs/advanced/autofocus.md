@@ -13,11 +13,11 @@ For Auto-Focus to be available for use in N.I.N.A. the following must be availab
 
 ## N.I.N.A. Autofocus
 
-N.I.N.A. is unique in that provides multiple ways to autofocus on star fields, on bright objects such as the moon or planets, or on terrestrial objects. This is done using two methods to measure how far from focus an image is.
+N.I.N.A. is unique in that it provides multiple ways to autofocus on star fields, bright objects such as the moon or planets, or terrestrial objects. This is done using two methods to measure how far from focus an image is.
 
 ### Star HFR
 
-With this method, N.I.N.A. will move far out of focus, take an exposure, detect the stars in the image, compute the Half Flux Radius (HFR) of the stars and take the average HFR across the frame. Then, moving the focuser by some defined amount (the Auto Focus Step Size), N.I.N.A. can repeat the process, until a nice focus curve is available, and the minimum (point of best focus) can be found by different types of fitting (trend lines, hyperbolic, or parabolic). The obtained curve is as the below.
+With this method, N.I.N.A. will move far out of focus, take an exposure, detect the stars in the image, compute the Half Flux Radius (HFR) of the stars and take the average HFR across the frame. Then, moving the focuser by some defined amount (the Auto Focus Step Size), N.I.N.A. can repeat the process until a usable focus curve is available, and the minimum (point of best focus) can be found by different types of fitting (trend lines, hyperbolic, or parabolic). The obtained curve looks like the example below.
 
 ![Autofocus Curve Example - Star HFR](../images/advanced/autofocuscurve1.png)
 
@@ -25,11 +25,11 @@ Each of the focus points above represents the HFR at its respective focus positi
 
 Note however that for Star HFR measurement to work, stars must be detected in the field of view - as such, the routine will have issues with short exposures and far from focus, where out of focus stars will tend to be very large. The Auto-Focus Exposure time is therefore an important parameter to the autofocus routine.
 
-It is also important to note that if the N.I.N.A Step Size were too big (in the above example we can see it is equal to 10 focuser steps), the curve could become too coarse to be analyzed. The N.I.N.A Step Size therefore needs to be selected judiciously.
+It is also important to note that if the N.I.N.A. Step Size were too big (in the above example we can see it is equal to 10 focuser steps), the curve could become too coarse to be analyzed. The N.I.N.A. Step Size therefore needs to be selected judiciously.
 
 ### Contrast Detection
 
-A second method is to detect the contrast available in the image - in the same way that a smartphone or mirrorless camera does to perform autofocus. The focuser is moved per the Auto Focus Step Size, exposures are taken per the Auto-Focus exposure time, and contrast is measured via different techniques. The curve obtained is close to a Gaussian Curve, where the maximum of the curve is the point of highest contrast and therefore best focus. An example would be as per the below.
+A second method is to detect the contrast available in the image, in the same way that a smartphone or mirrorless camera does to perform autofocus. The focuser is moved per the Auto Focus Step Size, exposures are taken per the Auto-Focus exposure time, and contrast is measured via different techniques. The curve obtained is close to a Gaussian Curve, where the maximum of the curve is the point of highest contrast and therefore best focus. An example is shown below.
 
 ![Autofocus Curve Example - Contrast Detection](../images/advanced/autofocuscurve2.png)
 
@@ -51,7 +51,7 @@ As we have seen above, the two main parameters to successful auto-focus are here
 
 Some additional parameters are available:
 
-* Auto Focus Initial Offset Steps (in N.I.N.A. Auto Focus Steps Sizes, and not focuser steps)
+* Auto Focus Initial Offset Steps (in N.I.N.A. Auto Focus Step Sizes, and not focuser steps)
 * Use FilterWheel Offsets (which does not directly affect auto-focus)
 
 !!! Note
@@ -64,8 +64,8 @@ The autofocus logic is as follows:
 1. For Star HFR, N.I.N.A. takes an exposure at current focuser position, and computes the Star HFR. This will be the "benchmark to beat", and the final focus point will be checked against this benchmark to ensure better focus has been achieved.
 2. Move the focuser outwards (to a higher focuser position value than current) by *Auto Focus Initial Offset Steps* multiplied by *Auto Focus Step Size*. In the above example, the focuser would be moved by 5 * 10 = 50 focuser steps to the right.
 3. Start moving the focuser inwards (to lower focuser position values), one *Auto Focus Step Size* (e.g. 10 focuser steps in the above example) at a time, measuring the contrast or HFR at each step.
-4. Keep moving inwards until it has found a minimum (for HFR) or maximum (for Contrast) point, and at least *Auto Focus Initial Offset Steps* (5 in this example) points on each side of that minimum or maximum. If N.I.N.A. finds that it doesn't have enough focus points to the right of the minimum/maximum, it will move back outwards to the rightmost point, then proceed again, one *Auto Focus Step Size* at a time, until it has enough points right of the minimum/maximum as well
-5. Perform a fitting on the points (trend lines, parabolic, hyperbolic, or Gaussian) to find the point of best focus, and moves the focuser to it.
+4. Keep moving inwards until it has found a minimum (for HFR) or maximum (for Contrast) point, and at least *Auto Focus Initial Offset Steps* (5 in this example) points on each side of that minimum or maximum. If N.I.N.A. finds that it doesn't have enough focus points to the right of the minimum/maximum, it will move back outwards to the rightmost point, then proceed again, one *Auto Focus Step Size* at a time, until it has enough points right of the minimum/maximum as well.
+5. Perform a fitting on the points (trend lines, parabolic, hyperbolic, or Gaussian) to find the point of best focus, and move the focuser to it.
 6. For Star HFR, a final validation exposure is taken, the HFR computed, and compared to the benchmark taken in Step 1. If the final HFR is worse than the initial HFR by 15% or more, the autofocus routine is deemed a failure and the focuser returns to its initial focus position, or an additional auto-focus run is attempted.
 
 ## Determining ideal parameters
@@ -76,9 +76,9 @@ As we have seen, there are three important parameters that are used in the autof
 This is typically good at the default value of 4 for Star HFR. For contrast measurement, a value of 6 is preferable.
 
 ### Auto Focus Step Size
-To determine the correct Auto Focus Step Size, a user could start with the focuser slightly out of focus outwards from best focus. Then move the focuser outwards by say 10 steps. If there an obvious difference to the eye, and the star diameter has increased by around 20-30% or so, this is likely a right step size. 
-Another method is the following: starting from a good focus position (e.g. by focusing with a Bahtinov mask) the user can progressively move the focuser inward (or outward) until N.I.N.A. is not able to determine stars HFR in the image. The total increment represents the maximum initial offset. To be on the safe side the user can take 80% of the max initial offset and divide it by the _Auto Focus Initial Offset Steps_ (default = 4). The resulting value represents a good Auto Focus Step size. [Star HFR](../tabs/imaging.md) detection and [Annotate Image](../tabs/options/imaging.md) must be turned ON during the process.
-> Example: assuming a starting point of good focus of 4000 steps, we will move the focuser outward by an amount of 10 steps at the time, and take a new exposure at the end of each increment to check the measured HFR. Let's say that after 12 moves (120 focuser steps) no or just a couple of very defocused stars will still be detected by N.I.N.A. The value of 120 steps will therefore represent be the max increment. Scaling it by 80% (roughly 100) and dividing it by the Initial Offset (4) will give us an _Auto Focus Step Size_ of 25.
+To determine the correct Auto Focus Step Size, a user could start with the focuser slightly out of focus outwards from best focus. Then move the focuser outwards by, say, 10 steps. If there is an obvious difference to the eye, and the star diameter has increased by around 20-30% or so, this is likely a good step size.
+Another method is the following: starting from a good focus position (e.g. by focusing with a Bahtinov mask) the user can progressively move the focuser inward (or outward) until N.I.N.A. is not able to determine star HFR in the image. The total increment represents the maximum initial offset. To be on the safe side, the user can take 80% of the max initial offset and divide it by the _Auto Focus Initial Offset Steps_ (default = 4). The resulting value represents a good Auto Focus Step Size. [Star HFR](../tabs/imaging.md) detection and [Annotate Image](../tabs/options/imaging.md) must be turned ON during the process.
+> Example: assuming a starting point of good focus of 4000 steps, we will move the focuser outward by an amount of 10 steps at a time, and take a new exposure at the end of each increment to check the measured HFR. Let's say that after 12 moves (120 focuser steps) no or just a couple of very defocused stars will still be detected by N.I.N.A. The value of 120 steps will therefore represent the max increment. Scaling it by 80% (roughly 100) and dividing it by the Initial Offset (4) will give us an _Auto Focus Step Size_ of 25.
 
 Otherwise, the user should keep experimenting until they find a step size that shifts the focus by the right amount.
 
@@ -97,7 +97,7 @@ Note that for contrast detection methods, it is generally safe to use an exposur
 
 ### Use FilterWheel Offsets
 
-Even par focal filters can cause small changes to focus, due to the filter itself, or the optical system and how it deals with different light wavelengths. As such it is possible to set offsets, in focuser steps, for each filter relative to one another. If a filter wheel is used, and offsets are properly defined per filter, this setting should be turned on. Otherwise, it should be kept off. This setting doesn't affect autofocus directly, unless an Auto-Focus filter is set. Defining filter offsets is further explained in the [Equipment Options Section](../tabs/options/equipment.md#filter-wheel-configuration).
+Even parfocal filters can cause small changes to focus, due to the filter itself, or the optical system and how it deals with different light wavelengths. As such it is possible to set offsets, in focuser steps, for each filter relative to one another. If a filter wheel is used, and offsets are properly defined per filter, this setting should be turned on. Otherwise, it should be kept off. This setting doesn't affect autofocus directly, unless an Auto-Focus filter is set. Defining filter offsets is further explained in the [Equipment Options Section](../tabs/options/equipment.md#filter-wheel-configuration).
 
 ## Important considerations
 
@@ -124,11 +124,11 @@ The Debayer setting is for OSC (one shot color) cameras, and will be ignored for
 
 Since, just as described above, many autofocus measurement methods depend on the stretched image, having this parameter correctly set will help with autofocus. Generally, it is better to leave these set to On.
 
-Similarly, the Debayered HFR option provides a better way to perform HFR calculation when set to On. If set to off, the Bayered sensor data will be used for Star HFR calculation, which can lead to small focus error.
+Similarly, the Debayered HFR option provides a better way to perform HFR calculation when set to On. If set to Off, the Bayered sensor data will be used for Star HFR calculation, which can lead to small focus error.
 
 ### Star Sensitivity
 
-Star sensitivity is a parameter that takes effect during Star Detection, and therefore affects the Star HFR autofocus methodology. More aggressive settings will typically detect more stars, but will become more sensitive to noise as a result, which could lead to miss detecting stars. With the Annotate Stars setting set to On it is possible for the user to see the effects of this setting both in and out of focus. Typically, a value of Normal or High will provide good results.
+Star sensitivity is a parameter that takes effect during Star Detection, and therefore affects the Star HFR autofocus methodology. More aggressive settings will typically detect more stars, but will become more sensitive to noise as a result, which could lead to missing stars. With the Annotate Stars setting set to On it is possible for the user to see the effects of this setting both in and out of focus. Typically, a value of Normal or High will provide good results.
 
 As making this parameter more aggressive increases noise sensitivity, it can be used efficiently with the Noise Reduction parameter described below.
 
@@ -189,11 +189,11 @@ This option is only available when the Star HFR autofocus method is selected (fo
 
 ### Focuser Settle Time
 
-This is the time, in seconds, that will be waited for after a focuser movement, and before the next exposure. This can be useful for focusing systems that can make the imaging train vibrate, like some belt focusers. For most users, this can be kept at zero.
+This is the time, in seconds, to wait after a focuser movement and before the next exposure. This can be useful for focusing systems that can make the imaging train vibrate, like some belt focusers. For most users, this can be kept at zero.
 
 ### AF Number of attempts
 
-If a focus run is deemed unsuccessful (which can happen with the Star HFR methodology, which compares the final Star HFR to the initial Star HFR), if there are Auto Focus Attempts left, a new focus run will be attempted. When all the attempts are exhausted, the autofocus routine will declare failure, get back to its original focuser position, and imaging will continue as usual. For most users, a value of 1 (single attempt, no re-try in case of failure) or 2 (one reattempt in case of failure) is appropriate.
+If a focus run is deemed unsuccessful (which can happen with the Star HFR methodology, which compares the final Star HFR to the initial Star HFR), and there are Auto Focus Attempts left, a new focus run will be attempted. When all the attempts are exhausted, the autofocus routine will declare failure, return to its original focuser position, and imaging will continue as usual. For most users, a value of 1 (single attempt, no retry in case of failure) or 2 (one retry in case of failure) is appropriate.
 
 ### AF Number of Frames per point
 
@@ -216,7 +216,7 @@ These settings (numbers between 0.2 and 1) are used to define a region of intere
 
 ![Outer Crop Ratio](../images/advanced/outercropratio.png)
 
-Note that it is possible to have the inner crop ratio to some value, and the outer crop ratio to a value such as 0.99 to take into account only the outside of the center - this can be useful for centered very dense globular clusters, although they should not pose a big issue to the N.I.N.A. star detection routines.
+Note that it is possible to set the inner crop ratio to some value, and the outer crop ratio to a value such as 0.99 to take into account only the outside of the center. This can be useful for centered, very dense globular clusters, although they should not pose a big issue to the N.I.N.A. star detection routines.
 
 Note that for Contrast Detection methods, only the inner crop ratio is available. In addition, for the Statistics contrast detection method, it will only work if the camera can subsample to the required ROI.
 
@@ -238,20 +238,20 @@ The initial focuser position for the above example was around step 9000. To begi
 
 N.I.N.A. offers two backlash compensation methods:
 
-* Absolute: 
+* Absolute:
   When the focuser changes directions, an absolute value will be added to the focuser movement.
-  Backlash IN: when the focuser changes from moving outwards to moving inwards the Backlash IN value will be added
-  Backlash OUT: when the focuser changes from moving inwards to moving outwards the Backlash OUT value will be added
- * Overshoot:
-  This method will compensate for Backlash by overshooting the target position by a large amount and then moving the focuser back to the initially requested position.
-  Due to this compensation the last movement of the focuser will always be in the same direction (either always inwards or always outwards)
+  Backlash IN: when the focuser changes from moving outwards to moving inwards, the Backlash IN value will be added.
+  Backlash OUT: when the focuser changes from moving inwards to moving outwards, the Backlash OUT value will be added.
+* Overshoot:
+  This method will compensate for backlash by overshooting the target position by a large amount and then moving the focuser back to the initially requested position.
+  Due to this compensation, the last movement of the focuser will always be in the same direction (either always inwards or always outwards).
 
 > Absolute is indicated for focusers with relatively small backlash and requires a more accurate measurement of the amount of backlash, while Overshoot is more forgiving and can be safely used for most focusers.
 
 **Backlash IN/OUT**
-* The focuser backlash in the IN (decreasing position) and OUT (increasing position) directions, expressed in focuser steps. 
+* The focuser backlash in the IN (decreasing position) and OUT (increasing position) directions, expressed in focuser steps.
   
-> When Overshoot is chosen, only ONE between Backlash IN and OUT must be set! When setting IN, the amount will be applied on each inward movement, so the final movement will always be outwards. For Backlash OUT, it will be the other way around
+> When Overshoot is chosen, only ONE value between Backlash IN and OUT must be set! When setting IN, the amount will be applied on each inward movement, so the final movement will always be outwards. For Backlash OUT, it will be the other way around.
 
 ### Binning
 
@@ -265,6 +265,6 @@ Another parameter that affects the auto-focus routine is the Auto-Focus Filter. 
 
 ## Auto-Focus Logs
 
-For each successful Auto-Focus that has been performed a JSON log file is created containing detailed information about the autofocus run. There you can find the used filter, all the steps that were measured and other useful  information to evaluate an Auto-Focus run from the past. Furthermore these logs can help greatly in analysing potential issues with Auto-Focus by sharing this file with other people.  
+For each successful Auto-Focus that has been performed, a JSON log file is created containing detailed information about the autofocus run. There you can find the used filter, all the steps that were measured, and other useful information to evaluate an Auto-Focus run from the past. Furthermore, these logs can help greatly in analyzing potential issues with Auto-Focus by sharing this file with other people.
   
 These logs are stored inside `%LOCALAPPDATA%\NINA\Autofocus\`

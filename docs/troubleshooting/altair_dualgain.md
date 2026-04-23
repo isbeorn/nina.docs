@@ -8,7 +8,7 @@ If your Altair camera has a dual-gain sensor, an option for _High Gain Mode_ wil
 
 ![High Gain Mode](../images/troubleshooting/altair_dualgain/camsettings.png)
 
-Note that switching from HCG to LCG or vice versa does not change the gain _value_ that you have set anywhere else in N.I.N.A. - for example, if you have a sequence set up to take images at gain 430, the camera will be instructed to use gain 430 irrespective of the high/low gain toggle. The same is true for any location in N.I.N.A. where camera gain is set (including the imaging tab, platesolving, autofocus, etc).
+Note that switching from HCG to LCG or vice versa does not change the gain _value_ that you have set anywhere else in N.I.N.A. - for example, if you have a sequence set up to take images at gain 430, the camera will be instructed to use gain 430 irrespective of the high/low gain toggle. The same is true for any location in N.I.N.A. where camera gain is set (including the imaging tab, plate solving, autofocus, etc).
 
 ## Comparison with Other Imaging Software
 

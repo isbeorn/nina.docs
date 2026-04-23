@@ -1,4 +1,4 @@
-The Imaging options tab contains settings for file formats, save directories, Automatic Meridian flips, sequencing and image options.
+The Imaging options tab contains settings for file formats, save directories, Automatic Meridian Flips, sequencing, and image options.
 
 ![The imaging options tab](../../images/tabs/Options-Imaging10.png)
 
@@ -11,7 +11,7 @@ The Imaging options tab contains settings for file formats, save directories, Au
     * [Advanced Topics: File Formats TIFF](../../advanced/file_formats/tiff.md)
     * [Advanced Topics: File Formats FITS](../../advanced/file_formats/fits.md) 
     * [Advanced Topics: File Formats XISF](../../advanced/file_formats/xisf.md)
-* All formats are saved as 16bit
+* All formats are saved as 16-bit
 * If an OSC camera is used, the raw bayered data is saved
     
 ### Compression
@@ -19,10 +19,10 @@ The Imaging options tab contains settings for file formats, save directories, Au
 * Compression will require more time to save the image, but the file size will be reduced
   
 ### Byte Shuffling
-* Enable/disable byte shuffling for XSIF compression
+* Enable/disable byte shuffling for XISF compression
 
 ### Checksum
-* Select a checksum method for XSIF (optional)
+* Select a checksum method for XISF (optional)
 * Checksums can be used to determine if a file was corrupted
    
 ### Image File Path
@@ -37,7 +37,7 @@ The Imaging options tab contains settings for file formats, save directories, Au
 * Furthermore you can expand this section to also specify different file patterns for FLAT, DARK and BIAS images. If no pattern is specified for those, the default image pattern will be used instead
 
 !!! note
-    You should avoid using non-ascii characters when filling the Target Name value in `FlatWizard`, `Legacy Sequencer`, `Advanced Sequencer` or `Imaging Snapshot`. Value in these fields will be passed to file pattern `$$TARGETNAME$$`. Due to compatibility requirements on FITS format and other image processing software, `$$TARGETNAME$$` does not allow non-ascii characters. Greek characters are replaced using a special translation table, and other non-ascii characters are replaced with "_", for example   
+    You should avoid using non-ASCII characters when filling the Target Name value in `FlatWizard`, `Legacy Sequencer`, `Advanced Sequencer`, or `Imaging Snapshot`. Values in these fields will be passed to file pattern `$$TARGETNAME$$`. Due to compatibility requirements on FITS format and other image processing software, `$$TARGETNAME$$` does not allow non-ASCII characters. Greek characters are replaced using a special translation table, and other non-ASCII characters are replaced with "_", for example
     `织女, Vega, α Lyr, BD +38°3238 -> __, Vega, alf Lyr, BD +38_3238`
 
 !!! tip
@@ -64,7 +64,7 @@ The Imaging options tab contains settings for file formats, save directories, Au
     E.g. you set it to 5 Minutes and 10 Max Minutes, and when an exposure finishes in between this time range the application can immediately flip the scope instead of having to wait for the remaining time where an exposure would not fit in.
     
 ### Use Telescope Side of Pier
-* Almost all mount drivers can tell N.I.N.A which side of the pier/tripod the telescope is on which is either west or east. Having this enabled will make the flip determination logic much more reliable and robust, as no assumptions about the pier state have to be made.  
+* Almost all mount drivers can tell N.I.N.A. which side of the pier/tripod the telescope is on, which is either west or east. Having this enabled will make the flip determination logic much more reliable and robust, as no assumptions about the pier state have to be made.
 *Strongly recommended to be turned on*
     
 ### Recenter after flip
@@ -73,7 +73,7 @@ The Imaging options tab contains settings for file formats, save directories, Au
     
 ### Scope Settle time
 * After flipping the scope, waits for the specified number of seconds to settle the scope
-> If you observe trailing in your first platesolve attempts after a flip, increase this value
+> If you observe trailing in your first plate solve attempts after a flip, increase this value
 
 ### Pause before meridian
 * For some setups the equipment can touch the tripod or pier a while before passing the meridian. This setting enables the mount to disable tracking for the defined minutes prior to reaching meridian. Once this time and the defined minutes after meridian are passed, the flip will occur normally.
@@ -87,7 +87,7 @@ The Imaging options tab contains settings for file formats, save directories, Au
     In previous versions of N.I.N.A. a switch to enable meridian flip was located here. However this approach has been changed and the meridian flip needs to be enabled on sequence level. The legacy sequencer has a target set option to enable it and the advanced sequencer needs to have a meridian flip trigger added to the sequence    
 
 ### Rotate image after flip
-* When enabling this option, the image inside the imaging tab will be automatically rotated by 180° after a meridian flip. This is for displaying purposes only and will not alter any raw image data.
+* When enabling this option, the image inside the imaging tab will be automatically rotated by 180 degrees after a meridian flip. This is for display purposes only and will not alter any raw image data.
   
 ## Image Options
 
@@ -100,17 +100,17 @@ The Imaging options tab contains settings for file formats, save directories, Au
 > Note that this is only for display in the imaging tab and has no effect on saved data
 
 ### Debayer Image
-* When a OSC camera is used, enabling this will debayer the images for display purposes only.
+* When an OSC camera is used, enabling this will debayer the images for display purposes only.
     
 ### Debayered HFR
-* If enabled, images will be debayered first before HFR analysis is done. In case you run into star detection problems with OSC camera and autofocus, enable this setting
-*This setting is the memory and processing heavy and should not be activated for resource restricted machines*
+* If enabled, images will be debayered first before HFR analysis is done. In case you run into star detection problems with an OSC camera and autofocus, enable this setting.
+*This setting is memory and processing heavy and should not be activated for resource-restricted machines*
 
 ### Unlinked Stretch
-* When a OSC camera is used, debayering the image generates 3 channels R,G and B
+* When an OSC camera is used, debayering the image generates 3 channels: R, G, and B
 * By default the autostretch in imaging is linked and may result in unbalanced color channels
 * Enabling this will enable debayer image, and should result in balanced color channels when stretching
-*This setting is the memory and processing heavy and should not be activated for resource restricted machines*
+*This setting is memory and processing heavy and should not be activated for resource-restricted machines*
     
 ### Star Sensitivity
 * This changes the sensitivity of star detection used for HFR analysis
@@ -146,7 +146,7 @@ The Imaging options tab contains settings for file formats, save directories, Au
 * This will remove the legacy sequencer from the UI. Useful if you don't use the legacy sequencer at all and want to remove the then unnecessary decisions between the two sequencers.
 
 !!! note
-    In previous versions of N.I.N.A. some options where available to run end of sequence options. These have been moved into the sequencer.
+    In previous versions of N.I.N.A. some options were available to run end-of-sequence options. These have been moved into the sequencer.
 
 ## Layout
 ### Reset Layout

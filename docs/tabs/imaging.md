@@ -1,9 +1,9 @@
-The Imaging tab is your imaging cockpit.   
-Here  N.I.N.A. will display  a variety of information regarding  the captured images and will let you control all the vital parameters of your imaging session.
+The Imaging tab is your imaging cockpit.
+Here N.I.N.A. will display a variety of information regarding the captured images and will let you control all the vital parameters of your imaging session.
 
 The Imaging tab is organized in windows that can be arranged dynamically to create your own layout.
 Available windows can be activated and deactivated from the top bar.
-To arrange a window simply drag it from the window header and drop it according to the suggested placeholders.   
+To arrange a window, simply drag it from the window header and drop it according to the suggested placeholders.
 
 The top bar is divided in two main sections: **Info** and **Tools**  
 
@@ -21,10 +21,10 @@ The image panel is the central part of the Imaging tab and is used to display th
 2.   Zoom to Fit  
 3.   Zoom 100% (1:1 )    
 4.   Opens a 3x3 crop mosaic of the current image to check for distortion and tilt
-5.   Initiates a platesolving routine for the current image
+5.   Initiates a plate solving routine for the current image
 6.   Toggles crosshair overlay on/off
 7.   Toggles automatic display of the displayed image (for autostretch settings refer to [Options](options/imaging.md))
-8.   Toggles automatic HFR (Half-FLux-Radius) star detection analysis. HFR is used for [Autofocus](options/equipment.md) routines. When HFR detection is ON, the average HFR value for each captured image are plotted in the HFR History window (M)
+8.   Toggles automatic HFR (Half-Flux-Radius) star detection analysis. HFR is used for [Autofocus](options/equipment.md) routines. When HFR detection is ON, the average HFR value for each captured image is plotted in the HFR History window (M)
 > If _Annotate Image_ is switched ON under [Options->Imaging](options/imaging.md), the calculated HFR values will be displayed on the image  
    ![HFR](../images/tabs/imaging_HFR.PNG)
 9.   Activates the Bahtinov Analyzer aid tool for manual focusing with a Bahtinov Mask.
@@ -54,10 +54,10 @@ This panel displays the focuser status and lets you manually move it to the desi
 2. Focuser current position (for absolute stepper motor focusers)
 3. Focuser temperature (if the focuser is equipped with an ambient temperature sensor)
 4. Toggles focuser temperature compensation
-5. Here you can set the target focuser position for the focuser to move by clicking on "Move" (7)
-6. Moves the focuser to the Target Position defined in (6)
-   > It is convenient to set the target position as the position of near-focus for your setup. This position can be determined by using a Bahtinov mask on a bright star (see **Manual Focus Targets**). Once the near-focus position is determined, input the number of steps indicated in "Position" (3) in Target Position field. You can then instruct the focuser to move to this position at the beginning of each imaging session before starting the Auto-Focusing routine 
-7. The arrows will move the focusers back and forth of a pre-defined amount related to the Auto Focus Step Size defined under Options - [Equipment](options/equipment.md):
+5. Here you can set the target focuser position for the focuser to move to by clicking on "Move" (6)
+6. Moves the focuser to the Target Position defined in (5)
+   > It is convenient to set the target position as the position of near-focus for your setup. This position can be determined by using a Bahtinov mask on a bright star (see **Manual Focus Targets**). Once the near-focus position is determined, input the number of steps indicated in "Position" (2) in the Target Position field. You can then instruct the focuser to move to this position at the beginning of each imaging session before starting the Auto-Focusing routine
+7. The arrows will move the focuser back and forth by a predefined amount related to the Auto Focus Step Size defined under Options - [Equipment](options/equipment.md):
     * Single arrow <  > : half the Auto Focus Step Size
     * Double arrows <<  >> : five times the Auto Focus Step Size
 
@@ -86,9 +86,9 @@ The guider panel replicates the PHD guiding graph in real time.
 
 ![guider](../images/tabs/imaging_guider.png)
 
-1. Select the scale range of y-axis
-2. Select the scale range of x-axis
-3. Select the units for y-axis:
+1. Select the scale range of the y-axis
+2. Select the scale range of the x-axis
+3. Select the units for the y-axis:
     * Pixels: guide camera pixels
     * Arcseconds: units in arcseconds (this is calculated by PHD2 based on your guide camera pixel size and guide scope focal length)
 4. Clears the chart
@@ -116,7 +116,7 @@ Weather and temperature information from OpenWeatherMap
 ![weather](../images/tabs/imaging_weather.png)
 
 ### K. Statistics  ![statsicon](../images/tabs/imaging_statsicon.PNG)  
-In this panel  all the important information about the last captured image are reported
+In this panel, all the important information about the last captured image is reported
 
 ![statistics](../images/tabs/imaging_statistics.png)
 
@@ -139,7 +139,7 @@ The chart is limited to displaying a moving window of the last 100 exposures.
 
 By default the HFR History shows the HFR values and the number of detected stars throughout the imaging session. The fields can be changed by hovering over the panel to different statistics.
 1. Green line: Left y-axis
-2. Yellow line: right-axis
+2. Yellow line: right y-axis
 3. Triangle marks: AF runs
    
 ## Tools 
@@ -153,7 +153,7 @@ The imaging panel allows you to take a single exposure or live view when support
 2. Filter to be used for the capture (if a Filter Wheel is connected)
 3. Camera Binning
 4. Toggles ON/OFF image looping. This is particularly useful for manual focus with a Bahtinov mask
-5. Toggles ON/OFF the saving on HD of the current capture
+5. Toggles ON/OFF saving the current capture to disk
 6. When supported by the camera, this will activate the Live View mode
 7. Takes the exposure
 
@@ -164,9 +164,9 @@ The Image History panel shows a list of thumbnails of the current sequence captu
 ![history](../images/tabs/imaging_history.png)
 
 ### P. Plate Solving ![platesolvingicon](../images/tabs/imaging_platesolveicon.PNG)  
-Platesolving is a very important step in the imaging process, for further information on the Plate Solving process refer to [Platesolving](../advanced/platesolving.md) in the advanced topics. This panel lets you perform a manual platesolving and keeps the history of all platesolving sessions.
-> Prerequisites for platesolving to work are:
-> * An external Platesolver is  defined in Options [Platesolving](options/platesolving.md)
+Plate solving is a very important step in the imaging process. For further information on the Plate Solving process, refer to [Plate Solving](../advanced/platesolving.md) in the advanced topics. This panel lets you perform manual plate solving and keeps the history of all plate solving sessions.
+> Prerequisites for plate solving to work are:
+> * An external plate solver is defined in Options [Plate Solving](options/platesolving.md)
 > * Telescope focal length is defined in Options [Equipment](options/equipment.md)
 > * Camera pixel size is defined in Options [Equipment](options/equipment.md)
 > * The image to be plate solved has been captured with the specified focal length and pixel size
@@ -175,11 +175,11 @@ Platesolving is a very important step in the imaging process, for further inform
 
 1. Plate solving results
 2. Toggles ON/OFF syncing the telescope mount with the plate solved coordinates 
-3. Toggles ON/OFF re-slewing and re-centering the mount to the plate solved coordinates if the plate solved position is not matching with the expected one
-4. Error threshold for (4)
+3. Toggles ON/OFF re-slewing and re-centering the mount to the plate solved coordinates if the plate solved position does not match the expected one
+4. Error threshold for (3)
 5. Exposure that will be used to capture the image for plate solving
 6. Filter that will be used to capture the image for plate solving
-7. Captures  an image for plate solving
+7. Captures an image for plate solving
 8. History of plate solving sessions
 
 ### R. Auto Focus ![AFicon](../images/tabs/imaging_aficon.PNG)  

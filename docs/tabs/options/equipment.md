@@ -6,24 +6,24 @@ This is the tab where you set up all the parameters related to your equipment.
 
 ### Pixel Size
 * The Pixel Size of your camera sensor in micrometers. This field will be automatically populated by the camera, if it provides the information.
-> This field together with the values in  “Telescope”  is used for Platesolving operations
+> This field, together with the values in “Telescope”, is used for Plate Solving operations.
      
 ### Bit Depth
 * Specify the bit-depth of the images outputted by the camera in use.
     
-> For DSLRs using DCRAW set this to 16 bit. If you're using FreeImage set to match the bitdepth of the camera
+> For DSLRs using DCRaw, set this to 16-bit. If you're using FreeImage, set this to match the bit depth of the camera.
 
-> For ZWO, QHY, SBIG, FLI, PlayerOne and Atik cameras set this to 16bit since they are rescaled by the camera drivers.
+> For ZWO, QHY, SBIG, FLI, PlayerOne and Atik cameras, set this to 16-bit since they are rescaled by the camera drivers.
 
-> Touptek, Risingcam, Altair, Mallincam, Omegon and SVBony do not scale, so set to match bit depth of the camera
+> ToupTek, RisingCam, Altair, MallinCam, Omegon and SVBony do not scale, so set this to match the bit depth of the camera.
 
-> For other CCD/CMOS cameras ask to your camera manufacturer.
+> For other CCD/CMOS cameras, ask your camera manufacturer.
 
 ### Bayer Pattern
 * Specify the bayer pattern for DSLR/OSC cameras. Leave it to Auto for auto-selection from camera drivers.
   
 ### Enable bit scaling
-* Indicates if data should be shifted to 16 bits. *Only relevant for Touptek, Risingcam, Altair, Mallincam, Omegon and SVBony cameras*
+* Indicates if data should be shifted to 16 bits. *Only relevant for ToupTek, RisingCam, Altair, MallinCam, Omegon and SVBony cameras*
 
 ### Bulb Mode
 * Allows you to change the bulb mode of the camera. Native will work in most cases.
@@ -32,7 +32,7 @@ This is the tab where you set up all the parameters related to your equipment.
 
 ### Raw Converter
 * Only for DSLR: select the RAW converter, options are DCRaw and FreeImage
-> DCRaw will utilize DCRaw and stretch your images to 16bit, applying the cameras specific color bias profile.  
+> DCRaw will utilize DCRaw and stretch your images to 16-bit, applying the camera's specific color bias profile.
 FreeImage will deliver the frame exactly as your camera provided it and can be slightly faster for image download on slower machines.
 
 !!! note
@@ -47,7 +47,7 @@ FreeImage will deliver the frame exactly as your camera provided it and can be s
 ## Telescope
 
 ### Telescope
-* This section lets you enter the parameters of your telescope that will be used for [Platesolving](../../advanced/platesolving.md).  
+* This section lets you enter the parameters of your telescope that will be used for [Plate Solving](../../advanced/platesolving.md).
 > If you change telescope, remember to update these settings or to switch profile under [Options/General](../../tabs/options/general.md).
 
 ### Settle time after slew
@@ -68,8 +68,8 @@ FreeImage will deliver the frame exactly as your camera provided it and can be s
 ### Filter wheel
 * If a Filter Wheel is connected in [Equipment](../equipment/equipment.md) this window lists the available filters and names.
     * Position: filter position
-    * Name: name of the filter as imported from ASCOm driver
-    * Focus Offset: offset values that are used at each filter change if "Use FilterWheel Offset" is enabled  
+    * Name: name of the filter as imported from ASCOM driver
+    * Focus Offset: offset values that are used at each filter change if "Use FilterWheel Offsets" is enabled.
     * Auto Focus Exposure Time: it is possible to specify an AF exposure time for each filter 
 ### Filter + - Buttons
     * These buttons add and remove filters from the filter wheel list (24)
@@ -79,8 +79,8 @@ FreeImage will deliver the frame exactly as your camera provided it and can be s
 The Filters defined in the Filter Wheel list are used in various places in N.I.N.A., especially in:
 
 * The [Sequencer](../../sequencer/overview.md): certain places can specify a filter for capture
-* The Plate Solving routine: it can be set to use a particular filter, to have lower exposure times for plate solving (e.g. using L rather than HA for example)
-* The Auto-Focus routine: like plate-solving, autofocus can be set to use a particular filter, as well as having filter specific autofocus options
+* The Plate Solving routine: it can be set to use a particular filter, to have lower exposure times for plate solving (e.g. using L rather than HA)
+* The Auto-Focus routine: like plate solving, autofocus can be set to use a particular filter, as well as having filter-specific autofocus options
 
 For the above to work well, it is necessary to define the proper filters available.
 
@@ -112,7 +112,7 @@ The connection allows a one way communication of coordinates from the planetariu
 If a planetarium program is configured, coordinates can be imported anywhere in the program that has the Planetarium Sync Button.
 
 ### Preferred Planetarium Software
-* This drop down menu selects the planetarium software to be used
+* This drop-down menu selects the planetarium software to be used
 
 ### Host
 * This is the address the planetarium server is hosted on

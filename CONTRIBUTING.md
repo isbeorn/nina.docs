@@ -3,7 +3,7 @@
 Thank you for considering a contribution to N.I.N.A.'s documentation!
 
 ## Prerequisites
-The documentation is using MkDocs. A in-depth guide on how to set it up and how to use MkDocs can be found on their project homepage [MkDocs](https://www.mkdocs.org)
+The documentation uses MkDocs. An in-depth guide on how to set it up and use MkDocs can be found on the [MkDocs project homepage](https://www.mkdocs.org).
 In summary you need:  
 - [Python](https://www.python.org/)  
   - Pip `pip install --upgrade pip`  

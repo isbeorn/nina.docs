@@ -53,7 +53,7 @@ Here's a Take Exposure instruction as it might appear in NINA 3.3; you'll see a 
 
 ![Expression Example](../../images/sequencer/Sequencer_SymbolExampleInstruction.png)
 
-The current value of an Expression is shown in curly brackets (braces)
+The current value of an Expression is shown in curly brackets (braces).
 
 ![Expression Example](../../images/sequencer/Sequencer_ExpressionValue.png)
 

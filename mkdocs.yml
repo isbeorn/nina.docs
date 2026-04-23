@@ -15,7 +15,7 @@ nav:
             - Overview: 'tabs/equipment/equipment.md'
             - Equipment: 
                 - Camera: 'tabs/equipment/camera.md'
-                - Filterwheel: 'tabs/equipment/filterwheel.md'
+                - Filter Wheel: 'tabs/equipment/filterwheel.md'
                 - Focuser: 'tabs/equipment/focuser.md'
                 - Rotator: 'tabs/equipment/rotator.md'
                 - Telescope: 'tabs/equipment/telescope.md'
@@ -24,7 +24,7 @@ nav:
                 - Flat Panel: 'tabs/equipment/flatpanel.md'
                 - Weather: 'tabs/equipment/weather.md'
                 - Dome: 'tabs/equipment/dome.md'
-                - SafetyMonitor: 'tabs/equipment/safetymonitor.md'
+                - Safety Monitor: 'tabs/equipment/safetymonitor.md'
             - Sky Atlas: 'tabs/skyatlas.md'
             - Framing Assistant: 'tabs/framing.md'
             - Flat Wizard: 'tabs/flatwizard.md'

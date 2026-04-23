@@ -1,22 +1,22 @@
 ## General
 ![Generic Instruction](../../images/sequencer/instructions/instruction_generic.png)  
-An instruction is a single command that the application will execute. Each instruction has a different purpose and can control various types of equipment, set parameters or are utility functions to automate the imaging process.
+An instruction is a single command that the application will execute. Each instruction has a different purpose and can control various types of equipment, set parameters, or provide utility functions to automate the imaging process.
 
 ![Instruction name](../../images/sequencer/instructions/instruction_name.png)  
 Each instruction can be identified by its name and its icon.
 
 ### Validations
 ![Instruction Validation](../../images/sequencer/instructions/instruction_validation.png)  
-Instructions are capable of validating prerequisites and warn the user about potential issues. When a red exclamation mark is visible next to the instructions, not all prerequisites to run this instruction are met and when hovering over the red circle, the details which prerequisites are missing is shown.  
-**Important**: An instruction that does not meet its prerequisites will be skipped and the instruction is considered as failed.  
+Instructions are capable of validating prerequisites and warning the user about potential issues. When a red exclamation mark is visible next to the instruction, not all prerequisites to run this instruction are met. When hovering over the red circle, the details of which prerequisites are missing are shown.
+**Important**: An instruction that does not meet its prerequisites will be skipped and the instruction is considered failed.
 
 ### Options
 ![Instruction Validation](../../images/sequencer/instructions/instruction_options.png)  
-Most instructions also come with a variety of options to adjust their behavior at runtime. For example you can adjust the exposure times, gain and offset for an instruction that should take an exposure with your camera. Each instruction has a different set of options which are explained in more detail below.
+Most instructions also come with a variety of options to adjust their behavior at runtime. For example, you can adjust the exposure times, gain, and offset for an instruction that should take an exposure with your camera. Each instruction has a different set of options, which are explained in more detail below.
 
 ### Buttons
 ![Generic Instruction](../../images/sequencer/instructions/instruction_buttons.png)  
-On the right side of the instructions are a bunch of buttons available to delete, copy, move or adjust advanced settings that exist for all instructions.
+On the right side of the instructions are buttons to delete, copy, move, or adjust advanced settings that exist for all instructions.
 ### Advanced settings
 
 ![Instruction Settings](../../images/sequencer/instructions/instruction_settings.png)  
@@ -24,7 +24,7 @@ On the right side of the instructions are a bunch of buttons available to delete
 When clicking on the three dots on the right side of an instruction, an advanced section will appear where advanced settings for an instruction are revealed.
 
 **Number of attempts**  
-This drives how many reattempts an instruction should make in case of failure
+This drives how many retry attempts an instruction should make in case of failure.
 
 **On error**  
 When all attempts have been unsuccessful this setting will drive how to continue with the sequence.  
@@ -188,7 +188,7 @@ When used in relative mode, if the focus position change is less than one step, 
 *Requires a focuser with a temperature probe*
 
 !!!note  
-    To determine the slope and intercept, you can use the history of your autofocus runs and run a linear regression on these best focus points. The intercept will be the the cross of the y-axis at 0°C and the slope will be the temperature gradient.  
+    To determine the slope and intercept, you can use the history of your autofocus runs and run a linear regression on these best focus points. The intercept will be where the line crosses the y-axis at 0°C, and the slope will be the temperature gradient.
     For the best fit try to only use autofocus points from a single session and make sure the telescope is cooled down fully.
     The plugin `Autofocus Report Analysis` can help you in determining these parameters, but be careful to have good data points with a good fit, otherwise these values will be error prone.
 
@@ -209,7 +209,7 @@ Issues the guider to [dither](../../advanced/dithering.md)
 
 ### Start Guiding
 ![Start Guiding](../../images/sequencer/instructions/guider_start.png)  
-Starts guiding if not already started. In addition a toggle to force the calibration can be enabled. Then the guider will be forced to run a calibration, even if a valid calibration is already available. When this toggle is off, the guider will determine by itself if calibration is necessary.
+Starts guiding if not already started. In addition, a toggle to force the calibration can be enabled. Then the guider will be forced to run a calibration, even if a valid calibration is already available. When this toggle is off, the guider will determine by itself if calibration is necessary.
 
 ### Stop Guiding
 ![Stop Guiding](../../images/sequencer/instructions/guider_stop.png)  
@@ -220,11 +220,11 @@ Control basic functions of a [Rotator](../../tabs/equipment/rotator.md). Each in
 
 ### Rotate By Mechanical Angle
 ![Rotate By Mechanical Angle](../../images/sequencer/instructions/rotator_movemechanical.png)  
-Rotates the rotator to the specified mechanical absolute angle
+Rotates the rotator to the specified absolute mechanical angle.
 
 ### Solve and Rotate
 ![Solve and Rotate](../../images/sequencer/instructions/rotator_solveandsync.png)  
-Takes an image from the current position the telescope is pointing at, platesolves it and moves the rotator to the specified sky angle. It will repeat until the rotator is within the rotation tolerance.   
+Takes an image from the current position the telescope is pointing at, plate solves it, and moves the rotator to the specified sky angle. It will repeat until the rotator is within the rotation tolerance.
 **This instruction will not move the mount, it will just sync and move the rotator to the target sky angle!**  
 
 ## Safety Monitor
@@ -232,7 +232,7 @@ Control basic functions of a [safety monitor](../../tabs/equipment/safetymonitor
 
 ### Wait Until Safe
 ![Safety Monitor](../../images/sequencer/instructions/safety_wait.png)  
-Waits until the safety monitor is reporting safe conditions again
+Waits until the safety monitor is reporting safe conditions again.
 
 ## Switch
 Control basic functions of a [Switch](../../tabs/equipment/switch.md). Each instruction in this category requires at least a Switch to be connected.
@@ -246,22 +246,22 @@ Control basic functions of a [Telescope](../../tabs/equipment/telescope.md). Eac
 
 ### Find Home
 ![Find Home](../../images/sequencer/instructions/telescope_findhome.png)  
-Move the mount to the home position.  
+Moves the mount to the home position.
 *Requires a mount driver that is capable of finding the home position*
 
 ### Park Scope
 ![Park Scope](../../images/sequencer/instructions/telescope_park.png)  
-Moves the mount to the park position. A mount that is parked, will not accept slew commands.
+Moves the mount to the park position. A mount that is parked will not accept slew commands.
 *Requires a mount driver that is capable of parking*
 
 ### Set Tracking
 ![Park Scope](../../images/sequencer/instructions/telescope_settracking.png)  
 Enables mount tracking to the specified tracking rate.
 
-### Slew And Center
-![Slew And Center](../../images/sequencer/instructions/telescope_slewcenter.png)  
-Stops Guiding (if it was active), slews to the specified coordinates, calls the platesolver to center to the specified coordinates and resumes guiding (if it was stopped at the start).  
-When this instruction is part of a "Deep Sky Object Sequence" the coordinates will be inherited and no coordinates need to be entered here  
+### Slew and center
+![Slew and center](../../images/sequencer/instructions/telescope_slewcenter.png)
+Stops Guiding (if it was active), slews to the specified coordinates, calls the plate solver to center to the specified coordinates, and resumes guiding (if it was stopped at the start).
+When this instruction is part of a "Deep Sky Object Sequence", the coordinates will be inherited and no coordinates need to be entered here.
 *Requires a [plate solver](../../advanced/platesolving.md) to be set up*
 
 ### Slew To Alt/Az
@@ -270,13 +270,13 @@ Slews to the specified coordinates.
 
 ### Slew To Ra/Dec
 ![Slew To Ra/Dec](../../images/sequencer/instructions/telescope_slewradec.png)  
-Stops Guiding (if it was active), slews to the specified coordinates and resumes guiding (if it was stopped at the start).  
-When this instruction is part of a "Deep Sky Object Sequence" the coordinates will be inherited and no coordinates need to be entered here  
+Stops Guiding (if it was active), slews to the specified coordinates, and resumes guiding (if it was stopped at the start).
+When this instruction is part of a "Deep Sky Object Sequence", the coordinates will be inherited and no coordinates need to be entered here.
 
-### Slew, Center And Rotate
-![Slew, Center And Rotate](../../images/sequencer/instructions/telescope_slewcenterrotate.png)  
-Stops Guiding (if it was active), slews to the specified coordinates, calls the platesolver to center to the specified coordinates as well as considering the rotation together with a [rotator](../../tabs/equipment/rotator.md) and resumes guiding (if it was stopped at the start).  
-When this instruction is part of a "Deep Sky Object Sequence" the coordinates will be inherited and no coordinates need to be entered here  
+### Slew, center and rotate
+![Slew, center and rotate](../../images/sequencer/instructions/telescope_slewcenterrotate.png)
+Stops Guiding (if it was active), slews to the specified coordinates, calls the plate solver to center to the specified coordinates while considering the rotation together with a [rotator](../../tabs/equipment/rotator.md), and resumes guiding (if it was stopped at the start).
+When this instruction is part of a "Deep Sky Object Sequence", the coordinates will be inherited and no coordinates need to be entered here.
 *Requires a [plate solver](../../advanced/platesolving.md) to be set up and a rotator to be connected*
 
 ### Solve And Sync
@@ -290,11 +290,11 @@ Unparks the mount so it is able to receive slew commands.
 *Requires a mount driver that is capable of parking*
 
 ## Utility
-The instructions in this category are utility commands that don't necessarily depend on any equipment and have useful tools and helpers to improve the sequence
+The instructions in this category are utility commands that don't necessarily depend on any equipment and have useful tools and helpers to improve the sequence.
 
 ### Annotation
 ![Annotation](../../images/sequencer/instructions/utility_annotation.png)  
-This instruction will not execute anything. It is purely there to have custom text annotations inside the sequence to remind you of things, or taking notes to clarify certain sequence arrangements etc.
+This instruction will not execute anything. It is purely there to have custom text annotations inside the sequence to remind you of things or take notes to clarify certain sequence arrangements, etc.
 
 ### External Script
 ![External Script](../../images/sequencer/instructions/utility_script.png)  
@@ -311,43 +311,46 @@ When this instruction is part of a "Deep Sky Object Sequence" the coordinates wi
 
 ### Wait For Time
 ![Wait For Time](../../images/sequencer/instructions/utility_waitfortime.png)  
-Wait until a specific point in time. The time can either be set manually or automatically determined based on criteria as well as an offset specified in minutes.  
-**Time**: Manually entered time  
-**Sunset**:  The time when the sun gets below 0° of the horizon  
-**Civil Dusk**: The time when the sun gets below 6° of the horizon  
-**Nautical Dusk**: The time when the sun gets below 12° of the horizon  
-**Astronomical Dusk**: The time when the sun gets below 18° of the horizon  
-**Astronomical Dawn**: The time when the sun gets above 18° of the horizon  
-**Nautical Dawn**: The time when the sun gets above 12° of the horizon  
-**Civil Dawn**: The time when the sun gets above 6° of the horizon  
-**Sunrise**: The time when the sun gets above 0° of the horizon  
-**Meridian**: When a target is set this will be the time the target will cross the meridian  
+Waits until a specific local time or astronomy-based event. The source can be a manually entered time, a sun event, or the current target's meridian crossing. For calculated sources, the time fields are populated automatically and can be shifted earlier or later by setting an offset in minutes. If the selected time has already passed for the current observing day, the instruction waits zero seconds and continues.
+
+* **Time**: Manually entered local time in `hh:mm:ss`
+* **Sunset**: The time when the sun goes below 0 degrees altitude
+* **Civil Dusk**: The time when the sun goes below -6 degrees altitude
+* **Nautical Dusk**: The time when the sun goes below -12 degrees altitude
+* **Astronomical Dusk**: The time when the sun goes below -18 degrees altitude
+* **Astronomical Dawn**: The time when the sun rises above -18 degrees altitude
+* **Nautical Dawn**: The time when the sun rises above -12 degrees altitude
+* **Civil Dawn**: The time when the sun rises above -6 degrees altitude
+* **Sunrise**: The time when the sun rises above 0 degrees altitude
+* **Meridian**: The time when the current target crosses the meridian. If no target coordinates are available, this resolves to the current time.
 
 | Time source         | Rollover time |
 |---------------------|---------------|
-| Time                | Sunrise       |
-| Sunset              | Sunrise       |
-| Civil Dusk          | Sunrise       |
-| Nautical Dusk       | Sunrise       |
-| Astronomical Dusk   | Sunrise       |
-| Astronomical Dawn   | Sunset        |
-| Nautical Dawn       | Sunset        |
-| Civil Dawn          | Sunset        |
-| Sunrise             | Sunset        |
-| Meridian            | Meridian + 12 |
+| Time                | Sunrise, or noon if sunrise is unavailable |
+| Sunset              | Sunrise, or noon if sunrise is unavailable |
+| Civil Dusk          | Sunrise, or noon if sunrise is unavailable |
+| Nautical Dusk       | Sunrise, or noon if sunrise is unavailable |
+| Astronomical Dusk   | Sunrise, or noon if sunrise is unavailable |
+| Astronomical Dawn   | Sunset, or noon if sunset is unavailable |
+| Nautical Dawn       | Sunset, or noon if sunset is unavailable |
+| Civil Dawn          | Sunset, or noon if sunset is unavailable |
+| Sunrise             | Sunset, or noon if sunset is unavailable |
+| Meridian            | Meridian + 12 hours |
 
-!!!note
-    **When using a manual time:**  
-    As there is no day attached to the instruction, the roll over for a new day happens at noon (similar to the altitude charts). This brings a few advantages to not wait unexpectedly when you are already past the specified time.
-    Examples:  
-    Sunrise is at 09:00h
-    Current time: 18:00h | Wait for time: 19:00h -> Wait for one hour  
-    Current time: 20:00h | Wait for time: 19:00h -> Instruction will be skipped  
-    Current time: 18:00h | Wait for time: 02:00h -> Wait for eight hours  
-    Current time: 02:00h | Wait for time: 03:00h -> Wait for one hour  
-    Current time: 04:00h | Wait for time: 03:00h -> Instruction will be skipped  
-    Current time: 08:00h | Wait for time: 18:00h -> **Instruction will be skipped** because the roll over at 09:00 has not happened yet  
-    
+!!! note
+    `Wait For Time` has no date field, so N.I.N.A. uses the rollover time to decide whether the selected time belongs to the current observing day or the next one. The rollover time shown in the instruction is the value currently being used.
+
+    Examples, assuming sunrise is at 09:00:
+
+    * Current time: 18:00 | Wait for time: 19:00 -> waits one hour
+    * Current time: 20:00 | Wait for time: 19:00 -> skips because 19:00 has already passed
+    * Current time: 18:00 | Wait for time: 02:00 -> waits eight hours
+    * Current time: 02:00 | Wait for time: 03:00 -> waits one hour
+    * Current time: 04:00 | Wait for time: 03:00 -> skips because 03:00 has already passed
+    * Current time: 08:00 | Wait for time: 18:00 -> skips because the 09:00 rollover has not happened yet, so 18:00 still belongs to the previous observing day
+
+!!! note
+    If a calculated source such as sunset, astronomical dusk, or astronomical dawn is unavailable for the current location and date, N.I.N.A. marks the instruction as invalid instead of using the current time.
 
 ### Wait For Time Span
 ![Wait For Time Span](../../images/sequencer/instructions/utility_waitfortimespan.png)  

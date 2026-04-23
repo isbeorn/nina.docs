@@ -1,22 +1,22 @@
-The advanced sequencer makes it possible to completely plan and customize an imaging run based on specific needs for each user by giving the capability to plan on a very granular level. Equipment can be controlled step by step with various available instructions and each instruction can be further customized by specific parameters for each individual person.  
+The advanced sequencer makes it possible to completely plan and customize an imaging run based on specific needs for each user by giving the capability to plan on a very granular level. Equipment can be controlled step by step with various available instructions, and each instruction can be further customized with specific parameters.
 
 ## Navigating
 The main area will contain the actual instructions. There it is possible to add the instructions, customize the parameters and see the progress of the sequencer.  
-Additionally the area is split into three sections to manage sequence start instructions, target instructions and end of sequence instructions.
+Additionally, the area is split into three sections to manage sequence start instructions, target instructions, and end-of-sequence instructions.
   
-On the bottom left it is possible to lock the sequencer from any manual input, disable the drag & drop as well as save and load a complete sequence run. On the bottom right it is possible to start and stop a sequence.  
+On the bottom left, it is possible to lock the sequencer from any manual input, disable drag & drop, and save and load a complete sequence run. On the bottom right, it is possible to start and stop a sequence.
 The right sidebar will show all available instructions as well as templates and targets. These are described in more detail below.
 ![Overview](../../images/sequencer/Sequencer_Overview.png)
 
 Everything inside the advanced sequencer is enabled to use drag and drop. For example an instruction can be grabbed by holding the left mouse button and then dragged into the sequencer area to add an instruction at the mouse location.  
-However it is also possible to plan everything without using drag and drop at all using the available '+' buttons
+However, it is also possible to plan everything without using drag and drop at all by using the available '+' buttons.
 ![Drag & Drop](../../images/sequencer/Sequencer_DragDrop.png)
 
 ## The flow of the sequencer
 
 On a high level, the concept of the advanced sequencer is quite simple. A sequence will consist of small building blocks that will execute some logic and the sequencer will execute these blocks one by one from top to bottom.  
-In addition to single building blocks so called *Instruction Sets* can be added too. Think of these as a logical group of instructions. These groups will function in the same way as the whole sequencer, as they will execute the blocks that are part of the group from top to bottom.  
-The *Instruction Sets* can contain so called *Loop Conditions* which will change the flow of operation slightly, as the Instruction Set will repeat its set of instructions for as long as all condition that these loop conditions define are met.
+In addition to single building blocks, so-called *Instruction Sets* can be added too. Think of these as a logical group of instructions. These groups will function in the same way as the whole sequencer, as they will execute the blocks that are part of the group from top to bottom.
+The *Instruction Sets* can contain so-called *Loop Conditions* which will change the flow of operation slightly, as the Instruction Set will repeat its set of instructions for as long as all conditions that these loop conditions define are met.
 ![Sequencer Flow](../../images/sequencer/Sequencer_Flow.png)
     
 ## Instructions
@@ -26,7 +26,7 @@ Instructions can be added to the sequencer and the specific parameters can be se
 From the available list, instructions can be dragged over from the right side to the left side and dropped into the sequencer.  
 ![Instructions](../../images/sequencer/Sequencer_Instructions.png)
 
-Furthermore instructions can also be directly added into the sequence by clicking on the + button on the top.  
+Furthermore, instructions can also be directly added into the sequence by clicking on the + button on the top.
 ![Add Instructions](../../images/sequencer/Sequencer_AddInstruction.png)
 
 Once an instruction is part of the sequencer, it will show the specific options for each instruction to customize the behavior. For example an item can be set to cool down the camera to a specific temperature, another item set to switch to a specific filter etc.
@@ -36,12 +36,12 @@ Once an instruction is part of the sequencer, it will show the specific options 
 NINA 3.3 adds the ability to use Expressions, in addition to numeric values, to customize instruction options.  Expressions are strings of text that represent something to be *calculated* or *evaluated*; the result of this evaluation must be a valid option for the instruction.   Expressions can include numeric values, Symbols (defined below), mathematical, bitwise, and logical operators (e.g. +, -, |, &, ||, &&), and functions (e.g. if, floor, between); in specific places, a string (text surrounded by single quotes) can also be part of an Expression.  Please see [Expressions](../advanced/expressions.md) for further details.
 
 ### Customizing the list of instructions
-With the gears icon in the sidebar a customizing mode can be enabled. In this mode you can flag each instruction to be hidden. When it is flagged the instruction will no longer be visible in the sidebar or in the context menus. This is useful if you don't have a specific type of equipment for example and don't want to see instructions for it cluttering your user interface. Instructions that are part of the sequence, but are hidden from the sidebar will still be visible and active in the sequence.  
+With the gear icon in the sidebar, a customization mode can be enabled. In this mode, you can flag each instruction to be hidden. When it is flagged, the instruction will no longer be visible in the sidebar or in the context menus. This is useful if, for example, you don't have a specific type of equipment and don't want to see instructions for it cluttering your user interface. Instructions that are part of the sequence, but are hidden from the sidebar, will still be visible and active in the sequence.
 ![Disable instruction in sidebar](../../images/sequencer/sidebar_disable_instruction.png)
 
 
 ### Validations
-Each instruction is capable of doing some degree of validation and will check if the preconditions are met. A red exclamation mark will appear next to an instruction, when an issue is detected. Hover over the red indicator to get more details.  
+Each instruction is capable of doing some degree of validation and will check if the preconditions are met. A red exclamation mark will appear next to an instruction when an issue is detected. Hover over the red indicator to get more details.
 For example when a camera is connected without a cooling element, and a "Cool Camera" instruction is dragged into the sequence, the instruction will show a visual indicator, as well as a tooltip showing that the camera is not capable of cooling.  
 ![Issues](../../images/sequencer/Sequencer_Issues.png)
 
@@ -49,25 +49,25 @@ For example when a camera is connected without a cooling element, and a "Cool Ca
     Instructions that report issues will always be skipped, indicate that there was an error and will not run at all!
 
 ## Instruction Sets
-Instruction sets are groups of instructions. Each set will process its content, based on the parameters inside the set. Their behavior can be further controlled by loop conditions and triggers, which are described further below.
+Instruction sets are groups of instructions. Each set will process its content based on the parameters inside the set. Their behavior can be further controlled by loop conditions and triggers, which are described further below.
 Instruction sets can be added to the sequencer in the same way as instructions. Furthermore it is possible to nest instruction sets inside of each other.
 ![Add Instructions Set](../../images/sequencer/Sequencer_AddInstructionSet.png)
 ### Sequential Instruction Set
 This instruction set will process the instructions one after the other, from top to bottom.
 ![Sequential Instruction Set](../../images/sequencer/Sequencer_SequentialInstructions.png)
 ### Parallel Instruction Set
-All instructions inside this special instruction set will be processed in parallel. As everything will run in parallel there are no conditions or triggers available for this set.
+All instructions inside this special instruction set will be processed in parallel. As everything will run in parallel, there are no conditions or triggers available for this set.
 Order of instructions within the Parallel Instruction Set is not defined or implied.
 
 - Note: <br>
    Multiple instructions for the same equipment should generally not be used in the same parallel instruction set. <br>
    example: Park Scope and Find Home will be executed in parallel and which one is executed first is not constant. <br>
    Wait instructions are executed in parallel with all other instructions so will not force an order to instruction execution. <br>
-   Shutdown PC and Shutdown N.I.N.A instructions generally are not wise to use inside a Parallel Instruction Sets. <br>
+   Shutdown PC and Shutdown N.I.N.A instructions generally are not wise to use inside a Parallel Instruction Set. <br>
         
 ![Parallel Instruction Set](../../images/sequencer/Sequencer_ParallelInstructions.png)
 ### Deep Sky Object Set
-This special set of instructions behaves similar to a sequential instruction set. The main difference here is, that a specific target can be specified with coordinates and rotation and then all instructions that are dependent on coordinates or rotation will pick up these coordinates automatically, so a user does not need to enter these coordinates multiple times.
+This special set of instructions behaves similarly to a sequential instruction set. The main difference here is that a specific target can be specified with coordinates and rotation, and then all instructions that are dependent on coordinates or rotation will pick up these coordinates automatically, so a user does not need to enter these coordinates multiple times.
 ![Deep Sky Object Set](../../images/sequencer/Sequencer_DSOSet.png)
 
 ## Loop Conditions
@@ -88,12 +88,12 @@ The following will happen in this case:
 
 
 ## Triggers
-Triggers are instructions that should only happen when certain events occur. These triggers can be attached to an instruction set. When attached, they will get evaluated after each instruction inside the set, similar like loop conditions are evaluated. When the defined event occurred for the trigger to fire, the trigger will execute its instruction. An example is to trigger something after a certain amount of exposures.
+Triggers are instructions that should only happen when certain events occur. These triggers can be attached to an instruction set. When attached, they will get evaluated after each instruction inside the set, similar to how loop conditions are evaluated. When the defined event occurs, the trigger will execute its instruction. An example is to trigger something after a certain amount of exposures.
 The lightning icon next to an instruction on the right side will indicate that the instruction is in fact a trigger. These can only be dragged into the trigger section of an instruction set. Additionally a trigger can directly be added to an instruction set by clicking on the + button.
 ![Add Triggers](../../images/sequencer/Sequencer_AddTrigger.png)
 ![Triggers](../../images/sequencer/Sequencer_Triggers.png)
 
-As triggers are evaluated in the same fashion as loop conditions, you can set triggers on a higher level and they get still evaluated when the current instruction that is executed is part of a nested instruction set. In the below example the trigger will fire after every 5 exposures, even though the trigger is defined on a higher level than the actual exposure item.
+As triggers are evaluated in the same fashion as loop conditions, you can set triggers on a higher level and they still get evaluated when the current instruction that is executed is part of a nested instruction set. In the example below, the trigger will fire after every 5 exposures, even though the trigger is defined on a higher level than the actual exposure item.
 ![Nested Triggers](../../images/sequencer/Sequencer_NestedTriggers.png)
 
 ## Templates

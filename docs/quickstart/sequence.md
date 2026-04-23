@@ -5,11 +5,11 @@ Once you nailed your focus you can switch to the Sequence tab. There you should 
 ![Sequence](../images/quickstart/sequence1.png)
 
 Here we can find various options. 
-For One-Shot-Color users it's a relatively simple matter. 
+For One-Shot-Color users, it's a relatively simple matter.
 Enter the amount of images you want to shoot in Total # (1), enter the time for a single image (2) and the type (3), which likely will be LIGHT at that point. 
 You may also want to change your gain for the sequence in the gain column (4).  
 
-Now open up the Target Options (5) and enable "Slew to Target" so that your mount will slew to the specified target. In addition enable to unpark the mount and to enable the meridian flip in (6). To also park the mount after everything is done, enable the Park Mount option in (7).  
+Now open up the Target Options (5) and enable "Slew to Target" so that your mount will slew to the specified target. In addition, enable unparking the mount and enabling the meridian flip in (6). To also park the mount after everything is done, enable the Park Mount option in (7).
 Now for the slew to actually slew to a specific target, enter the coordinates and name in (8).  
 
 You can see an estimation when the sequence is likely going to end (9). This value will change during the sequence depending on the average download time of your camera.  

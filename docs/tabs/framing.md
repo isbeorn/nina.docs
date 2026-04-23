@@ -1,4 +1,4 @@
-Framing Assistant allows you to frame the next shot perfectly via several online sky survey services, an inbuilt planetarium, or a user-supplied image. It can utilize plate solving to perfectly align your telescope and rotator (if equipped) to match the position of the framing rectangle.
+Framing Assistant allows you to frame the next shot perfectly via several online sky survey services, a built-in planetarium, or a user-supplied image. It can utilize plate solving to perfectly align your telescope and rotator (if equipped) to match the position of the framing rectangle.
 
 For further information about using the Framing Assistant refer to the [Advanced Framing](../advanced/framingassistant.md) topic.
 
@@ -12,7 +12,7 @@ For further information about using the Framing Assistant refer to the [Advanced
     * **Offline Sky Map**: N.I.N.A.'s own database of objects. Circles representing approximate target sizes will be displayed
         * If you have images in your Sky Survey Cache, they will be shown in the offline sky map
         * A pre-rendered cache of cache images spanning the whole sky can be downloaded on the homepage. This cache can be used to have a fast and complete offline framing tool.
-    * **From File**: Load an existing JPEG, GIF, PNG or TIFF image of an object. When an image is provided through **From File**, the configured [Solver](../advanced/platesolving.md) is used to determine the coordinates and orientation of the image. Alternatively, for FITS and XSIF files the WCS header coordinates are used if present.
+    * **From File**: Load an existing JPEG, GIF, PNG or TIFF image of an object. When an image is provided through **From File**, the configured [Solver](../advanced/platesolving.md) is used to determine the coordinates and orientation of the image. Alternatively, for FITS and XISF files the WCS header coordinates are used if present.
     * **Cache**: Load images directly from a local cache of images that have already been downloaded from one of the Digital Sky Survey servers or loaded in from files
 * Successfully-solved or downloaded local and sky survey images are cached automatically
 
@@ -27,7 +27,7 @@ For further information about using the Framing Assistant refer to the [Advanced
 
 ### Load Image
 * Starts the image download when using a sky survey 
-* Starts the plate solving mechanism when using **From File**. If the uploaded file already contains WCS headers these will be used instead of attempting a new platesolve.
+* Starts the plate solving mechanism when using **From File**. If the uploaded file already contains WCS headers, these will be used instead of attempting a new plate solve.
 * Attempts to load an image from the cache using the provided coordinates
 
 ### Width, Height, Pixel Size and Focal Length
@@ -35,7 +35,7 @@ For further information about using the Framing Assistant refer to the [Advanced
 * These settings are not available to DSLR users
 * The specified Focal Length is **not** synchronized to the your Telescope settings. This allows you to experiment with various focal lengths
 * These parameters determine the size of the framing rectangle (15)
-> These parameters are only used for displaying the framing rectangle. For camera and focal length parameters used in platesolving refer to [Options](../tabs/options/equipment.md)
+> These parameters are only used for displaying the framing rectangle. For camera and focal length parameters used in plate solving, refer to [Options](../tabs/options/equipment.md).
 
 ## Targets
 
@@ -47,14 +47,14 @@ For further information about using the Framing Assistant refer to the [Advanced
     ![Mosaic](../images/tabs/framing_mosaic.PNG)
 
 ### Rotation from camera
-* This will take an exposure from your connected camera, platesolve it and determine the rotation of the frame. Afterwards the rotation of the framing is updated.
+* This will take an exposure from your connected camera, plate solve it, and determine the rotation of the frame. Afterwards, the rotation of the framing is updated.
 
 ### Slew and center
-* Slews the mount to the coordinates of the center of the framing rectangle (16) and uses platesolving to recenter the mount to be precisely on target
+* Slews the mount to the coordinates of the center of the framing rectangle (16) and uses plate solving to recenter the mount to be precisely on target
 * In addition when clicking on the arrow the operation can be adjusted to only slew to the target without solving or also consider the rotation (when a rotator is connected)
 
 ### Add target to sequence
-* Takes the name, coordinates of the RA and Dec and the angle of the framing window and adds it as a sequence target for either the legacy sequencer or the advanced sequencer using a deep sky object template
+* Takes the name, the RA and Dec coordinates, and the angle of the framing window, and adds it as a sequence target for either the legacy sequencer or the advanced sequencer using a deep sky object template
 * In addition when clicking on the arrow and clicking on "Add target to target list", the target can be added to the advanced sequencer's target tab instead
 * A third option is to click on "Update Existing Target in Sequencer" which becomes available when there is already a target inside the sequencer and the target should be updated with the new framing instead
 
@@ -78,4 +78,4 @@ For further information about using the Framing Assistant refer to the [Advanced
 * Can be rotated with (6) 
 
 ### RA/DEC Coordinates
-* The coordinates of the center of the framing rectangle. These are used as a sequences target coordinates  
+* The coordinates of the center of the framing rectangle. These are used as a sequence target's coordinates.

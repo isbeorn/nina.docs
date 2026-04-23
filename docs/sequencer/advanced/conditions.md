@@ -19,45 +19,48 @@ When this condition is part of a "Deep Sky Object Sequence" the coordinates will
 
 ### Loop Until Time
 ![Loop Until Time](../../images/sequencer/conditions/loopuntiltime.png)  
-Loop an instruction set until a specific point in time. The time can either be set manually or automatically determined based on criteria and an offset specified in minutes.  
-**Time**: Manually entered time  
-**Sunset**:  The time when the sun gets below 0° of the horizon  
-**Civil Dusk**: The time when the sun gets below 6° of the horizon  
-**Nautical Dusk**: The time when the sun gets below 12° of the horizon  
-**Astronomical Dusk**: The time when the sun gets below 18° of the horizon  
-**Astronomical Dawn**: The time when the sun gets above 18° of the horizon  
-**Nautical Dawn**: The time when the sun gets above 12° of the horizon  
-**Civil Dawn**: The time when the sun gets above 6° of the horizon  
-**Sunrise**: The time when the sun gets above 0° of the horizon  
-**Meridian**: When a target is set this will be the time the target will cross the meridian  
+Loops an instruction set until a specific local time or astronomy-based event. The source can be a manually entered time, a sun event, or the current target's meridian crossing. For calculated sources, the time fields are populated automatically and can be shifted earlier or later by setting an offset in minutes.
+
+This condition remains true while there is enough time left to run the next instruction. If the selected time has already passed for the current observing day, or if the next instruction's estimated duration would exceed the selected time, the condition becomes false and the instruction set stops.
+
+* **Time**: Manually entered local time in `hh:mm:ss`
+* **Sunset**: The time when the sun goes below 0 degrees altitude
+* **Civil Dusk**: The time when the sun goes below -6 degrees altitude
+* **Nautical Dusk**: The time when the sun goes below -12 degrees altitude
+* **Astronomical Dusk**: The time when the sun goes below -18 degrees altitude
+* **Astronomical Dawn**: The time when the sun rises above -18 degrees altitude
+* **Nautical Dawn**: The time when the sun rises above -12 degrees altitude
+* **Civil Dawn**: The time when the sun rises above -6 degrees altitude
+* **Sunrise**: The time when the sun rises above 0 degrees altitude
+* **Meridian**: The time when the current target crosses the meridian. If no target coordinates are available, this resolves to the current time.
 
 | Time source         | Rollover time |
 |---------------------|---------------|
-| Time                | Sunrise       |
-| Sunset              | Sunrise       |
-| Civil Dusk          | Sunrise       |
-| Nautical Dusk       | Sunrise       |
-| Astronomical Dusk   | Sunrise       |
-| Astronomical Dawn   | Sunset        |
-| Nautical Dawn       | Sunset        |
-| Civil Dawn          | Sunset        |
-| Sunrise             | Sunset        |
-| Meridian            | Meridian + 12 |
+| Time                | Sunrise, or noon if sunrise is unavailable |
+| Sunset              | Sunrise, or noon if sunrise is unavailable |
+| Civil Dusk          | Sunrise, or noon if sunrise is unavailable |
+| Nautical Dusk       | Sunrise, or noon if sunrise is unavailable |
+| Astronomical Dusk   | Sunrise, or noon if sunrise is unavailable |
+| Astronomical Dawn   | Sunset, or noon if sunset is unavailable |
+| Nautical Dawn       | Sunset, or noon if sunset is unavailable |
+| Civil Dawn          | Sunset, or noon if sunset is unavailable |
+| Sunrise             | Sunset, or noon if sunset is unavailable |
+| Meridian            | Meridian + 12 hours |
 
-!!!note
-    **When using a manual time:**  
-    As there is no day attached to the condition, the roll over for a new day happens at noon (similar to the altitude charts). This brings a few advantages to not loop unexpectedly when you are already past the specified time. 
-    Examples:  
-    Sunrise is at 09:00h  
-    Current time: 18:00h | Loop for time: 19:00h -> Loop for one hour  
-    Current time: 20:00h | Loop for time: 19:00h -> Condition will be skipped  
-    Current time: 18:00h | Loop for time: 02:00h -> Loop for eight hours  
-    Current time: 02:00h | Loop for time: 03:00h -> Loop for one hour  
-    Current time: 04:00h | Loop for time: 03:00h -> Condition will be skipped  
-    Current time: 08:00h | Loop for time: 18:00h -> **Condition will be skipped** because the roll over at 09:00 has not happened yet   
+!!! note
+    `Loop Until Time` has no date field, so N.I.N.A. uses the rollover time to decide whether the selected time belongs to the current observing day or the next one. The rollover time shown in the condition is the value currently being used.
 
-    **When using calculated times for dawn and dusk:**  
-    Instead of using noon to roll over to the next day the rollover will instead happen at the "opposite" side of the condition at dawn or dusk. For example when you loop until astronomical dawn, the roll over will be at dusk
+    Examples, assuming sunrise is at 09:00:
+
+    * Current time: 18:00 | Loop until time: 19:00 -> loops for one hour
+    * Current time: 20:00 | Loop until time: 19:00 -> condition is false because 19:00 has already passed
+    * Current time: 18:00 | Loop until time: 02:00 -> loops for eight hours
+    * Current time: 02:00 | Loop until time: 03:00 -> loops for one hour
+    * Current time: 04:00 | Loop until time: 03:00 -> condition is false because 03:00 has already passed
+    * Current time: 08:00 | Loop until time: 18:00 -> condition is false because the 09:00 rollover has not happened yet, so 18:00 still belongs to the previous observing day
+
+!!! note
+    If a calculated source such as sunset, astronomical dusk, or astronomical dawn is unavailable for the current location and date, N.I.N.A. marks the condition as invalid instead of using the current time.
 
 
 

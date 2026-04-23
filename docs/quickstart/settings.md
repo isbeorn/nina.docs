@@ -13,7 +13,7 @@ Bit depth will be kept at 16 bit for most cameras, as this does not refer to the
 
 ![N.I.N.A Configuration](../images/quickstart/settings2.png)
 
-Now we have to set a few other image saving related settings as well. To do that switch to the Imaging tab (1). The images can be saved as TIFF (with two different compression algorithms, too), XISF and FITS (2). FITS is a solid format that can be read by all astronomy related software and this setting can be left unchanged. Feel free to change it though should you prefer a different format.  
+Now we have to set a few other image-saving-related settings as well. To do that, switch to the Imaging tab (1). The images can be saved as TIFF (with two different compression algorithms, too), XISF, and FITS (2). FITS is a solid format that can be read by all astronomy-related software and this setting can be left unchanged. Feel free to change it though should you prefer a different format.
 Next you need to set the Image File path (3). This is the place where your images will be saved. And finally, if you want you can change the Image File Pattern (4). This is how the images will be named after. You can see variables that you can use below the panel and below the pattern you can check how your file pattern will look like. You can leave this setting on default or customize it as you like.
 
-Once you have done that we can move on to to focusing and starting a sequence.
+Once you have done that, we can move on to focusing and starting a sequence.
