@@ -1,4 +1,28 @@
-Plugins are intended to add custom functionality into the application, that doesn't fit the general needs and is more specialized for a sub set of users. These plugins can easily be created by creating a specific C# class library.  
-A plugin template to get a starting point and also a detailed description how to work with the template can be found in the [Plugin Template Repository](https://github.com/isbeorn/nina.plugin.template)
+Plugins are intended to add functionality that is useful for a more specialized workflow without having to add it to the core application.
 
-Furthermore plugins can be made officially available in the plugins tab by submitting a plugin manifest into the main [Plugin Manifest Repository](https://github.com/isbeorn/nina.plugin.manifests). This repository will automatically update the remote host with the available plugins to show them inside the application to download. All details how to create a manifest and how to submit it, can be found in the README of the repository.
+## Getting Started
+
+The usual starting point for a new plugin is the [Plugin Template Repository](https://github.com/isbeorn/nina.plugin.template). It provides the base structure and the setup expected by the plugin system.
+
+## Making a Plugin Available in N.I.N.A.
+
+To make a plugin available from the **Available** plugins tab, submit a manifest to the main [Plugin Manifest Repository](https://github.com/isbeorn/nina.plugin.manifests).
+
+The **Available** tab reads plugin repositories and shows the metadata supplied there, so the manifest is what users will see before they install your plugin.
+
+## What Users See
+
+The plugin pages inside N.I.N.A. can display:
+
+* plugin name, author, and version
+* homepage and changelog links
+* short and long descriptions
+* tags
+* installation method and download link
+* source repository
+* license information
+* screenshots
+
+If your plugin exposes user-configurable options, they appear on the **Installed** tab after the plugin has been loaded.
+
+For manifest format details and submission instructions, use the README in the plugin manifest repository.

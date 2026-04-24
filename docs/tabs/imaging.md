@@ -5,6 +5,8 @@ The Imaging tab is organized in windows that can be arranged dynamically to crea
 Available windows can be activated and deactivated from the top bar.
 To arrange a window, simply drag it from the window header and drop it according to the suggested placeholders.
 
+Depending on your connected equipment and the panels you enable, the Imaging workspace can also show additional panels for the Dome, Safety Monitor, Flat Device, and the currently active sequencer.
+
 The top bar is divided in two main sections: **Info** and **Tools**  
 
 ![topbarmenu](../images/tabs/Imaging_menu.PNG)  
@@ -24,7 +26,7 @@ The image panel is the central part of the Imaging tab and is used to display th
 5.   Initiates a plate solving routine for the current image
 6.   Toggles crosshair overlay on/off
 7.   Toggles automatic display of the displayed image (for autostretch settings refer to [Options](options/imaging.md))
-8.   Toggles automatic HFR (Half-Flux-Radius) star detection analysis. HFR is used for [Autofocus](options/equipment.md) routines. When HFR detection is ON, the average HFR value for each captured image is plotted in the HFR History window (M)
+8.   Toggles automatic HFR (Half-Flux-Radius) star detection analysis. HFR is used for [Autofocus](options/autofocus.md) routines. When HFR detection is ON, the average HFR value for each captured image is plotted in the HFR History window (M)
 > If _Annotate Image_ is switched ON under [Options->Imaging](options/imaging.md), the calculated HFR values will be displayed on the image  
    ![HFR](../images/tabs/imaging_HFR.PNG)
 9.   Activates the Bahtinov Analyzer aid tool for manual focusing with a Bahtinov Mask.
@@ -57,7 +59,7 @@ This panel displays the focuser status and lets you manually move it to the desi
 5. Here you can set the target focuser position for the focuser to move to by clicking on "Move" (6)
 6. Moves the focuser to the Target Position defined in (5)
    > It is convenient to set the target position as the position of near-focus for your setup. This position can be determined by using a Bahtinov mask on a bright star (see **Manual Focus Targets**). Once the near-focus position is determined, input the number of steps indicated in "Position" (2) in the Target Position field. You can then instruct the focuser to move to this position at the beginning of each imaging session before starting the Auto-Focusing routine
-7. The arrows will move the focuser back and forth by a predefined amount related to the Auto Focus Step Size defined under Options - [Equipment](options/equipment.md):
+7. The arrows will move the focuser back and forth by a predefined amount related to the Auto Focus Step Size defined under Options - [Autofocus](options/autofocus.md):
     * Single arrow <  > : half the Auto Focus Step Size
     * Double arrows <<  >> : five times the Auto Focus Step Size
 
@@ -81,8 +83,7 @@ The telescope panel provides all important information about your telescope like
 ![telescope](../images/tabs/imaging_telescope.PNG)
 
 ### G. Guiding  ![guideicon](../images/tabs/imaging_guideicon.PNG)  
-The guider panel replicates the PHD guiding graph in real time. 
-> PHD2 must be connected for the Guider to display the guiding trends and pulses (RA and DEC).
+The guider panel shows the current guider state, RMS values, and a live guide graph when the connected guider provides guide telemetry.
 
 ![guider](../images/tabs/imaging_guider.png)
 
@@ -90,12 +91,12 @@ The guider panel replicates the PHD guiding graph in real time.
 2. Select the scale range of the x-axis
 3. Select the units for the y-axis:
     * Pixels: guide camera pixels
-    * Arcseconds: units in arcseconds (this is calculated by PHD2 based on your guide camera pixel size and guide scope focal length)
+    * Arcseconds: guide error shown in arcseconds
 4. Clears the chart
-5. Chart area, this is where the PHD2 graph will be visualized
+5. Chart area, this is where the guider graph is visualized
 
 ### H. Sequence ![sequenceicon](../images/tabs/imaging_sequenceicon.PNG)  
-Sequence panel lets you start/stop imaging sequences and provides information on the sequence run in a compressed format. To learn how to set up a sequence refer to the [Sequence](sequencer.md) section.
+The sequence panel follows the currently active sequencer and gives you quick access to the running sequence from the Imaging workspace. Depending on your current mode, it can show the legacy/simple sequencer, the advanced sequencer, or a navigation placeholder until a sequencer is active. To learn how to set up a sequence refer to the [Sequence](sequencer.md) section.
 
 ![sequence1](../images/tabs/imaging_sequence.png)
 
@@ -110,8 +111,8 @@ This panel will let you control the active switches
 3. Toggle active switch ON/OFF
 
 ### J. Weather  ![weathericon](../images/tabs/imaging_weathericon.PNG)  
-Weather and temperature information from OpenWeatherMap
-> OpenWeatherMap API key must be set under Options [Equipment](options/equipment.md)
+The weather panel shows the values reported by the connected weather source. Only the values provided by that source are shown.
+> Some weather sources require additional setup under [Equipment > Weather](equipment/weather.md)
 
 ![weather](../images/tabs/imaging_weather.png)
 
@@ -130,17 +131,31 @@ In this panel, all the important information about the last captured image is re
 
 2. Image histogram of the last captured image
 
-### M. HFR History  ![HFRicon](../images/tabs/imaging_HFRicon.PNG)  
-When automatic HFR (Half-Flux-Radius) star detection is ON, this panel will display the history of HFR values and number of stars used to evaluate the HFR for each exposure.
-The chart is limited to displaying a moving window of the last 100 exposures. 
+### Additional Equipment Panels
+Depending on your connected hardware and selected layout, the Imaging tab can also show these additional panels:
 
+* **Dome**: reports connected state, park/home status, slewing state, following mode, shutter status, azimuth, and altitude
+* **Safety Monitor**: reports whether the selected safety monitor is connected and currently safe
+* **Flat Device**: reports light state, brightness, and cover state, and can optionally expose manual controls for the light, brightness, and cover
+
+### M. HFR History  ![HFRicon](../images/tabs/imaging_HFRicon.PNG)  
+When automatic HFR (Half-Flux-Radius) star detection is ON, this panel will display the history of the captured images using two configurable plotted values and autofocus markers.
 
 ![HFRHistory](../images/tabs/HFR2.png)
 
-By default the HFR History shows the HFR values and the number of detected stars throughout the imaging session. The fields can be changed by hovering over the panel to different statistics.
+By default the HFR History shows HFR and star count throughout the current session. When the panel settings are open, you can:
+
 1. Green line: Left y-axis
 2. Yellow line: right y-axis
 3. Triangle marks: AF runs
+4. Choose the left and right plotted values
+5. Filter the graph by filter
+6. Include or exclude snapshots
+7. Switch star measurements between pixels and arcseconds
+8. Clear the current history
+9. Save the current history as a CSV file
+
+Hovering a plotted image point shows the recorded image properties for that exposure. Hovering an autofocus marker shows the recorded autofocus details for that run.
    
 ## Tools 
 
@@ -158,8 +173,10 @@ The imaging panel allows you to take a single exposure or live view when support
 7. Takes the exposure
 
 ### O. Image History ![imagehistory](../images/tabs/imaging_historyicon.PNG)  
-The Image History panel shows a list of thumbnails of the current sequence captured images with basic statistics: Mean value in ADU, average HFR, Filter used, duration and capture time.
-> By double-clicking on any of the thumbnails the relative image will be opened in the Image panel (A)
+The Image History panel shows the most recent saved images as thumbnails. The list keeps up to 50 entries and can show basic image details such as mean value in ADU, average HFR, filter, duration, and capture time.
+> Clicking a thumbnail opens that image in the Image panel (A)
+
+Hovering a thumbnail shows the grading button so you can mark or clear that image as bad.
 
 ![history](../images/tabs/imaging_history.png)
 
@@ -183,7 +200,7 @@ Plate solving is a very important step in the imaging process. For further infor
 8. History of plate solving sessions
 
 ### R. Auto Focus ![AFicon](../images/tabs/imaging_aficon.PNG)  
-This panel lets you manually trigger an Auto Focus routine based on the Auto Focus parameters set in Options [Equipment](options/equipment.md).
+This panel lets you manually trigger an Auto Focus routine based on the Auto Focus parameters set in Options [Autofocus](options/autofocus.md).
 
 ![AF](../images/tabs/AF10.png)
 

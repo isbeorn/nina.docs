@@ -1,28 +1,81 @@
-The Camera Tab lets you connect an ASCOM-compatible camera or one of the natively integrated drivers
+The Camera tab lets you connect an ASCOM-compatible camera or one of the native camera integrations supported by N.I.N.A.
 
 ![Camera](../../images/tabs/equipment_camera.png)
 
-1. **Camera  Info Panel**
-      * This section provides info about the camera in general, like sensor dimensions, sensor type, pixel size etc.
+The header contains the usual device controls for connecting, disconnecting, refreshing the device list, and opening the driver setup dialog when one is available.
 
-2. **Camera Settings**
-      Default camera settings. These settings are used by default if not overridden by different inputs in other parts of the application
+## Camera Information
 
-## Temperature control
-When a cooled camera is connected, this section allows the user to control cooling and warming
+The left side of the page shows the current camera information. Depending on the connected camera, this can include:
 
-3. **Info Panel**
-      * Provides info about the current camera cooler status, power usage and chip temperature (actual / target)
-   
-4. **Cooling**
-      * Define a target temperature and activate camera cooling with the ice icon. Min Duration is optional and lets you define a minimum duration for cooling, most cameras drivers already regulate the cooler power automatically and will gradually decrease the temperature.
-  
-5. **Warming**
-      * Gradually warms the camera to ambient temperature with the fire icon. Min Duration is optional and lets you define a minimum duration for warming, most cameras drivers already regulate the cooler power automatically and will gradually increase the temperature.
-  
-6. Camera Cooler Power chart
-   
-7. Chip Temperature chart
+* camera state
+* camera name and description
+* driver information and version
+* sensor type and sensor name
+* sensor width and height
+* minimum and maximum exposure times
+* maximum binning values
+* pixel size
+* battery level
+* gain and offset
+
+Some native camera integrations can also show additional driver-specific information or settings.
+
+## Camera Settings
+
+The camera settings area contains the default settings that are used throughout the application unless a sequence or tool overrides them.
+
+The exact controls in this area depend on the selected camera and driver.
+
+### File Camera Setup
+
+When you use the File Camera integration, its setup dialog lets you configure:
+
+* the folder to watch for incoming images
+* the expected file extension
+* whether to use bulb mode
+* whether incoming images are Bayered
+* whether N.I.N.A. should keep listening continuously
+* an optional download delay
+
+## Temperature Control
+
+When a cooled camera is connected, the right side of the page provides camera cooling control and monitoring.
+
+### Status
+
+The status area can show:
+
+* dew heater state, if the camera supports a dew heater
+* cooler on/off state
+* cooler power
+* current chip temperature
+* target chip temperature while cooling is active
+
+### Cooling
+
+The **Cooling** section lets you:
+
+* set a target temperature
+* set an optional minimum cooling duration
+* start or cancel the cooling run
+
+### Warming
+
+The **Warming** section lets you:
+
+* set an optional minimum warming duration
+* start or cancel the warm-up
+
+### Charts
+
+The charts below the controls show:
+
+* camera cooler power
+* chip temperature
+
+!!! note
+    Not every camera exposes every field or every control. The visible information depends on the selected driver and the hardware capabilities it reports.
    
 
    

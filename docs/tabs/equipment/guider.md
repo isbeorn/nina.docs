@@ -1,12 +1,31 @@
-
-
-The Guider tab lets you connect to autoguiders.
+The Guider tab lets you connect to supported guiders and configure the settings used for guiding and dithering.
 
 ![Guider](../../images/tabs/equipment_guider.png)
 
-1. Guider information can be found on the left side. Furthermore, the guide chart colors can be customized here.
-2. On the right side you can find guider specific settings. The available settings depend on the type of guider that is connected.
-3. On the bottom you can find the guider graph showing the corrections and drift of the guider.
+The header contains the usual guider controls for connecting, disconnecting, refreshing the device list, and opening the setup dialog when one is available.
+
+## Overview
+
+The left side of the page shows guider status and graph settings:
+
+* connected state
+* current guider state
+* guider pixel scale
+* guider dither distance
+* main camera pixel scale
+* equivalent main camera dither distance
+* guide graph correction visibility
+* RA and Dec guide graph colors
+
+The right side contains the guider-specific settings page for the selected guider. Dedicated settings pages are available for:
+
+* PHD2
+* MGEN
+* MetaGuide
+* Direct Guider
+* SkyGuard
+
+The graph at the bottom shows live guide drift, optional correction bars, and dither markers.
 
 ## PHD2 Setup
 ![Guider](../../images/tabs/guider_phdsetup.png)
@@ -20,6 +39,9 @@ You can set the PHD2 server settings here.
 
 ### PHD2 Server Port
 PHD server port. Usually the default 4400 works fine. If you are using multiple instances of PHD2, each instance will add 1 to the port number. So instance 2 will run on port 4401, instance 3 on 4402, etc.
+
+### PHD2 Instance Number
+Use this when you run more than one PHD2 instance on the same machine.
 
 ## PHD2 Settings
 ![Guider](../../images/tabs/guider_phdsettings.png)
@@ -53,3 +75,7 @@ A region of interest expressed in a percentage of the full frame with the center
 
 ### PHD2 profile
 Select from the list of available PHD2 profiles to switch to.
+
+## Other Guider-Specific Pages
+
+If you select a guider other than PHD2, the settings panel changes to match that guider. For example, MetaGuide, MGEN, Direct Guider, and SkyGuard each expose their own dedicated controls when selected.
