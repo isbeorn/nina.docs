@@ -99,6 +99,16 @@ As triggers are evaluated in the same fashion as loop conditions, you can set tr
 ## Templates
 A template is a set of various customized instructions set up with predefined values to be re-used constantly. To be able to quickly set up a sequence for an imaging run, the templates will take a key part and enable the possibility to easily create specific types of sequences in a matter of no time.  
 Each instruction set is capable of being templated. When a set is templated, all its content and the values set inside are saved and put into the template. When the template is then added to the sequence again, it will create a copy of it and create an instruction set that is exactly set up like the templated set.  
+
+### Linked Templates
+By default, adding a template to a sequence creates an independent copy. If you want a sequence to follow future changes to the source template, hold Ctrl while dropping the template into the sequencer, or add it from the Linked Templates menu. This creates a Linked Template container instead of copying the template.
+
+A linked template shows the current template contents directly in the sequence, but the materialized content is dimmed and read-only so it can be inspected without accidentally changing it. When the source template changes, the linked template refreshes automatically.
+
+To intentionally change the source template from the sequence, use Edit Template on the linked template. While editing, the materialized content becomes editable. Save Template writes the changes back to the user template; Cancel discards the edit and refreshes from the current source. Default templates cannot be edited directly.
+
+When a linked template is based on a Deep Sky Object Set, target information is stored on the linked template instance and not in the reusable template itself. Enter a target on the linked template or drop a target onto it. This target override is saved with that linked use and is reapplied whenever the template refreshes, so the same template can be reused for multiple targets.
+
 The templates are located on the right sidebar when switching to the templates tab. A couple of basic templates are provided with the application.  
 ![Templates](../../images/sequencer/Sequencer_Templates.png)
 
