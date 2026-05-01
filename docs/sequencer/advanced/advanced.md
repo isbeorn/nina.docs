@@ -16,7 +16,7 @@ However, it is also possible to plan everything without using drag and drop at a
 
 On a high level, the concept of the advanced sequencer is quite simple. A sequence will consist of small building blocks that will execute some logic and the sequencer will execute these blocks one by one from top to bottom.  
 In addition to single building blocks, so-called *Instruction Sets* can be added too. Think of these as a logical group of instructions. These groups will function in the same way as the whole sequencer, as they will execute the blocks that are part of the group from top to bottom.
-The *Instruction Sets* can contain so-called *Loop Conditions* which will change the flow of operation slightly, as the Instruction Set will repeat its set of instructions for as long as all conditions that these loop conditions define are met.
+The *Instruction Sets* can contain so-called *Loop Conditions* which will change the flow of operation slightly, as the Instruction Set will repeat its set of instructions for as long as all conditions that these loop conditions define are met. Some instruction sets can also change when or how their contents run, such as running in parallel or only when an Expression is true.
 ![Sequencer Flow](../../images/sequencer/Sequencer_Flow.png)
     
 ## Instructions
@@ -55,6 +55,11 @@ Instruction sets can be added to the sequencer in the same way as instructions. 
 ### Sequential Instruction Set
 This instruction set will process the instructions one after the other, from top to bottom.
 ![Sequential Instruction Set](../../images/sequencer/Sequencer_SequentialInstructions.png)
+### Conditional Instruction Set
+This instruction set checks its Expression when the set is reached. If the Expression evaluates to true, the instructions inside run once from top to bottom. If it evaluates to false, the instructions inside are skipped and the sequence continues after the set.
+
+The Expression and its current evaluated result are shown in the set header, so the condition remains visible even when the set is collapsed.
+
 ### Parallel Instruction Set
 All instructions inside this special instruction set will be processed in parallel. As everything will run in parallel, there are no conditions or triggers available for this set.
 Order of instructions within the Parallel Instruction Set is not defined or implied.

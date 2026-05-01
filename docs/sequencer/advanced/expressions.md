@@ -82,5 +82,7 @@ Instructions that use celestial coordinates look a little different in NINA 3.3;
 
 ### Conditional Execution
 
-Currently, NINA does not have instructions for conditional execution using Expressions (things like "If" and "If-Then-Else").  To gain this functionality (and much more), use the Sequencer Powerups plugin.
+Use a Conditional Instruction Set when a group of instructions should only run if an Expression is true. The Expression is evaluated when the set is reached. If it is true, the instructions inside run once; if it is false, they are skipped and the sequence continues after the set.
+
+The Expression and its evaluated result are shown in the set header, including while the set is collapsed. Conditional Instruction Sets do not have their own loop condition or trigger sections; parent loop conditions and triggers still apply when the set is placed inside another instruction set.
 
