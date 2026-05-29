@@ -18,6 +18,7 @@ However it depends on various third party libraries which carry their own copyri
 | GrpcDotNetNamedPipes     | [https://github.com/cyanfish/grpc-dotnet-namedpipes](https://github.com/cyanfish/grpc-dotnet-namedpipes) | [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) |
 | Iconic.Zlib.Netstandard  | [https://github.com/HelloKitty/Iconic.Zlib.Netstandard](https://github.com/HelloKitty/Iconic.Zlib.Netstandard) | [zlib License](https://opensource.org/licenses/Zlib) |
 | K4os.Compression.LZ4     | [https://github.com/MiloszKrajewski/K4os.Compression.LZ4](https://github.com/MiloszKrajewski/K4os.Compression.LZ4) | [The MIT License](https://opensource.org/licenses/MIT)  |
+| LibRaw                   | [https://www.libraw.org/](https://www.libraw.org/) | [Common Development and Distribution License Version 1.0](https://opensource.org/license/cddl-1-0) |
 | MdXaml                   | [https://github.com/whistyun/MdXaml](https://github.com/whistyun/MdXaml) | [The MIT License](https://opensource.org/licenses/MIT) |
 | Newtonsoft.Json          | [https://www.newtonsoft.com/json](https://www.newtonsoft.com/json) | [The MIT License](https://opensource.org/licenses/MIT)                   |
 | Nito.AsyncEx             | [https://github.com/StephenCleary/AsyncEx](https://github.com/StephenCleary/AsyncEx) | [The MIT License](https://opensource.org/licenses/MIT)                   |
@@ -35,7 +36,6 @@ However it depends on various third party libraries which carry their own copyri
 | ToastNotifications       | [https://github.com/raflop/ToastNotifications](https://github.com/raflop/ToastNotifications) | [GNU Lesser General Public License version 3](https://www.gnu.de/documents/lgpl-3.0.de.html) |
 | ToggleSwitch             | [https://archive.codeplex.com/?p=toggleswitch](https://archive.codeplex.com/?p=toggleswitch) | [Microsoft Public License (MS-PL)](https://opensource.org/licenses/MS-PL) |
 | Trinet.Core.IO.Ntfs      | [https://github.com/RichardD2/NTFS-Streams](https://github.com/RichardD2/NTFS-Streams) | [The 2-Clause BSD License](https://opensource.org/licenses/BSD-2-Clause) |
-| VVVV.FreeImage           | [http://freeimage.sourceforge.net/](http://freeimage.sourceforge.net/) | [FreeImage Public License - Version 1.0](http://freeimage.sourceforge.net/freeimage-license.txt) |
 | Wpf Extended Toolkit     | [https://github.com/dotnetprojects/WpfExtendedToolkit](https://github.com/dotnetprojects/WpfExtendedToolkit) | [Microsoft Public License (MS-PL)](https://opensource.org/licenses/MS-PL) |
 
 

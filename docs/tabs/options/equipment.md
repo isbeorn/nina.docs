@@ -11,9 +11,9 @@ This is the tab where you set up all the parameters related to your equipment.
 ### Bit Depth
 * Specify the bit-depth of the images outputted by the camera in use.
     
-> For DSLRs using DCRaw, set this to 16-bit. If you're using FreeImage, set this to match the bit depth of the camera.
-
 > For ZWO, QHY, SBIG, FLI, PlayerOne and Atik cameras, set this to 16-bit since they are rescaled by the camera drivers.
+
+> For the native Canon or Nikon driver, set this to match the bit depth of the camera.
 
 > ToupTek, RisingCam, Altair, MallinCam, Omegon and SVBony do not scale, so set this to match the bit depth of the camera.
 
@@ -29,14 +29,6 @@ This is the tab where you set up all the parameters related to your equipment.
 * Allows you to change the bulb mode of the camera. Native will work in most cases.
 > RS232 and Mount is available as well and might be necessary for older Nikon cameras
 > For usage of RS232 and Mount shutter refer to Usage: [Using RS232 or Mount for bulb shutter](../../advanced/bulbshutter.md)
-
-### Raw Converter
-* Only for DSLR: select the RAW converter, options are DCRaw and FreeImage
-> DCRaw will utilize DCRaw and stretch your images to 16-bit, applying the camera's specific color bias profile.
-FreeImage will deliver the frame exactly as your camera provided it and can be slightly faster for image download on slower machines.
-
-!!! note
-    Both raw converters will deliver you the raw frame of your DSLR, but they might vary in color. Saving the raw frame without adding the camera specific profile with FreeImage can deliver more faint and less colorful raw images than you are used to.
 
 ### Camera Timeout
 * Specifies how long N.I.N.A. should wait after the exposure time for the frame download before timing out and proceeding.
