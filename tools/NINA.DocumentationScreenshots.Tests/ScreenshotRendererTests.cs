@@ -83,6 +83,69 @@ public class ScreenshotRendererTests {
         Assert.That(File.ReadAllBytes(second), Is.EqualTo(File.ReadAllBytes(first)));
     }
 
+    [TestCase("simple:set-options", 1920, 61)]
+    [TestCase("simple:target-tabs", 1920, 51)]
+    [TestCase("simple:target-general", 960, 149)]
+    [TestCase("simple:target-information", 960, 410)]
+    [TestCase("simple:target-options", 930, 120)]
+    [TestCase("simple:autofocus", 500, 210)]
+    [TestCase("simple:imaging-details", 1920, 129)]
+    [TestCase("simple:transform-button", 485, 99)]
+    public void Render_CropsCurrentCompiledSimpleSequencerRegions(
+            string cropTarget,
+            int width,
+            int height) {
+        ScreenshotAsset asset = new() {
+            Id = $"simple-crop-{cropTarget.Replace(':', '-')}",
+            Classification = ScreenshotClassification.NinaUi,
+            Output = $"docs/images/generated/sequencer/simple/{cropTarget.Replace(':', '-')}.png",
+            Fixture = "view",
+            State = "legacy-simple-documentation",
+            ViewType = "NINA.View.SimpleSequencer.SimpleSequenceView",
+            Width = width,
+            Height = height,
+            RenderWidth = 1920,
+            RenderHeight = 1080,
+            CropTarget = cropTarget
+        };
+        string output = Path.Combine(root, $"{cropTarget.Replace(':', '-')}.png");
+
+        new ScreenshotRenderer(new FixtureRegistry()).Render(asset, output);
+
+        BitmapFrame frame = BitmapDecoder.Create(
+            new Uri(output),
+            BitmapCreateOptions.PreservePixelFormat,
+            BitmapCacheOption.OnLoad).Frames[0];
+        Assert.Multiple(() => {
+            Assert.That(frame.PixelWidth, Is.EqualTo(width));
+            Assert.That(frame.PixelHeight, Is.EqualTo(height));
+            Assert.That(new FileInfo(output).Length, Is.GreaterThan(1000));
+        });
+    }
+
+    [Test]
+    public void Render_LegacySimpleSequenceIsDeterministicAcrossClockTicks() {
+        ScreenshotAsset asset = new() {
+            Id = "legacy-simple-deterministic",
+            Classification = ScreenshotClassification.NinaUi,
+            Output = "docs/images/generated/sequencer/simple/Sequencer_Screen.png",
+            Fixture = "view",
+            State = "legacy-simple-documentation",
+            ViewType = "NINA.View.SimpleSequencer.SimpleSequenceView",
+            Width = 960,
+            Height = 600
+        };
+        string first = Path.Combine(root, "legacy-simple-first.png");
+        string second = Path.Combine(root, "legacy-simple-second.png");
+
+        ScreenshotRenderer renderer = new(new FixtureRegistry());
+        renderer.Render(asset, first);
+        Thread.Sleep(TimeSpan.FromSeconds(1.1));
+        renderer.Render(asset, second);
+
+        Assert.That(File.ReadAllBytes(second), Is.EqualTo(File.ReadAllBytes(first)));
+    }
+
     [Test]
     public void Render_NestedConditionsUsesFixedClock() {
         ScreenshotAsset asset = new() {

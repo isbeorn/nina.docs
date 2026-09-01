@@ -51,6 +51,7 @@ public static class NamedStateController {
         ApplyAdvancedSequencerSidebarState(fixture, output, asset.Id);
         PinAltitudeChartNowMarkers(fixture);
         ApplyAdvancedSequencerDragState(fixture, output, asset.Id);
+        ApplySimpleSequencerState(fixture, asset);
 
         if (output.EndsWith("/sequencer/trigger/customtrigger.png", StringComparison.Ordinal)) {
             Expander trigger = FindDescendants<Expander>(fixture)
@@ -104,6 +105,31 @@ public static class NamedStateController {
                 ?? throw new CatalogException($"Screenshot '{asset.Id}' could not find the production image-source selector.");
             PrepareProductionComboBox(source, asset.Id, "image-source");
         }
+    }
+
+    private static void ApplySimpleSequencerState(FrameworkElement fixture, ScreenshotAsset asset) {
+        if (asset.State is not ("legacy-simple-documentation" or "simple-to-advanced-legacy")) {
+            return;
+        }
+        if (fixture is not NINA.View.SimpleSequencer.SimpleSequenceView
+            || fixture.DataContext is not NINA.ViewModel.Interfaces.ISimpleSequenceVM viewModel) {
+            throw new CatalogException(
+                $"Screenshot '{asset.Id}' requested a Legacy Sequencer state without NINA's production SimpleSequenceView.");
+        }
+
+        List<Expander> targetExpanders = FindDescendants<Expander>(fixture)
+            .Where(expander => ReferenceEquals(expander.DataContext, viewModel.SelectedTarget))
+            .Where(expander => expander.IsVisible)
+            .OrderBy(expander => expander.TranslatePoint(new Point(0, 0), fixture).Y)
+            .ToList();
+        if (targetExpanders.Count != 2) {
+            throw new CatalogException(
+                $"Screenshot '{asset.Id}' expected the two production Legacy Sequencer target expanders but found {targetExpanders.Count}.");
+        }
+        foreach (Expander expander in targetExpanders) {
+            expander.IsExpanded = true;
+        }
+        fixture.UpdateLayout();
     }
 
     private static void OpenProductionInstructionSettings(

@@ -5,11 +5,11 @@ For more advanced use cases refer to the [advanced sequencer](../advanced/advanc
 
 The Legacy Sequencer is not a separate execution engine. It translates the configured target list into advanced sequence entities at runtime. **Build Sequence** exposes that translation so the result can be customized in the Advanced Sequencer. Building again replaces the previously generated advanced sequence, so save any advanced edits first.
 
-![The sequencing tab](../../images/sequencer/simple/Sequencer_Screen.png)
+![The sequencing tab](../../images/generated/sequencer/simple/Sequencer_Screen.png)
 
 ### Sequence Target Set Options
 
-![Sequence Target Set Options](../../images/sequencer/simple/Target_Set_Options.png)
+![Sequence Target Set Options](../../images/generated/sequencer/simple/Target_Set_Options.png)
 
 In this section you can adjust which instructions should be considered for the complete set of targets.   
 When *Cool Camera* and *Unpark Mount* are enabled, these instructions will be executed before the *first* target.  
@@ -19,7 +19,7 @@ In addition to that there is the option to enable the [auto meridian flip](../..
 
 ### Sequence Target Tab List  
   
-![Sequence Target Tab List](../../images/sequencer/simple/Target_Tabs.png)
+![Sequence Target Tab List](../../images/generated/sequencer/simple/Target_Tabs.png)
 Multiple sequences can be loaded into N.I.N.A., with each residing in its own tab at the top of the Sequence window. When multiple sequences are opened, N.I.N.A. will run each sequence in order after the prior sequence is completed. This allows you to specify multiple targets to image over the course of a night, each with their own settings and behaviors.
 
 1.  **Target tabs**
@@ -41,7 +41,7 @@ Multiple sequences can be loaded into N.I.N.A., with each residing in its own ta
 
 ### Target General Options
 
-![Target General Options](../../images/sequencer/simple/Target_General.png)
+![Target General Options](../../images/generated/sequencer/simple/Target_General.png)
 
 1. **Delay start**  
     Specifies a delay (in seconds) before the first operation when the sequence starts.
@@ -60,7 +60,7 @@ Multiple sequences can be loaded into N.I.N.A., with each residing in its own ta
 
 ### Target Information
 
-![Target Information](../../images/sequencer/simple/Target_Information.png)
+![Target Information](../../images/generated/sequencer/simple/Target_Information.png)
 
 1. **Target coordinates**  
     Displays the target name, right ascension, declination, and desired rotation angle. These may be edited as needed. The right ascension, declination, and rotation angle specified will be used to slew, center and rotate on target start (if enabled)
@@ -76,7 +76,7 @@ Multiple sequences can be loaded into N.I.N.A., with each residing in its own ta
 
 ### Target start options
 
-![Target start options](../../images/sequencer/simple/Target_Start_Options.png)
+![Target start options](../../images/generated/sequencer/simple/Target_Start_Options.png)
 
 1. **Slew to target**  
     At the beginning of the sequence, N.I.N.A. will command the mount to slew to the coordinates that are specified in RA and Dec fields. This does not plate solve to verify it is on target.
@@ -96,7 +96,7 @@ Multiple sequences can be loaded into N.I.N.A., with each residing in its own ta
 
 ### Auto Focus behavior
 
-![Auto Focus behavior](../../images/sequencer/simple/Target_Autofocus.png)
+![Auto Focus behavior](../../images/generated/sequencer/simple/Target_Autofocus.png)
 
 Due to the large number of auto focus options that can be configured in a sequence, they are grouped under an expandable menu. When the menu is not expanded, a summary of the activated options will be displayed. Expanding the menu by clicking on the arrow will reveal the auto focus settings and make them available for altering.
 
@@ -110,7 +110,7 @@ Many of the options are self-explanatory, however two in particular may require 
 
 ### Sequence entries
 
-![Sequence entries](../../images/sequencer/simple/Imaging_Details.png)
+![Sequence entries](../../images/generated/sequencer/simple/Imaging_Details.png)
 
 Sequence entries define the image acquisition order and behavior of N.I.N.A. Each sequence entry consists of up to 11 columns which determine how the images will be exposed:
 

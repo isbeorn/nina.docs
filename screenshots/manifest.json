@@ -2150,67 +2150,139 @@
     },
     {
       "id": "docs-images-sequencer-simple-imaging-details-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/sequencer/simple/Imaging_Details.png",
-      "width": 1832,
-      "height": 173,
-      "exclusionReason": "This selective NINA workflow, annotation or hardware-specific state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting a guessed or incomplete view."
+      "classification": "nina-ui",
+      "output": "docs/images/generated/sequencer/simple/Imaging_Details.png",
+      "width": 1920,
+      "height": 129,
+      "fixture": "view",
+      "state": "legacy-simple-documentation",
+      "viewType": "NINA.View.SimpleSequencer.SimpleSequenceView",
+      "renderWidth": 1920,
+      "renderHeight": 1080,
+      "cropTarget": "simple:imaging-details",
+      "displayName": "Legacy Sequencer exposure rows",
+      "sourceIdentifier": "view:NINA.View.SimpleSequencer.SimpleDSOContainerView"
     },
     {
       "id": "docs-images-sequencer-simple-sequencer-screen-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/sequencer/simple/Sequencer_Screen.png",
+      "classification": "nina-ui",
+      "output": "docs/images/generated/sequencer/simple/Sequencer_Screen.png",
       "width": 1914,
       "height": 1030,
-      "exclusionReason": "This full Legacy Sequencer workspace contains a live current-time marker. Keep the original capture until the production view supports a fully fixed documentation clock."
+      "fixture": "view",
+      "state": "legacy-simple-documentation",
+      "viewType": "NINA.View.SimpleSequencer.SimpleSequenceView",
+      "displayName": "Legacy Sequencer workspace",
+      "sourceIdentifier": "view:NINA.View.SimpleSequencer.SimpleSequenceView"
     },
     {
       "id": "docs-images-sequencer-simple-target-autofocus-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/sequencer/simple/Target_Autofocus.png",
+      "classification": "nina-ui",
+      "output": "docs/images/generated/sequencer/simple/Target_Autofocus.png",
       "width": 495,
       "height": 192,
-      "exclusionReason": "This selective NINA workflow, annotation or hardware-specific state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting a guessed or incomplete view."
+      "fixture": "view",
+      "state": "legacy-simple-documentation",
+      "viewType": "NINA.View.SimpleSequencer.SimpleSequenceView",
+      "renderWidth": 1920,
+      "renderHeight": 1080,
+      "cropTarget": "simple:autofocus",
+      "displayName": "Legacy Sequencer autofocus options",
+      "sourceIdentifier": "view:NINA.View.SimpleSequencer.SimpleDSOContainerView"
     },
     {
       "id": "docs-images-sequencer-simple-target-general-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/sequencer/simple/Target_General.png",
-      "width": 928,
-      "height": 194,
-      "exclusionReason": "This selective NINA workflow, annotation or hardware-specific state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting a guessed or incomplete view."
+      "classification": "nina-ui",
+      "output": "docs/images/generated/sequencer/simple/Target_General.png",
+      "width": 960,
+      "height": 149,
+      "fixture": "view",
+      "state": "legacy-simple-documentation",
+      "viewType": "NINA.View.SimpleSequencer.SimpleSequenceView",
+      "renderWidth": 1920,
+      "renderHeight": 1080,
+      "cropTarget": "simple:target-general",
+      "displayName": "Legacy Sequencer target timing options",
+      "sourceIdentifier": "view:NINA.View.SimpleSequencer.SimpleDSOContainerView",
+      "callouts": [
+        { "x": 0.52, "y": 0.15, "text": "1" },
+        { "x": 0.52, "y": 0.32, "text": "2" },
+        { "x": 0.52, "y": 0.50, "text": "3" },
+        { "x": 0.98, "y": 0.78, "text": "4" }
+      ]
     },
     {
       "id": "docs-images-sequencer-simple-target-information-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/sequencer/simple/Target_Information.png",
-      "width": 928,
-      "height": 435,
-      "exclusionReason": "This selective NINA workflow, annotation or hardware-specific state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting a guessed or incomplete view."
+      "classification": "nina-ui",
+      "output": "docs/images/generated/sequencer/simple/Target_Information.png",
+      "width": 960,
+      "height": 410,
+      "fixture": "view",
+      "state": "legacy-simple-documentation",
+      "viewType": "NINA.View.SimpleSequencer.SimpleSequenceView",
+      "renderWidth": 1920,
+      "renderHeight": 1080,
+      "cropTarget": "simple:target-information",
+      "displayName": "Legacy Sequencer target coordinates and altitude",
+      "sourceIdentifier": "view:NINA.View.SimpleSequencer.SimpleDSOContainerView",
+      "callouts": [
+        { "x": 0.38, "y": 0.17, "text": "1" },
+        { "x": 0.16, "y": 0.50, "text": "2" },
+        { "x": 0.93, "y": 0.10, "text": "3" },
+        { "x": 0.98, "y": 0.10, "text": "4" }
+      ]
     },
     {
       "id": "docs-images-sequencer-simple-target-set-options-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/sequencer/simple/Target_Set_Options.png",
-      "width": 1843,
-      "height": 70,
-      "exclusionReason": "This selective NINA workflow, annotation or hardware-specific state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting a guessed or incomplete view."
+      "classification": "nina-ui",
+      "output": "docs/images/generated/sequencer/simple/Target_Set_Options.png",
+      "width": 1920,
+      "height": 61,
+      "fixture": "view",
+      "state": "legacy-simple-documentation",
+      "viewType": "NINA.View.SimpleSequencer.SimpleSequenceView",
+      "renderWidth": 1920,
+      "renderHeight": 1080,
+      "cropTarget": "simple:set-options",
+      "displayName": "Legacy Sequencer target set options",
+      "sourceIdentifier": "view:NINA.View.SimpleSequencer.SimpleSequenceView"
     },
     {
       "id": "docs-images-sequencer-simple-target-start-options-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/sequencer/simple/Target_Start_Options.png",
+      "classification": "nina-ui",
+      "output": "docs/images/generated/sequencer/simple/Target_Start_Options.png",
       "width": 931,
       "height": 94,
-      "exclusionReason": "This selective NINA workflow, annotation or hardware-specific state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting a guessed or incomplete view."
+      "fixture": "view",
+      "state": "legacy-simple-documentation",
+      "viewType": "NINA.View.SimpleSequencer.SimpleSequenceView",
+      "renderWidth": 1920,
+      "renderHeight": 1080,
+      "cropTarget": "simple:target-options",
+      "displayName": "Legacy Sequencer target start options",
+      "sourceIdentifier": "view:NINA.View.SimpleSequencer.SimpleDSOContainerView"
     },
     {
       "id": "docs-images-sequencer-simple-target-tabs-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/sequencer/simple/Target_Tabs.png",
-      "width": 1842,
-      "height": 90,
-      "exclusionReason": "This selective NINA workflow, annotation or hardware-specific state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting a guessed or incomplete view."
+      "classification": "nina-ui",
+      "output": "docs/images/generated/sequencer/simple/Target_Tabs.png",
+      "width": 1920,
+      "height": 51,
+      "fixture": "view",
+      "state": "legacy-simple-documentation",
+      "viewType": "NINA.View.SimpleSequencer.SimpleSequenceView",
+      "renderWidth": 1920,
+      "renderHeight": 1080,
+      "cropTarget": "simple:target-tabs",
+      "displayName": "Legacy Sequencer target tabs and toolbar",
+      "sourceIdentifier": "view:NINA.View.SimpleSequencer.SimpleSequenceView",
+      "callouts": [
+        { "x": 0.11, "y": 0.50, "text": "1" },
+        { "x": 0.935, "y": 0.50, "text": "2" },
+        { "x": 0.955, "y": 0.50, "text": "3" },
+        { "x": 0.975, "y": 0.50, "text": "4" },
+        { "x": 0.995, "y": 0.50, "text": "5" }
+      ]
     },
     {
       "id": "docs-images-sequencer-simpletoadvanced-betterdither-png",
@@ -2259,11 +2331,15 @@
     },
     {
       "id": "docs-images-sequencer-simpletoadvanced-simplesequence-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/sequencer/simpletoadvanced/simplesequence.png",
+      "classification": "nina-ui",
+      "output": "docs/images/generated/sequencer/simpletoadvanced/simplesequence.png",
       "width": 1451,
       "height": 899,
-      "exclusionReason": "This selective NINA workflow, annotation or hardware-specific state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting a guessed or incomplete view."
+      "fixture": "view",
+      "state": "simple-to-advanced-legacy",
+      "viewType": "NINA.View.SimpleSequencer.SimpleSequenceView",
+      "displayName": "Legacy LRGB sequence before conversion",
+      "sourceIdentifier": "view:NINA.View.SimpleSequencer.SimpleSequenceView"
     },
     {
       "id": "docs-images-sequencer-simpletoadvanced-startarea-png",
@@ -2357,11 +2433,21 @@
     },
     {
       "id": "docs-images-sequencer-simpletoadvanced-transform-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/sequencer/simpletoadvanced/transform.png",
+      "classification": "nina-ui",
+      "output": "docs/images/generated/sequencer/simpletoadvanced/transform.png",
       "width": 485,
       "height": 99,
-      "exclusionReason": "This selective NINA workflow, annotation or hardware-specific state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting a guessed or incomplete view."
+      "fixture": "view",
+      "state": "simple-to-advanced-legacy",
+      "viewType": "NINA.View.SimpleSequencer.SimpleSequenceView",
+      "renderWidth": 1600,
+      "renderHeight": 1000,
+      "cropTarget": "simple:transform-button",
+      "displayName": "Build Sequence action",
+      "sourceIdentifier": "view:NINA.View.SimpleSequencer.SimpleSequenceView",
+      "callouts": [
+        { "kind": "box", "x": 0.015, "y": 0.10, "width": 0.28, "height": 0.80 }
+      ]
     },
     {
       "id": "docs-images-sequencer-simpletoadvanced-withoffsets-png",

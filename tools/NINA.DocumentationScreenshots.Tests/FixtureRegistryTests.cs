@@ -924,6 +924,41 @@ public class FixtureRegistryTests {
     }
 
     [Test]
+    public void SimpleSequenceView_UsesDeterministicProductionDocumentationSequence() {
+        ScreenshotAsset asset = new() {
+            Id = "docs-images-sequencer-simple-sequencer-screen-png",
+            Classification = ScreenshotClassification.NinaUi,
+            Output = "docs/images/generated/sequencer/simple/Sequencer_Screen.png",
+            Fixture = "view",
+            State = "legacy-simple-documentation",
+            ViewType = "NINA.View.SimpleSequencer.SimpleSequenceView",
+            Width = 1914,
+            Height = 1030
+        };
+
+        FrameworkElement fixture = new FixtureRegistry().Create(asset);
+        NINA.ViewModel.Interfaces.ISimpleSequenceVM viewModel =
+            (NINA.ViewModel.Interfaces.ISimpleSequenceVM)fixture.DataContext;
+        NINA.Sequencer.Container.SimpleDSOContainer selectedTarget =
+            (NINA.Sequencer.Container.SimpleDSOContainer)viewModel.SelectedTarget;
+        NINA.Sequencer.Container.ISequenceContainer targets =
+            (NINA.Sequencer.Container.ISequenceContainer)viewModel.Sequencer.MainContainer.Items[1];
+
+        Assert.Multiple(() => {
+            Assert.That(fixture.GetType().FullName, Is.EqualTo("NINA.View.SimpleSequencer.SimpleSequenceView"));
+            Assert.That(targets.Items.Select(target => target.Name),
+                Is.EqualTo(new[] { "NGC 7380", "Eagle Nebula" }));
+            Assert.That(selectedTarget.Items, Has.Count.EqualTo(3));
+            Assert.That(selectedTarget.Target.TargetName, Is.EqualTo("NGC 7380"));
+            Assert.That(selectedTarget.SlewToTarget, Is.True);
+            Assert.That(selectedTarget.CenterTarget, Is.True);
+            Assert.That(selectedTarget.RotateTarget, Is.True);
+            Assert.That(selectedTarget.StartGuiding, Is.True);
+            Assert.That(selectedTarget.EstimatedStartTime, Is.EqualTo(new DateTime(2026, 8, 31, 20, 0, 0)));
+        });
+    }
+
+    [Test]
     public void FramingAssistantView_UsesProductionViewModelWithLoadedDeterministicMosaic() {
         ScreenshotAsset asset = new() {
             Id = "framing-mosaic",

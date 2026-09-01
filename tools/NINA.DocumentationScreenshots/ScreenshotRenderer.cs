@@ -466,6 +466,9 @@ public sealed class ScreenshotRenderer(FixtureRegistry fixtures) {
         if (asset.CropTarget.StartsWith("framing:", StringComparison.Ordinal)) {
             return ResolveFramingCrop(content, asset, renderWidth, renderHeight);
         }
+        if (asset.CropTarget.StartsWith("simple:", StringComparison.Ordinal)) {
+            return ResolveSimpleSequencerCrop(content, fixture, asset, renderWidth, renderHeight);
+        }
         if (asset.CropTarget == "sidebar:filtered-item") {
             return ResolveFilteredSidebarItemCrop(content, fixture, asset, renderWidth, renderHeight);
         }
@@ -546,6 +549,175 @@ public sealed class ScreenshotRenderer(FixtureRegistry fixtures) {
             Width = width / renderWidth,
             Height = height / renderHeight
         };
+    }
+
+    private static ScreenshotCrop ResolveSimpleSequencerCrop(
+            FrameworkElement content,
+            FrameworkElement fixture,
+            ScreenshotAsset asset,
+            int renderWidth,
+            int renderHeight) {
+        if (fixture is not NINA.View.SimpleSequencer.SimpleSequenceView
+            || fixture.DataContext is not NINA.ViewModel.Interfaces.ISimpleSequenceVM viewModel
+            || viewModel.SelectedTarget is not NINA.Sequencer.Container.SimpleDSOContainer selectedTarget) {
+            throw new CatalogException(
+                $"Screenshot '{asset.Id}' requested a Legacy Sequencer crop without NINA's production SimpleSequenceView and selected target.");
+        }
+
+        NINA.View.SimpleSequencer.SimpleDSOContainerView targetView =
+            FindVisualDescendants<NINA.View.SimpleSequencer.SimpleDSOContainerView>(fixture)
+                .FirstOrDefault(candidate => ReferenceEquals(candidate.DataContext, selectedTarget))
+            ?? throw new CatalogException(
+                $"Screenshot '{asset.Id}' could not locate NINA's production Legacy Sequencer target view.");
+        DataGrid exposureGrid = FindVisualDescendants<DataGrid>(targetView)
+            .FirstOrDefault(candidate => ReferenceEquals(candidate.DataContext, selectedTarget))
+            ?? throw new CatalogException(
+                $"Screenshot '{asset.Id}' could not locate NINA's production Legacy Sequencer exposure grid.");
+        List<Expander> targetExpanders = FindVisualDescendants<Expander>(targetView)
+            .Where(expander => ReferenceEquals(expander.DataContext, selectedTarget) && expander.IsVisible)
+            .OrderBy(expander => expander.TranslatePoint(new Point(0, 0), targetView).Y)
+            .ToList();
+        if (targetExpanders.Count != 2) {
+            throw new CatalogException(
+                $"Screenshot '{asset.Id}' expected the two production Legacy Sequencer target expanders but found {targetExpanders.Count}.");
+        }
+
+        Rect bounds;
+        Rect cropAvailable = new(0, 0, renderWidth, renderHeight);
+        bool preserveMeasuredBounds = false;
+        switch (asset.CropTarget) {
+            case "simple:set-options": {
+                List<Expander> setOptions = FindVisualDescendants<Expander>(fixture)
+                    .Where(expander => expander.DataContext is
+                        NINA.ViewModel.Sequencer.SimpleSequence.SimpleStartContainer or
+                        NINA.ViewModel.Sequencer.SimpleSequence.SimpleEndContainer)
+                    .Where(expander => expander.IsVisible)
+                    .ToList();
+                if (setOptions.Count != 2) {
+                    throw new CatalogException(
+                        $"Screenshot '{asset.Id}' expected the two production Legacy Sequencer set option expanders but found {setOptions.Count}.");
+                }
+                bounds = UnionBounds(setOptions, content);
+                preserveMeasuredBounds = true;
+                break;
+            }
+            case "simple:target-tabs": {
+                ListView tabs = FindVisualDescendants<ListView>(fixture)
+                    .FirstOrDefault(list => list.Items.Count > 0
+                        && list.Items.Cast<object>().All(item => item is NINA.Sequencer.Container.SimpleDSOContainer))
+                    ?? throw new CatalogException(
+                        $"Screenshot '{asset.Id}' could not locate NINA's production Legacy Sequencer target tabs.");
+                Grid tabsRegion = VisualAncestors(tabs).OfType<Grid>()
+                    .Where(grid => grid.IsVisible
+                        && grid.ActualWidth >= tabs.ActualWidth
+                        && grid.ActualHeight >= tabs.ActualHeight
+                        && grid.ActualHeight <= 100)
+                    .OrderByDescending(grid => grid.ActualWidth)
+                    .FirstOrDefault()
+                    ?? throw new CatalogException(
+                        $"Screenshot '{asset.Id}' could not locate NINA's production Legacy Sequencer target tab toolbar.");
+                bounds = ElementBounds(tabsRegion, content);
+                preserveMeasuredBounds = true;
+                break;
+            }
+            case "simple:target-general": {
+                Point origin = targetView.TranslatePoint(new Point(0, 0), content);
+                double expanderTop = targetExpanders[0].TranslatePoint(new Point(0, 0), targetView).Y;
+                bounds = new Rect(origin.X, origin.Y, targetView.ActualWidth / 2, expanderTop);
+                cropAvailable = bounds;
+                preserveMeasuredBounds = true;
+                break;
+            }
+            case "simple:target-information": {
+                Point origin = targetView.TranslatePoint(new Point(0, 0), content);
+                double gridTop = exposureGrid.TranslatePoint(new Point(0, 0), targetView).Y;
+                bounds = new Rect(
+                    origin.X + targetView.ActualWidth / 2,
+                    origin.Y,
+                    targetView.ActualWidth / 2,
+                    gridTop);
+                cropAvailable = bounds;
+                preserveMeasuredBounds = true;
+                break;
+            }
+            case "simple:target-options":
+                bounds = ElementBounds(targetExpanders[0], content);
+                break;
+            case "simple:autofocus": {
+                List<FrameworkElement> autofocusControls =
+                    FindVisualDescendants<FrameworkElement>(targetExpanders[1])
+                        .Where(element => element.IsVisible
+                            && element.ActualWidth > 1
+                            && element.ActualHeight > 1
+                            && element is TextBlock or TextBox or CheckBox)
+                        .ToList();
+                if (autofocusControls.Count == 0) {
+                    throw new CatalogException(
+                        $"Screenshot '{asset.Id}' could not locate NINA's production Legacy Sequencer autofocus controls.");
+                }
+                bounds = UnionBounds(autofocusControls, content);
+                break;
+            }
+            case "simple:imaging-details": {
+                List<FrameworkElement> rows = FindVisualDescendants<DataGridRow>(exposureGrid)
+                    .Where(row => row.IsVisible
+                        && selectedTarget.Items.Any(item => ReferenceEquals(item, row.DataContext)))
+                    .Cast<FrameworkElement>()
+                    .ToList();
+                DataGridColumnHeadersPresenter header =
+                    FindVisualDescendants<DataGridColumnHeadersPresenter>(exposureGrid).FirstOrDefault()
+                    ?? throw new CatalogException(
+                        $"Screenshot '{asset.Id}' could not locate NINA's production Legacy Sequencer exposure headers.");
+                rows.Add(header);
+                bounds = UnionBounds(rows, content);
+                double gridTop = exposureGrid.TranslatePoint(new Point(0, 0), content).Y;
+                cropAvailable = new Rect(0, gridTop, renderWidth, renderHeight - gridTop);
+                preserveMeasuredBounds = true;
+                break;
+            }
+            case "simple:transform-button": {
+                Button buildButton = FindVisualDescendants<Button>(fixture)
+                    .FirstOrDefault(button => ReferenceEquals(button.Command, viewModel.BuildSequenceCommand))
+                    ?? throw new CatalogException(
+                        $"Screenshot '{asset.Id}' could not locate NINA's production Build Sequence button.");
+                StackPanel actionRegion = VisualAncestors(buildButton).OfType<StackPanel>()
+                    .FirstOrDefault(panel => panel.IsVisible
+                        && panel.Orientation == Orientation.Horizontal
+                        && panel.HorizontalAlignment == HorizontalAlignment.Right)
+                    ?? throw new CatalogException(
+                        $"Screenshot '{asset.Id}' could not locate NINA's production Legacy Sequencer action toolbar.");
+                bounds = ElementBounds(actionRegion, content);
+                break;
+            }
+            default:
+                throw new CatalogException(
+                    $"Screenshot '{asset.Id}' has unknown Legacy Sequencer crop target '{asset.CropTarget}'.");
+        }
+
+        bounds.Inflate(6, 6);
+        bounds.Intersect(cropAvailable);
+        if (preserveMeasuredBounds) {
+            return new ScreenshotCrop {
+                X = bounds.Left / renderWidth,
+                Y = bounds.Top / renderHeight,
+                Width = bounds.Width / renderWidth,
+                Height = bounds.Height / renderHeight
+            };
+        }
+        return BoundsToCrop(bounds, asset, renderWidth, renderHeight, cropAvailable);
+    }
+
+    private static Rect UnionBounds(IEnumerable<FrameworkElement> elements, FrameworkElement relativeTo) {
+        Rect bounds = Rect.Empty;
+        foreach (FrameworkElement element in elements) {
+            bounds.Union(ElementBounds(element, relativeTo));
+        }
+        return bounds;
+    }
+
+    private static Rect ElementBounds(FrameworkElement element, FrameworkElement relativeTo) {
+        Point topLeft = element.TranslatePoint(new Point(0, 0), relativeTo);
+        return new Rect(topLeft, new Size(element.ActualWidth, element.ActualHeight));
     }
 
     private static ScreenshotCrop ResolveFilteredSidebarItemCrop(
@@ -669,11 +841,13 @@ public sealed class ScreenshotRenderer(FixtureRegistry fixtures) {
             Rect bounds,
             ScreenshotAsset asset,
             int renderWidth,
-            int renderHeight) {
+            int renderHeight,
+            Rect? availableBounds = null) {
+        Rect available = availableBounds ?? new Rect(0, 0, renderWidth, renderHeight);
         bounds = ExpandBoundsToAspect(
             bounds,
             asset.Width / (double)asset.Height,
-            new Rect(0, 0, renderWidth, renderHeight),
+            available,
             asset.Id);
         double left = Math.Clamp(bounds.Left, 0, renderWidth - 1);
         double top = Math.Clamp(bounds.Top, 0, renderHeight - 1);

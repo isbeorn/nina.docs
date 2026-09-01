@@ -2,7 +2,7 @@ This page is intended to give some hints on how to transition from the legacy se
 In this section we will cover a single target for the night and we will utilize the capabilities of a camera, a goto mount, a filter wheel, and a focuser.
  
 Most likely when you wanted to run a target for the night with LRGB filters you would have set up a sequence like this.
-![LRGB Legacy Sequence](../../images/sequencer/simpletoadvanced/simplesequence.png)
+![LRGB Legacy Sequence](../../images/generated/sequencer/simpletoadvanced/simplesequence.png)
 
 The goal here is to get exposures of each filter for usable color data and to autofocus after the filter change when the batch of exposures is completed. Furthermore, the number of exposures is added based on the estimated duration to fully fill the night.
 This approach, however, has some downsides, which we want to fix using the advanced sequencer step by step. For simplicity, AF after HFR or other conditions is ignored, as this is dependent on the current night's conditions and not a problem of the general setup.
@@ -16,7 +16,7 @@ This approach, however, has some downsides, which we want to fix using the advan
 ## Transforming to an advanced sequence
 
 To get rolling with the advanced sequencer, there is a tool button on the bottom right to easily generate an advanced sequence out of the legacy sequence.
-![Transform](../../images/sequencer/simpletoadvanced/transform.png)
+![Transform](../../images/generated/sequencer/simpletoadvanced/transform.png)
 
 !!!note
     **Did you know?** The legacy sequencer is actually running an advanced sequence behind the scenes. The User Interface is just wrapped around to give the traditional experience of the legacy sequence. This will ensure that the effort to maintain the code for the sequencer is not doubled and that everything is working the same way. This approach also makes it possible to keep the legacy sequencer alive.

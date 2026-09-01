@@ -126,7 +126,15 @@ public static class CatalogValidator {
             and not "settings:meridian-flip"
             and not "framing:image-source"
             and not "framing:coordinates"
-            and not "framing:mosaic-plan") {
+            and not "framing:mosaic-plan"
+            and not "simple:set-options"
+            and not "simple:target-tabs"
+            and not "simple:target-general"
+            and not "simple:target-information"
+            and not "simple:target-options"
+            and not "simple:autofocus"
+            and not "simple:imaging-details"
+            and not "simple:transform-button") {
             throw new CatalogException($"Screenshot '{asset.Id}' has unknown crop target '{asset.CropTarget}'.");
         }
         bool sequencerCrop = asset.CropTarget is "target-area:first-item"
@@ -150,6 +158,11 @@ public static class CatalogValidator {
             && (!string.Equals(asset.Fixture, "framing-assistant", StringComparison.OrdinalIgnoreCase)
                 || asset.ViewType != "NINA.View.FramingAssistantView")) {
             throw new CatalogException($"Screenshot '{asset.Id}' uses a Framing Assistant crop target with fixture '{asset.Fixture}'.");
+        }
+        if (asset.CropTarget.StartsWith("simple:", StringComparison.Ordinal)
+            && (!string.Equals(asset.Fixture, "view", StringComparison.OrdinalIgnoreCase)
+                || asset.ViewType != "NINA.View.SimpleSequencer.SimpleSequenceView")) {
+            throw new CatalogException($"Screenshot '{asset.Id}' uses a Legacy Sequencer crop target with fixture '{asset.Fixture}'.");
         }
     }
 

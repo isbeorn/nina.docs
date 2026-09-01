@@ -37,6 +37,7 @@ using NINA.Sequencer.SequenceItem.Imaging;
 using NINA.Sequencer.SequenceItem.Telescope;
 using NINA.Sequencer.SequenceItem.Utility;
 using NINA.Sequencer.Trigger;
+using NINA.Sequencer.Trigger.Guider;
 using NINA.Sequencer.Utility.DateTimeProvider;
 using NINA.Plugin.Interfaces;
 using NINA.View.Sequencer;
@@ -179,7 +180,7 @@ public sealed class DocumentationApplicationHost {
             "NINA.ViewModel.DockManagerVM" => CreateDockManagerViewModel(viewModelType, asset.Id),
             "NINA.ViewModel.Sequencer.Sequence2VM" => CreateAdvancedSequenceViewModel(asset.Id),
             "NINA.ViewModel.SimpleSequenceVM" when viewTypeName == "NINA.View.SimpleSequencer.SimpleSequenceView"
-                => CreateSimpleSequenceViewModel(viewModelType, asset.Id),
+                => CreateSimpleSequenceViewModel(viewModelType, asset),
             "NINA.ViewModel.FramingAssistant.FramingAssistantVM" => CreateFramingAssistantViewModel(viewModelType, asset),
             "NINA.ViewModel.FramingAssistant.FramingPlateSolveParameter" => CreateFramingPlateSolveParameter(),
             "NINA.Equipment.Equipment.MyRotator.ManualRotator" => CreateManualRotator(),
@@ -357,7 +358,7 @@ public sealed class DocumentationApplicationHost {
             .FirstOrDefault(type => type.Name == expectedName);
     }
 
-    private static object CreateSimpleSequenceViewModel(Type viewModelType, string screenshotId) {
+    private static object CreateSimpleSequenceViewModel(Type viewModelType, ScreenshotAsset asset) {
         IProfileService profileService = GetProfileService();
         SequencerFactory factory = CreateSequencerFactory(profileService, Instance.GetSymbolBroker());
         ConstructorInfo constructor = viewModelType.GetConstructors(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic).Single();
@@ -367,7 +368,12 @@ public sealed class DocumentationApplicationHost {
                 : InertValue.Create(parameter.ParameterType)).ToArray();
         NINA.ViewModel.Interfaces.ISimpleSequenceVM viewModel =
             (NINA.ViewModel.Interfaces.ISimpleSequenceVM)constructor.Invoke(arguments);
-        WaitWithDispatcher(viewModel.Initialize(), screenshotId);
+        WaitWithDispatcher(viewModel.Initialize(), asset.Id);
+
+        if (asset.State is "legacy-simple-documentation" or "simple-to-advanced-legacy") {
+            ConfigureDocumentationSimpleSequence(viewModelType, viewModel, profileService, asset.State);
+            return viewModel;
+        }
 
         NINA.Astrometry.DeepSkyObject flats = new(
             "Flats",
@@ -403,6 +409,158 @@ public sealed class DocumentationApplicationHost {
         }
         viewModel.SelectedTarget = target;
         return viewModel;
+    }
+
+    private static void ConfigureDocumentationSimpleSequence(
+            Type viewModelType,
+            NINA.ViewModel.Interfaces.ISimpleSequenceVM viewModel,
+            IProfileService profileService,
+            string state) {
+        bool migrationExample = state == "simple-to-advanced-legacy";
+        List<NINA.Sequencer.Container.SimpleDSOContainer> targets = [];
+        if (migrationExample) {
+            targets.Add(AddDocumentationSimpleTarget(
+                viewModel,
+                profileService,
+                "M33 Pinwheel Galaxy",
+                1 + 33d / 60 + 51d / 3600,
+                30 + 39d / 60 + 36d / 3600,
+                0,
+                ["L", "R", "G", "B", "L", "R", "G", "B"],
+                40,
+                60,
+                139,
+                21,
+                4));
+        } else {
+            targets.Add(AddDocumentationSimpleTarget(
+                viewModel,
+                profileService,
+                "NGC 7380",
+                22 + 47d / 60 + 21d / 3600,
+                58 + 7d / 60 + 54d / 3600,
+                123,
+                ["Ha", "OIII", "SII"],
+                20,
+                180,
+                139,
+                21,
+                3));
+            targets.Add(AddDocumentationSimpleTarget(
+                viewModel,
+                profileService,
+                "Eagle Nebula",
+                18 + 18d / 60 + 48d / 3600,
+                -(13 + 49d / 60),
+                0,
+                ["L"],
+                10,
+                120,
+                50,
+                25,
+                2));
+        }
+
+        foreach (NINA.Sequencer.Container.SimpleDSOContainer target in targets) {
+            target.Delay = 0;
+            target.SlewToTarget = true;
+            target.CenterTarget = true;
+            target.RotateTarget = true;
+            target.StartGuiding = true;
+            target.AutoFocusOnStart = true;
+            target.AutoFocusOnFilterChange = true;
+            target.AutoFocusAfterSetTime = false;
+            target.AutoFocusSetTime = 30;
+            target.AutoFocusAfterSetExposures = false;
+            target.AutoFocusSetExposures = 10;
+            target.AutoFocusAfterTemperatureChange = false;
+            target.AutoFocusAfterTemperatureChangeAmount = 5;
+            target.AutoFocusAfterHFRChange = true;
+            target.AutoFocusAfterHFRChangeAmount = 10;
+        }
+
+        NINA.ViewModel.Sequencer.SimpleSequence.SimpleStartContainer startOptions =
+            (NINA.ViewModel.Sequencer.SimpleSequence.SimpleStartContainer)viewModel.Sequencer.MainContainer.Items[0];
+        NINA.ViewModel.Sequencer.SimpleSequence.SimpleEndContainer endOptions =
+            (NINA.ViewModel.Sequencer.SimpleSequence.SimpleEndContainer)viewModel.Sequencer.MainContainer.Items[2];
+        startOptions.CoolCameraAtSequenceStart = true;
+        startOptions.UnparkMountAtSequenceStart = true;
+        endOptions.WarmCamAtSequenceEnd = true;
+        endOptions.ParkMountAtSequenceEnd = true;
+        viewModelType.GetProperty("DoMeridianFlip")!.SetValue(viewModel, true);
+        viewModel.EstimatedDownloadTime = TimeSpan.FromSeconds(6.7365905);
+        ((NINA.Equipment.Interfaces.Mediator.ICameraConsumer)viewModel).UpdateDeviceInfo(CreateDocumentationCameraInfo());
+
+        System.Windows.Threading.DispatcherTimer? timer =
+            viewModelType.GetField("autoUpdateTimer", BindingFlags.Instance | BindingFlags.NonPublic)
+                ?.GetValue(viewModel) as System.Windows.Threading.DispatcherTimer;
+        timer?.Stop();
+        DateTime cursor = DocumentationFixedDateTime.Instance.Now;
+        foreach (NINA.Sequencer.Container.SimpleDSOContainer target in targets) {
+            TimeSpan duration = target.CalculateEstimatedRuntime();
+            target.EstimatedStartTime = cursor;
+            target.EstimatedEndTime = cursor.Add(duration);
+            target.EstimatedDuration = duration;
+            cursor = target.EstimatedEndTime;
+        }
+        SetNonPublicProperty(viewModel, "OverallStartTime", DocumentationFixedDateTime.Instance.Now);
+        SetNonPublicProperty(viewModel, "OverallEndTime", cursor);
+        SetNonPublicProperty(viewModel, "OverallDuration", cursor - DocumentationFixedDateTime.Instance.Now);
+        viewModelType.GetProperty("NighttimeData")!.SetValue(
+            viewModel,
+            DocumentationNighttimeCalculator.Instance.Calculate(DocumentationAstronomy.ReferenceDate));
+        viewModel.SelectedTarget = targets[0];
+    }
+
+    private static NINA.Sequencer.Container.SimpleDSOContainer AddDocumentationSimpleTarget(
+            NINA.ViewModel.Interfaces.ISimpleSequenceVM viewModel,
+            IProfileService profileService,
+            string name,
+            double rightAscensionHours,
+            double declinationDegrees,
+            double rotation,
+            IReadOnlyList<string> filterNames,
+            int exposureCount,
+            double exposureTime,
+            int gain,
+            int offset,
+            int ditherEvery) {
+        NINA.Astrometry.DeepSkyObject deepSkyObject = new(
+            name,
+            new NINA.Astrometry.Coordinates(
+                NINA.Astrometry.Angle.ByHours(rightAscensionHours),
+                NINA.Astrometry.Angle.ByDegree(declinationDegrees),
+                NINA.Astrometry.Epoch.J2000),
+            profileService.ActiveProfile.AstrometrySettings.Horizon) {
+            RotationPositionAngle = rotation
+        };
+        viewModel.AddTarget(deepSkyObject);
+        NINA.Sequencer.Container.SimpleDSOContainer target =
+            (NINA.Sequencer.Container.SimpleDSOContainer)viewModel.SelectedTarget;
+        target.Name = name;
+        target.Target.TargetName = name;
+        DocumentationAstronomy.AlignAltitudeChart(target);
+        target.Items.Clear();
+
+        foreach (string filterName in filterNames) {
+            NINA.Core.Model.Equipment.FilterInfo filter =
+                profileService.ActiveProfile.FilterWheelSettings.FilterWheelFilters
+                    .Single(candidate => string.Equals(candidate.Name, filterName, StringComparison.Ordinal));
+            NINA.ViewModel.Sequencer.SimpleSequence.SimpleExposure exposure =
+                (NINA.ViewModel.Sequencer.SimpleSequence.SimpleExposure)target.AddSimpleExposure();
+            ((NINA.Sequencer.SequenceItem.FilterWheel.SwitchFilter)exposure.GetSwitchFilter()).Filter = filter;
+            NINA.Sequencer.SequenceItem.Imaging.TakeExposure takeExposure =
+                (NINA.Sequencer.SequenceItem.Imaging.TakeExposure)exposure.GetTakeExposure();
+            takeExposure.ExposureTime = exposureTime;
+            takeExposure.ImageType = "LIGHT";
+            takeExposure.Gain = gain;
+            takeExposure.Offset = offset;
+            takeExposure.Binning = new NINA.Core.Model.Equipment.BinningMode(1, 1);
+            ((NINA.Sequencer.Conditions.LoopCondition)exposure.GetLoopCondition()).Iterations = exposureCount;
+            exposure.Dither = true;
+            ((DitherAfterExposures)exposure.GetDitherAfterExposures()).AfterExposures = ditherEvery;
+        }
+        return target;
     }
 
     private static object CreateSkyAtlasViewModel(Type viewModelType, string screenshotId) {

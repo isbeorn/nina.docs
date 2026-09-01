@@ -323,6 +323,34 @@ public class CatalogValidatorTests {
             Throws.Nothing);
     }
 
+    [TestCase("simple:set-options")]
+    [TestCase("simple:target-tabs")]
+    [TestCase("simple:target-general")]
+    [TestCase("simple:target-information")]
+    [TestCase("simple:target-options")]
+    [TestCase("simple:autofocus")]
+    [TestCase("simple:imaging-details")]
+    [TestCase("simple:transform-button")]
+    public void Validate_AcceptsProductionSimpleSequencerCrops(string cropTarget) {
+        ScreenshotAsset asset = new() {
+            Id = cropTarget.Replace(':', '-'),
+            Classification = ScreenshotClassification.NinaUi,
+            Output = $"docs/images/generated/sequencer/simple/{cropTarget.Replace(':', '-')}.png",
+            Fixture = "view",
+            State = "legacy-simple-documentation",
+            ViewType = "NINA.View.SimpleSequencer.SimpleSequenceView",
+            Width = 900,
+            Height = 200,
+            RenderWidth = 1920,
+            RenderHeight = 1080,
+            CropTarget = cropTarget
+        };
+
+        Assert.That(
+            () => CatalogValidator.Validate(Catalog(asset), root, new FixtureRegistry()),
+            Throws.Nothing);
+    }
+
     [Test]
     public void Validate_AcceptsAllTargetAreaItemsCropForSequencerFixture() {
         ScreenshotAsset asset = new() {
