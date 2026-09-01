@@ -379,6 +379,7 @@ public sealed class DocumentationApplicationHost {
         viewModel.AddTarget(flats);
         NINA.Sequencer.Container.SimpleDSOContainer target =
             (NINA.Sequencer.Container.SimpleDSOContainer)viewModel.SelectedTarget;
+        DocumentationAstronomy.AlignAltitudeChart(target);
         target.Name = "Flats";
         target.Target.TargetName = "Flats";
         target.Items.Clear();
@@ -409,7 +410,7 @@ public sealed class DocumentationApplicationHost {
         BitmapSource sample = LoadDocumentationSampleImage(screenshotId);
         Func<NINA.Astrometry.SkyObjectBase, Task<BitmapSource>> imageFactory = _ => Task.FromResult(sample);
         NINA.Profile.Profile profile = GetActiveProfile();
-        DateTime referenceDate = new(2026, 8, 31, 12, 0, 0, DateTimeKind.Local);
+        DateTime referenceDate = DocumentationAstronomy.ReferenceDate;
 
         NINA.Astrometry.DeepSkyObject[] objects = [
             CreateDocumentationDeepSkyObject("M 51", "Whirlpool Galaxy", 13.497, 47.195, "GALAXY", "CVN", 8.4, 11.2, imageFactory, profile, referenceDate),
@@ -448,6 +449,14 @@ public sealed class DocumentationApplicationHost {
                 $"Screenshot '{asset.Id}' could not construct NINA's production FramingAssistantVM: {ex.GetBaseException().Message}");
         }
 
+        object timeContext = viewModelType.GetProperty("TimeContext")!.GetValue(viewModel)!;
+        DateTime fixedNow = DocumentationFixedDateTime.Instance.Now;
+        SetProperty(timeContext, "Year", fixedNow.Year);
+        SetProperty(timeContext, "Month", fixedNow.Month);
+        SetProperty(timeContext, "Day", fixedNow.Day);
+        SetProperty(timeContext, "Hour", fixedNow.Hour);
+        SetProperty(timeContext, "Minute", fixedNow.Minute);
+
         NINA.Profile.Profile profile = GetActiveProfile();
         NINA.Astrometry.Coordinates coordinates = new(
             NINA.Astrometry.Angle.ByHours(0.712),
@@ -459,9 +468,9 @@ public sealed class DocumentationApplicationHost {
             profile.AstrometrySettings.Horizon);
         target.RotationPositionAngle = 30;
         target.SetDateAndPosition(
-            new DateTime(2026, 8, 31, 12, 0, 0, DateTimeKind.Local),
-            profile.AstrometrySettings.Latitude,
-            profile.AstrometrySettings.Longitude);
+            DocumentationAstronomy.ReferenceDate,
+            DocumentationAstronomy.Latitude,
+            DocumentationAstronomy.Longitude);
         viewModelType.GetProperty("DSO")!.SetValue(viewModel, target);
         deepSkyObjectSearchType.GetMethod("SetTargetNameWithoutSearch")!
             .Invoke(deepSkyObjectSearch, [target.Name]);
@@ -1228,6 +1237,7 @@ public sealed class DocumentationApplicationHost {
         DeepSkyObjectContainer target = viewModel.SequencerFactory.GetContainer<DeepSkyObjectContainer>();
         target.Name = "Basic Sequence Target";
         target.Target.TargetName = "Deep Sky Target";
+        DocumentationAstronomy.AlignAltitudeChart(target);
         target.Add(viewModel.SequencerFactory.GetItem<TakeExposure>());
 
         SequentialContainer end = viewModel.SequencerFactory.GetContainer<SequentialContainer>();
@@ -1289,6 +1299,7 @@ public sealed class DocumentationApplicationHost {
             NINA.Astrometry.Angle.ByDegree(declinationDegrees),
             NINA.Astrometry.Epoch.J2000);
         target.Target.PositionAngle = 0;
+        DocumentationAstronomy.AlignAltitudeChart(target);
         return target;
     }
 
@@ -1850,10 +1861,10 @@ public sealed class DocumentationApplicationHost {
 
         public NINA.Astrometry.NighttimeData Calculate(DateTime? selectedDate = null) {
             DateTime date = selectedDate ?? new DateTime(2026, 8, 31, 22, 0, 0, DateTimeKind.Local);
-            DateTime referenceDate = new(2026, 8, 31, 12, 0, 0, DateTimeKind.Local);
-            const double latitude = 52.52;
-            const double longitude = 13.405;
-            const double elevation = 34;
+            DateTime referenceDate = DocumentationAstronomy.ReferenceDate;
+            const double latitude = DocumentationAstronomy.Latitude;
+            const double longitude = DocumentationAstronomy.Longitude;
+            const double elevation = DocumentationAstronomy.Elevation;
             NINA.Astrometry.ObserverInfo observer = new() {
                 Latitude = latitude,
                 Longitude = longitude,

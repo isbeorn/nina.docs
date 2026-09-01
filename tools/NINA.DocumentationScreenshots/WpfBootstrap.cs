@@ -75,6 +75,9 @@ public static class WpfBootstrap {
         profile.CameraSettings.USBLimit = 50;
         profile.CameraSettings.PixelSize = 3.76;
         profile.TelescopeSettings.FocalLength = 800;
+        profile.AstrometrySettings.Latitude = DocumentationAstronomy.Latitude;
+        profile.AstrometrySettings.Longitude = DocumentationAstronomy.Longitude;
+        profile.AstrometrySettings.Elevation = DocumentationAstronomy.Elevation;
         profile.ColorSchemaSettings.ColorSchema = profile.ColorSchemaSettings.ColorSchemas.Items
             .Single(schema => string.Equals(schema.Name, "Slate", StringComparison.Ordinal));
         FilterInfo[] filters = [

@@ -71,6 +71,9 @@ public class FixtureRegistryTests {
             Assert.That(profile.CameraSettings.USBLimit, Is.EqualTo(50));
             Assert.That(profile.CameraSettings.PixelSize, Is.EqualTo(3.76d));
             Assert.That(profile.TelescopeSettings.FocalLength, Is.EqualTo(800));
+            Assert.That(profile.AstrometrySettings.Latitude, Is.EqualTo(52.52d));
+            Assert.That(profile.AstrometrySettings.Longitude, Is.EqualTo(13.405d));
+            Assert.That(profile.AstrometrySettings.Elevation, Is.EqualTo(34d));
             Assert.That(profile.GuiderSettings.PHD2HistorySize, Is.EqualTo(100));
             Assert.That(profileService.Profiles.Select(item => item.Id), Does.Contain(profile.Id));
             Assert.That(profileService.Profiles.Single(item => item.Id == profile.Id).Name,
@@ -422,6 +425,67 @@ public class FixtureRegistryTests {
             Assert.That(target.Target.DeepSkyObject.MaxAltitude.Y, Is.EqualTo(68.1).Within(0.5));
             Assert.That(target.Target.DeepSkyObject.DoesTransitSouth, Is.True);
         });
+    }
+
+    [TestCase("sequencer-dso-set")]
+    [TestCase("sequencer-add-target-to-target-tab")]
+    [TestCase("sequencer-apply-target")]
+    [TestCase("sequencer-drop-target-to-tab")]
+    [TestCase("simple-to-advanced-target-area")]
+    public void AdvancedSequencer_ExpandedTargetAltitudeChartUsesTheNighttimeReferenceDate(string state) {
+        FrameworkElement fixture = new FixtureRegistry().Create(new ScreenshotAsset {
+            Id = state,
+            Classification = ScreenshotClassification.NinaUi,
+            Output = $"docs/images/generated/sequencer/{state}.png",
+            Width = 1920,
+            Height = 1080,
+            Fixture = "sequencer",
+            State = state,
+            ViewType = "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView"
+        });
+        NINA.ViewModel.Sequencer.ISequence2VM viewModel =
+            (NINA.ViewModel.Sequencer.ISequence2VM)fixture.DataContext;
+        NINA.Sequencer.Container.ISequenceContainer targetArea =
+            (NINA.Sequencer.Container.ISequenceContainer)viewModel.Sequencer.MainContainer.Items[1];
+        NINA.Sequencer.Container.DeepSkyObjectContainer target = targetArea.Items
+            .OfType<NINA.Sequencer.Container.DeepSkyObjectContainer>()
+            .Single();
+
+        Assert.That(SpinWait.SpinUntil(
+            () => target.NighttimeData is not null,
+            TimeSpan.FromSeconds(2)), Is.True, "Nighttime data did not initialize.");
+        Assert.That(
+            ((NINA.Astrometry.DeepSkyObject)target.Target.DeepSkyObject).ReferenceDate,
+            Is.EqualTo(target.NighttimeData.ReferenceDate));
+    }
+
+    [Test]
+    public void AdvancedSequencer_TargetSidebarAltitudeChartsUseTheNighttimeReferenceDate() {
+        FrameworkElement fixture = new FixtureRegistry().Create(new ScreenshotAsset {
+            Id = "sequencer-add-target",
+            Classification = ScreenshotClassification.NinaUi,
+            Output = "docs/images/generated/sequencer/Sequencer_AddTarget.png",
+            Width = 1920,
+            Height = 1000,
+            Fixture = "sequencer",
+            State = "sequencer-add-target",
+            ViewType = "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView"
+        });
+        object viewModel = fixture.DataContext;
+        NINA.Sequencer.TargetController targetController =
+            (NINA.Sequencer.TargetController)viewModel.GetType().GetProperty("TargetController")!.GetValue(viewModel)!;
+
+        foreach (NINA.Sequencer.TargetSequenceContainer savedTarget in targetController.Targets) {
+            NINA.Sequencer.Container.DeepSkyObjectContainer target =
+                (NINA.Sequencer.Container.DeepSkyObjectContainer)savedTarget.Container;
+            Assert.That(SpinWait.SpinUntil(
+                () => target.NighttimeData is not null,
+                TimeSpan.FromSeconds(2)), Is.True, $"Nighttime data did not initialize for {target.Name}.");
+            Assert.That(
+                ((NINA.Astrometry.DeepSkyObject)target.Target.DeepSkyObject).ReferenceDate,
+                Is.EqualTo(target.NighttimeData.ReferenceDate),
+                target.Name);
+        }
     }
 
     [TestCase("simple-to-advanced-start-area", 0, 2, 1)]
@@ -888,7 +952,13 @@ public class FixtureRegistryTests {
             Type viewModelType = viewModel.GetType();
             object imageParameter = viewModelType.GetProperty("ImageParameter")!.GetValue(viewModel)!;
             BitmapSource image = (BitmapSource)imageParameter.GetType().GetProperty("Image")!.GetValue(imageParameter)!;
-            object dso = viewModelType.GetProperty("DSO")!.GetValue(viewModel)!;
+            NINA.Astrometry.DeepSkyObject dso =
+                (NINA.Astrometry.DeepSkyObject)viewModelType.GetProperty("DSO")!.GetValue(viewModel)!;
+            Assert.That(SpinWait.SpinUntil(
+                () => viewModelType.GetProperty("NighttimeData")!.GetValue(viewModel) is not null,
+                TimeSpan.FromSeconds(2)), Is.True, "Framing Assistant nighttime data did not initialize.");
+            NINA.Astrometry.NighttimeData nighttimeData =
+                (NINA.Astrometry.NighttimeData)viewModelType.GetProperty("NighttimeData")!.GetValue(viewModel)!;
             System.Collections.ICollection rectangles =
                 (System.Collections.ICollection)viewModelType.GetProperty("ProjectedCameraRectangles")!.GetValue(viewModel)!;
 
@@ -897,7 +967,8 @@ public class FixtureRegistryTests {
                 Assert.That(viewModelType.FullName, Is.EqualTo("NINA.ViewModel.FramingAssistant.FramingAssistantVM"));
                 Assert.That(image.PixelWidth, Is.GreaterThan(500));
                 Assert.That(image.PixelHeight, Is.GreaterThan(300));
-                Assert.That(dso.GetType().GetProperty("Name")!.GetValue(dso), Is.EqualTo("M 31 Andromeda Galaxy"));
+                Assert.That(dso.Name, Is.EqualTo("M 31 Andromeda Galaxy"));
+                Assert.That(dso.ReferenceDate, Is.EqualTo(nighttimeData.ReferenceDate));
                 Assert.That(viewModelType.GetProperty("CameraWidth")!.GetValue(viewModel), Is.EqualTo(4656));
                 Assert.That(viewModelType.GetProperty("CameraHeight")!.GetValue(viewModel), Is.EqualTo(3520));
                 Assert.That(viewModelType.GetProperty("RectangleCalculated")!.GetValue(viewModel), Is.True);

@@ -41,9 +41,6 @@ namespace NINA.DocumentationScreenshots;
 /// It changes model data only and does not create screenshot-specific visual elements.
 /// </summary>
 internal static class SequencerFixtureState {
-    private const double DocumentationLatitude = 52.52;
-    private const double DocumentationLongitude = 13.405;
-
     public static void Apply(ISequence2VM viewModel, ScreenshotAsset asset, ISymbolBroker symbolBroker) {
         string state = Normalize(asset.State + " " + asset.Output);
         if (state.Contains("sequencerflow", StringComparison.Ordinal)) {
@@ -291,9 +288,6 @@ internal static class SequencerFixtureState {
         DeepSkyObjectContainer target = NewDeepSkyObject(viewModel);
         target.Name = "M33 Pinwheel Galaxy";
         target.Target.TargetName = "M33 Pinwheel Galaxy";
-        target.Target.SetPosition(
-            NINA.Astrometry.Angle.ByDegree(DocumentationLatitude),
-            NINA.Astrometry.Angle.ByDegree(DocumentationLongitude));
         target.Add(NewCollapsedContainer(viewModel, "Target preparation instructions"));
         target.Add(NewCollapsedContainer(viewModel, "Target imaging instructions"));
         target.Add(NewCollapsedContainer(viewModel, "Target closure instructions"));
@@ -529,6 +523,7 @@ internal static class SequencerFixtureState {
             NINA.Astrometry.Angle.ByDegree(30.66),
             NINA.Astrometry.Epoch.J2000);
         target.Target.PositionAngle = 0;
+        DocumentationAstronomy.AlignAltitudeChart(target);
         return target;
     }
 
