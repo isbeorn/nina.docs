@@ -89,43 +89,98 @@
     },
     {
       "id": "docs-images-advanced-camerasimulator-directory-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/advanced/camerasimulator/directory.png",
-      "width": 524,
-      "height": 455,
-      "exclusionReason": "This selective NINA workflow, annotation or hardware-specific state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting a guessed or incomplete view."
+      "classification": "nina-ui",
+      "output": "docs/images/generated/advanced/camerasimulator/directory.png",
+      "width": 600,
+      "height": 130,
+      "fixture": "view",
+      "state": "camera-simulator-directory",
+      "viewType": "NINA.WPF.Base.Model.Equipment.MyCamera.Simulator.SetupView",
+      "renderWidth": 600,
+      "renderHeight": 280,
+      "crop": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 1.0,
+        "height": 0.4642857142857143
+      },
+      "displayName": "Camera simulator directory source"
     },
     {
       "id": "docs-images-advanced-camerasimulator-image-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/advanced/camerasimulator/image.png",
-      "width": 723,
-      "height": 455,
-      "exclusionReason": "This selective NINA workflow, annotation or hardware-specific state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting a guessed or incomplete view."
+      "classification": "nina-ui",
+      "output": "docs/images/generated/advanced/camerasimulator/image.png",
+      "width": 600,
+      "height": 170,
+      "fixture": "view",
+      "state": "camera-simulator-image",
+      "viewType": "NINA.WPF.Base.Model.Equipment.MyCamera.Simulator.SetupView",
+      "renderWidth": 600,
+      "renderHeight": 330,
+      "crop": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 1.0,
+        "height": 0.5151515151515151
+      },
+      "displayName": "Camera simulator image source"
     },
     {
       "id": "docs-images-advanced-camerasimulator-random-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/advanced/camerasimulator/random.png",
-      "width": 528,
-      "height": 450,
-      "exclusionReason": "This selective NINA workflow, annotation or hardware-specific state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting a guessed or incomplete view."
+      "classification": "nina-ui",
+      "output": "docs/images/generated/advanced/camerasimulator/random.png",
+      "width": 600,
+      "height": 115,
+      "fixture": "view",
+      "state": "camera-simulator-random",
+      "viewType": "NINA.WPF.Base.Model.Equipment.MyCamera.Simulator.SetupView",
+      "renderWidth": 600,
+      "renderHeight": 210,
+      "crop": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 1.0,
+        "height": 0.5476190476190477
+      },
+      "displayName": "Camera simulator random source"
     },
     {
       "id": "docs-images-advanced-camerasimulator-selection-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/advanced/camerasimulator/selection.png",
-      "width": 444,
-      "height": 341,
-      "exclusionReason": "This selective NINA workflow, annotation or hardware-specific state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting a guessed or incomplete view."
+      "classification": "nina-ui",
+      "output": "docs/images/generated/advanced/camerasimulator/selection.png",
+      "width": 450,
+      "height": 55,
+      "fixture": "view",
+      "state": "camera-simulator-selection",
+      "viewType": "NINA.View.Equipment.CameraView",
+      "renderWidth": 900,
+      "renderHeight": 600,
+      "crop": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 0.5,
+        "height": 0.09166666666666666
+      },
+      "displayName": "Camera simulator selection"
     },
     {
       "id": "docs-images-advanced-camerasimulator-skysurvey-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/advanced/camerasimulator/skysurvey.png",
-      "width": 520,
-      "height": 449,
-      "exclusionReason": "This selective NINA workflow, annotation or hardware-specific state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting a guessed or incomplete view."
+      "classification": "nina-ui",
+      "output": "docs/images/generated/advanced/camerasimulator/skysurvey.png",
+      "width": 600,
+      "height": 240,
+      "fixture": "view",
+      "state": "camera-simulator-sky-survey",
+      "viewType": "NINA.WPF.Base.Model.Equipment.MyCamera.Simulator.SetupView",
+      "renderWidth": 600,
+      "renderHeight": 440,
+      "crop": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 1.0,
+        "height": 0.5454545454545454
+      },
+      "displayName": "Camera simulator sky survey source"
     },
     {
       "id": "docs-images-advanced-dialgauge-png",

@@ -118,6 +118,15 @@ public sealed class DocumentationApplicationHost {
         }
 
         FrameworkElement view = InstantiateProductionView(viewTypeName, asset.Id);
+        if (viewTypeName == "NINA.WPF.Base.Model.Equipment.MyCamera.Simulator.SetupView") {
+            view.DataContext = CreateCameraSimulator(asset.State, asset.Id);
+            return view;
+        }
+        if (viewTypeName == "NINA.View.Equipment.CameraView"
+                && asset.State?.Equals("camera-simulator-selection", StringComparison.OrdinalIgnoreCase) == true) {
+            view.DataContext = CreateCameraSimulatorViewModel(asset.Id);
+            return view;
+        }
         foreach (NINA.WPF.Base.View.BrowserPopupButton helpButton in
             EnumerateLogicalDescendants<NINA.WPF.Base.View.BrowserPopupButton>(view)) {
             ClearBrowserPopupSizingBindings(helpButton);
@@ -180,6 +189,70 @@ public sealed class DocumentationApplicationHost {
         PopulateProductionViewModel(viewModel);
         view.DataContext = viewModel;
         return view;
+    }
+
+    private static NINA.WPF.Base.Model.Equipment.MyCamera.Simulator.SimulatorCamera CreateCameraSimulator(
+            string? state,
+            string screenshotId) {
+        NINA.WPF.Base.Model.Equipment.MyCamera.Simulator.SimulatorCamera simulator = new(
+            GetProfileService(),
+            (NINA.Equipment.Interfaces.Mediator.ITelescopeMediator)InertValue.Create(
+                typeof(NINA.Equipment.Interfaces.Mediator.ITelescopeMediator))!,
+            (NINA.Image.Interfaces.IExposureDataFactory)InertValue.Create(
+                typeof(NINA.Image.Interfaces.IExposureDataFactory))!,
+            (NINA.Image.Interfaces.IImageDataFactory)InertValue.Create(
+                typeof(NINA.Image.Interfaces.IImageDataFactory))!);
+
+        simulator.Settings.RandomSettings.ImageWidth = 640;
+        simulator.Settings.RandomSettings.ImageHeight = 480;
+        simulator.Settings.RandomSettings.ImageMean = 5000;
+        simulator.Settings.RandomSettings.ImageStdDev = 100;
+        simulator.Settings.ImageSettings.IsBayered = true;
+        simulator.Settings.ImageSettings.ImagePath = @"C:\NINA\Simulator\M42.xisf";
+        simulator.Settings.SkySurveySettings.FieldOfView = 1;
+        simulator.Settings.SkySurveySettings.RAError = 45;
+        simulator.Settings.SkySurveySettings.DecError = -30;
+        simulator.Settings.SkySurveySettings.AzShift = 60;
+        simulator.Settings.SkySurveySettings.AltShift = -15;
+        simulator.Settings.DirectorySettings.DirectoryPath = @"C:\NINA\Simulator\Images";
+        simulator.Settings.Type = state?.ToLowerInvariant() switch {
+            "camera-simulator-random" => NINA.Core.Enum.CameraType.RANDOM,
+            "camera-simulator-image" => NINA.Core.Enum.CameraType.IMAGE,
+            "camera-simulator-sky-survey" => NINA.Core.Enum.CameraType.SKYSURVEY,
+            "camera-simulator-directory" => NINA.Core.Enum.CameraType.DIRECTORY,
+            _ => throw new CatalogException(
+                $"Screenshot '{screenshotId}' has unknown camera simulator state '{state}'.")
+        };
+        return simulator;
+    }
+
+    private static NINA.WPF.Base.ViewModel.Equipment.Camera.CameraVM CreateCameraSimulatorViewModel(
+            string screenshotId) {
+        NINA.WPF.Base.Model.Equipment.MyCamera.Simulator.SimulatorCamera simulator =
+            CreateCameraSimulator("camera-simulator-random", screenshotId);
+        DocumentationCameraChooserVM chooser = new(
+            GetProfileService(),
+            simulator,
+            (NINA.Equipment.Interfaces.ViewModel.IEquipmentProviders<NINA.Equipment.Interfaces.ICamera>)
+                InertValue.Create(typeof(NINA.Equipment.Interfaces.ViewModel.IEquipmentProviders<NINA.Equipment.Interfaces.ICamera>))!);
+        NINA.WPF.Base.ViewModel.Equipment.Camera.CameraVM camera = new(
+            GetProfileService(),
+            (NINA.Equipment.Interfaces.Mediator.ICameraMediator)InertValue.Create(
+                typeof(NINA.Equipment.Interfaces.Mediator.ICameraMediator))!,
+            (NINA.Equipment.Interfaces.Mediator.IFilterWheelMediator)InertValue.Create(
+                typeof(NINA.Equipment.Interfaces.Mediator.IFilterWheelMediator))!,
+            (NINA.WPF.Base.Interfaces.Mediator.IApplicationStatusMediator)InertValue.Create(
+                typeof(NINA.WPF.Base.Interfaces.Mediator.IApplicationStatusMediator))!,
+            chooser);
+        SetNonPublicProperty(camera, nameof(camera.Cam), simulator);
+        camera.CameraInfo = new NINA.Equipment.Equipment.MyCamera.CameraInfo {
+            Connected = false,
+            Name = simulator.Name,
+            Description = simulator.Description,
+            DriverVersion = simulator.DriverVersion,
+            SensorType = simulator.SensorType
+        };
+        return camera;
     }
 
     private object CreateDockManagerViewModel(Type dockManagerViewModelType, string screenshotId) {

@@ -776,6 +776,88 @@ public class FixtureRegistryTests {
         });
     }
 
+    [TestCase("camera-simulator-random", NINA.Core.Enum.CameraType.RANDOM, "Random Image Generation")]
+    [TestCase("camera-simulator-image", NINA.Core.Enum.CameraType.IMAGE, "Load Image")]
+    [TestCase("camera-simulator-sky-survey", NINA.Core.Enum.CameraType.SKYSURVEY, "Sky Survey")]
+    [TestCase("camera-simulator-directory", NINA.Core.Enum.CameraType.DIRECTORY, "Load Directory")]
+    public void CameraSimulatorSetup_UsesTheRealProductionViewAndSelectedSource(
+            string state,
+            NINA.Core.Enum.CameraType expectedType,
+            string expectedPanel) {
+        ScreenshotAsset asset = new() {
+            Id = state,
+            Classification = ScreenshotClassification.NinaUi,
+            Output = $"docs/images/generated/advanced/camerasimulator/{state}.png",
+            Fixture = "view",
+            State = state,
+            ViewType = "NINA.WPF.Base.Model.Equipment.MyCamera.Simulator.SetupView",
+            Width = 800,
+            Height = 450
+        };
+
+        FrameworkElement fixture = new FixtureRegistry().Create(asset);
+        fixture.Measure(new Size(asset.Width, asset.Height));
+        fixture.Arrange(new Rect(0, 0, asset.Width, asset.Height));
+        fixture.UpdateLayout();
+
+        NINA.WPF.Base.Model.Equipment.MyCamera.Simulator.SimulatorCamera simulator =
+            (NINA.WPF.Base.Model.Equipment.MyCamera.Simulator.SimulatorCamera)fixture.DataContext;
+        ComboBox sourceSelector = FindDescendants(fixture).OfType<ComboBox>()
+            .Single(comboBox => comboBox.Name == "PART_Type");
+        GroupBox selectedPanel = FindDescendants(fixture).OfType<GroupBox>()
+            .Single(groupBox => Equals(groupBox.Header, expectedPanel));
+        FrameworkElement selectedPanelContainer = (FrameworkElement)VisualTreeHelper.GetParent(selectedPanel);
+
+        Assert.Multiple(() => {
+            Assert.That(fixture, Is.TypeOf<NINA.WPF.Base.Model.Equipment.MyCamera.Simulator.SetupView>());
+            Assert.That(simulator.Settings.Type, Is.EqualTo(expectedType));
+            Assert.That(sourceSelector.SelectedItem, Is.EqualTo(expectedType));
+            Assert.That(selectedPanelContainer.Visibility, Is.EqualTo(Visibility.Visible));
+            Assert.That(FindDescendants(fixture).OfType<GroupBox>()
+                .Where(groupBox => !Equals(groupBox.Header, expectedPanel))
+                .Select(groupBox => ((FrameworkElement)VisualTreeHelper.GetParent(groupBox)).Visibility),
+                Is.All.EqualTo(Visibility.Collapsed));
+            Assert.That(simulator.Settings.ImageSettings.ImagePath, Is.EqualTo(@"C:\NINA\Simulator\M42.xisf"));
+            Assert.That(simulator.Settings.DirectorySettings.DirectoryPath, Is.EqualTo(@"C:\NINA\Simulator\Images"));
+        });
+    }
+
+    [Test]
+    public void CameraSimulatorSelection_UsesTheRealCameraViewAndSimulatorDevice() {
+        ScreenshotAsset asset = new() {
+            Id = "camera-simulator-selection",
+            Classification = ScreenshotClassification.NinaUi,
+            Output = "docs/images/generated/advanced/camerasimulator/selection.png",
+            Fixture = "view",
+            State = "camera-simulator-selection",
+            ViewType = "NINA.View.Equipment.CameraView",
+            Width = 800,
+            Height = 600
+        };
+
+        FrameworkElement fixture = new FixtureRegistry().Create(asset);
+        fixture.Measure(new Size(asset.Width, asset.Height));
+        fixture.Arrange(new Rect(0, 0, asset.Width, asset.Height));
+        fixture.UpdateLayout();
+
+        NINA.WPF.Base.ViewModel.Equipment.Camera.CameraVM camera =
+            (NINA.WPF.Base.ViewModel.Equipment.Camera.CameraVM)fixture.DataContext;
+        NINA.WPF.Base.Model.Equipment.MyCamera.Simulator.SimulatorCamera simulator =
+            (NINA.WPF.Base.Model.Equipment.MyCamera.Simulator.SimulatorCamera)camera.DeviceChooserVM.SelectedDevice;
+        NINA.View.Equipment.Connector connector = FindDescendants(fixture)
+            .OfType<NINA.View.Equipment.Connector>()
+            .Single();
+        ComboBox sourceSelector = FindDescendants(connector).OfType<ComboBox>().Single();
+
+        Assert.Multiple(() => {
+            Assert.That(fixture, Is.TypeOf<NINA.View.Equipment.CameraView>());
+            Assert.That(simulator.Name, Is.EqualTo("N.I.N.A. Simulator Camera"));
+            Assert.That(simulator.HasSetupDialog, Is.True);
+            Assert.That(camera.DeviceChooserVM.Devices, Does.Contain(simulator));
+            Assert.That(sourceSelector.SelectedItem, Is.SameAs(simulator));
+        });
+    }
+
     [Test]
     public void GuiderView_UsesTheProductionPhd2DeviceAndNonRepeatingGuideData() {
         ScreenshotAsset asset = new() {
