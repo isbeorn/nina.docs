@@ -47,6 +47,34 @@ If the previous instruction is an instruction set that is not collapsed, the ins
 Moves the instruction one row below. If it is already the last instruction of an instruction set, it will move to the parent instruction set below the current instruction set instead.
 If the next instruction is an instruction set that is not collapsed, the instruction will move to the top of that instruction set
 
+## Connect
+Connect or disconnect equipment selected in the active profile. These instructions are useful when a sequence must recover from a disconnected device or deliberately change profiles without operator input.
+
+### Connect All Equipment
+![Connect All Equipment](../../images/sequencer/instructions/connect_all.png)
+
+Connects every device saved in the active profile.
+
+### Connect Equipment
+![Connect Equipment](../../images/sequencer/instructions/connect_equipment.png)
+
+Connects the saved device for the selected equipment category.
+
+### Disconnect All Equipment
+![Disconnect All Equipment](../../images/sequencer/instructions/disconnect_all.png)
+
+Disconnects all currently connected devices.
+
+### Disconnect Equipment
+![Disconnect Equipment](../../images/sequencer/instructions/disconnect_equipment.png)
+
+Disconnects the selected equipment category.
+
+### Switch Profile
+![Switch Profile](../../images/sequencer/instructions/switch_profile.png)
+
+Disconnects the current equipment, switches to the selected profile and connects the equipment saved in that profile. Put this instruction where no exposure or other device operation can be active.
+
 ## Camera
 Control basic functions of a [Camera](../../tabs/equipment/camera.md). Each instruction in this category requires at least a Camera to be connected.
 
@@ -71,6 +99,11 @@ This instruction will turn on or turn off the camera dew heater
 ![Set Readout Mode](../../images/sequencer/instructions/camera_readout.png)  
 Set your camera to a specific readout mode. The number indicates the index of the readout mode from the camera dropdown - starting with 0.  
 *Requires a camera with settable readout modes*
+
+### Set USB Limit
+![Set USB Limit](../../images/sequencer/instructions/camera_usblimit.png)
+
+Sets the camera's USB transfer limit. The available range comes from the connected camera driver and the instruction is invalid when the driver does not expose this control.
 
 ### Take Exposure
 ![Take Exposure](../../images/sequencer/instructions/camera_exposure.png)  
@@ -110,6 +143,12 @@ Enables the automatic background synchronization of the telescope and the dome
 Disables the automatic background synchronization of the telescope and the dome  
 *Requires a telescope to be connected*
 
+### Find Dome Home
+![Find Dome Home](../../images/sequencer/instructions/dome_findhome.png)
+
+Rotates the dome to its home position.
+*Requires a dome driver that is capable of finding home*
+
 ### Open Dome Shutter
 ![Open Dome Shutter](../../images/sequencer/instructions/dome_open.png)  
 Opens the dome shutter  
@@ -138,6 +177,21 @@ Switches the filter wheel filter to the specified filter. Like all filter wheel 
 
 ## Flat Panel
 Control basic functions of a [Flat Panel](../../tabs/equipment/flatpanel.md). Each instruction in this category requires at least a Flat Panel to be connected.
+
+### Auto Brightness Flat
+![Auto Brightness Flat](../../images/sequencer/instructions/flat_autobrightness.png)
+
+Finds a panel brightness that reaches the configured target mean at a fixed exposure time, then captures the requested flats. Configure the permitted brightness range so the search cannot command values outside the useful range of the panel.
+
+### Auto Exposure Flat
+![Auto Exposure Flat](../../images/sequencer/instructions/flat_autoexposure.png)
+
+Finds an exposure time that reaches the configured target mean at a fixed panel brightness, then captures the requested flats. The minimum and maximum exposure settings bound the search.
+
+### Twilight Sky Flats
+![Twilight Sky Flats](../../images/sequencer/instructions/flat_sky.png)
+
+Captures sky flats while adjusting the exposure time after each image to follow changing twilight brightness. It can dither between exposures when a connected, unparked mount supports pulse guiding.
 
 ### Close Flat Panel Cover
 ![Close Flat Panel Cover](../../images/sequencer/instructions/flat_close.png)  
@@ -256,7 +310,7 @@ Moves the mount to the park position. A mount that is parked will not accept sle
 
 ### Set Tracking
 ![Park Scope](../../images/sequencer/instructions/telescope_settracking.png)  
-Enables mount tracking to the specified tracking rate.
+Sets the mount tracking mode to Sidereal, King, Solar, Lunar or Stopped. The selected mode must be reported as supported by the connected mount driver.
 
 ### Slew and center
 ![Slew and center](../../images/sequencer/instructions/telescope_slewcenter.png)
@@ -287,7 +341,6 @@ Uses the current mount position to solve the position and sync it based on the p
 ### Unpark Scope
 ![Unpark Scope](../../images/sequencer/instructions/telescope_unpark.png)  
 Unparks the mount so it is able to receive slew commands.  
-*Requires a mount driver that is capable of parking*
 
 ## Utility
 The instructions in this category are utility commands that don't necessarily depend on any equipment and have useful tools and helpers to improve the sequence.
@@ -299,6 +352,16 @@ This instruction will not execute anything. It is purely there to have custom te
 ### External Script
 ![External Script](../../images/sequencer/instructions/utility_script.png)  
 An instruction to start a custom executable file from your file system. Click on the three dots to browse through the file explorer and set a file path.
+
+### Load Imaging Layout
+![Load Imaging Layout](../../images/sequencer/instructions/utility_loadlayout.png)
+
+Loads an Imaging workspace layout from a saved dock configuration file. The selected file must be an existing Imaging layout backup.
+
+### Save Sequence
+![Save Sequence](../../images/sequencer/instructions/utility_savesequence.png)
+
+Saves the currently running sequence to the specified file path. This is useful when a sequence modifies runtime state that should be preserved for a later session.
 
 ### Message Box
 ![Message Box](../../images/sequencer/instructions/utility_box.png)  

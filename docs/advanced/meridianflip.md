@@ -22,7 +22,11 @@ Meridian flips prevent that your telescope and camera bump into the mount and do
 N.I.N.A. has built-in functionality for the automated flip, even if your mount does not support it in firmware.
 After a flip, N.I.N.A. verifies that it is still imaging the desired area of sky through [Plate Solving](platesolving.md), and the imaging session continues.
 
-To enable the Automated Meridian Flip you need to enable it in the legacy sequence target set options or when using the advanced sequencer, the meridian flip trigger needs to be added to the sequence. For customizing the behavior of the meridian flip, the [meridian flip settings](../tabs/options/imaging.md#auto-meridian-flip) can be customized.
+In the Simple Sequencer, enable meridian flips in the sequence options. In the Advanced Sequencer, add either **Meridian Flip** or **Programmable Meridian Flip** to a trigger container that covers the imaging instructions. The timing and normal post-flip workflow use the [meridian flip settings](../tabs/options/imaging.md#auto-meridian-flip).
+
+The trigger is evaluated only while the telescope is connected, unparked, away from home and tracking. A parked telescope, a telescope at home or a mount with tracking disabled is not eligible for an automatic flip. The standard workflow stops guiding when necessary, stops tracking while it waits to pass the configured point, slews to the target on the opposite pier side and can autofocus, recenter, restart guiding, settle and rotate the displayed image according to the profile settings.
+
+The **Programmable Meridian Flip** trigger adds editable before and after instruction containers. It stops tracking before running the before actions, keeps tracking stopped while waiting for the flip window, resumes tracking for the flip and then runs the after actions. Keep the before actions short because their estimated duration is reserved when the trigger decides whether another exposure will fit.
 
 ## Meridian flip settings in detail
 
@@ -33,7 +37,7 @@ The meridian flip settings offer a variety of settings that will affect how a me
 
 In earlier versions of N.I.N.A. there was no `Max. Minutes after meridian` setting and it is synonymous to having both settings set to an equal value.  
 As you can see in the picture above, the `Minutes after meridian` settings will define the point in time where a flip must happen.  
-N.I.N.A. will try fit in exposures until one exposure is longer than the remaining time to `Minutes after meridian`. When this happens, the application will pause the tracking of the mount and will wait for the point in time to come to actually flip the mount. Once the `Minutes after meridian` time has been reached, the telescope will flip and the sequence will continue afterwards.  
+N.I.N.A. will fit exposures while their estimated duration remains before `Minutes after meridian`. When the next instruction no longer fits, the flip workflow stops tracking and waits for the configured point. It then resumes tracking, performs the flip and continues the sequence.
   
 A setup like this will result in a little downtime, as some time is spent just waiting until the flip can happen.
 
@@ -49,6 +53,9 @@ The big advantage with a configuration like this is that there is absolutely no 
 ![pause before meridian](../images/advanced/meridianflip/pausebefore.PNG)
 
 Setting a `Pause before meridian` time as non-zero will result in creating an obstruction zone. This means that your equipment will hit the tripod before actually passing the meridian (e.g. you have a very long telescope tube). During this period of time, no imaging must happen as the telescope cannot safely track past this time before crossing the meridian.  
-N.I.N.A. will try to fit in exposures until one exposure is longer than the remaining time to `Pause before meridian`. When this happens, the application will pause the tracking of the mount and will wait for the point in time to come to actually flip the mount at `Minutes after meridian`. Once the `Minutes after meridian` time has been reached, the telescope will flip and the sequence will continue afterwards.  
+N.I.N.A. will fit exposures until the next instruction would enter the `Pause before meridian` obstruction zone. The flip workflow then stops tracking and waits until the flip point at `Minutes after meridian`. It resumes tracking, performs the flip and continues the sequence.
 
 Use this setting only when your equipment hits the tripod before crossing the meridian, as it will result in a long downtime to wait for the object to get out of the obstruction zone!
+
+!!! warning
+    If a connected safety monitor reports unsafe when a flip is due, the trigger stops mount tracking instead of attempting the slew. Resolve the unsafe state and verify the mount state before resuming the sequence.

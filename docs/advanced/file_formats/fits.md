@@ -5,6 +5,10 @@ Flexible Image Transport System (FITS) is a flexible open file format for images
 N.I.N.A. is capable of saving images in FITS format. The FITS format offers a variety of header meta information and N.I.N.A. will populate all available information into this header. A detailed list of all available Headers and their conditions is described below.
 Many applications can make use of these headers (e.g. PixInsight during processing).
 
+## Compression
+
+FITS files can be saved uncompressed or with RICE, PLIO, HCOMPRESS, GZIP1 or GZIP2 compression. Compression is applied through CFITSIO and remains lossless except where the selected algorithm or downstream software imposes its own restrictions. The optional `.fz` suffix can be added to compressed files. Confirm that the processing software you use supports the selected FITS compression before adopting it for an unattended session.
+
 ## Standard FITS Headers
 
 - SIMPLE: true
@@ -24,12 +28,12 @@ Many applications can make use of these headers (e.g. PixInsight during processi
 - DATE-LOC: Locale time at exposure start
 - DATE-UTC: UTC time at exposure start
 - DATE-AVG: Averaged midpoint time (UTC)
-- ROWORDER: TOP-DOWN orientation of the image starting point. [Details at free-astro.org](https://free-astro.org/index.php?title=Siril:FITS_orientation)
+- ROWORDER: TOP-DOWN orientation of the image starting point. [Details at free-astro.org](//free-astro.org/index.php?title=Siril:FITS_orientation)
 
 ## Observer Headers
 Taken from the Astrometry Options
 
-- SITEELEV: Elevation (currently taken from a connected telescope)
+- SITEELEV: Elevation specified in the astrometry settings
 - SITELAT: Latitude specified in astrometry options
 - SITELONG: Longitude specified in astrometry options
 - OBSERVER: Observer name specified in astrometry options

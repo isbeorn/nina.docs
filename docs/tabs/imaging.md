@@ -14,7 +14,7 @@ The top bar is divided in two main sections: **Info** and **Tools**
 ## Info  
 These windows provide important status information about captured images and connected equipment  
 
-### A. Image  ![imageicon](../images/tabs/imaging_imageicon.PNG)  
+### Image ![imageicon](../images/tabs/imaging_imageicon.PNG)
 The image panel is the central part of the Imaging tab and is used to display the latest captured images
 
 ![image](../images/tabs/imaging_image.png)
@@ -26,12 +26,12 @@ The image panel is the central part of the Imaging tab and is used to display th
 5.   Initiates a plate solving routine for the current image
 6.   Toggles crosshair overlay on/off
 7.   Toggles automatic display of the displayed image (for autostretch settings refer to [Options](options/imaging.md))
-8.   Toggles automatic HFR (Half-Flux-Radius) star detection analysis. HFR is used for [Autofocus](options/autofocus.md) routines. When HFR detection is ON, the average HFR value for each captured image is plotted in the HFR History window (M)
+8.   Toggles automatic HFR (Half-Flux-Radius) star detection analysis. HFR is used for [Autofocus](options/autofocus.md) routines. When HFR detection is ON, the average HFR value for each captured image is plotted in the HFR History window
 > If _Annotate Image_ is switched ON under [Options->Imaging](options/imaging.md), the calculated HFR values will be displayed on the image  
    ![HFR](../images/tabs/imaging_HFR.PNG)
 9.   Activates the Bahtinov Analyzer aid tool for manual focusing with a Bahtinov Mask.
 
-### B. Camera ![cameraicon](../images/tabs/imaging_cameraicon.PNG)  
+### Camera ![cameraicon](../images/tabs/imaging_cameraicon.PNG)
 This panel displays the main camera and sensor properties and cooling status
 > Requires a connected camera
 
@@ -41,12 +41,12 @@ This panel displays the main camera and sensor properties and cooling status
    
 ![cameratab](../images/tabs/cameratab.png)
 
-### C. Filter Wheel ![fwicon](../images/tabs/imaging_fwicon.PNG)  
+### Filter Wheel ![fwicon](../images/tabs/imaging_fwicon.PNG)
 When a Filter Wheel is connected, this panel displays the current filter (1) and lets you manually switch filters by selecting them with the drop-down menu (2)
 
 ![image](../images/tabs/imaging_filterwheel.PNG)
 
-### D. Focuser  ![focusericon](../images/tabs/imaging_focusericon.PNG)  
+### Focuser ![focusericon](../images/tabs/imaging_focusericon.PNG)
 This panel displays the focuser status and lets you manually move it to the desired position
 > Requires a connected focuser
 
@@ -64,7 +64,7 @@ This panel displays the focuser status and lets you manually move it to the desi
     * Double arrows <<  >> : five times the Auto Focus Step Size
 
 
-### E. Rotator ![rotatoricon](../images/tabs/imaging_rotatoricon.PNG)  
+### Rotator ![rotatoricon](../images/tabs/imaging_rotatoricon.PNG)
 Here you can control the Rotator
 > Requires a connected ASCOM Rotator
 
@@ -76,13 +76,13 @@ Here you can control the Rotator
 4. Moves the rotator to the Target Position
 
 
-### F. Telescope ![telescopeicon](../images/tabs/imaging_telescopeicon.PNG)  
+### Telescope ![telescopeicon](../images/tabs/imaging_telescopeicon.PNG)
 The telescope panel provides all important information about your telescope like tracking status, sidereal time, time to meridian passing and current telescope coordinates.
 > Requires a connected ASCOM telescope
 
 ![telescope](../images/tabs/imaging_telescope.PNG)
 
-### G. Guiding  ![guideicon](../images/tabs/imaging_guideicon.PNG)  
+### Guiding ![guideicon](../images/tabs/imaging_guideicon.PNG)
 The guider panel shows the current guider state, RMS values, and a live guide graph when the connected guider provides guide telemetry.
 
 ![guider](../images/tabs/imaging_guider.png)
@@ -95,12 +95,12 @@ The guider panel shows the current guider state, RMS values, and a live guide gr
 4. Clears the chart
 5. Chart area, this is where the guider graph is visualized
 
-### H. Sequence ![sequenceicon](../images/tabs/imaging_sequenceicon.PNG)  
+### Sequence ![sequenceicon](../images/tabs/imaging_sequenceicon.PNG)
 The sequence panel follows the currently active sequencer and gives you quick access to the running sequence from the Imaging workspace. Depending on your current mode, it can show the legacy/simple sequencer, the advanced sequencer, or a navigation placeholder until a sequencer is active. To learn how to set up a sequence refer to the [Sequence](sequencer.md) section.
 
 ![sequence1](../images/tabs/imaging_sequence.png)
 
-### I. Switches ![switchesicon](../images/tabs/imaging_switchesicon.PNG)  
+### Switches ![switchesicon](../images/tabs/imaging_switchesicon.PNG)
 This panel will let you control the active switches
 > Requires connected switches
 
@@ -110,13 +110,13 @@ This panel will let you control the active switches
 2. Manually select switch
 3. Toggle active switch ON/OFF
 
-### J. Weather  ![weathericon](../images/tabs/imaging_weathericon.PNG)  
+### Weather ![weathericon](../images/tabs/imaging_weathericon.PNG)
 The weather panel shows the values reported by the connected weather source. Only the values provided by that source are shown.
 > Some weather sources require additional setup under [Equipment > Weather](equipment/weather.md)
 
 ![weather](../images/tabs/imaging_weather.png)
 
-### K. Statistics  ![statsicon](../images/tabs/imaging_statsicon.PNG)  
+### Statistics ![statsicon](../images/tabs/imaging_statsicon.PNG)
 In this panel, all the important information about the last captured image is reported
 
 ![statistics](../images/tabs/imaging_statistics.png)
@@ -138,7 +138,7 @@ Depending on your connected hardware and selected layout, the Imaging tab can al
 * **Safety Monitor**: reports whether the selected safety monitor is connected and currently safe
 * **Flat Device**: reports light state, brightness, and cover state, and can optionally expose manual controls for the light, brightness, and cover
 
-### M. HFR History  ![HFRicon](../images/tabs/imaging_HFRicon.PNG)  
+### HFR History ![HFRicon](../images/tabs/imaging_HFRicon.PNG)
 When automatic HFR (Half-Flux-Radius) star detection is ON, this panel will display the history of the captured images using two configurable plotted values and autofocus markers.
 
 ![HFRHistory](../images/tabs/HFR2.png)
@@ -159,7 +159,7 @@ Hovering a plotted image point shows the recorded image properties for that expo
    
 ## Tools 
 
-### N. Imaging ![image1icon](../images/tabs/imaging_imagingicon.PNG)  
+### Imaging ![image1icon](../images/tabs/imaging_imagingicon.PNG)
 The imaging panel allows you to take a single exposure or live view when supported by the camera
 
 ![image1](../images/tabs/imaging_image1.png)
@@ -172,15 +172,15 @@ The imaging panel allows you to take a single exposure or live view when support
 6. When supported by the camera, this will activate the Live View mode
 7. Takes the exposure
 
-### O. Image History ![imagehistory](../images/tabs/imaging_historyicon.PNG)  
+### Image History ![imagehistory](../images/tabs/imaging_historyicon.PNG)
 The Image History panel shows the most recent saved images as thumbnails. The list keeps up to 50 entries and can show basic image details such as mean value in ADU, average HFR, filter, duration, and capture time.
-> Clicking a thumbnail opens that image in the Image panel (A)
+> Clicking a thumbnail opens that image in the Image panel
 
 Hovering a thumbnail shows the grading button so you can mark or clear that image as bad.
 
 ![history](../images/tabs/imaging_history.png)
 
-### P. Plate Solving ![platesolvingicon](../images/tabs/imaging_platesolveicon.PNG)  
+### Plate Solving ![platesolvingicon](../images/tabs/imaging_platesolveicon.PNG)
 Plate solving is a very important step in the imaging process. For further information on the Plate Solving process, refer to [Plate Solving](../advanced/platesolving.md) in the advanced topics. This panel lets you perform manual plate solving and keeps the history of all plate solving sessions.
 > Prerequisites for plate solving to work are:
 > * An external plate solver is defined in Options [Plate Solving](options/platesolving.md)
@@ -199,7 +199,7 @@ Plate solving is a very important step in the imaging process. For further infor
 7. Captures an image for plate solving
 8. History of plate solving sessions
 
-### R. Auto Focus ![AFicon](../images/tabs/imaging_aficon.PNG)  
+### Auto Focus ![AFicon](../images/tabs/imaging_aficon.PNG)
 This panel lets you manually trigger an Auto Focus routine based on the Auto Focus parameters set in Options [Autofocus](options/autofocus.md).
 
 ![AF](../images/tabs/AF10.png)
@@ -208,7 +208,7 @@ This panel lets you manually trigger an Auto Focus routine based on the Auto Foc
 2. Last Auto Focus run parameters
 3. Starts Auto Focus routine
 
-### S. Manual Focus Targets ![MFicon](../images/tabs/imaging_mftargetsicon.PNG)  
+### Manual Focus Targets ![MFicon](../images/tabs/imaging_mftargetsicon.PNG)
 When you have to manual focus your scope this tab lets you conveniently choose among the current visible brighter stars according to your location and time.
 
 ![MFtargets](../images/tabs/imaging_mftargets.png)

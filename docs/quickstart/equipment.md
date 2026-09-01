@@ -1,33 +1,22 @@
-Let us focus now on connecting your camera and mount for the first time.
+# Connect and verify equipment
 
-!!! note
-    You should have physically connected your camera and mount to the PC N.I.N.A. is running on already. If you did not, connect it now.
+Physically connect and power the rig, then open **Equipment**. Select the saved driver for each device, open its setup dialog if required and connect it.
 
 ![Camera Connections](../images/quickstart/equipment1.png)
 
-You need to select your camera in the drop down menu (1). 
-If it does not appear in the list press the refresh button (2). 
-Some cameras require a driver to be installed before being able to see them in the list.  
-Once you selected your camera press the Connect button (3) to connect the device.
+Start with the camera and telescope. Then connect the filter wheel, focuser, rotator, guider, flat device, dome, safety monitor, weather source and switches that the profile uses. The **Connect All Equipment** button is convenient after each device has been selected and tested once.
 
-Once your device is connected it will display various information about the camera (if available) in the camera section (4).
-
-!!! note
-    Keep in mind that if you are using a DSLR the information might be incomplete or missing. That doesn't deter N.I.N.A. from working, but should you need to find the information you have to look for it online.
-
-When you connect a camera that has the ability to change the gain (ISO) 
-it will be displayed in the camera settings section (5). 
-This is the default gain that will be used and can be overridden by settings during imaging later.
-
-Once you connected your camera you also need to connect your mount. For that we have to switch to the telescope tab (6).
+For the camera, take a short manual exposure and verify download, gain or ISO, offset, binning and cooling controls. For the telescope, verify that the reported site, time, tracking state and pier side are credible before issuing a small slew.
 
 ![Telescope Connections](../images/quickstart/equipment2.png)
 
-Here we have the same procedure to connect the mount as we have with the camera. 
-Select the mount from the dropdown (1), refresh if not available (2), and press connect (3) to connect to the mount.
+Check the remaining device paths independently:
 
-In the Telescope section (4) you will find useful information about the latitude, longitude, elevation, sidereal time and when it will arrive at the meridian. 
-You can manually slew to specific coordinates with (5) or control the mount manually in the Manual Control section (6). This is very useful if you do not use a hand controller with your mount.
+* move the focuser in both directions without approaching a hard stop
+* change filters and confirm the reported position
+* connect the guider and start a short guiding test
+* run a plate solve on a downloaded exposure
+* confirm that a safety monitor changes state as its driver reports
 
-!!! tip
-    The time to meridian depends on correct latitude and longitude settings!
+!!! warning
+    N.I.N.A. sends commands through the selected driver. Establish safe slew, park, home and meridian limits in the mount or driver before relying on an automated sequence.

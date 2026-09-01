@@ -127,7 +127,7 @@ It requires downloading index files, which can be installed through N.I.N.A., fo
 
 ### All Sky Plate Solver
 Author: Giovanni Benintende  
-URL: [astrogb.com/astrogb/All_Sky_Plate_Solver.html](http://www.astrogb.com/astrogb/All_Sky_Plate_Solver.html)
+URL: [astrogb.com/astrogb/All_Sky_Plate_Solver.html](//www.astrogb.com/astrogb/All_Sky_Plate_Solver.html)
 
 This application is basically a wrapper for the local astrometry.net client. 
 
@@ -149,7 +149,7 @@ This application is basically a wrapper for the local astrometry.net client.
 
 ### PlateSolve3.80
 Author: PlaneWave Instruments (Dave Rowe)
-URL: [PlateSolve 3.80](https://drive.google.com/drive/folders/1JCgzmSJGBXOtfYrqpG5Jvp_Dr_gvEOgt)
+URL: [PlateSolve 3.80](//drive.google.com/drive/folders/1JCgzmSJGBXOtfYrqpG5Jvp_Dr_gvEOgt)
 
 N.I.N.A. was kindly selected to include the improved PlateSolve3.80 in its arsenal of plate solvers, courtesy of Dave Rowe of PlaneWave Instruments.
 PlateSolve3 is a standalone executable. It handles longer focal lengths and small FOVs, and solves quickly with few stars (<10).

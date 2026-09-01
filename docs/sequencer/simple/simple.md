@@ -1,7 +1,9 @@
 
-The legacy sequencer offers the traditional experience of planning complete sequences for the most common use cases. The capabilities range from cooled cameras, goto mounts, automated focusers, filter wheels and guiders. 
-With this sequencer you can plan straight forward sequences with a set amount of exposures for specific filters and some basic added automation like centering of targets and keeping the objects in focus using auto focus.  
+The Legacy Sequencer offers the traditional experience of planning complete sequences for common use cases. Its capabilities include cooled cameras, goto mounts, automated focusers, filter wheels and guiders.
+With this sequencer you can plan straightforward sequences with a fixed number of exposures for specific filters and automation such as centering, guiding, autofocus, dithering and meridian flips.
 For more advanced use cases refer to the [advanced sequencer](../advanced/advanced.md) which offers a lot more planning granularity, capabilities and supports more types of equipment.
+
+The Legacy Sequencer is not a separate execution engine. It translates the configured target list into advanced sequence entities at runtime. **Build Sequence** exposes that translation so the result can be customized in the Advanced Sequencer. Building again replaces the previously generated advanced sequence, so save any advanced edits first.
 
 ![The sequencing tab](../../images/sequencer/simple/Sequencer_Screen.png)
 

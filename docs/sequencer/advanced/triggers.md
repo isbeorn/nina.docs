@@ -2,6 +2,19 @@ Triggers are instructions that should only happen when certain events occur. The
 Triggers can be identified by the highlighted lightning icon next to them in the sequencer sidebar.  
 ![Triggers](../../images/sequencer/trigger/trigger.png)  
 
+## Connect
+Triggers that recover selected equipment after an unexpected disconnect.
+
+### Reconnect Camera On Download Failure
+![Reconnect Camera On Download Failure](../../images/sequencer/trigger/reconnectcamera.png)
+
+Runs when the camera fails to download an exposure, reconnects the camera and restores the cooler and dew heater states.
+
+### Reconnect Equipment
+![Reconnect Equipment](../../images/sequencer/trigger/reconnectequipment.png)
+
+Monitors the selected equipment category and attempts to reconnect its profile device when it becomes disconnected.
+
 ## Dome
 Trigger actions for a dome. Each trigger in this category requires at least a dome to be connected.
 
@@ -69,6 +82,13 @@ After the set amount of exposures, this trigger will plate solve the saved image
 ![Meridian Flip](../../images/sequencer/trigger/meridianflip.png)  
 When the telescope passes the meridian according to the meridian flip settings in the [options](../../tabs/options/imaging.md), this trigger will initiate the meridian flip.  
 More information on the settings and how the flip works is available on the [meridian flip page](../../advanced/meridianflip.md).
+
+### Programmable Meridian Flip
+![Programmable Meridian Flip](../../images/sequencer/trigger/programmablemeridianflip.png)
+
+Provides editable **Before Flip Actions** and **After Flip Actions** containers around the built-in flip. When the trigger fires, N.I.N.A. stops tracking, runs the before actions, keeps tracking stopped until the flip window, resumes tracking, performs the normal flip workflow and then runs the after actions. Keep before actions short enough that they cannot delay the required flip.
+
+The standard post-flip rotation setting still applies. If the programmable workflow is cancelled or fails while tracking is stopped, N.I.N.A. attempts to restore tracking before exiting.
 
 ## Utility
 Trigger actions that let you reuse existing trigger timing with your own instruction set.

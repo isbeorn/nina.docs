@@ -1,7 +1,7 @@
 ## Forking the repository
 
 1. Login to your github account
-2. Navigate to [N.I.N.A.'s main repository](https://github.com/isbeorn/nina)
+2. Navigate to [N.I.N.A.'s main repository](//github.com/isbeorn/nina)
 3. Click "Fork"
 ![Fork this repository](../images/setup/Fork2.png)
 4. You will see a configuration wizard for your fork.

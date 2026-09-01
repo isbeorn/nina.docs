@@ -9,7 +9,7 @@ For usage of the Plate Solver, refer to [Advanced Topics: Plate Solving](../../a
 
 ### Plate Solver
 * This drop-down menu selects the primary plate solver to use
-> [ASTAP](https://www.hnsky.org/astap.htm) is recommended
+> [ASTAP](//www.hnsky.org/astap.htm) is recommended
 
 ### Blind Solver
 * This drop-down menu selects the blind solver that is used for initial solves and/or backup solving

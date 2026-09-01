@@ -1,8 +1,8 @@
-The Rotator Tab lets you connect an ASCOM-compatible telescope mount.
+The Mount tab lets you connect and control an ASCOM-compatible Mount mount.
 
-![Telescope](../../images/tabs/equipment_scope.png)
+![Mount](../../images/tabs/equipment_scope.png)
 
-1. Telescope information 
+1. Mount information 
 2. Define manual target coordinates
 3. Slew to manual target coordinates
 4. Define movement rate

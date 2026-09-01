@@ -1,5 +1,7 @@
 Framing Assistant allows you to frame the next shot perfectly via several online sky survey services, a built-in planetarium, or a user-supplied image. It can utilize plate solving to perfectly align your telescope and rotator (if equipped) to match the position of the framing rectangle.
 
+A current end-to-end workflow is to load or solve an image, set the profile-derived camera geometry, position and rotate the framing rectangle, configure mosaic panels if required and add the result to an Advanced Sequencer Deep Sky Object template. You can return later with **Update Existing Target in Sequencer** without rebuilding the target's exposure plan.
+
 For further information about using the Framing Assistant refer to the [Advanced Framing](../advanced/framingassistant.md) topic.
 
 ![The Framing Tab](../images/tabs/Framing10.png)
@@ -7,14 +9,14 @@ For further information about using the Framing Assistant refer to the [Advanced
 ## Image source 
 
 ### Image Source selection menu
-* Allows you to specify the source of an image to utilize in the Framing Assistant. Possible options are:
-    * **Digital Sky Survey**: Fetch an image of the object from a sky survey server. This requires an internet connection
-    * **Offline Sky Map**: N.I.N.A.'s own database of objects. Circles representing approximate target sizes will be displayed
+* Allows you to specify the source of an image to utilize in the Framing Assistant. Current options are:
+    * **NASA, SkyServer, STScI, ESO, and HIPS 2 FITS Sky Surveys**: Fetch an image of the object from the selected online service
+    * **Offline Sky Map**: N.I.N.A.'s interactive catalog map. Object outlines and optional annotations are displayed
         * If you have images in your Sky Survey Cache, they will be shown in the offline sky map
         * A pre-rendered cache of cache images spanning the whole sky can be downloaded on the homepage. This cache can be used to have a fast and complete offline framing tool.
-    * **From File**: Load an existing JPEG, GIF, PNG or TIFF image of an object. When an image is provided through **From File**, the configured [Solver](../advanced/platesolving.md) is used to determine the coordinates and orientation of the image. Alternatively, for FITS and XISF files the WCS header coordinates are used if present.
+    * **File**: Load TIFF, JPEG, PNG, supported camera RAW, FITS or XISF data. Complete FITS/XISF WCS metadata is used directly; otherwise N.I.N.A. opens its current framing plate-solve prompt.
     * **Cache**: Load images directly from a local cache of images that have already been downloaded from one of the Digital Sky Survey servers or loaded in from files
-* Successfully-solved or downloaded local and sky survey images are cached automatically
+* Downloaded or loaded images can be saved to the survey cache for later offline use
 
 ### Planetarium Sync
 * Pressing the Planetarium Sync button fetches the coordinates of a selected object from the configured external planetarium program. If no objects are selected in the planetarium the center of frame coordinates are selected as a fallback.
@@ -27,7 +29,7 @@ For further information about using the Framing Assistant refer to the [Advanced
 
 ### Load Image
 * Starts the image download when using a sky survey 
-* Starts the plate solving mechanism when using **From File**. If the uploaded file already contains WCS headers, these will be used instead of attempting a new plate solve.
+* Starts the plate solving mechanism when using **File**. If the uploaded FITS or XISF file already contains usable WCS metadata, it is used instead of another solve.
 * Attempts to load an image from the cache using the provided coordinates
 
 ### Width, Height, Pixel Size and Focal Length
@@ -54,7 +56,7 @@ For further information about using the Framing Assistant refer to the [Advanced
 * In addition when clicking on the arrow the operation can be adjusted to only slew to the target without solving or also consider the rotation (when a rotator is connected)
 
 ### Add target to sequence
-* Takes the name, the RA and Dec coordinates, and the angle of the framing window, and adds it as a sequence target for either the legacy sequencer or the advanced sequencer using a deep sky object template
+* Takes the name, the RA and Dec coordinates, and the angle of the framing window, and adds it as a target for either the Simple Sequencer or the Advanced Sequencer using a Deep Sky Object template
 * In addition when clicking on the arrow and clicking on "Add target to target list", the target can be added to the advanced sequencer's target tab instead
 * A third option is to click on "Update Existing Target in Sequencer" which becomes available when there is already a target inside the sequencer and the target should be updated with the new framing instead
 

@@ -92,7 +92,7 @@ Loop for as long as the moon matches the specified parameters.
 
 ### Moon Illumination
 ![Moon Illumination](../../images/sequencer/conditions/moonillumination.png)  
-Loop for as long as the sun matches the specified parameters.
+Loop for as long as the moon illumination matches the specified parameters.
 
 ### Sun Altitude
 ![Sun Altitude](../../images/sequencer/conditions/sunaltitude.png)  

@@ -1,13 +1,13 @@
 # 📚 N.I.N.A. Documentation
 
-[![Website](https://img.shields.io/badge/website-nighttime--imaging.eu-blue)](https://nighttime-imaging.eu/)
-[![Discord](https://img.shields.io/discord/436650817295089664)](https://discord.gg/nighttime-imaging)
-[![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](https://www.mozilla.org/en-US/MPL/2.0/)
+[![Website](//img.shields.io/badge/website-nighttime--imaging.eu-blue)](//nighttime-imaging.eu/)
+[![Discord](//img.shields.io/discord/436650817295089664)](//discord.gg/nighttime-imaging)
+[![License: MPL 2.0](//img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](//www.mozilla.org/en-US/MPL/2.0/)
 
 This repository contains the source files for the documentation of **N.I.N.A. – Nighttime Imaging 'N' Astronomy**.
 
 📖 The live documentation is available at:  
-**https://nighttime-imaging.eu/docs/master/site/**
+**[//nighttime-imaging.eu/docs/master/site/](//nighttime-imaging.eu/docs/master/site/)**
 
 ---
 
@@ -28,7 +28,7 @@ Please read our [Contributing Guide](CONTRIBUTING.md) for full details on:
 
 To get started locally, follow these steps:
 
-1. Install [Python](https://www.python.org/)
+1. Install [Python](//www.python.org/)
 2. Upgrade pip:
     ```bash
     pip install --upgrade pip
@@ -65,9 +65,9 @@ Documentation updates are deployed automatically via GitHub Actions when pull re
 
 ## 💬 Need Help?
 
-- 🔧 Main application repo: [github.com/isbeorn/N.I.N.A](https://github.com/isbeorn/nina)
-- 🧠 Real-time support: [Discord Community](https://discord.gg/nighttime-imaging)
-- 🌐 More resources: [nighttime-imaging.eu](https://nighttime-imaging.eu/)
+- 🔧 Main application repo: [github.com/isbeorn/N.I.N.A](//github.com/isbeorn/nina)
+- 🧠 Real-time support: [Discord Community](//discord.gg/nighttime-imaging)
+- 🌐 More resources: [nighttime-imaging.eu](//nighttime-imaging.eu/)
 
 ---
 
