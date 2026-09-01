@@ -51,27 +51,27 @@ If the next instruction is an instruction set that is not collapsed, the instruc
 Connect or disconnect equipment selected in the active profile. These instructions are useful when a sequence must recover from a disconnected device or deliberately change profiles without operator input.
 
 ### Connect All Equipment
-![Connect All Equipment](../../images/sequencer/instructions/connect_all.png)
+![Connect All Equipment](../../images/generated/sequencer/instructions/connect_all.png)
 
 Connects every device saved in the active profile.
 
 ### Connect Equipment
-![Connect Equipment](../../images/sequencer/instructions/connect_equipment.png)
+![Connect Equipment](../../images/generated/sequencer/instructions/connect_equipment.png)
 
 Connects the saved device for the selected equipment category.
 
 ### Disconnect All Equipment
-![Disconnect All Equipment](../../images/sequencer/instructions/disconnect_all.png)
+![Disconnect All Equipment](../../images/generated/sequencer/instructions/disconnect_all.png)
 
 Disconnects all currently connected devices.
 
 ### Disconnect Equipment
-![Disconnect Equipment](../../images/sequencer/instructions/disconnect_equipment.png)
+![Disconnect Equipment](../../images/generated/sequencer/instructions/disconnect_equipment.png)
 
 Disconnects the selected equipment category.
 
 ### Switch Profile
-![Switch Profile](../../images/sequencer/instructions/switch_profile.png)
+![Switch Profile](../../images/generated/sequencer/instructions/switch_profile.png)
 
 Disconnects the current equipment, switches to the selected profile and connects the equipment saved in that profile. Put this instruction where no exposure or other device operation can be active.
 
@@ -79,29 +79,33 @@ Disconnects the current equipment, switches to the selected profile and connects
 Control basic functions of a [Camera](../../tabs/equipment/camera.md). Each instruction in this category requires at least a Camera to be connected.
 
 ### Cool Camera  
-![Cool Camera](../../images/sequencer/instructions/camera_cool.png)  
+![Cool Camera](../../images/generated/sequencer/instructions/camera_cool.png)
+
 Cool your camera to the specified temperature and the specified minimum duration. For most cameras the duration can be left at 0 as the driver will handle the cooling duration.
 Once the camera has reached the specified temperature the instruction is completed.  
 *Requires a camera that is capable of set point cooling*
 
 ### Warm Camera  
-![Warm Camera](../../images/sequencer/instructions/camera_warm.png)  
+![Warm Camera](../../images/generated/sequencer/instructions/camera_warm.png)
+
 Warm your camera to ambient temperature using the specified minimum duration. For most cameras the duration can be left at 0 as the driver will handle the cooling duration.
 Once the camera has reached the ambient temperature the cooler is turned off and the instruction is completed.  
 *Requires a camera that is capable of set point cooling*
 
 ### Dew Heater
-![Dew Heater](../../images/sequencer/instructions/camera_dew.png)  
+![Dew Heater](../../images/generated/sequencer/instructions/camera_dew.png)
+
 This instruction will turn on or turn off the camera dew heater  
 *Requires a camera that has a controllable dew heater*
 
 ### Set Readout Mode
-![Set Readout Mode](../../images/sequencer/instructions/camera_readout.png)  
+![Set Readout Mode](../../images/generated/sequencer/instructions/camera_readout.png)
+
 Set your camera to a specific readout mode. The number indicates the index of the readout mode from the camera dropdown - starting with 0.  
 *Requires a camera with settable readout modes*
 
 ### Set USB Limit
-![Set USB Limit](../../images/sequencer/instructions/camera_usblimit.png)
+![Set USB Limit](../../images/generated/sequencer/instructions/camera_usblimit.png)
 
 Sets the camera's USB transfer limit. The available range comes from the connected camera driver and the instruction is invalid when the driver does not expose this control.
 
@@ -110,11 +114,12 @@ Sets the camera's USB transfer limit. The available range comes from the connect
 This instruction will take an exposure using the specified exposure time, binning, gain and offset.
 
 ### Take Many Exposures
-![Take Many Exposures](../../images/sequencer/instructions/camera_manyexposures.png)  
+![Take Many Exposures](../../images/generated/sequencer/instructions/camera_manyexposures.png)
+
 Similar to the "Take Exposure" instruction, but with the added ability to specify a number of exposures to complete before proceeding.
 
 ### Take Subframe Exposure
-![Take Subframe Exposure](../../images/sequencer/instructions/take_subframe_exposure.png)
+![Take Subframe Exposure](../../images/generated/sequencer/instructions/take_subframe_exposure.png)
 Similar to the "Take Exposure" instruction, but with the added ability to specify a subframe percentage relative to the center.
 
 ### Smart Exposure
@@ -130,94 +135,108 @@ Keep dither after exposures to 0, to skip the dither completely.
 Control basic functions of a [Dome](../../tabs/equipment/dome.md). Each instruction in this category requires at least a Dome to be connected.
 
 ### Close Dome Shutter
-![Close Dome Shutter](../../images/sequencer/instructions/dome_close.png)  
+![Close Dome Shutter](../../images/generated/sequencer/instructions/dome_close.png)
+
 Closes the dome shutter  
 *Requires a controllable dome shutter*
 ### Enable Dome Sync
-![Enable Dome Sync](../../images/sequencer/instructions/dome_sync.png)  
+![Enable Dome Sync](../../images/generated/sequencer/instructions/dome_sync.png)
+
 Enables the automatic background synchronization of the telescope and the dome  
 *Requires a telescope to be connected*
 
 ### Disable Dome Sync
-![Disable Dome Sync](../../images/sequencer/instructions/disable_dome_sync.png)  
+![Disable Dome Sync](../../images/generated/sequencer/instructions/disable_dome_sync.png)
+
 Disables the automatic background synchronization of the telescope and the dome  
 *Requires a telescope to be connected*
 
 ### Find Dome Home
-![Find Dome Home](../../images/sequencer/instructions/dome_findhome.png)
+![Find Dome Home](../../images/generated/sequencer/instructions/dome_findhome.png)
 
 Rotates the dome to its home position.
 *Requires a dome driver that is capable of finding home*
 
 ### Open Dome Shutter
-![Open Dome Shutter](../../images/sequencer/instructions/dome_open.png)  
+![Open Dome Shutter](../../images/generated/sequencer/instructions/dome_open.png)
+
 Opens the dome shutter  
 *Requires a controllable dome shutter*
 
 ### Park Dome
-![Park Dome](../../images/sequencer/instructions/dome_park.png)  
+![Park Dome](../../images/generated/sequencer/instructions/dome_park.png)
+
 Parks the dome to its specified home position  
 *Requires a dome driver that is capable of parking*
 
 ### Slew Dome Azimuth
-![Slew Dome Azimuth](../../images/sequencer/instructions/slew_dome_azimuth.png)  
+![Slew Dome Azimuth](../../images/generated/sequencer/instructions/slew_dome_azimuth.png)
+
 Slews the dome to a specific azimuth position  
 *Requires a dome driver that is capable of setting azimuth*
 
 ### Synchronize Dome
-![Synchronize Dome](../../images/sequencer/instructions/synchronize_dome.png)  
+![Synchronize Dome](../../images/generated/sequencer/instructions/synchronize_dome.png)
+
 Synchronizes the dome to the current telescope position  
 
 ## Filter Wheel
 Control basic functions of a [Filter Wheel](../../tabs/equipment/filterwheel.md). Each instruction in this category requires at least a Filter Wheel to be connected.
 
 ### Switch Filter
-![Switch Filter](../../images/sequencer/instructions/filter_switch.png)  
+![Switch Filter](../../images/generated/sequencer/instructions/filter_switch.png)
+
 Switches the filter wheel filter to the specified filter. Like all filter wheel changes the focuser offset will be applied, when available.
 
 ## Flat Panel
 Control basic functions of a [Flat Panel](../../tabs/equipment/flatpanel.md). Each instruction in this category requires at least a Flat Panel to be connected.
 
 ### Auto Brightness Flat
-![Auto Brightness Flat](../../images/sequencer/instructions/flat_autobrightness.png)
+![Auto Brightness Flat](../../images/generated/sequencer/instructions/flat_autobrightness.png)
 
 Finds a panel brightness that reaches the configured target mean at a fixed exposure time, then captures the requested flats. Configure the permitted brightness range so the search cannot command values outside the useful range of the panel.
 
 ### Auto Exposure Flat
-![Auto Exposure Flat](../../images/sequencer/instructions/flat_autoexposure.png)
+![Auto Exposure Flat](../../images/generated/sequencer/instructions/flat_autoexposure.png)
 
 Finds an exposure time that reaches the configured target mean at a fixed panel brightness, then captures the requested flats. The minimum and maximum exposure settings bound the search.
 
 ### Twilight Sky Flats
-![Twilight Sky Flats](../../images/sequencer/instructions/flat_sky.png)
+![Twilight Sky Flats](../../images/generated/sequencer/instructions/flat_sky.png)
 
 Captures sky flats while adjusting the exposure time after each image to follow changing twilight brightness. It can dither between exposures when a connected, unparked mount supports pulse guiding.
 
 ### Close Flat Panel Cover
-![Close Flat Panel Cover](../../images/sequencer/instructions/flat_close.png)  
+![Close Flat Panel Cover](../../images/generated/sequencer/instructions/flat_close.png)
+
 Closes the flat panel  
 *Requires a flat panel that can open and close itself*
 
 ### Open Flat Panel Cover
-![Open Flat Panel Cover](../../images/sequencer/instructions/flat_open.png)  
+![Open Flat Panel Cover](../../images/generated/sequencer/instructions/flat_open.png)
+
 Opens the flat panel  
 *Requires a flat panel that can open and close itself*
 
 ### Set Brightness
-![Set Brightness](../../images/sequencer/instructions/flat_brightness.png)  
+![Set Brightness](../../images/generated/sequencer/instructions/flat_brightness.png)
+
 Sets the brightness of the panel to the specified value. (Does not turn on the panel automatically).
 
 ### Toggle Light
-![Toggle Light](../../images/sequencer/instructions/flat_light.png)  
+![Toggle Light](../../images/generated/sequencer/instructions/flat_light.png)
+
 Turns the flat panel light on or off depending on the setting
 
 ### Trained Flat Exposure
-![Trained Flat Exposure](../../images/sequencer/instructions/flat_trainedflat.png)  
+![Trained Flat Exposure](../../images/generated/sequencer/instructions/flat_trainedflat.png)
+
 This instruction will look up the trained flat exposures according to the specified filter, exposure time, gain and offset, close the flat panel (if available), set the flat panel brightness, turn it on, take the flat frames for the given amount, turns off the flat panel and finally opens the cover again (if available and if "keep closed" is off)  
 *Requires a camera to be connected and trained flat values being set in the [flat panel tab](../../tabs/equipment/flatpanel.md) that match the values in the instruction*
 
 ### Trained Dark Exposure
-![Trained Dark Exposure](../../images/sequencer/instructions/flat_traineddark.png)  
+![Trained Dark Exposure](../../images/generated/sequencer/instructions/flat_traineddark.png)
+
 This instruction will look up the trained flat exposures according to the specified filter, exposure time, gain and offset, close the flat panel (if available), turn it off, take the dark frames for the given amount and finally opens the cover again (if available and if "keep closed" is off)  
 *Requires a camera to be connected and trained flat values being set in the [flat panel tab](../../tabs/equipment/flatpanel.md) that match the values in the instruction*
 
@@ -225,11 +244,13 @@ This instruction will look up the trained flat exposures according to the specif
 Control basic functions of a [Focuser](../../tabs/equipment/focuser.md). Each instruction in this category requires at least a Focuser to be connected.
 
 ### Move Focuser
-![Move Focuser](../../images/sequencer/instructions/focuser_move.png)  
+![Move Focuser](../../images/generated/sequencer/instructions/focuser_move.png)
+
 Moves the focuser to the specified absolute position
 
 ### Move Focuser By Temp.
-![Move Focuser By Temp](../../images/sequencer/instructions/focuser_movebytemp.png)  
+![Move Focuser By Temp](../../images/generated/sequencer/instructions/focuser_movebytemp.png)
+
 Moves the focuser to a position that is based on the temperature reported by the focuser. This can be used to "follow" the point of best focus in its temperature dependency.
 
 The dependency is modeled with a simple linear model. This can work in two ways:
@@ -247,37 +268,44 @@ When used in relative mode, if the focus position change is less than one step, 
     The plugin `Autofocus Report Analysis` can help you in determining these parameters, but be careful to have good data points with a good fit, otherwise these values will be error prone.
 
 ### Move Focuser Relative
-![Move Focuser Relative](../../images/sequencer/instructions/focuser_moverelative.png)  
+![Move Focuser Relative](../../images/generated/sequencer/instructions/focuser_moverelative.png)
+
 Moves the focuser to a target position based on the current position and a specified amount from that position
 
 ### Run Autofocus
-![Run Autofocus](../../images/sequencer/instructions/focuser_autofocus.png)  
+![Run Autofocus](../../images/generated/sequencer/instructions/focuser_autofocus.png)
+
 Starts an [autofocus run](../../advanced/autofocus.md) based on the [autofocus settings](../../tabs/options/autofocus.md)
 
 ## Guider
 Control basic functions of a [Guider](../../tabs/equipment/guider.md). Each instruction in this category requires at least a Guider to be connected.
 
 ### Dither
-![Dither](../../images/sequencer/instructions/guider_dither.png)  
+![Dither](../../images/generated/sequencer/instructions/guider_dither.png)
+
 Issues the guider to [dither](../../advanced/dithering.md)
 
 ### Start Guiding
-![Start Guiding](../../images/sequencer/instructions/guider_start.png)  
+![Start Guiding](../../images/generated/sequencer/instructions/guider_start.png)
+
 Starts guiding if not already started. In addition, a toggle to force the calibration can be enabled. Then the guider will be forced to run a calibration, even if a valid calibration is already available. When this toggle is off, the guider will determine by itself if calibration is necessary.
 
 ### Stop Guiding
-![Stop Guiding](../../images/sequencer/instructions/guider_stop.png)  
+![Stop Guiding](../../images/generated/sequencer/instructions/guider_stop.png)
+
 Stops active guiding when guiding is active.
 
 ## Rotator
 Control basic functions of a [Rotator](../../tabs/equipment/rotator.md). Each instruction in this category requires at least a Rotator to be connected.
 
 ### Rotate By Mechanical Angle
-![Rotate By Mechanical Angle](../../images/sequencer/instructions/rotator_movemechanical.png)  
+![Rotate By Mechanical Angle](../../images/generated/sequencer/instructions/rotator_movemechanical.png)
+
 Rotates the rotator to the specified absolute mechanical angle.
 
 ### Solve and Rotate
-![Solve and Rotate](../../images/sequencer/instructions/rotator_solveandsync.png)  
+![Solve and Rotate](../../images/generated/sequencer/instructions/rotator_solveandsync.png)
+
 Takes an image from the current position the telescope is pointing at, plate solves it, and moves the rotator to the specified sky angle. It will repeat until the rotator is within the rotation tolerance.
 **This instruction will not move the mount, it will just sync and move the rotator to the target sky angle!**  
 
@@ -285,35 +313,40 @@ Takes an image from the current position the telescope is pointing at, plate sol
 Control basic functions of a [safety monitor](../../tabs/equipment/safetymonitor.md). Each instruction in this category requires at least a safety monitor to be connected.
 
 ### Wait Until Safe
-![Safety Monitor](../../images/sequencer/instructions/safety_wait.png)  
+![Safety Monitor](../../images/generated/sequencer/instructions/safety_wait.png)
+
 Waits until the safety monitor is reporting safe conditions again.
 
 ## Switch
 Control basic functions of a [Switch](../../tabs/equipment/switch.md). Each instruction in this category requires at least a Switch to be connected.
 
 ### Set Switch Value
-![Set Switch Value](../../images/sequencer/instructions/switch_set.png)  
+![Set Switch Value](../../images/generated/sequencer/instructions/switch_set.png)
+
 Sets a switch to a specified value. When no switch is connected, a list of generic switches by number are available. The list will update itself to the actual switches on device connection. When a specified switch value is out of range, the instruction will show a validation error.
 
 ## Telescope
 Control basic functions of a [Telescope](../../tabs/equipment/telescope.md). Each instruction in this category requires at least a Telescope to be connected.
 
 ### Find Home
-![Find Home](../../images/sequencer/instructions/telescope_findhome.png)  
+![Find Home](../../images/generated/sequencer/instructions/telescope_findhome.png)
+
 Moves the mount to the home position.
 *Requires a mount driver that is capable of finding the home position*
 
 ### Park Scope
-![Park Scope](../../images/sequencer/instructions/telescope_park.png)  
+![Park Scope](../../images/generated/sequencer/instructions/telescope_park.png)
+
 Moves the mount to the park position. A mount that is parked will not accept slew commands.
 *Requires a mount driver that is capable of parking*
 
 ### Set Tracking
-![Park Scope](../../images/sequencer/instructions/telescope_settracking.png)  
+![Park Scope](../../images/generated/sequencer/instructions/telescope_settracking.png)
+
 Sets the mount tracking mode to Sidereal, King, Solar, Lunar or Stopped. The selected mode must be reported as supported by the connected mount driver.
 
 ### Slew and center
-![Slew and center](../../images/sequencer/instructions/telescope_slewcenter.png)
+![Slew and center](../../images/generated/sequencer/instructions/telescope_slewcenter.png)
 Stops Guiding (if it was active), slews to the specified coordinates, calls the plate solver to center to the specified coordinates, and resumes guiding (if it was stopped at the start).
 When this instruction is part of a "Deep Sky Object Sequence", the coordinates will be inherited and no coordinates need to be entered here.
 *Requires a [plate solver](../../advanced/platesolving.md) to be set up*
@@ -323,12 +356,13 @@ When this instruction is part of a "Deep Sky Object Sequence", the coordinates w
 Slews to the specified coordinates.
 
 ### Slew To Ra/Dec
-![Slew To Ra/Dec](../../images/sequencer/instructions/telescope_slewradec.png)  
+![Slew To Ra/Dec](../../images/generated/sequencer/instructions/telescope_slewradec.png)
+
 Stops Guiding (if it was active), slews to the specified coordinates, and resumes guiding (if it was stopped at the start).
 When this instruction is part of a "Deep Sky Object Sequence", the coordinates will be inherited and no coordinates need to be entered here.
 
 ### Slew, center and rotate
-![Slew, center and rotate](../../images/sequencer/instructions/telescope_slewcenterrotate.png)
+![Slew, center and rotate](../../images/generated/sequencer/instructions/telescope_slewcenterrotate.png)
 Stops Guiding (if it was active), slews to the specified coordinates, calls the plate solver to center to the specified coordinates while considering the rotation together with a [rotator](../../tabs/equipment/rotator.md), and resumes guiding (if it was stopped at the start).
 When this instruction is part of a "Deep Sky Object Sequence", the coordinates will be inherited and no coordinates need to be entered here.
 *Requires a [plate solver](../../advanced/platesolving.md) to be set up and a rotator to be connected*
@@ -339,32 +373,36 @@ Uses the current mount position to solve the position and sync it based on the p
 *Requires a [plate solver](../../advanced/platesolving.md) to be set up*
 
 ### Unpark Scope
-![Unpark Scope](../../images/sequencer/instructions/telescope_unpark.png)  
+![Unpark Scope](../../images/generated/sequencer/instructions/telescope_unpark.png)
+
 Unparks the mount so it is able to receive slew commands.  
 
 ## Utility
 The instructions in this category are utility commands that don't necessarily depend on any equipment and have useful tools and helpers to improve the sequence.
 
 ### Annotation
-![Annotation](../../images/sequencer/instructions/utility_annotation.png)  
+![Annotation](../../images/generated/sequencer/instructions/utility_annotation.png)
+
 This instruction will not execute anything. It is purely there to have custom text annotations inside the sequence to remind you of things or take notes to clarify certain sequence arrangements, etc.
 
 ### External Script
-![External Script](../../images/sequencer/instructions/utility_script.png)  
+![External Script](../../images/generated/sequencer/instructions/utility_script.png)
+
 An instruction to start a custom executable file from your file system. Click on the three dots to browse through the file explorer and set a file path.
 
 ### Load Imaging Layout
-![Load Imaging Layout](../../images/sequencer/instructions/utility_loadlayout.png)
+![Load Imaging Layout](../../images/generated/sequencer/instructions/utility_loadlayout.png)
 
 Loads an Imaging workspace layout from a saved dock configuration file. The selected file must be an existing Imaging layout backup.
 
 ### Save Sequence
-![Save Sequence](../../images/sequencer/instructions/utility_savesequence.png)
+![Save Sequence](../../images/generated/sequencer/instructions/utility_savesequence.png)
 
 Saves the currently running sequence to the specified file path. This is useful when a sequence modifies runtime state that should be preserved for a later session.
 
 ### Message Box
-![Message Box](../../images/sequencer/instructions/utility_box.png)  
+![Message Box](../../images/generated/sequencer/instructions/utility_box.png)
+
 When this instruction is starting it will spawn a message box and pauses the sequence until the user action to confirm the box is taken. The box can be used for example to stop the sequence and notify you to put a cover on to take flats etc.
 
 ### Wait For Altitude
@@ -373,7 +411,8 @@ For the given target coordinates, this instruction will simply wait until the al
 When this instruction is part of a "Deep Sky Object Sequence" the coordinates will be inherited and no coordinates need to be entered here  
 
 ### Wait For Time
-![Wait For Time](../../images/sequencer/instructions/utility_waitfortime.png)  
+![Wait For Time](../../images/generated/sequencer/instructions/utility_waitfortime.png)
+
 Waits until a specific local time or astronomy-based event. The source can be a manually entered time, a sun event, or the current target's meridian crossing. For calculated sources, the time fields are populated automatically and can be shifted earlier or later by setting an offset in minutes. If the selected time has already passed for the current observing day, the instruction waits zero seconds and continues.
 
 * **Time**: Manually entered local time in `hh:mm:ss`
@@ -416,19 +455,22 @@ Waits until a specific local time or astronomy-based event. The source can be a 
     If a calculated source such as sunset, astronomical dusk, or astronomical dawn is unavailable for the current location and date, N.I.N.A. marks the instruction as invalid instead of using the current time.
 
 ### Wait For Time Span
-![Wait For Time Span](../../images/sequencer/instructions/utility_waitfortimespan.png)  
+![Wait For Time Span](../../images/generated/sequencer/instructions/utility_waitfortimespan.png)
+
 Wait for a specific period of time.
 
 ### Wait If Moon Altitude
-![Wait If Moon Altitude](../../images/sequencer/instructions/utility_waitifmoonaltitude.png)  
+![Wait If Moon Altitude](../../images/generated/sequencer/instructions/utility_waitifmoonaltitude.png)
+
 Waits for as long as the moon matches the specified parameters.
 
 ### Wait If Sun Altitude
-![Wait If Sun Altitude](../../images/sequencer/instructions/utility_waitifsunaltitude.png)  
+![Wait If Sun Altitude](../../images/generated/sequencer/instructions/utility_waitifsunaltitude.png)
+
 Waits for as long as the sun matches the specified parameters.
 
 ### Wait Until (NINA 3.3)
-![Wait Until](../../images/sequencer/instructions/utility_waituntil.png)
+![Wait Until](../../images/generated/sequencer/instructions/utility_waituntil.png)
 
 This will wait until the Expression becomes True.
 ### Wait Until Above Horizon

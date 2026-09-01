@@ -6,12 +6,12 @@ Triggers can be identified by the highlighted lightning icon next to them in the
 Triggers that recover selected equipment after an unexpected disconnect.
 
 ### Reconnect Camera On Download Failure
-![Reconnect Camera On Download Failure](../../images/sequencer/trigger/reconnectcamera.png)
+![Reconnect Camera On Download Failure](../../images/generated/sequencer/trigger/reconnectcamera.png)
 
 Runs when the camera fails to download an exposure, reconnects the camera and restores the cooler and dew heater states.
 
 ### Reconnect Equipment
-![Reconnect Equipment](../../images/sequencer/trigger/reconnectequipment.png)
+![Reconnect Equipment](../../images/generated/sequencer/trigger/reconnectequipment.png)
 
 Monitors the selected equipment category and attempts to reconnect its profile device when it becomes disconnected.
 
@@ -19,7 +19,8 @@ Monitors the selected equipment category and attempts to reconnect its profile d
 Trigger actions for a dome. Each trigger in this category requires at least a dome to be connected.
 
 ### Synchronize Dome
-![Synchronize Dome](../../images/sequencer/trigger/syncdome.png)  
+![Synchronize Dome](../../images/generated/sequencer/trigger/syncdome.png)
+
 N.I.N.A. has the capability to automatically synchronize the dome with the telescope pointing direction. However, in some scenarios, for example with a heavy dome, the vibrations of movement can affect imaging quality. Therefore this trigger exists to only synchronize the dome between instructions, instead of having it constantly adjusted. This will also prevent dome movement during exposures.
 *Requires dome following to be disabled*
 
@@ -27,36 +28,43 @@ N.I.N.A. has the capability to automatically synchronize the dome with the teles
 Trigger actions for a focuser. Each trigger in this category requires at least a focuser to be connected.
 
 ### AF After # Exposures
-![AF After # Exposures](../../images/sequencer/trigger/afafterexposures.png)  
+![AF After # Exposures](../../images/generated/sequencer/trigger/afafterexposures.png)
+
 A trigger to simply run an autofocus after a set amount of exposures. As the amount of exposures is an arbitrary metric, this trigger is not recommended.
 
 ### AF After Filter Change
-![AF After Filter Change](../../images/sequencer/trigger/afafterfilter.png)  
+![AF After Filter Change](../../images/generated/sequencer/trigger/afafterfilter.png)
+
 When the filter wheel changes its filters and no filter offsets have been calculated to automatically adjust the focuser position for the change of focus due to the filter shift, this trigger can help to mitigate the problem by running an autofocus run when a filter changes during imaging.
 
 ### AF After HFR Increase
-![AF After HFR Increase](../../images/sequencer/trigger/afafterhfr.png)  
+![AF After HFR Increase](../../images/generated/sequencer/trigger/afafterhfr.png)
+
 This trigger will monitor the history of images taken during the sequence. It will take all exposures up until the last autofocus (or all if no autofocus has happened yet) and filter them for the currently active filter. The first point after the autofocus will be taken as a reference point as well as the last n points, where n is the specified sample size. Out of the last n points, the trend will be determined and compared to the reference point. If the trend is above the specified percentage, an autofocus will be triggered.
 This is a decent generic trigger if you don't know about the temperature sensitivity of your equipment, but it requires that your autofocus results are consistent and that the seeing is not bad.
 
 ### AF After Temperature Change
-![AF After Temperature Change](../../images/sequencer/trigger/afaftertemp.png)  
+![AF After Temperature Change](../../images/generated/sequencer/trigger/afaftertemp.png)
+
 When the temperature rises or falls, most equipment will slightly shift its focus. When you roughly know at which temperature your equipment shifts focus enough to be out of the critical focus zone, this trigger can help you automatically run the autofocus routine when a specified amount of temperature drift has happened.
 *Requires a focuser with a temperature probe*
 
 ### AF After Time
-![AF After Time](../../images/sequencer/trigger/afaftertime.png)  
+![AF After Time](../../images/generated/sequencer/trigger/afaftertime.png)
+
 A trigger to simply run an autofocus after a set amount of time. As the amount of time is an arbitrary metric, this trigger is not recommended.
 
 ## Guider
 Trigger actions for a guider. Each trigger in this category requires at least a guider to be connected.
 
 ### Dither After Exposures
-![Dither After Exposures](../../images/sequencer/trigger/ditherafterexposures.png)  
+![Dither After Exposures](../../images/generated/sequencer/trigger/ditherafterexposures.png)
+
 Using this trigger will initiate a dither operation after the set amount of exposures. For more information about dithering, visit the [dedicated page](../../advanced/dithering.md) about it.
 
 ### Restore Guiding
-![Restore Guiding](../../images/sequencer/trigger/restoreguiding.png)  
+![Restore Guiding](../../images/generated/sequencer/trigger/restoreguiding.png)
+
 This trigger will start guiding each time after an instruction inside its context. When guiding is already started, no action will be taken. Using this trigger makes sure that the guiding software reacquires a guide star after some failures, like clouds.  
 This trigger is best used in combination with the "Center After Drift" trigger to guard against interruption from clouds and thus drifting off target.
 
@@ -79,12 +87,13 @@ After the set amount of exposures, this trigger will plate solve the saved image
 *Requires a plate solver to be set up and the trigger needs to be inside a deep sky object sequence to have a target reference*
 
 ### Meridian Flip
-![Meridian Flip](../../images/sequencer/trigger/meridianflip.png)  
+![Meridian Flip](../../images/generated/sequencer/trigger/meridianflip.png)
+
 When the telescope passes the meridian according to the meridian flip settings in the [options](../../tabs/options/imaging.md), this trigger will initiate the meridian flip.  
 More information on the settings and how the flip works is available on the [meridian flip page](../../advanced/meridianflip.md).
 
 ### Programmable Meridian Flip
-![Programmable Meridian Flip](../../images/sequencer/trigger/programmablemeridianflip.png)
+![Programmable Meridian Flip](../../images/generated/sequencer/trigger/programmablemeridianflip.png)
 
 Provides editable **Before Flip Actions** and **After Flip Actions** containers around the built-in flip. When the trigger fires, N.I.N.A. stops tracking, runs the before actions, keeps tracking stopped until the flip window, resumes tracking, performs the normal flip workflow and then runs the after actions. Keep before actions short enough that they cannot delay the required flip.
 

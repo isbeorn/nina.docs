@@ -1,7 +1,7 @@
 The Rotator tab lets you connect an ASCOM-compatible rotator.
 A Manual Rotator option is also available.
 
-![Rotator](../../images/tabs/equipment_rotator.png)
+![Rotator](../../images/generated/tabs/equipment_rotator.png)
 
 1. Rotator information
 2. Reverse the direction of the rotator (if available). Enable this option when the rotator moves in the wrong direction during centering and rotation. This is required, for example, on setups like a Hyperstar where the horizontal image axis is flipped.

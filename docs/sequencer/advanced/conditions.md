@@ -4,11 +4,13 @@ Conditions can be identified by the highlighted icon next to them in the sequenc
 ![Loop Conditions](../../images/sequencer/conditions/conditions.png)  
 
 ### Loop For Iterations
-![Loop For Iterations](../../images/sequencer/conditions/loopforiterations.png)  
+![Loop For Iterations](../../images/generated/sequencer/conditions/loopforiterations.png)
+
 Loop the instruction set for the specified amount of iterations.
 
 ### Loop For Time Span
-![Loop For Time Span](../../images/sequencer/conditions/loopfortimespan.png)  
+![Loop For Time Span](../../images/generated/sequencer/conditions/loopfortimespan.png)
+
 Loop the instruction set for the specified amount of seconds.
 
 ### Loop Until Altitude Sets Below
@@ -71,31 +73,37 @@ When this condition is part of a "Deep Sky Object Sequence" the coordinates will
 ![Loop While Altitude Above Horizon](../../images/sequencer/conditions/loopwhilehorizon.png)  
 
 ### Loop While Safe
-![Loop While Safe](../../images/sequencer/conditions/loopwhilesafe.png)  
+![Loop While Safe](../../images/generated/sequencer/conditions/loopwhilesafe.png)
+
 Loop for as long as the safety monitor is reporting safe conditions. When the state of the safety monitor switches to unsafe, the currently running instruction will be cancelled and the rest of the instruction set will be skipped.  
 It is recommended to use this condition in conjunction with another condition, to not run in an endless loop when the safety monitor is reporting safe conditions for the whole time.  
 *Requires a safety monitor device to be connected*
 
 ### Loop While Unsafe
-![Loop While Unsafe](../../images/sequencer/conditions/loopwhileunsafe.png)  
+![Loop While Unsafe](../../images/generated/sequencer/conditions/loopwhileunsafe.png)
+
 Loop for as long as the safety monitor is reporting unsafe conditions. When the state of the safety monitor switches to safe, the currently running instruction will be cancelled and the rest of the instruction set will be skipped.  
 It is recommended to use this condition in conjunction with another condition, to not run in an endless loop when the safety monitor is reporting unsafe conditions for the whole time.  
 *Requires a safety monitor device to be connected*
 
 ### Loop While (NINA 3.3)
-![Sun Altitude](../../images/sequencer/conditions/loopwhile.png)  
+![Sun Altitude](../../images/generated/sequencer/conditions/loopwhile.png)
+
 Loop while the Expression is True
 
 ### Moon Altitude
-![Moon Altitude](../../images/sequencer/conditions/moonaltitude.png)  
+![Moon Altitude](../../images/generated/sequencer/conditions/moonaltitude.png)
+
 Loop for as long as the moon matches the specified parameters.
 
 ### Moon Illumination
-![Moon Illumination](../../images/sequencer/conditions/moonillumination.png)  
+![Moon Illumination](../../images/generated/sequencer/conditions/moonillumination.png)
+
 Loop for as long as the moon illumination matches the specified parameters.
 
 ### Sun Altitude
-![Sun Altitude](../../images/sequencer/conditions/sunaltitude.png)  
+![Sun Altitude](../../images/generated/sequencer/conditions/sunaltitude.png)
+
 Loop while the sun altitude is above or below the specified amount of degrees
 
 

@@ -1,6 +1,6 @@
 The Imaging options tab contains settings for file formats, save directories, Automatic Meridian Flips, sequencing, and image options.
 
-![The imaging options tab](../../images/tabs/Options-Imaging10.png)
+![The imaging options tab](../../images/generated/tabs/Options-Imaging10.png)
 
 ## File Settings
 

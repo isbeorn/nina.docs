@@ -20,7 +20,7 @@
     {
       "id": "docs-images-advanced-autofocuscurve1-png",
       "classification": "nina-generated-visual",
-      "output": "docs/images/advanced/autofocuscurve1.png",
+      "output": "docs/images/generated/advanced/autofocuscurve1.png",
       "width": 975,
       "height": 713,
       "fixture": "autofocus-chart",
@@ -31,7 +31,7 @@
     {
       "id": "docs-images-advanced-autofocuscurve2-png",
       "classification": "nina-generated-visual",
-      "output": "docs/images/advanced/autofocuscurve2.png",
+      "output": "docs/images/generated/advanced/autofocuscurve2.png",
       "width": 1025,
       "height": 586,
       "fixture": "autofocus-chart",
@@ -154,7 +154,7 @@
     {
       "id": "docs-images-advanced-focuserbacklash-png",
       "classification": "nina-generated-visual",
-      "output": "docs/images/advanced/focuserbacklash.png",
+      "output": "docs/images/generated/advanced/focuserbacklash.png",
       "width": 809,
       "height": 473,
       "fixture": "autofocus-chart",
@@ -180,7 +180,7 @@
     {
       "id": "docs-images-advanced-framing-imagesources-png",
       "classification": "nina-ui",
-      "output": "docs/images/advanced/framing/ImageSources.png",
+      "output": "docs/images/generated/advanced/framing/ImageSources.png",
       "width": 469,
       "height": 153,
       "fixture": "framing-assistant",
@@ -202,7 +202,7 @@
     {
       "id": "docs-images-advanced-framing-mosaicplan-png",
       "classification": "nina-ui",
-      "output": "docs/images/advanced/framing/MosaicPlan.png",
+      "output": "docs/images/generated/advanced/framing/MosaicPlan.png",
       "width": 1200,
       "height": 380,
       "fixture": "framing-assistant",
@@ -224,7 +224,7 @@
     {
       "id": "docs-images-advanced-framing-platesolve-png",
       "classification": "nina-ui",
-      "output": "docs/images/advanced/framing/Platesolve.png",
+      "output": "docs/images/generated/advanced/framing/Platesolve.png",
       "width": 505,
       "height": 219,
       "fixture": "framing-assistant",
@@ -515,7 +515,7 @@
     {
       "id": "docs-images-sequencer-conditions-loopforiterations-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/conditions/loopforiterations.png",
+      "output": "docs/images/generated/sequencer/conditions/loopforiterations.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -526,7 +526,7 @@
     {
       "id": "docs-images-sequencer-conditions-loopfortimespan-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/conditions/loopfortimespan.png",
+      "output": "docs/images/generated/sequencer/conditions/loopfortimespan.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -561,7 +561,7 @@
     {
       "id": "docs-images-sequencer-conditions-loopwhile-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/conditions/loopwhile.png",
+      "output": "docs/images/generated/sequencer/conditions/loopwhile.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -588,7 +588,7 @@
     {
       "id": "docs-images-sequencer-conditions-loopwhilesafe-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/conditions/loopwhilesafe.png",
+      "output": "docs/images/generated/sequencer/conditions/loopwhilesafe.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -599,7 +599,7 @@
     {
       "id": "docs-images-sequencer-conditions-loopwhileunsafe-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/conditions/loopwhileunsafe.png",
+      "output": "docs/images/generated/sequencer/conditions/loopwhileunsafe.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -610,7 +610,7 @@
     {
       "id": "docs-images-sequencer-conditions-moonaltitude-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/conditions/moonaltitude.png",
+      "output": "docs/images/generated/sequencer/conditions/moonaltitude.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -621,7 +621,7 @@
     {
       "id": "docs-images-sequencer-conditions-moonillumination-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/conditions/moonillumination.png",
+      "output": "docs/images/generated/sequencer/conditions/moonillumination.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -632,7 +632,7 @@
     {
       "id": "docs-images-sequencer-conditions-sunaltitude-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/conditions/sunaltitude.png",
+      "output": "docs/images/generated/sequencer/conditions/sunaltitude.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -643,7 +643,7 @@
     {
       "id": "docs-images-sequencer-instructions-camera-cool-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/camera_cool.png",
+      "output": "docs/images/generated/sequencer/instructions/camera_cool.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -654,7 +654,7 @@
     {
       "id": "docs-images-sequencer-instructions-camera-dew-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/camera_dew.png",
+      "output": "docs/images/generated/sequencer/instructions/camera_dew.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -673,7 +673,7 @@
     {
       "id": "docs-images-sequencer-instructions-camera-manyexposures-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/camera_manyexposures.png",
+      "output": "docs/images/generated/sequencer/instructions/camera_manyexposures.png",
       "width": 920,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -684,7 +684,7 @@
     {
       "id": "docs-images-sequencer-instructions-camera-readout-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/camera_readout.png",
+      "output": "docs/images/generated/sequencer/instructions/camera_readout.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -703,7 +703,7 @@
     {
       "id": "docs-images-sequencer-instructions-camera-usblimit-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/camera_usblimit.png",
+      "output": "docs/images/generated/sequencer/instructions/camera_usblimit.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -714,7 +714,7 @@
     {
       "id": "docs-images-sequencer-instructions-camera-warm-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/camera_warm.png",
+      "output": "docs/images/generated/sequencer/instructions/camera_warm.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -725,7 +725,7 @@
     {
       "id": "docs-images-sequencer-instructions-connect-all-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/connect_all.png",
+      "output": "docs/images/generated/sequencer/instructions/connect_all.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -736,7 +736,7 @@
     {
       "id": "docs-images-sequencer-instructions-connect-equipment-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/connect_equipment.png",
+      "output": "docs/images/generated/sequencer/instructions/connect_equipment.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -747,7 +747,7 @@
     {
       "id": "docs-images-sequencer-instructions-disable-dome-sync-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/disable_dome_sync.png",
+      "output": "docs/images/generated/sequencer/instructions/disable_dome_sync.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -758,7 +758,7 @@
     {
       "id": "docs-images-sequencer-instructions-disconnect-all-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/disconnect_all.png",
+      "output": "docs/images/generated/sequencer/instructions/disconnect_all.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -769,7 +769,7 @@
     {
       "id": "docs-images-sequencer-instructions-disconnect-equipment-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/disconnect_equipment.png",
+      "output": "docs/images/generated/sequencer/instructions/disconnect_equipment.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -780,7 +780,7 @@
     {
       "id": "docs-images-sequencer-instructions-dome-close-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/dome_close.png",
+      "output": "docs/images/generated/sequencer/instructions/dome_close.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -791,7 +791,7 @@
     {
       "id": "docs-images-sequencer-instructions-dome-findhome-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/dome_findhome.png",
+      "output": "docs/images/generated/sequencer/instructions/dome_findhome.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -802,7 +802,7 @@
     {
       "id": "docs-images-sequencer-instructions-dome-open-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/dome_open.png",
+      "output": "docs/images/generated/sequencer/instructions/dome_open.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -813,7 +813,7 @@
     {
       "id": "docs-images-sequencer-instructions-dome-park-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/dome_park.png",
+      "output": "docs/images/generated/sequencer/instructions/dome_park.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -824,7 +824,7 @@
     {
       "id": "docs-images-sequencer-instructions-dome-sync-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/dome_sync.png",
+      "output": "docs/images/generated/sequencer/instructions/dome_sync.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -835,7 +835,7 @@
     {
       "id": "docs-images-sequencer-instructions-filter-switch-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/filter_switch.png",
+      "output": "docs/images/generated/sequencer/instructions/filter_switch.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -846,7 +846,7 @@
     {
       "id": "docs-images-sequencer-instructions-flat-autobrightness-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/flat_autobrightness.png",
+      "output": "docs/images/generated/sequencer/instructions/flat_autobrightness.png",
       "width": 1400,
       "height": 56,
       "fixture": "sequencer-entity",
@@ -857,7 +857,7 @@
     {
       "id": "docs-images-sequencer-instructions-flat-autoexposure-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/flat_autoexposure.png",
+      "output": "docs/images/generated/sequencer/instructions/flat_autoexposure.png",
       "width": 1400,
       "height": 56,
       "fixture": "sequencer-entity",
@@ -868,7 +868,7 @@
     {
       "id": "docs-images-sequencer-instructions-flat-brightness-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/flat_brightness.png",
+      "output": "docs/images/generated/sequencer/instructions/flat_brightness.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -879,7 +879,7 @@
     {
       "id": "docs-images-sequencer-instructions-flat-close-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/flat_close.png",
+      "output": "docs/images/generated/sequencer/instructions/flat_close.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -890,7 +890,7 @@
     {
       "id": "docs-images-sequencer-instructions-flat-light-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/flat_light.png",
+      "output": "docs/images/generated/sequencer/instructions/flat_light.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -901,7 +901,7 @@
     {
       "id": "docs-images-sequencer-instructions-flat-open-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/flat_open.png",
+      "output": "docs/images/generated/sequencer/instructions/flat_open.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -912,7 +912,7 @@
     {
       "id": "docs-images-sequencer-instructions-flat-sky-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/flat_sky.png",
+      "output": "docs/images/generated/sequencer/instructions/flat_sky.png",
       "width": 1400,
       "height": 56,
       "fixture": "sequencer-entity",
@@ -923,7 +923,7 @@
     {
       "id": "docs-images-sequencer-instructions-flat-traineddark-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/flat_traineddark.png",
+      "output": "docs/images/generated/sequencer/instructions/flat_traineddark.png",
       "width": 1000,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -934,7 +934,7 @@
     {
       "id": "docs-images-sequencer-instructions-flat-trainedflat-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/flat_trainedflat.png",
+      "output": "docs/images/generated/sequencer/instructions/flat_trainedflat.png",
       "width": 1000,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -945,7 +945,7 @@
     {
       "id": "docs-images-sequencer-instructions-focuser-autofocus-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/focuser_autofocus.png",
+      "output": "docs/images/generated/sequencer/instructions/focuser_autofocus.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -956,7 +956,7 @@
     {
       "id": "docs-images-sequencer-instructions-focuser-move-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/focuser_move.png",
+      "output": "docs/images/generated/sequencer/instructions/focuser_move.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -967,7 +967,7 @@
     {
       "id": "docs-images-sequencer-instructions-focuser-movebytemp-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/focuser_movebytemp.png",
+      "output": "docs/images/generated/sequencer/instructions/focuser_movebytemp.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -978,7 +978,7 @@
     {
       "id": "docs-images-sequencer-instructions-focuser-moverelative-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/focuser_moverelative.png",
+      "output": "docs/images/generated/sequencer/instructions/focuser_moverelative.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -989,7 +989,7 @@
     {
       "id": "docs-images-sequencer-instructions-guider-dither-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/guider_dither.png",
+      "output": "docs/images/generated/sequencer/instructions/guider_dither.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -1000,7 +1000,7 @@
     {
       "id": "docs-images-sequencer-instructions-guider-start-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/guider_start.png",
+      "output": "docs/images/generated/sequencer/instructions/guider_start.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -1011,7 +1011,7 @@
     {
       "id": "docs-images-sequencer-instructions-guider-stop-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/guider_stop.png",
+      "output": "docs/images/generated/sequencer/instructions/guider_stop.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -1070,7 +1070,7 @@
     {
       "id": "docs-images-sequencer-instructions-rotator-movemechanical-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/rotator_movemechanical.png",
+      "output": "docs/images/generated/sequencer/instructions/rotator_movemechanical.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -1081,7 +1081,7 @@
     {
       "id": "docs-images-sequencer-instructions-rotator-solveandsync-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/rotator_solveandsync.png",
+      "output": "docs/images/generated/sequencer/instructions/rotator_solveandsync.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -1092,7 +1092,7 @@
     {
       "id": "docs-images-sequencer-instructions-safety-wait-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/safety_wait.png",
+      "output": "docs/images/generated/sequencer/instructions/safety_wait.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -1103,7 +1103,7 @@
     {
       "id": "docs-images-sequencer-instructions-slew-dome-azimuth-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/slew_dome_azimuth.png",
+      "output": "docs/images/generated/sequencer/instructions/slew_dome_azimuth.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -1114,7 +1114,7 @@
     {
       "id": "docs-images-sequencer-instructions-switch-set-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/switch_set.png",
+      "output": "docs/images/generated/sequencer/instructions/switch_set.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -1125,7 +1125,7 @@
     {
       "id": "docs-images-sequencer-instructions-switch-profile-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/switch_profile.png",
+      "output": "docs/images/generated/sequencer/instructions/switch_profile.png",
       "width": 820,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -1136,7 +1136,7 @@
     {
       "id": "docs-images-sequencer-instructions-synchronize-dome-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/synchronize_dome.png",
+      "output": "docs/images/generated/sequencer/instructions/synchronize_dome.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -1147,7 +1147,7 @@
     {
       "id": "docs-images-sequencer-instructions-take-subframe-exposure-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/take_subframe_exposure.png",
+      "output": "docs/images/generated/sequencer/instructions/take_subframe_exposure.png",
       "width": 1009,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -1158,7 +1158,7 @@
     {
       "id": "docs-images-sequencer-instructions-telescope-findhome-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/telescope_findhome.png",
+      "output": "docs/images/generated/sequencer/instructions/telescope_findhome.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -1169,7 +1169,7 @@
     {
       "id": "docs-images-sequencer-instructions-telescope-park-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/telescope_park.png",
+      "output": "docs/images/generated/sequencer/instructions/telescope_park.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -1180,7 +1180,7 @@
     {
       "id": "docs-images-sequencer-instructions-telescope-settracking-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/telescope_settracking.png",
+      "output": "docs/images/generated/sequencer/instructions/telescope_settracking.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -1199,7 +1199,7 @@
     {
       "id": "docs-images-sequencer-instructions-telescope-slewcenter-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/telescope_slewcenter.png",
+      "output": "docs/images/generated/sequencer/instructions/telescope_slewcenter.png",
       "width": 1000,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -1210,7 +1210,7 @@
     {
       "id": "docs-images-sequencer-instructions-telescope-slewcenterrotate-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/telescope_slewcenterrotate.png",
+      "output": "docs/images/generated/sequencer/instructions/telescope_slewcenterrotate.png",
       "width": 1000,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -1221,7 +1221,7 @@
     {
       "id": "docs-images-sequencer-instructions-telescope-slewradec-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/telescope_slewradec.png",
+      "output": "docs/images/generated/sequencer/instructions/telescope_slewradec.png",
       "width": 1000,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -1232,7 +1232,7 @@
     {
       "id": "docs-images-sequencer-instructions-telescope-unpark-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/telescope_unpark.png",
+      "output": "docs/images/generated/sequencer/instructions/telescope_unpark.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -1243,7 +1243,7 @@
     {
       "id": "docs-images-sequencer-instructions-utility-annotation-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/utility_annotation.png",
+      "output": "docs/images/generated/sequencer/instructions/utility_annotation.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -1254,7 +1254,7 @@
     {
       "id": "docs-images-sequencer-instructions-utility-box-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/utility_box.png",
+      "output": "docs/images/generated/sequencer/instructions/utility_box.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -1265,7 +1265,7 @@
     {
       "id": "docs-images-sequencer-instructions-utility-loadlayout-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/utility_loadlayout.png",
+      "output": "docs/images/generated/sequencer/instructions/utility_loadlayout.png",
       "width": 900,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -1276,7 +1276,7 @@
     {
       "id": "docs-images-sequencer-instructions-utility-savesequence-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/utility_savesequence.png",
+      "output": "docs/images/generated/sequencer/instructions/utility_savesequence.png",
       "width": 900,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -1287,7 +1287,7 @@
     {
       "id": "docs-images-sequencer-instructions-utility-script-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/utility_script.png",
+      "output": "docs/images/generated/sequencer/instructions/utility_script.png",
       "width": 983,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -1306,7 +1306,7 @@
     {
       "id": "docs-images-sequencer-instructions-utility-waitfortime-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/utility_waitfortime.png",
+      "output": "docs/images/generated/sequencer/instructions/utility_waitfortime.png",
       "width": 900,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -1317,7 +1317,7 @@
     {
       "id": "docs-images-sequencer-instructions-utility-waitfortimespan-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/utility_waitfortimespan.png",
+      "output": "docs/images/generated/sequencer/instructions/utility_waitfortimespan.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -1328,7 +1328,7 @@
     {
       "id": "docs-images-sequencer-instructions-utility-waitifmoonaltitude-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/utility_waitifmoonaltitude.png",
+      "output": "docs/images/generated/sequencer/instructions/utility_waitifmoonaltitude.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -1339,7 +1339,7 @@
     {
       "id": "docs-images-sequencer-instructions-utility-waitifsunaltitude-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/utility_waitifsunaltitude.png",
+      "output": "docs/images/generated/sequencer/instructions/utility_waitifsunaltitude.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -1350,7 +1350,7 @@
     {
       "id": "docs-images-sequencer-instructions-utility-waituntil-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/instructions/utility_waituntil.png",
+      "output": "docs/images/generated/sequencer/instructions/utility_waituntil.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -1497,7 +1497,7 @@
     {
       "id": "docs-images-sequencer-sequencer-functions-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/Sequencer_Functions.png",
+      "output": "docs/images/generated/sequencer/Sequencer_Functions.png",
       "width": 469,
       "height": 695,
       "fixture": "sequencer",
@@ -1516,7 +1516,7 @@
     {
       "id": "docs-images-sequencer-sequencer-instructions-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/Sequencer_Instructions.png",
+      "output": "docs/images/generated/sequencer/Sequencer_Instructions.png",
       "width": 468,
       "height": 520,
       "fixture": "sequencer",
@@ -1535,7 +1535,7 @@
     {
       "id": "docs-images-sequencer-sequencer-instructionsdetails-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/Sequencer_InstructionsDetails.png",
+      "output": "docs/images/generated/sequencer/Sequencer_InstructionsDetails.png",
       "width": 1220,
       "height": 160,
       "fixture": "sequencer",
@@ -1565,7 +1565,7 @@
     {
       "id": "docs-images-sequencer-sequencer-nestedconditions-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/Sequencer_NestedConditions.png",
+      "output": "docs/images/generated/sequencer/Sequencer_NestedConditions.png",
       "width": 1434,
       "height": 891,
       "fixture": "sequencer",
@@ -1579,7 +1579,7 @@
     {
       "id": "docs-images-sequencer-sequencer-nestedtriggers-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/Sequencer_NestedTriggers.png",
+      "output": "docs/images/generated/sequencer/Sequencer_NestedTriggers.png",
       "width": 1429,
       "height": 885,
       "fixture": "sequencer",
@@ -1593,7 +1593,7 @@
     {
       "id": "docs-images-sequencer-sequencer-overview-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/Sequencer_Overview.png",
+      "output": "docs/images/generated/sequencer/Sequencer_Overview.png",
       "width": 2306,
       "height": 1274,
       "fixture": "sequencer",
@@ -1604,7 +1604,7 @@
     {
       "id": "docs-images-sequencer-sequencer-parallelinstructions-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/Sequencer_ParallelInstructions.png",
+      "output": "docs/images/generated/sequencer/Sequencer_ParallelInstructions.png",
       "width": 1453,
       "height": 250,
       "fixture": "sequencer",
@@ -1634,7 +1634,7 @@
     {
       "id": "docs-images-sequencer-sequencer-sequentialinstructions-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/Sequencer_SequentialInstructions.png",
+      "output": "docs/images/generated/sequencer/Sequencer_SequentialInstructions.png",
       "width": 1450,
       "height": 423,
       "fixture": "sequencer",
@@ -1664,7 +1664,7 @@
     {
       "id": "docs-images-sequencer-sequencer-symbols-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/Sequencer_Symbols.png",
+      "output": "docs/images/generated/sequencer/Sequencer_Symbols.png",
       "width": 313,
       "height": 687,
       "fixture": "sequencer",
@@ -1699,7 +1699,7 @@
     {
       "id": "docs-images-sequencer-sequencer-templates-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/Sequencer_Templates.png",
+      "output": "docs/images/generated/sequencer/Sequencer_Templates.png",
       "width": 374,
       "height": 512,
       "fixture": "sequencer",
@@ -1718,7 +1718,7 @@
     {
       "id": "docs-images-sequencer-sequencer-triggers-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/Sequencer_Triggers.png",
+      "output": "docs/images/generated/sequencer/Sequencer_Triggers.png",
       "width": 1452,
       "height": 487,
       "fixture": "sequencer",
@@ -1908,7 +1908,7 @@
     {
       "id": "docs-images-sequencer-trigger-afafterexposures-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/trigger/afafterexposures.png",
+      "output": "docs/images/generated/sequencer/trigger/afafterexposures.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -1919,7 +1919,7 @@
     {
       "id": "docs-images-sequencer-trigger-afafterfilter-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/trigger/afafterfilter.png",
+      "output": "docs/images/generated/sequencer/trigger/afafterfilter.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -1930,7 +1930,7 @@
     {
       "id": "docs-images-sequencer-trigger-afafterhfr-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/trigger/afafterhfr.png",
+      "output": "docs/images/generated/sequencer/trigger/afafterhfr.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -1941,7 +1941,7 @@
     {
       "id": "docs-images-sequencer-trigger-afaftertemp-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/trigger/afaftertemp.png",
+      "output": "docs/images/generated/sequencer/trigger/afaftertemp.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -1952,7 +1952,7 @@
     {
       "id": "docs-images-sequencer-trigger-afaftertime-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/trigger/afaftertime.png",
+      "output": "docs/images/generated/sequencer/trigger/afaftertime.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -1979,7 +1979,7 @@
     {
       "id": "docs-images-sequencer-trigger-ditherafterexposures-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/trigger/ditherafterexposures.png",
+      "output": "docs/images/generated/sequencer/trigger/ditherafterexposures.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -1990,7 +1990,7 @@
     {
       "id": "docs-images-sequencer-trigger-meridianflip-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/trigger/meridianflip.png",
+      "output": "docs/images/generated/sequencer/trigger/meridianflip.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -2001,7 +2001,7 @@
     {
       "id": "docs-images-sequencer-trigger-programmablemeridianflip-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/trigger/programmablemeridianflip.png",
+      "output": "docs/images/generated/sequencer/trigger/programmablemeridianflip.png",
       "width": 412,
       "height": 456,
       "fixture": "sequencer-entity",
@@ -2012,7 +2012,7 @@
     {
       "id": "docs-images-sequencer-trigger-reconnectcamera-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/trigger/reconnectcamera.png",
+      "output": "docs/images/generated/sequencer/trigger/reconnectcamera.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -2023,7 +2023,7 @@
     {
       "id": "docs-images-sequencer-trigger-reconnectequipment-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/trigger/reconnectequipment.png",
+      "output": "docs/images/generated/sequencer/trigger/reconnectequipment.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -2034,7 +2034,7 @@
     {
       "id": "docs-images-sequencer-trigger-restoreguiding-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/trigger/restoreguiding.png",
+      "output": "docs/images/generated/sequencer/trigger/restoreguiding.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -2045,7 +2045,7 @@
     {
       "id": "docs-images-sequencer-trigger-syncdome-png",
       "classification": "nina-ui",
-      "output": "docs/images/sequencer/trigger/syncdome.png",
+      "output": "docs/images/generated/sequencer/trigger/syncdome.png",
       "width": 720,
       "height": 35,
       "fixture": "sequencer-entity",
@@ -2104,7 +2104,7 @@
     {
       "id": "docs-images-tabs-equipment-camera-png",
       "classification": "nina-ui",
-      "output": "docs/images/tabs/equipment_camera.png",
+      "output": "docs/images/generated/tabs/equipment_camera.png",
       "width": 1849,
       "height": 800,
       "fixture": "view",
@@ -2131,7 +2131,7 @@
     {
       "id": "docs-images-tabs-equipment-guider-png",
       "classification": "nina-ui",
-      "output": "docs/images/tabs/equipment_guider.png",
+      "output": "docs/images/generated/tabs/equipment_guider.png",
       "width": 1861,
       "height": 850,
       "fixture": "view",
@@ -2142,7 +2142,7 @@
     {
       "id": "docs-images-tabs-equipment-rotator-png",
       "classification": "nina-ui",
-      "output": "docs/images/tabs/equipment_rotator.png",
+      "output": "docs/images/generated/tabs/equipment_rotator.png",
       "width": 1754,
       "height": 297,
       "fixture": "view",
@@ -2161,7 +2161,7 @@
     {
       "id": "docs-images-tabs-equipment-scope-png",
       "classification": "nina-ui",
-      "output": "docs/images/tabs/equipment_scope.png",
+      "output": "docs/images/generated/tabs/equipment_scope.png",
       "width": 1583,
       "height": 966,
       "fixture": "view",
@@ -2172,7 +2172,7 @@
     {
       "id": "docs-images-tabs-equipment-switches-png",
       "classification": "nina-ui",
-      "output": "docs/images/tabs/equipment_switches.png",
+      "output": "docs/images/generated/tabs/equipment_switches.png",
       "width": 1441,
       "height": 1003,
       "fixture": "view",
@@ -2183,7 +2183,7 @@
     {
       "id": "docs-images-tabs-equipment-dome0-png",
       "classification": "nina-ui",
-      "output": "docs/images/tabs/Equipment-Dome0.png",
+      "output": "docs/images/generated/tabs/Equipment-Dome0.png",
       "width": 1441,
       "height": 761,
       "fixture": "view",
@@ -2226,7 +2226,7 @@
     {
       "id": "docs-images-tabs-flatwizard1-png",
       "classification": "nina-ui",
-      "output": "docs/images/tabs/flatwizard1.png",
+      "output": "docs/images/generated/tabs/flatwizard1.png",
       "width": 1435,
       "height": 837,
       "fixture": "view",
@@ -2277,7 +2277,7 @@
     {
       "id": "docs-images-tabs-hfr2-png",
       "classification": "nina-generated-visual",
-      "output": "docs/images/tabs/HFR2.png",
+      "output": "docs/images/generated/tabs/HFR2.png",
       "width": 808,
       "height": 343,
       "fixture": "autofocus-chart",
@@ -2305,7 +2305,7 @@
     {
       "id": "docs-images-tabs-imaging-aficon-png",
       "classification": "nina-ui",
-      "output": "docs/images/tabs/imaging_aficon.PNG",
+      "output": "docs/images/generated/tabs/imaging_aficon.PNG",
       "width": 46,
       "height": 46,
       "fixture": "resource-icon",
@@ -2315,7 +2315,7 @@
     {
       "id": "docs-images-tabs-imaging-cameraicon-png",
       "classification": "nina-ui",
-      "output": "docs/images/tabs/imaging_cameraicon.PNG",
+      "output": "docs/images/generated/tabs/imaging_cameraicon.PNG",
       "width": 42,
       "height": 44,
       "fixture": "resource-icon",
@@ -2341,7 +2341,7 @@
     {
       "id": "docs-images-tabs-imaging-focusericon-png",
       "classification": "nina-ui",
-      "output": "docs/images/tabs/imaging_focusericon.PNG",
+      "output": "docs/images/generated/tabs/imaging_focusericon.PNG",
       "width": 46,
       "height": 45,
       "fixture": "resource-icon",
@@ -2351,7 +2351,7 @@
     {
       "id": "docs-images-tabs-imaging-fwicon-png",
       "classification": "nina-ui",
-      "output": "docs/images/tabs/imaging_fwicon.PNG",
+      "output": "docs/images/generated/tabs/imaging_fwicon.PNG",
       "width": 43,
       "height": 41,
       "fixture": "resource-icon",
@@ -2361,7 +2361,7 @@
     {
       "id": "docs-images-tabs-imaging-guideicon-png",
       "classification": "nina-ui",
-      "output": "docs/images/tabs/imaging_guideicon.PNG",
+      "output": "docs/images/generated/tabs/imaging_guideicon.PNG",
       "width": 39,
       "height": 40,
       "fixture": "resource-icon",
@@ -2387,7 +2387,7 @@
     {
       "id": "docs-images-tabs-imaging-hfricon-png",
       "classification": "nina-ui",
-      "output": "docs/images/tabs/imaging_HFRicon.PNG",
+      "output": "docs/images/generated/tabs/imaging_HFRicon.PNG",
       "width": 48,
       "height": 44,
       "fixture": "resource-icon",
@@ -2397,7 +2397,7 @@
     {
       "id": "docs-images-tabs-imaging-history-png",
       "classification": "nina-ui",
-      "output": "docs/images/tabs/imaging_history.png",
+      "output": "docs/images/generated/tabs/imaging_history.png",
       "width": 590,
       "height": 404,
       "fixture": "view",
@@ -2408,7 +2408,7 @@
     {
       "id": "docs-images-tabs-imaging-historyicon-png",
       "classification": "nina-ui",
-      "output": "docs/images/tabs/imaging_historyicon.PNG",
+      "output": "docs/images/generated/tabs/imaging_historyicon.PNG",
       "width": 47,
       "height": 41,
       "fixture": "resource-icon",
@@ -2434,7 +2434,7 @@
     {
       "id": "docs-images-tabs-imaging-imageicon-png",
       "classification": "nina-ui",
-      "output": "docs/images/tabs/imaging_imageicon.PNG",
+      "output": "docs/images/generated/tabs/imaging_imageicon.PNG",
       "width": 46,
       "height": 40,
       "fixture": "resource-icon",
@@ -2444,7 +2444,7 @@
     {
       "id": "docs-images-tabs-imaging-imagingicon-png",
       "classification": "nina-ui",
-      "output": "docs/images/tabs/imaging_imagingicon.PNG",
+      "output": "docs/images/generated/tabs/imaging_imagingicon.PNG",
       "width": 46,
       "height": 45,
       "fixture": "resource-icon",
@@ -2470,7 +2470,7 @@
     {
       "id": "docs-images-tabs-imaging-mftargetsicon-png",
       "classification": "nina-ui",
-      "output": "docs/images/tabs/imaging_mftargetsicon.PNG",
+      "output": "docs/images/generated/tabs/imaging_mftargetsicon.PNG",
       "width": 40,
       "height": 41,
       "fixture": "resource-icon",
@@ -2488,7 +2488,7 @@
     {
       "id": "docs-images-tabs-imaging-platesolveicon-png",
       "classification": "nina-ui",
-      "output": "docs/images/tabs/imaging_platesolveicon.PNG",
+      "output": "docs/images/generated/tabs/imaging_platesolveicon.PNG",
       "width": 42,
       "height": 42,
       "fixture": "resource-icon",
@@ -2506,7 +2506,7 @@
     {
       "id": "docs-images-tabs-imaging-rotatoricon-png",
       "classification": "nina-ui",
-      "output": "docs/images/tabs/imaging_rotatoricon.PNG",
+      "output": "docs/images/generated/tabs/imaging_rotatoricon.PNG",
       "width": 45,
       "height": 40,
       "fixture": "resource-icon",
@@ -2524,7 +2524,7 @@
     {
       "id": "docs-images-tabs-imaging-sequenceicon-png",
       "classification": "nina-ui",
-      "output": "docs/images/tabs/imaging_sequenceicon.PNG",
+      "output": "docs/images/generated/tabs/imaging_sequenceicon.PNG",
       "width": 45,
       "height": 46,
       "fixture": "resource-icon",
@@ -2542,7 +2542,7 @@
     {
       "id": "docs-images-tabs-imaging-statsicon-png",
       "classification": "nina-ui",
-      "output": "docs/images/tabs/imaging_statsicon.PNG",
+      "output": "docs/images/generated/tabs/imaging_statsicon.PNG",
       "width": 46,
       "height": 44,
       "fixture": "resource-icon",
@@ -2560,7 +2560,7 @@
     {
       "id": "docs-images-tabs-imaging-switchesicon-png",
       "classification": "nina-ui",
-      "output": "docs/images/tabs/imaging_switchesicon.PNG",
+      "output": "docs/images/generated/tabs/imaging_switchesicon.PNG",
       "width": 43,
       "height": 44,
       "fixture": "resource-icon",
@@ -2578,7 +2578,7 @@
     {
       "id": "docs-images-tabs-imaging-telescopeicon-png",
       "classification": "nina-ui",
-      "output": "docs/images/tabs/imaging_telescopeicon.PNG",
+      "output": "docs/images/generated/tabs/imaging_telescopeicon.PNG",
       "width": 46,
       "height": 41,
       "fixture": "resource-icon",
@@ -2596,7 +2596,7 @@
     {
       "id": "docs-images-tabs-imaging-weathericon-png",
       "classification": "nina-ui",
-      "output": "docs/images/tabs/imaging_weathericon.PNG",
+      "output": "docs/images/generated/tabs/imaging_weathericon.PNG",
       "width": 46,
       "height": 41,
       "fixture": "resource-icon",
@@ -2614,7 +2614,7 @@
     {
       "id": "docs-images-tabs-options-autofocus-png",
       "classification": "nina-ui",
-      "output": "docs/images/tabs/options_autofocus.png",
+      "output": "docs/images/generated/tabs/options_autofocus.png",
       "width": 1377,
       "height": 800,
       "fixture": "view",
@@ -2633,7 +2633,7 @@
     {
       "id": "docs-images-tabs-options-imaging10-png",
       "classification": "nina-ui",
-      "output": "docs/images/tabs/Options-Imaging10.png",
+      "output": "docs/images/generated/tabs/Options-Imaging10.png",
       "width": 2796,
       "height": 1449,
       "fixture": "view",
@@ -2644,7 +2644,7 @@
     {
       "id": "docs-images-tabs-optionsequipment10-png",
       "classification": "nina-ui",
-      "output": "docs/images/tabs/OptionsEquipment10.png",
+      "output": "docs/images/generated/tabs/OptionsEquipment10.png",
       "width": 1472,
       "height": 772,
       "fixture": "view",
@@ -2663,7 +2663,7 @@
     {
       "id": "docs-images-tabs-optionsplatesolving10-png",
       "classification": "nina-ui",
-      "output": "docs/images/tabs/OptionsPlateSolving10.png",
+      "output": "docs/images/generated/tabs/OptionsPlateSolving10.png",
       "width": 2367,
       "height": 1318,
       "fixture": "application",
@@ -2689,7 +2689,7 @@
     {
       "id": "docs-images-tabs-plugins-installed-png-2",
       "classification": "nina-ui",
-      "output": "docs/images/tabs/plugins/installed.png",
+      "output": "docs/images/generated/tabs/plugins/installed.png",
       "width": 34,
       "height": 28,
       "fixture": "resource-icon",
@@ -2699,7 +2699,7 @@
     {
       "id": "docs-images-tabs-plugins-restart-png",
       "classification": "nina-ui",
-      "output": "docs/images/tabs/plugins/restart.png",
+      "output": "docs/images/generated/tabs/plugins/restart.png",
       "width": 38,
       "height": 24,
       "fixture": "resource-icon",
@@ -2709,7 +2709,7 @@
     {
       "id": "docs-images-tabs-plugins-update-png",
       "classification": "nina-ui",
-      "output": "docs/images/tabs/plugins/update.png",
+      "output": "docs/images/generated/tabs/plugins/update.png",
       "width": 38,
       "height": 24,
       "fixture": "resource-icon",
@@ -2751,7 +2751,7 @@
     {
       "id": "docs-images-tabs-weather-png",
       "classification": "nina-ui",
-      "output": "docs/images/tabs/weather.PNG",
+      "output": "docs/images/generated/tabs/weather.PNG",
       "width": 1100,
       "height": 440,
       "fixture": "view",
@@ -2826,7 +2826,7 @@
     {
       "id": "docs-images-troubleshooting-ioptron-meridian-flip-png",
       "classification": "nina-ui",
-      "output": "docs/images/troubleshooting/ioptron/meridian_flip.png",
+      "output": "docs/images/generated/troubleshooting/ioptron/meridian_flip.png",
       "width": 410,
       "height": 270,
       "fixture": "settings-group",

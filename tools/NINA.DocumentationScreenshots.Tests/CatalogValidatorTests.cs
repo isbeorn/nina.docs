@@ -36,8 +36,8 @@ public class CatalogValidatorTests {
         ScreenshotCatalog catalog = new() {
             SchemaVersion = 1,
             Assets = [
-                Managed("minimum", "docs/images/minimum.png", 16, 16, [new ScreenshotCallout { X = 0, Y = 0, Text = "1" }]),
-                Managed("maximum", "docs/images/maximum.png", 8192, 8192, [new ScreenshotCallout { X = 1, Y = 1, Text = "2" }])
+                Managed("minimum", "docs/images/generated/minimum.png", 16, 16, [new ScreenshotCallout { X = 0, Y = 0, Text = "1" }]),
+                Managed("maximum", "docs/images/generated/maximum.png", 8192, 8192, [new ScreenshotCallout { X = 1, Y = 1, Text = "2" }])
             ]
         };
 
@@ -51,7 +51,7 @@ public class CatalogValidatorTests {
     [TestCase(8193, 8192)]
     [TestCase(8192, 8193)]
     public void Validate_RejectsDimensionsOutsideBothBoundaries(int width, int height) {
-        ScreenshotCatalog catalog = Catalog(Managed("invalid", "docs/images/invalid.png", width, height));
+        ScreenshotCatalog catalog = Catalog(Managed("invalid", "docs/images/generated/invalid.png", width, height));
 
         Assert.That(
             () => CatalogValidator.Validate(catalog, root, new FixtureRegistry()),
@@ -61,18 +61,18 @@ public class CatalogValidatorTests {
     [Test]
     public void Validate_RejectsDuplicateIdsAndOutputs() {
         ScreenshotCatalog duplicateIds = Catalog(
-            Managed("same", "docs/images/first.png"),
-            Managed("same", "docs/images/second.png"));
+            Managed("same", "docs/images/generated/first.png"),
+            Managed("same", "docs/images/generated/second.png"));
         ScreenshotCatalog duplicateOutputs = Catalog(
-            Managed("first", "docs/images/same.png"),
-            Managed("second", "docs/images/same.png"));
+            Managed("first", "docs/images/generated/same.png"),
+            Managed("second", "docs/images/generated/same.png"));
 
         Assert.That(() => CatalogValidator.Validate(duplicateIds, root, new FixtureRegistry()), Throws.TypeOf<CatalogException>());
         Assert.That(() => CatalogValidator.Validate(duplicateOutputs, root, new FixtureRegistry()), Throws.TypeOf<CatalogException>());
     }
 
-    [TestCase("docs/images/generated.jpg")]
-    [TestCase("docs/images/generated.JPEG")]
+    [TestCase("docs/images/generated/generated.jpg")]
+    [TestCase("docs/images/generated/generated.JPEG")]
     public void Validate_RejectsManagedOutputsThatAreNotPng(string output) {
         ScreenshotCatalog catalog = Catalog(Managed("generated", output));
 
@@ -82,11 +82,20 @@ public class CatalogValidatorTests {
     }
 
     [Test]
+    public void Validate_RequiresManagedOutputsInsideGeneratedImageRoot() {
+        ScreenshotCatalog catalog = Catalog(Managed("legacy-location", "docs/images/legacy-location.png"));
+
+        Assert.That(
+            () => CatalogValidator.Validate(catalog, root, new FixtureRegistry()),
+            Throws.TypeOf<CatalogException>().With.Message.Contains("docs/images/generated"));
+    }
+
+    [Test]
     public void Validate_RejectsCatalogGuessesForProductionSequencerIcons() {
         ScreenshotAsset asset = new() {
             Id = "cool-camera",
             Classification = ScreenshotClassification.NinaUi,
-            Output = "docs/images/cool-camera.png",
+            Output = "docs/images/generated/cool-camera.png",
             Fixture = "sequencer-entity",
             State = "cool-camera",
             SourceIdentifier = "sequencer:CoolCamera",
@@ -103,8 +112,8 @@ public class CatalogValidatorTests {
     [Test]
     public void Validate_RejectsDifferentScreenshotsThatWouldRenderIdentically() {
         ScreenshotCatalog catalog = Catalog(
-            Managed("open-dome", "docs/images/open-dome.png", 200, 35),
-            Managed("park-scope", "docs/images/park-scope.png", 200, 35));
+            Managed("open-dome", "docs/images/generated/open-dome.png", 200, 35),
+            Managed("park-scope", "docs/images/generated/park-scope.png", 200, 35));
 
         Assert.That(
             () => CatalogValidator.Validate(catalog, root, new FixtureRegistry()),
@@ -114,10 +123,10 @@ public class CatalogValidatorTests {
     [Test]
     public void Validate_RejectsPathTraversalAndCalloutsOutsideEveryEdge() {
         ScreenshotCatalog traversal = Catalog(Managed("escape", "../escape.png"));
-        ScreenshotCatalog left = Catalog(Managed("left", "docs/images/left.png", callouts: [new ScreenshotCallout { X = -0.01, Y = 0.5, Text = "1" }]));
-        ScreenshotCatalog top = Catalog(Managed("top", "docs/images/top.png", callouts: [new ScreenshotCallout { X = 0.5, Y = -0.01, Text = "1" }]));
-        ScreenshotCatalog right = Catalog(Managed("right", "docs/images/right.png", callouts: [new ScreenshotCallout { X = 1.01, Y = 0.5, Text = "1" }]));
-        ScreenshotCatalog bottom = Catalog(Managed("bottom", "docs/images/bottom.png", callouts: [new ScreenshotCallout { X = 0.5, Y = 1.01, Text = "1" }]));
+        ScreenshotCatalog left = Catalog(Managed("left", "docs/images/generated/left.png", callouts: [new ScreenshotCallout { X = -0.01, Y = 0.5, Text = "1" }]));
+        ScreenshotCatalog top = Catalog(Managed("top", "docs/images/generated/top.png", callouts: [new ScreenshotCallout { X = 0.5, Y = -0.01, Text = "1" }]));
+        ScreenshotCatalog right = Catalog(Managed("right", "docs/images/generated/right.png", callouts: [new ScreenshotCallout { X = 1.01, Y = 0.5, Text = "1" }]));
+        ScreenshotCatalog bottom = Catalog(Managed("bottom", "docs/images/generated/bottom.png", callouts: [new ScreenshotCallout { X = 0.5, Y = 1.01, Text = "1" }]));
 
         Assert.That(() => CatalogValidator.Validate(traversal, root, new FixtureRegistry()), Throws.TypeOf<CatalogException>());
         Assert.That(() => CatalogValidator.Validate(left, root, new FixtureRegistry()), Throws.TypeOf<CatalogException>());
@@ -131,7 +140,7 @@ public class CatalogValidatorTests {
         ScreenshotCatalog missingFixture = Catalog(new ScreenshotAsset {
             Id = "managed",
             Classification = ScreenshotClassification.NinaUi,
-            Output = "docs/images/managed.png",
+            Output = "docs/images/generated/managed.png",
             Width = 100,
             Height = 100
         });
@@ -147,7 +156,7 @@ public class CatalogValidatorTests {
 
     [Test]
     public void Validate_AcceptsProductionSettingsCropForARealViewFixture() {
-        ScreenshotAsset asset = Managed("meridian-flip", "docs/images/meridian-flip.png");
+        ScreenshotAsset asset = Managed("meridian-flip", "docs/images/generated/meridian-flip.png");
         asset = new ScreenshotAsset {
             Id = asset.Id,
             Classification = asset.Classification,

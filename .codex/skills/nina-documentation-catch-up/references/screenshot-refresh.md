@@ -13,7 +13,7 @@ The versioned catalog is `screenshots/manifest.json`. Every source raster image 
 
 An external, static or selectively excluded image must have a concise reason. Do not reinterpret it from its filename. Automate a selective state only after a real fixture reproduces it faithfully.
 
-Managed output paths must end in `.png`. Preserve an existing PNG path where possible. When replacing a generated JPEG, choose the corresponding PNG path and update all documentation references. Never make the renderer write JPEGs.
+Managed output paths must be below `docs/images/generated` and end in `.png`. Preserve the documentation-area hierarchy and stable catalog ID when moving or replacing a managed output. Keep external and static assets in their existing source-image directories. When replacing a generated JPEG, choose the corresponding PNG path and update all documentation references. Never make the renderer write JPEGs.
 
 ## Real-View Fixture Rules
 

@@ -2,7 +2,7 @@ The Flat Wizard offers the possibility to automate flat image capture. It takes 
 
 Flat Wizard takes 3 test exposures and attempts to calculate the optimal exposure time for a flat image by using linear extrapolation. Should that not be sufficient to derive a suitable exposure time, it will continue to take test exposures until it can determine the optimal exposure time or will ask to adjust the parameters when it fails to find one.
 
-![The Flatwizard tab](../images/tabs/flatwizard1.png)
+![The Flatwizard tab](../images/generated/tabs/flatwizard1.png)
 
 ## Settings
 

@@ -1,6 +1,6 @@
 The Mount tab lets you connect and control an ASCOM-compatible Mount mount.
 
-![Mount](../../images/tabs/equipment_scope.png)
+![Mount](../../images/generated/tabs/equipment_scope.png)
 
 1. Mount information 
 2. Define manual target coordinates

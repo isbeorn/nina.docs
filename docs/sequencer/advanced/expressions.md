@@ -22,7 +22,7 @@ Variables are created using the Define Variable instruction, also by providing a
 
 Data are *read-only* Symbols (i.e. you cannot modify them) that are created either by NINA itself (representing the status of connected devices or NINA itself) or by Plugins that define them (for whatever that Plugin wishes to make available). The list of available Data appears in the sidebar of the Sequencer under "Symbols". This list visually updates every five seconds, but instructions that *use* Data Symbols will always use the value that exists *at the time the instruction is executed*.
 
-![Symbols](../../images/sequencer/Sequencer_Symbols.png)
+![Symbols](../../images/generated/sequencer/Sequencer_Symbols.png)
 
 !!! tip "Variables and Scope"
     Variables in NINA have a property called *scope* (a computer programming term; sorry!).  In simple terms, scope defines *where* within a sequence the Variable is *visible* (i.e. where it can be used).  For the sake of simplicity, the Define Variable instruction creates a Variable with *global scope*, meaning that it can be used *anywhere* in a sequence (once the Define Variable instruction has been run).
@@ -44,7 +44,7 @@ If Symbols are the *nouns* of an Expression, then Operators are the verbs. They 
 
 Functions are a very powerful addition to Expressions.  There are many built-in functions, in categories such as Math, Logic, Strings, and Time.  They are all listed in the sequencer sidebar, as seen below.  Hovering over the name of a function shows an example of how the function is used.
 
-![Functions](../../images/sequencer/Sequencer_Functions.png)
+![Functions](../../images/generated/sequencer/Sequencer_Functions.png)
 
 
 ### Expression Errors, Warnings, and Information

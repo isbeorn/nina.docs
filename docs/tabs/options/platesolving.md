@@ -3,7 +3,7 @@ N.I.N.A. currently supports Astrometry.Net, Local Platesolver, Platesolve2, Plat
 
 For usage of the Plate Solver, refer to [Advanced Topics: Plate Solving](../../advanced/platesolving.md).
 
-![The platesolving options tab](../../images/tabs/OptionsPlateSolving10.png)
+![The platesolving options tab](../../images/generated/tabs/OptionsPlateSolving10.png)
 
 ## Plate Solving
 

@@ -37,7 +37,7 @@ b) In Options>Imaging>Auto Meridian Flip you can define the mount behavior at me
 !!! notice
     When Pause Before Meridian is set to “0” the mount will keep tracking past meridian until the Minutes after meridian is reached. Make sure that the time you set in Minutes after meridian is shorter than what you set in iOptron Commander, otherwise your mount will stop before N.I.N.A. can perform the flip.
     For example, if you set 2 degrees (8 min) in iOptron Commander and 15 minutes in Minutes after meridian in N.I.N.A., iOptron Commander will stop the mount 8 minutes after meridian is passed and N.I.N.A. will not be able to perform the flip procedure.
-![Meridian Flip](../images/troubleshooting/ioptron/meridian_flip.png)
+![Meridian Flip](../images/generated/troubleshooting/ioptron/meridian_flip.png)
 
 c) Under Equipment>Telescope select iOptron ASCOM Driver for Mount, click on the connect symbol and enjoy our imaging session!
 ![Telescope](../images/troubleshooting/ioptron/telescope.png)

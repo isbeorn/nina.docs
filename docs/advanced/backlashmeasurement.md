@@ -4,7 +4,7 @@ Focusers can suffer from backlash when they reverse directions, which is the num
 
 A typical effect of backlash on the AF curve is shown in the image below. In the first part of the curve (from right to left), the HFR remains constant due to the focuser drawtube not moving while the focuser is only compensating for backlash. In this case the curve shows approximately 150 steps of backlash.
 
-![focuserbacklash](../images/advanced/focuserbacklash.png)
+![focuserbacklash](../images/generated/advanced/focuserbacklash.png)
 
 A good AF curve should not display any signs of backlash and look similar to the one below:
 

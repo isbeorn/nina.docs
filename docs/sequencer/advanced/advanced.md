@@ -6,7 +6,7 @@ Additionally, the area is split into three sections to manage sequence start ins
   
 On the bottom left, it is possible to lock the sequencer from any manual input, disable drag & drop, and save and load a complete sequence run. On the bottom right, it is possible to start and stop a sequence.
 The right sidebar will show all available instructions as well as templates and targets. These are described in more detail below.
-![Overview](../../images/sequencer/Sequencer_Overview.png)
+![Overview](../../images/generated/sequencer/Sequencer_Overview.png)
 
 Everything inside the advanced sequencer is enabled to use drag and drop. For example an instruction can be grabbed by holding the left mouse button and then dragged into the sequencer area to add an instruction at the mouse location.  
 However, it is also possible to plan everything without using drag and drop at all by using the available '+' buttons.
@@ -24,13 +24,13 @@ An instruction is a single command that the sequencer will execute. Each instruc
 A complete list of available instructions can be found on the right side of the advanced sequencer and each instruction will have a small description as well as a tooltip of its purpose. The [Instructions page](./instructions.md) will also describe each available instruction in detail.
 Instructions can be added to the sequencer and the specific parameters can be set there. The sequencer will then go through each instruction and process them.
 From the available list, instructions can be dragged over from the right side to the left side and dropped into the sequencer.  
-![Instructions](../../images/sequencer/Sequencer_Instructions.png)
+![Instructions](../../images/generated/sequencer/Sequencer_Instructions.png)
 
 Furthermore, instructions can also be directly added into the sequence by clicking on the + button on the top.
 ![Add Instructions](../../images/sequencer/Sequencer_AddInstruction.png)
 
 Once an instruction is part of the sequencer, it will show the specific options for each instruction to customize the behavior. For example an item can be set to cool down the camera to a specific temperature, another item set to switch to a specific filter etc.
-![Instructions in Detail](../../images/sequencer/Sequencer_InstructionsDetails.png)
+![Instructions in Detail](../../images/generated/sequencer/Sequencer_InstructionsDetails.png)
 
 ### Expressions (NINA 3.3)
 NINA 3.3 adds the ability to use Expressions, in addition to numeric values, to customize instruction options.  Expressions are strings of text that represent something to be *calculated* or *evaluated*; the result of this evaluation must be a valid option for the instruction.   Expressions can include numeric values, Symbols (defined below), mathematical, bitwise, and logical operators (e.g. +, -, |, &, ||, &&), and functions (e.g. if, floor, between); in specific places, a string (text surrounded by single quotes) can also be part of an Expression.  Please see [Expressions](../advanced/expressions.md) for further details.
@@ -54,7 +54,7 @@ Instruction sets can be added to the sequencer in the same way as instructions. 
 ![Add Instructions Set](../../images/sequencer/Sequencer_AddInstructionSet.png)
 ### Sequential Instruction Set
 This instruction set will process the instructions one after the other, from top to bottom.
-![Sequential Instruction Set](../../images/sequencer/Sequencer_SequentialInstructions.png)
+![Sequential Instruction Set](../../images/generated/sequencer/Sequencer_SequentialInstructions.png)
 ### Conditional Instruction Set
 This instruction set checks its Expression when the set is reached. If the Expression evaluates to true, the instructions inside run once from top to bottom. If it evaluates to false, the instructions inside are skipped and the sequence continues after the set.
 
@@ -70,7 +70,7 @@ Order of instructions within the Parallel Instruction Set is not defined or impl
    Wait instructions are executed in parallel with all other instructions so will not force an order to instruction execution. <br>
    Shutdown PC and Shutdown N.I.N.A instructions generally are not wise to use inside a Parallel Instruction Set. <br>
         
-![Parallel Instruction Set](../../images/sequencer/Sequencer_ParallelInstructions.png)
+![Parallel Instruction Set](../../images/generated/sequencer/Sequencer_ParallelInstructions.png)
 ### Deep Sky Object Set
 This special set of instructions behaves similarly to a sequential instruction set. The main difference here is that a specific target can be specified with coordinates and rotation, and then all instructions that are dependent on coordinates or rotation will pick up these coordinates automatically, so a user does not need to enter these coordinates multiple times.
 ![Deep Sky Object Set](../../images/sequencer/Sequencer_DSOSet.png)
@@ -84,7 +84,7 @@ Loop conditions can also be directly attached to an instruction set by clicking 
 
 As instruction sets can be nested, the loop conditions are also evaluated for the current instruction set and all loop conditions that are in a parent instruction set.  
 Let's take a look at the below example to give an example. The top level instruction set has a condition attached to loop until 12:24:09h. Then there are two further instruction sets inside that should loop 2 times and 3 times respectively.
-![Nested Conditions](../../images/sequencer/Sequencer_NestedConditions.png)
+![Nested Conditions](../../images/generated/sequencer/Sequencer_NestedConditions.png)
 The following will happen in this case:  
 - The first instruction set will loop 2 times. After each instruction the parent condition will be checked too, that the remaining time is still sufficient to continue.  
 - Afterwards the second instruction set will loop 3 times. After each instruction the parent condition will be checked too, that the remaining time is still sufficient to continue.  
@@ -96,10 +96,10 @@ The following will happen in this case:
 Triggers are instructions that should only happen when certain events occur. These triggers can be attached to an instruction set. When attached, they will get evaluated after each instruction inside the set, similar to how loop conditions are evaluated. When the defined event occurs, the trigger will execute its instruction. An example is to trigger something after a certain amount of exposures.
 The lightning icon next to an instruction on the right side will indicate that the instruction is in fact a trigger. These can only be dragged into the trigger section of an instruction set. Additionally a trigger can directly be added to an instruction set by clicking on the + button.
 ![Add Triggers](../../images/sequencer/Sequencer_AddTrigger.png)
-![Triggers](../../images/sequencer/Sequencer_Triggers.png)
+![Triggers](../../images/generated/sequencer/Sequencer_Triggers.png)
 
 As triggers are evaluated in the same fashion as loop conditions, you can set triggers on a higher level and they still get evaluated when the current instruction that is executed is part of a nested instruction set. In the example below, the trigger will fire after every 5 exposures, even though the trigger is defined on a higher level than the actual exposure item.
-![Nested Triggers](../../images/sequencer/Sequencer_NestedTriggers.png)
+![Nested Triggers](../../images/generated/sequencer/Sequencer_NestedTriggers.png)
 
 ## Templates
 A template is a set of various customized instructions set up with predefined values to be re-used constantly. To be able to quickly set up a sequence for an imaging run, the templates will take a key part and enable the possibility to easily create specific types of sequences in a matter of no time.  
@@ -115,7 +115,7 @@ To intentionally change the source template from the sequence, use Edit Template
 When a linked template is based on a Deep Sky Object Set, target information is stored on the linked template instance and not in the reusable template itself. Enter a target on the linked template or drop a target onto it. This target override is saved with that linked use and is reapplied whenever the template refreshes, so the same template can be reused for multiple targets.
 
 The templates are located on the right sidebar when switching to the templates tab. A couple of basic templates are provided with the application.  
-![Templates](../../images/sequencer/Sequencer_Templates.png)
+![Templates](../../images/generated/sequencer/Sequencer_Templates.png)
 
 User specific templates are listed below the basic templates.
 ![User Templates](../../images/sequencer/Sequencer_UserTemplate.png)

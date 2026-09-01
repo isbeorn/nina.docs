@@ -34,7 +34,7 @@ public class NamedStateControllerTests {
         ScreenshotAsset asset = new() {
             Id = "sequencer-templates",
             Classification = ScreenshotClassification.NinaUi,
-            Output = "docs/images/sequencer/Sequencer_Templates.png",
+            Output = "docs/images/generated/sequencer/Sequencer_Templates.png",
             Width = 410,
             Height = 510,
             Fixture = "sequencer",
@@ -104,7 +104,7 @@ public class NamedStateControllerTests {
         ScreenshotAsset asset = new() {
             Id = "sequencer-symbols",
             Classification = ScreenshotClassification.NinaUi,
-            Output = "docs/images/sequencer/Sequencer_Symbols.png",
+            Output = "docs/images/generated/sequencer/Sequencer_Symbols.png",
             Width = 313,
             Height = 687,
             Fixture = "sequencer",
@@ -128,7 +128,7 @@ public class NamedStateControllerTests {
     public void AdvancedSequencer_DoesNotInventACommandLineSequenceFile() {
         FrameworkElement fixture = new FixtureRegistry().Create(SequencerAsset(
             "sequencer-overview",
-            "docs/images/sequencer/Sequencer_Overview.png"));
+            "docs/images/generated/sequencer/Sequencer_Overview.png"));
         object viewModel = fixture.DataContext;
         object commandLineOptions = viewModel.GetType()
             .GetField("commandLineOptions", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)
@@ -172,7 +172,7 @@ public class NamedStateControllerTests {
     public void AdvancedSequencer_SequentialInstructionsStateUsesProductionFilterAndExposureItems() {
         FrameworkElement fixture = new FixtureRegistry().Create(SequencerAsset(
             "sequencer-sequential-instructions",
-            "docs/images/sequencer/Sequencer_SequentialInstructions.png"));
+            "docs/images/generated/sequencer/Sequencer_SequentialInstructions.png"));
         NINA.ViewModel.Sequencer.ISequence2VM viewModel =
             (NINA.ViewModel.Sequencer.ISequence2VM)fixture.DataContext;
         NINA.Sequencer.Container.ISequenceContainer targetArea =
@@ -194,7 +194,7 @@ public class NamedStateControllerTests {
     public void AdvancedSequencer_NestedTriggersStateUsesProductionTriggerAndContainers() {
         FrameworkElement fixture = new FixtureRegistry().Create(SequencerAsset(
             "sequencer-nested-triggers",
-            "docs/images/sequencer/Sequencer_NestedTriggers.png"));
+            "docs/images/generated/sequencer/Sequencer_NestedTriggers.png"));
         NINA.ViewModel.Sequencer.ISequence2VM viewModel =
             (NINA.ViewModel.Sequencer.ISequence2VM)fixture.DataContext;
         NINA.Sequencer.Container.ISequenceContainer targetArea =
@@ -215,7 +215,7 @@ public class NamedStateControllerTests {
     public void AdvancedSequencer_InstructionDetailsStateUsesRealConfiguredItems() {
         FrameworkElement fixture = new FixtureRegistry().Create(SequencerAsset(
             "sequencer-instructions-details",
-            "docs/images/sequencer/Sequencer_InstructionsDetails.png"));
+            "docs/images/generated/sequencer/Sequencer_InstructionsDetails.png"));
         NINA.ViewModel.Sequencer.ISequence2VM viewModel =
             (NINA.ViewModel.Sequencer.ISequence2VM)fixture.DataContext;
         NINA.Sequencer.Container.ISequenceContainer targetArea =

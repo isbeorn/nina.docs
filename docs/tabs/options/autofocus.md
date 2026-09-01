@@ -1,4 +1,4 @@
-![Autofocus options](../../images/tabs/options_autofocus.png)
+![Autofocus options](../../images/generated/tabs/options_autofocus.png)
 
 ## General settings
 ### Use FilterWheel Offsets

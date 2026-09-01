@@ -1,6 +1,6 @@
 The Guider tab lets you connect to supported guiders and configure the settings used for guiding and dithering.
 
-![Guider](../../images/tabs/equipment_guider.png)
+![Guider](../../images/generated/tabs/equipment_guider.png)
 
 The header contains the usual guider controls for connecting, disconnecting, refreshing the device list, and opening the setup dialog when one is available.
 

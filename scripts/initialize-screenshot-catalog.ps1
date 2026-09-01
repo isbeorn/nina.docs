@@ -23,10 +23,26 @@ if ((Test-Path -LiteralPath $CatalogPath) -and -not $Force) {
 # files deliberately start excluded. This script must never infer a production view,
 # sequencer type or icon from a filename.
 $reviewedAssetByOutput = @{}
+$reviewedIds = @{}
 if (Test-Path -LiteralPath $CatalogPath) {
     $reviewedCatalog = Get-Content -Raw -LiteralPath $CatalogPath | ConvertFrom-Json
     foreach ($reviewedAsset in $reviewedCatalog.assets) {
-        $reviewedAssetByOutput[$reviewedAsset.output.ToLowerInvariant()] = $reviewedAsset
+        $reviewedOutput = [string] $reviewedAsset.output
+        $reviewedId = [string] $reviewedAsset.id
+        if ([string]::IsNullOrWhiteSpace($reviewedOutput)) {
+            throw 'Reviewed catalog contains an empty output path.'
+        }
+        if ([string]::IsNullOrWhiteSpace($reviewedId)) {
+            throw "Reviewed catalog entry has an empty stable ID: $reviewedOutput"
+        }
+        if ($reviewedAssetByOutput.ContainsKey($reviewedOutput.ToLowerInvariant())) {
+            throw "Reviewed catalog contains a duplicate output path: $reviewedOutput"
+        }
+        if ($reviewedIds.ContainsKey($reviewedId)) {
+            throw "Reviewed catalog contains a duplicate stable ID: $reviewedId"
+        }
+        $reviewedAssetByOutput[$reviewedOutput.ToLowerInvariant()] = $reviewedAsset
+        $reviewedIds[$reviewedId] = $true
     }
 }
 
@@ -133,21 +149,28 @@ $imageFiles = Get-ChildItem -LiteralPath $docsRoot -Recurse -File |
     Sort-Object FullName
 
 $usedIds = @{}
+foreach ($reviewedId in $reviewedIds.Keys) {
+    $usedIds[$reviewedId] = $true
+}
 $assets = foreach ($file in $imageFiles) {
     $relative = [System.IO.Path]::GetRelativePath($root, $file.FullName).Replace('\', '/')
     $dimensions = Get-ImageDimensions $file.FullName
     $dimensions = Get-CurrentUiDimensions $relative $dimensions.Width $dimensions.Height
     $classification = Get-Classification $relative $dimensions.Width $dimensions.Height
     $reviewedAsset = $reviewedAssetByOutput[$relative.ToLowerInvariant()]
-    $id = (($relative.ToLowerInvariant() -replace '\.[^.]+$', '') -replace '[^a-z0-9]+', '-').Trim('-')
-    $extension = $file.Extension.TrimStart('.').ToLowerInvariant()
-    $baseId = "$id-$extension"
-    if ($usedIds.ContainsKey($baseId)) {
-        $usedIds[$baseId]++
-        $id = "$baseId-$($usedIds[$baseId])"
+    if ($reviewedAsset) {
+        $id = [string] $reviewedAsset.id
     } else {
-        $usedIds[$baseId] = 1
+        $id = (($relative.ToLowerInvariant() -replace '\.[^.]+$', '') -replace '[^a-z0-9]+', '-').Trim('-')
+        $extension = $file.Extension.TrimStart('.').ToLowerInvariant()
+        $baseId = "$id-$extension"
         $id = $baseId
+        $suffix = 1
+        while ($usedIds.ContainsKey($id)) {
+            $suffix++
+            $id = "$baseId-$suffix"
+        }
+        $usedIds[$id] = $true
     }
 
     $asset = [ordered]@{

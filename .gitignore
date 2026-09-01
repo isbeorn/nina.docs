@@ -78,5 +78,5 @@ site/
 /tools/**/bin/
 /tools/**/obj/
 
-.codex
 .dotnet-cli
+.artifacts

@@ -1,6 +1,6 @@
 This is the tab where you set up all the parameters related to your equipment.  
 
-![Equipment Settings](../../images/tabs/OptionsEquipment10.png)
+![Equipment Settings](../../images/generated/tabs/OptionsEquipment10.png)
 
 ## Camera
 

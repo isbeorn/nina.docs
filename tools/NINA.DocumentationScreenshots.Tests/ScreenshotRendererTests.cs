@@ -88,7 +88,7 @@ public class ScreenshotRendererTests {
         ScreenshotAsset asset = new() {
             Id = "deterministic-nested-conditions",
             Classification = ScreenshotClassification.NinaUi,
-            Output = "docs/images/sequencer/Sequencer_NestedConditions.png",
+            Output = "docs/images/generated/sequencer/Sequencer_NestedConditions.png",
             Fixture = "sequencer",
             State = "docs-images-sequencer-sequencer-nestedconditions-png",
             ViewType = "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView",
@@ -227,7 +227,7 @@ public class ScreenshotRendererTests {
         ScreenshotAsset asset = new() {
             Id = "sequence-container-crop",
             Classification = ScreenshotClassification.NinaUi,
-            Output = "docs/images/sequencer/Sequencer_SequentialInstructions.png",
+            Output = "docs/images/generated/sequencer/Sequencer_SequentialInstructions.png",
             Fixture = "sequencer",
             State = "sequencer-sequential-instructions",
             ViewType = "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView",
@@ -364,7 +364,7 @@ public class ScreenshotRendererTests {
         ScreenshotAsset asset = new() {
             Id = "cool-camera-production-icon",
             Classification = ScreenshotClassification.NinaUi,
-            Output = "docs/images/sequencer/instructions/camera_cool.png",
+            Output = "docs/images/generated/sequencer/instructions/camera_cool.png",
             Fixture = "sequencer-entity",
             State = "cool-camera-production-icon",
             SourceIdentifier = "sequencer:CoolCamera",
@@ -481,13 +481,13 @@ public class ScreenshotRendererTests {
     [Test]
     public void Main_WhenLaterFixtureFails_DoesNotReplaceEarlierScreenshot() {
         byte[] original = [1, 2, 3, 4];
-        string target = CreateTarget("first.png", original);
+        string target = CreateTarget("generated/first.png", original);
         string catalog = WriteCatalog("""
             {
               "schemaVersion": 1,
               "assets": [
-                { "id": "first", "classification": "nina-ui", "output": "docs/images/first.png", "fixture": "view", "state": "NINA.View.Options.GeneralView", "width": 320, "height": 240 },
-                { "id": "failure", "classification": "nina-ui", "output": "docs/images/failure.png", "fixture": "view", "state": "NINA.View.DoesNotExist", "width": 320, "height": 240 }
+                { "id": "first", "classification": "nina-ui", "output": "docs/images/generated/first.png", "fixture": "view", "state": "NINA.View.Options.GeneralView", "width": 320, "height": 240 },
+                { "id": "failure", "classification": "nina-ui", "output": "docs/images/generated/failure.png", "fixture": "view", "state": "NINA.View.DoesNotExist", "width": 320, "height": 240 }
               ]
             }
             """);
@@ -496,22 +496,22 @@ public class ScreenshotRendererTests {
 
         Assert.That(exitCode, Is.EqualTo(1));
         Assert.That(File.ReadAllBytes(target), Is.EqualTo(original));
-        Assert.That(File.Exists(Path.Combine(root, "docs", "images", "failure.png")), Is.False);
+        Assert.That(File.Exists(Path.Combine(root, "docs", "images", "generated", "failure.png")), Is.False);
     }
 
     [Test]
     public void Main_WhenQualityValidationFails_ReportsEveryFailureAndReplacesNothing() {
-        string first = CreatePngTarget("first.png");
+        string first = CreatePngTarget("generated/first.png");
         byte[] original = File.ReadAllBytes(first);
-        CreateDetailedPngTarget("degraded-one.png", 320, 240);
-        CreateDetailedPngTarget("degraded-two.png", 321, 240);
+        CreateDetailedPngTarget("generated/degraded-one.png", 320, 240);
+        CreateDetailedPngTarget("generated/degraded-two.png", 321, 240);
         string catalog = WriteCatalog("""
             {
               "schemaVersion": 1,
               "assets": [
-                { "id": "first", "classification": "nina-ui", "output": "docs/images/first.png", "fixture": "view", "state": "NINA.View.Options.GeneralView", "width": 320, "height": 240 },
-                { "id": "degraded-one", "classification": "nina-ui", "output": "docs/images/degraded-one.png", "fixture": "view", "state": "NINA.View.MeridianFlipView", "width": 320, "height": 240 },
-                { "id": "degraded-two", "classification": "nina-ui", "output": "docs/images/degraded-two.png", "fixture": "view", "state": "NINA.View.MeridianFlipView", "width": 321, "height": 240 }
+                { "id": "first", "classification": "nina-ui", "output": "docs/images/generated/first.png", "fixture": "view", "state": "NINA.View.Options.GeneralView", "width": 320, "height": 240 },
+                { "id": "degraded-one", "classification": "nina-ui", "output": "docs/images/generated/degraded-one.png", "fixture": "view", "state": "NINA.View.MeridianFlipView", "width": 320, "height": 240 },
+                { "id": "degraded-two", "classification": "nina-ui", "output": "docs/images/generated/degraded-two.png", "fixture": "view", "state": "NINA.View.MeridianFlipView", "width": 321, "height": 240 }
               ]
             }
             """);
@@ -540,7 +540,7 @@ public class ScreenshotRendererTests {
             {
               "schemaVersion": 1,
               "assets": [
-                { "id": "managed", "classification": "nina-ui", "output": "docs/images/managed.png", "fixture": "view", "state": "NINA.View.Options.GeneralView", "width": 320, "height": 240 },
+                { "id": "managed", "classification": "nina-ui", "output": "docs/images/generated/managed.png", "fixture": "view", "state": "NINA.View.Options.GeneralView", "width": 320, "height": 240 },
                 { "id": "external", "classification": "external-ui", "output": "docs/images/external.png", "width": 100, "height": 100, "exclusionReason": "This belongs to third-party software." }
               ]
             }
@@ -551,13 +551,42 @@ public class ScreenshotRendererTests {
         Assert.Multiple(() => {
             Assert.That(exitCode, Is.EqualTo(0));
             Assert.That(File.ReadAllBytes(excluded), Is.EqualTo(original));
-            Assert.That(File.Exists(Path.Combine(root, "docs", "images", "managed.png")), Is.True);
+            Assert.That(File.Exists(Path.Combine(root, "docs", "images", "generated", "managed.png")), Is.True);
+        });
+    }
+
+    [Test]
+    public void Main_AreaFilterMatchesAreaBelowGeneratedRoot() {
+        TextWriter originalOutput = Console.Out;
+        StringWriter output = new();
+        string catalog = WriteCatalog("""
+            {
+              "schemaVersion": 1,
+              "assets": [
+                { "id": "tabs", "classification": "nina-ui", "output": "docs/images/generated/tabs/tabs.png", "fixture": "view", "state": "NINA.View.Options.GeneralView", "width": 320, "height": 240 },
+                { "id": "sequencer", "classification": "nina-ui", "output": "docs/images/generated/sequencer/sequencer.png", "fixture": "view", "state": "NINA.View.MeridianFlipView", "width": 320, "height": 240 }
+              ]
+            }
+            """);
+
+        int exitCode;
+        try {
+            Console.SetOut(output);
+            exitCode = Program.Main(["--catalog", catalog, "--docs-root", root, "--area", "tabs", "--preview"]);
+        } finally {
+            Console.SetOut(originalOutput);
+        }
+
+        Assert.Multiple(() => {
+            Assert.That(exitCode, Is.EqualTo(0));
+            Assert.That(output.ToString(), Does.Contain("Rendering tabs..."));
+            Assert.That(output.ToString(), Does.Not.Contain("Rendering sequencer..."));
         });
     }
 
     [Test]
     public void Main_InPreviewMode_ReportsChangeWithoutReplacingScreenshot() {
-        string target = CreatePngTarget("preview.png");
+        string target = CreatePngTarget("generated/preview.png");
         byte[] original = File.ReadAllBytes(target);
         TextWriter originalOutput = Console.Out;
         StringWriter output = new();
@@ -565,7 +594,7 @@ public class ScreenshotRendererTests {
             {
               "schemaVersion": 1,
               "assets": [
-                { "id": "preview", "classification": "nina-ui", "output": "docs/images/preview.png", "fixture": "view", "state": "NINA.View.Options.GeneralView", "width": 320, "height": 240 }
+                { "id": "preview", "classification": "nina-ui", "output": "docs/images/generated/preview.png", "fixture": "view", "state": "NINA.View.Options.GeneralView", "width": 320, "height": 240 }
               ]
             }
             """);
@@ -580,21 +609,21 @@ public class ScreenshotRendererTests {
 
         Assert.That(exitCode, Is.EqualTo(0));
         Assert.That(File.ReadAllBytes(target), Is.EqualTo(original));
-        Assert.That(output.ToString(), Does.Contain("Changed: preview -> docs/images/preview.png"));
+        Assert.That(output.ToString(), Does.Contain("Changed: preview -> docs/images/generated/preview.png"));
     }
 
-    private string CreateTarget(string fileName, byte[] content) {
+    private string CreateTarget(string relativePath, byte[] content) {
         string directory = Path.Combine(root, "docs", "images");
-        Directory.CreateDirectory(directory);
-        string target = Path.Combine(directory, fileName);
+        string target = Path.Combine(directory, relativePath.Replace('/', Path.DirectorySeparatorChar));
+        Directory.CreateDirectory(Path.GetDirectoryName(target)!);
         File.WriteAllBytes(target, content);
         return target;
     }
 
-    private string CreatePngTarget(string fileName) {
+    private string CreatePngTarget(string relativePath) {
         string directory = Path.Combine(root, "docs", "images");
-        Directory.CreateDirectory(directory);
-        string target = Path.Combine(directory, fileName);
+        string target = Path.Combine(directory, relativePath.Replace('/', Path.DirectorySeparatorChar));
+        Directory.CreateDirectory(Path.GetDirectoryName(target)!);
         BitmapSource bitmap = BitmapSource.Create(
             320,
             240,
@@ -611,10 +640,10 @@ public class ScreenshotRendererTests {
         return target;
     }
 
-    private string CreateDetailedPngTarget(string fileName, int width, int height) {
+    private string CreateDetailedPngTarget(string relativePath, int width, int height) {
         string directory = Path.Combine(root, "docs", "images");
-        Directory.CreateDirectory(directory);
-        string target = Path.Combine(directory, fileName);
+        string target = Path.Combine(directory, relativePath.Replace('/', Path.DirectorySeparatorChar));
+        Directory.CreateDirectory(Path.GetDirectoryName(target)!);
         byte[] pixels = new byte[width * height * 4];
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {

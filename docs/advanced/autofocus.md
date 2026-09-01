@@ -19,7 +19,7 @@ N.I.N.A. is unique in that it provides multiple ways to autofocus on star fields
 
 With this method, N.I.N.A. will move far out of focus, take an exposure, detect the stars in the image, compute the Half Flux Radius (HFR) of the stars and take the average HFR across the frame. Then, moving the focuser by some defined amount (the Auto Focus Step Size), N.I.N.A. can repeat the process until a usable focus curve is available, and the minimum (point of best focus) can be found by different types of fitting (trend lines, hyperbolic, or parabolic). The obtained curve looks like the example below.
 
-![Autofocus Curve Example - Star HFR](../images/advanced/autofocuscurve1.png)
+![Autofocus Curve Example - Star HFR](../images/generated/advanced/autofocuscurve1.png)
 
 Each of the focus points above represents the HFR at its respective focus position. In addition, the red bars on each point represent the potential error on each of the focus points - wind and other factors can cause this error to be large. The line and curve fitting used to find best focus make use of those errors to take into account points with smaller error more than points with bigger error. The routine is therefore resistant to noise and other factors such as wind.
 
@@ -31,7 +31,7 @@ It is also important to note that if the N.I.N.A. Step Size were too big (in the
 
 A second method is to detect the contrast available in the image, in the same way that a smartphone or mirrorless camera does to perform autofocus. The focuser is moved per the Auto Focus Step Size, exposures are taken per the Auto-Focus exposure time, and contrast is measured via different techniques. The curve obtained is close to a Gaussian Curve, where the maximum of the curve is the point of highest contrast and therefore best focus. An example is shown below.
 
-![Autofocus Curve Example - Contrast Detection](../images/advanced/autofocuscurve2.png)
+![Autofocus Curve Example - Contrast Detection](../images/generated/advanced/autofocuscurve2.png)
 
 As is visible on the image, N.I.N.A. fits a Gaussian Curve to the focus points to find the maximum, the point of best contrast. Because this method doesn't rely on detecting stars, it can use very short exposures, and use up very little computing time - this makes it good for very quick focus. Note however that the peak can be quite narrow and would be easy to miss entirely - as such the Auto Focus Step Size would need to be narrower than with the Star HFR technique. Getting more points near best focus is also recommended.
 Since this method uses contrast detection, it will also work on the Moon, solar system objects, or terrestrial objects. However it can be more sensitive to adverse conditions than the Star HFR method, and is still currently experimental.

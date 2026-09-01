@@ -104,8 +104,16 @@ public static class Program {
 
     private static bool IsInArea(ScreenshotAsset asset, string area) {
         string normalized = asset.Output.Replace('\\', '/');
-        return normalized.Contains($"/images/{area}/", StringComparison.OrdinalIgnoreCase) ||
-            normalized.StartsWith($"docs/images/{area}/", StringComparison.OrdinalIgnoreCase);
+        const string generatedPrefix = "docs/images/generated/";
+        if (!normalized.StartsWith(generatedPrefix, StringComparison.OrdinalIgnoreCase)) {
+            return false;
+        }
+
+        int separator = normalized.IndexOf('/', generatedPrefix.Length);
+        string assetArea = separator < 0
+            ? normalized[generatedPrefix.Length..]
+            : normalized[generatedPrefix.Length..separator];
+        return string.Equals(assetArea, area, StringComparison.OrdinalIgnoreCase);
     }
 
     private static bool FilesEqual(string left, string right) {

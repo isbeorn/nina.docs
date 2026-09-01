@@ -29,6 +29,7 @@ Read both references for a full catch-up.
 - Generate NINA UI images only from real production views, templates, resources, icons and metadata. Never substitute hand-built lookalike controls or guessed icons.
 - Use the production "Slate" color schema for generated captures.
 - Generated raster screenshots are PNG files. When replacing a generated JPEG, add a PNG path and update references rather than generating another JPEG.
+- Keep generated outputs below `docs/images/generated`, preserving the documentation-area hierarchy beneath that root. Keep external and static assets in their existing source-image directories.
 - Do not add screenshot-only APIs to shipping NINA code. Keep fixtures and deterministic state inside `tools/NINA.DocumentationScreenshots`.
 - Do not add CI enforcement, scheduled automation, update bots or drift warnings. The inventory and renderer are deliberate maintainer tools.
 - A selective screenshot that cannot yet be reproduced faithfully may remain cataloged and preserved with an explicit exclusion reason. Bulk automation is the goal, not low-quality total automation.

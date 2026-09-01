@@ -12,7 +12,7 @@ Enter a target name or coordinates, or use the planetarium and telescope buttons
 
 ## Image sources
 
-![Image source selector](../images/advanced/framing/ImageSources.png)
+![Image source selector](../images/generated/advanced/framing/ImageSources.png)
 
 - **NASA Sky Survey**, **SkyServer Sky Survey**, **STScI Sky Survey** and **ESO Sky Survey** download an image from their respective services.
 - **HIPS 2 FITS Sky Survey** downloads from the selected HiPS map. The available map list is loaded from N.I.N.A.'s database.
@@ -38,7 +38,7 @@ If a FITS or XISF image contains usable World Coordinate System metadata, N.I.N.
 
 If scale or coordinates are missing, N.I.N.A. shows the current solve prompt. Confirm pixel size, focal length and binning. Supply approximate coordinates for a normal plate solve, or select **Blind solver** when no reliable reference is available.
 
-![Current Framing plate-solve prompt](../images/advanced/framing/Platesolve.png)
+![Current Framing plate-solve prompt](../images/generated/advanced/framing/Platesolve.png)
 
 The configured plate solver and blind solver under **Options > Plate Solving** are used. A successful solve updates the displayed image, frame scale and center coordinates.
 
@@ -52,7 +52,7 @@ Increase **Horizontal panels** or **Vertical panels** to create a mosaic. Set ov
 
 The **Mosaic Panels** table is the generated plan that will be transferred to the sequencer:
 
-![Calculated mosaic panel plan](../images/advanced/framing/MosaicPlan.png)
+![Calculated mosaic panel plan](../images/generated/advanced/framing/MosaicPlan.png)
 
 For the Advanced Sequencer, prepare a Deep Sky Object container template first. **Add target to sequence** can create targets from that template, add targets to the target list or update an existing sequencer target. A mosaic creates one target per panel with the panel number appended to its name.
 

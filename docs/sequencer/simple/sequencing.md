@@ -34,4 +34,4 @@ When having a motorized focuser, the sequence offers a variety of options to ens
 
 *After HFR increase* - This method will only trigger when the measured HFR trend is going up by a certain percentage. Having just one sub with worse focus won't necessarily trigger this, as it could just be one sub with bad guiding or worse sky conditions. In general this is a good way to ensure best Auto Focus during the run and can be used almost always. A visual representation of the HFR history can be seen in the imaging tab which is used to determine the baseline.
 
-![HFRHistory](../../images/tabs/HFR2.png)
+![HFRHistory](../../images/generated/tabs/HFR2.png)

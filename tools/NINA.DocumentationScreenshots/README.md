@@ -6,7 +6,7 @@ The renderer loads production resource dictionaries on an STA thread, creates an
 
 Fixtures live in `FixtureRegistry.cs`. Use production views and deterministic view models or data. Do not add screenshot-specific APIs to shipping projects.
 
-The command stages every requested image before copying any output. An unknown fixture or view, invalid path or dimension, binding failure, dispatcher timeout or blank capture fails the operation without replacing existing documentation images.
+The command stages every requested image before copying any output. Managed PNG files live below `docs/images/generated`, with their documentation-area hierarchy preserved under that root. External and static source assets remain outside that directory. An unknown fixture or view, invalid path or dimension, binding failure, dispatcher timeout or blank capture fails the operation without replacing existing documentation images.
 
 The project resolves production code through the `NinaSource` MSBuild property. It must point to the N.I.N.A. solution directory that contains `NINA.sln`. The screenshot script supplies this property from its `-NinaSource` parameter.
 

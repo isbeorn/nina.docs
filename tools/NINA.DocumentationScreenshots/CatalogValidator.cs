@@ -24,6 +24,8 @@ public static class CatalogValidator {
         }
 
         string root = Path.GetFullPath(documentationRoot).TrimEnd(Path.DirectorySeparatorChar) + Path.DirectorySeparatorChar;
+        string generatedRoot = Path.GetFullPath(Path.Combine(documentationRoot, "docs", "images", "generated"))
+            .TrimEnd(Path.DirectorySeparatorChar) + Path.DirectorySeparatorChar;
         Dictionary<ScreenshotAsset, string> paths = [];
         HashSet<string> ids = new(StringComparer.OrdinalIgnoreCase);
         HashSet<string> outputs = new(StringComparer.OrdinalIgnoreCase);
@@ -45,6 +47,9 @@ public static class CatalogValidator {
 
             bool managed = asset.Classification is ScreenshotClassification.NinaUi or ScreenshotClassification.NinaGeneratedVisual;
             if (managed) {
+                if (!outputPath.StartsWith(generatedRoot, StringComparison.OrdinalIgnoreCase)) {
+                    throw new CatalogException($"Screenshot '{asset.Id}' must use an output path below docs/images/generated: {asset.Output}");
+                }
                 if (!string.Equals(Path.GetExtension(asset.Output), ".png", StringComparison.OrdinalIgnoreCase)) {
                     throw new CatalogException($"Screenshot '{asset.Id}' must use a PNG output path. Generated JPEG and other image formats are not supported.");
                 }

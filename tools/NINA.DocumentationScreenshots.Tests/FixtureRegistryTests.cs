@@ -139,7 +139,7 @@ public class FixtureRegistryTests {
         ScreenshotAsset asset = new() {
             Id = "reconnect-on-download-failure",
             Classification = ScreenshotClassification.NinaUi,
-            Output = "docs/images/sequencer/trigger/reconnectcamera.png",
+            Output = "docs/images/generated/sequencer/trigger/reconnectcamera.png",
             Fixture = "sequencer-entity",
             State = "reconnect-on-download-failure",
             SourceIdentifier = "sequencer:ReconnectOnDownloadFailure",
@@ -166,7 +166,7 @@ public class FixtureRegistryTests {
         ScreenshotAsset asset = new() {
             Id = "save-sequence",
             Classification = ScreenshotClassification.NinaUi,
-            Output = "docs/images/sequencer/instructions/utility_savesequence.png",
+            Output = "docs/images/generated/sequencer/instructions/utility_savesequence.png",
             Fixture = "sequencer-entity",
             State = "save-sequence",
             SourceIdentifier = "sequencer:SaveSequence",
@@ -197,7 +197,7 @@ public class FixtureRegistryTests {
         ScreenshotAsset asset = new() {
             Id = "reconnect-equipment",
             Classification = ScreenshotClassification.NinaUi,
-            Output = "docs/images/sequencer/trigger/reconnectequipment.png",
+            Output = "docs/images/generated/sequencer/trigger/reconnectequipment.png",
             Fixture = "sequencer-entity",
             State = "reconnect-equipment",
             SourceIdentifier = "sequencer:ReconnectTrigger",
@@ -226,7 +226,7 @@ public class FixtureRegistryTests {
         ScreenshotAsset asset = new() {
             Id = "take-many-exposures",
             Classification = ScreenshotClassification.NinaUi,
-            Output = "docs/images/sequencer/instructions/camera_manyexposures.png",
+            Output = "docs/images/generated/sequencer/instructions/camera_manyexposures.png",
             Width = 766,
             Height = 34,
             Fixture = "sequencer-entity",
@@ -254,7 +254,7 @@ public class FixtureRegistryTests {
         ScreenshotAsset asset = new() {
             Id = "trained-dark-flat",
             Classification = ScreenshotClassification.NinaUi,
-            Output = "docs/images/sequencer/instructions/flat_traineddark.png",
+            Output = "docs/images/generated/sequencer/instructions/flat_traineddark.png",
             Width = 1000,
             Height = 35,
             Fixture = "sequencer-entity",
@@ -280,7 +280,7 @@ public class FixtureRegistryTests {
         ScreenshotAsset asset = new() {
             Id = "autofocus-curve",
             Classification = ScreenshotClassification.NinaGeneratedVisual,
-            Output = "docs/images/advanced/autofocuscurve1.png",
+            Output = "docs/images/generated/advanced/autofocuscurve1.png",
             Fixture = "autofocus-chart",
             State = "autofocus-curve",
             ViewType = "NINA.View.AutoFocusChart",
@@ -517,7 +517,7 @@ public class FixtureRegistryTests {
         ScreenshotAsset asset = new() {
             Id = "imaging-options",
             Classification = ScreenshotClassification.NinaUi,
-            Output = "docs/images/tabs/Options-Imaging10.png",
+            Output = "docs/images/generated/tabs/Options-Imaging10.png",
             Fixture = "view",
             State = "imaging-options",
             ViewType = "NINA.View.Options.ImagingView",
@@ -541,7 +541,7 @@ public class FixtureRegistryTests {
         ScreenshotAsset asset = new() {
             Id = "plate-solving-options",
             Classification = ScreenshotClassification.NinaUi,
-            Output = "docs/images/tabs/OptionsPlateSolving10.png",
+            Output = "docs/images/generated/tabs/OptionsPlateSolving10.png",
             Fixture = "application",
             State = "options-plate-solving",
             Width = 2367,
@@ -666,7 +666,7 @@ public class FixtureRegistryTests {
         ScreenshotAsset asset = new() {
             Id = "thumbnail-history",
             Classification = ScreenshotClassification.NinaUi,
-            Output = "docs/images/tabs/imaging_history.png",
+            Output = "docs/images/generated/tabs/imaging_history.png",
             Fixture = "view",
             State = "thumbnail-history",
             ViewType = "NINA.View.ThumbnailListView",
@@ -739,7 +739,7 @@ public class FixtureRegistryTests {
         ScreenshotAsset asset = new() {
             Id = "equipment-camera",
             Classification = ScreenshotClassification.NinaUi,
-            Output = "docs/images/tabs/equipment_camera.png",
+            Output = "docs/images/generated/tabs/equipment_camera.png",
             Fixture = "view",
             State = "equipment-camera",
             ViewType = "NINA.View.Equipment.CameraView",
@@ -772,7 +772,7 @@ public class FixtureRegistryTests {
         ScreenshotAsset asset = new() {
             Id = "equipment-guider",
             Classification = ScreenshotClassification.NinaUi,
-            Output = "docs/images/tabs/equipment_guider.png",
+            Output = "docs/images/generated/tabs/equipment_guider.png",
             Fixture = "view",
             State = "equipment-guider",
             ViewType = "NINA.View.Equipment.Guider.GuiderView",
@@ -806,7 +806,7 @@ public class FixtureRegistryTests {
         ScreenshotAsset asset = new() {
             Id = "flat-wizard",
             Classification = ScreenshotClassification.NinaUi,
-            Output = "docs/images/tabs/flatwizard1.png",
+            Output = "docs/images/generated/tabs/flatwizard1.png",
             Fixture = "view",
             State = "flat-wizard",
             ViewType = "NINA.View.FlatWizardView",
@@ -867,7 +867,7 @@ public class FixtureRegistryTests {
         ScreenshotAsset asset = new() {
             Id = "switches",
             Classification = ScreenshotClassification.NinaUi,
-            Output = "docs/images/tabs/equipment_switches.png",
+            Output = "docs/images/generated/tabs/equipment_switches.png",
             Fixture = "view",
             State = "switches",
             ViewType = "NINA.View.Equipment.SwitchHubView",
