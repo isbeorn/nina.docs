@@ -14,17 +14,24 @@
 
 using NINA.Sequencer.Conditions;
 using NINA.Sequencer.Container;
+using NINA.Sequencer.Logic;
 using NINA.Sequencer.SequenceItem.Camera;
 using NINA.Sequencer.SequenceItem.Dome;
 using NINA.Sequencer.SequenceItem.FilterWheel;
 using NINA.Sequencer.SequenceItem.Expressions;
 using NINA.Sequencer.SequenceItem.FlatDevice;
+using NINA.Sequencer.SequenceItem.Autofocus;
+using NINA.Sequencer.SequenceItem.Guider;
 using NINA.Sequencer.SequenceItem.Imaging;
+using NINA.Sequencer.SequenceItem.Platesolving;
 using NINA.Sequencer.SequenceItem.Telescope;
 using NINA.Sequencer.SequenceItem.Utility;
 using NINA.Sequencer.Trigger;
 using NINA.Sequencer.Trigger.Autofocus;
 using NINA.Sequencer.Trigger.Guider;
+using NINA.Sequencer.Trigger.MeridianFlip;
+using NINA.Sequencer.Trigger.SafetyMonitor;
+using NINA.Sequencer.Trigger.Utility;
 using NINA.ViewModel.Sequencer;
 
 namespace NINA.DocumentationScreenshots;
@@ -34,10 +41,49 @@ namespace NINA.DocumentationScreenshots;
 /// It changes model data only and does not create screenshot-specific visual elements.
 /// </summary>
 internal static class SequencerFixtureState {
-    public static void Apply(ISequence2VM viewModel, ScreenshotAsset asset) {
+    private const double DocumentationLatitude = 52.52;
+    private const double DocumentationLongitude = 13.405;
+
+    public static void Apply(ISequence2VM viewModel, ScreenshotAsset asset, ISymbolBroker symbolBroker) {
         string state = Normalize(asset.State + " " + asset.Output);
         if (state.Contains("sequencerflow", StringComparison.Ordinal)) {
             BuildFlow(viewModel);
+        } else if (state.Contains("simpletoadvanced", StringComparison.Ordinal)) {
+            BuildSimpleToAdvanced(viewModel, state, symbolBroker);
+        } else if (state.Contains("sequencersidebarloopuntiltime", StringComparison.Ordinal)) {
+            BuildFilteredSidebar(viewModel, "Loop Until Time", false);
+        } else if (state.Contains("sequencersidebarafaftertime", StringComparison.Ordinal)) {
+            BuildFilteredSidebar(viewModel, "AF After Time", false);
+        } else if (state.Contains("sequencersidebarsettings", StringComparison.Ordinal)) {
+            BuildFilteredSidebar(viewModel, string.Empty, true);
+        } else if (state.Contains("instructionsettings", StringComparison.Ordinal)) {
+            BuildInstructionSettings(viewModel);
+        } else if (state.Contains("sequencerexpressionwarninggone", StringComparison.Ordinal)) {
+            BuildExpressionVariableExample(viewModel, symbolBroker, true);
+        } else if (state.Contains("sequencerexpressionwarning", StringComparison.Ordinal)) {
+            BuildExpressionVariableExample(viewModel, symbolBroker, false);
+        } else if (ContainsAny(
+            state,
+            "sequencerexpressionexample",
+            "sequencersymbolexampleinstruction",
+            "sequencerexpressionvalue",
+            "sequencersymbolvalues",
+            "sequencerundefined")) {
+            BuildExpressionExample(viewModel, symbolBroker);
+        } else if (state.Contains("sequencerslewtoradec", StringComparison.Ordinal)) {
+            BuildSlewToRaDec(viewModel);
+        } else if (ContainsAny(
+            state,
+            "instructiongeneric",
+            "instructionname",
+            "instructionoptions",
+            "instructionbuttons",
+            "instructionvalidation")) {
+            BuildInstructionAnatomy(viewModel, state);
+        } else if (state.Contains("customtrigger", StringComparison.Ordinal)) {
+            BuildTriggerExample<CustomTrigger>(viewModel, "Custom trigger example");
+        } else if (state.Contains("triggeronunsafe", StringComparison.Ordinal)) {
+            BuildTriggerExample<TriggerOnUnsafe>(viewModel, "Safety trigger example");
         } else if (state.Contains("sequencersequentialinstructions", StringComparison.Ordinal)) {
             BuildSequentialInstructions(viewModel);
         } else if (state.Contains("sequencerparallelinstructions", StringComparison.Ordinal)) {
@@ -74,6 +120,273 @@ internal static class SequencerFixtureState {
         }
     }
 
+    private static void BuildFilteredSidebar(
+            ISequence2VM viewModel,
+            string filter,
+            bool settingsMode) {
+        viewModel.SequencerFactory.ViewFilter = filter;
+        if (viewModel.SequencerFactory is not NINA.Sequencer.SequencerFactory factory) {
+            throw new InvalidOperationException("The documentation fixture requires NINA's production SequencerFactory.");
+        }
+        factory.SettingsMode = settingsMode;
+    }
+
+    private static void BuildInstructionSettings(ISequence2VM viewModel) {
+        SequentialContainer sequence = NewContainer<SequentialContainer>(viewModel, "Instruction settings example");
+        TakeExposure exposure = NewExposure(viewModel, 180);
+        exposure.Attempts = 3;
+        exposure.ErrorBehavior = NINA.Sequencer.Utility.InstructionErrorBehavior.SkipInstructionSetOnError;
+        exposure.ShowMenu = true;
+        sequence.Add(exposure);
+        TargetArea(viewModel).Add(sequence);
+    }
+
+    private static void BuildExpressionExample(
+            ISequence2VM viewModel,
+            ISymbolBroker symbolBroker) {
+        SequentialContainer constants = NewContainer<SequentialContainer>(viewModel, "Expression constants");
+        StartArea(viewModel).Add(constants);
+        AddConstant(viewModel, constants, symbolBroker, "ExposureTime", "60");
+        AddConstant(viewModel, constants, symbolBroker, "FudgeFactor", "-15");
+
+        SequentialContainer sequence = NewContainer<SequentialContainer>(viewModel, "Expression example");
+        TargetArea(viewModel).Add(sequence);
+
+        TakeExposure exposure = NewExposure(viewModel, 60);
+        sequence.Add(exposure);
+        ConfigureExpression(exposure.ExposureTimeExpression, symbolBroker, "ExposureTime + FudgeFactor");
+        ConfigureExpression(exposure.GainExpression, symbolBroker, "CameraGain");
+        exposure.Validate();
+    }
+
+    private static void BuildExpressionVariableExample(
+            ISequence2VM viewModel,
+            ISymbolBroker symbolBroker,
+            bool executed) {
+        SequentialContainer constants = NewContainer<SequentialContainer>(viewModel, "Expression constants");
+        StartArea(viewModel).Add(constants);
+        AddConstant(viewModel, constants, symbolBroker, "ExposureTime", "60");
+        AddConstant(viewModel, constants, symbolBroker, "FudgeFactor", "-15");
+
+        SequentialContainer sequence = NewContainer<SequentialContainer>(viewModel, "Variable expression example");
+        TargetArea(viewModel).Add(sequence);
+
+        GlobalVariable variable = viewModel.SequencerFactory.GetItem<GlobalVariable>();
+        sequence.Add(variable);
+        variable.SymbolBroker = symbolBroker;
+        variable.Identifier = "CameraGain";
+        variable.OriginalExpr.SymbolBroker = symbolBroker;
+        variable.OriginalDefinition = "100";
+        variable.OriginalExpr.Evaluate(true);
+        variable.Expr.SymbolBroker = symbolBroker;
+        variable.Executed = executed;
+        if (executed) {
+            variable.Expr.Definition = "100";
+            variable.Expr.Evaluate(true);
+        } else {
+            variable.Expr.Definition = string.Empty;
+            variable.Expr.IsExpression = true;
+            variable.Expr.Error = "Not evaluated";
+        }
+        variable.Validate();
+
+        TakeExposure exposure = NewExposure(viewModel, 60);
+        sequence.Add(exposure);
+        ConfigureExpression(exposure.ExposureTimeExpression, symbolBroker, "ExposureTime + FudgeFactor");
+        ConfigureExpression(exposure.GainExpression, symbolBroker, "CameraGain");
+        exposure.Validate();
+    }
+
+    private static void AddConstant(
+            ISequence2VM viewModel,
+            ISequenceContainer sequence,
+            ISymbolBroker symbolBroker,
+            string identifier,
+            string definition) {
+        GlobalConstant constant = viewModel.SequencerFactory.GetItem<GlobalConstant>();
+        sequence.Add(constant);
+        constant.SymbolBroker = symbolBroker;
+        constant.Identifier = identifier;
+        constant.Expr = new NINA.Sequencer.Logic.Expression(definition, sequence, constant) {
+            SymbolBroker = symbolBroker
+        };
+        constant.Expr.Evaluate(true);
+        constant.Validate();
+    }
+
+    private static void ConfigureExpression(
+            NINA.Sequencer.Logic.Expression expression,
+            ISymbolBroker symbolBroker,
+            string definition) {
+        expression.SymbolBroker = symbolBroker;
+        expression.Definition = definition;
+        expression.Evaluate(true);
+    }
+
+    private static void BuildSlewToRaDec(ISequence2VM viewModel) {
+        SequentialContainer sequence = NewContainer<SequentialContainer>(viewModel, "Coordinate example");
+        SlewScopeToRaDec slew = viewModel.SequencerFactory.GetItem<SlewScopeToRaDec>();
+        sequence.Add(slew);
+        TargetArea(viewModel).Add(sequence);
+        slew.RaExpression.Definition = "11.3758333";
+        slew.RaExpression.Evaluate(true);
+        slew.DecExpression.Definition = "-30.7198333";
+        slew.DecExpression.Evaluate(true);
+        slew.Validate();
+    }
+
+    private static void BuildSimpleToAdvanced(
+            ISequence2VM viewModel,
+            string state,
+            ISymbolBroker symbolBroker) {
+        if (state.Contains("startarea", StringComparison.Ordinal)) {
+            BuildSimpleStartArea(viewModel);
+        } else if (state.Contains("endarea", StringComparison.Ordinal)) {
+            BuildSimpleEndArea(viewModel);
+        } else if (state.Contains("targetarea", StringComparison.Ordinal)) {
+            BuildSimpleTargetArea(viewModel);
+        } else if (state.Contains("targetpreparation", StringComparison.Ordinal)) {
+            BuildSimpleTargetPreparation(viewModel);
+        } else if (state.Contains("targetclosure", StringComparison.Ordinal)) {
+            BuildSimpleTargetClosure(viewModel);
+        } else if (state.Contains("targetimaging", StringComparison.Ordinal)) {
+            TargetArea(viewModel).Add(CreateSimpleImagingSet(viewModel, symbolBroker, 8, 40, 4, true, false, false));
+        } else if (state.Contains("loopfortwo", StringComparison.Ordinal)) {
+            TargetArea(viewModel).Add(CreateSimpleImagingSet(viewModel, symbolBroker, 4, 40, 4, true, true, false));
+        } else if (state.Contains("loopuntiltime", StringComparison.Ordinal)) {
+            SequentialContainer sequence = CreateSimpleImagingSet(viewModel, symbolBroker, 4, 40, 4, true, true, false);
+            AddNauticalDawnCondition(viewModel, sequence);
+            TargetArea(viewModel).Add(sequence);
+        } else if (state.Contains("withoffsets", StringComparison.Ordinal)) {
+            SequentialContainer sequence = CreateSimpleImagingSet(viewModel, symbolBroker, 4, 4, 4, false, false, false);
+            AddNauticalDawnCondition(viewModel, sequence);
+            TargetArea(viewModel).Add(sequence);
+        } else if (state.Contains("betterdither", StringComparison.Ordinal)) {
+            SequentialContainer sequence = CreateSimpleImagingSet(viewModel, symbolBroker, 4, 4, 0, false, false, true);
+            AddNauticalDawnCondition(viewModel, sequence);
+            TargetArea(viewModel).Add(sequence);
+        }
+    }
+
+    private static void BuildSimpleStartArea(ISequence2VM viewModel) {
+        ((ITriggerable)viewModel.Sequencer.MainContainer).Add(
+            viewModel.SequencerFactory.GetTrigger<MeridianFlipTrigger>());
+        CoolCamera coolCamera = viewModel.SequencerFactory.GetItem<CoolCamera>();
+        coolCamera.Temperature = -40;
+        coolCamera.Duration = 0;
+        StartArea(viewModel).Add(coolCamera);
+        StartArea(viewModel).Add(viewModel.SequencerFactory.GetItem<UnparkScope>());
+    }
+
+    private static void BuildSimpleEndArea(ISequence2VM viewModel) {
+        ParallelContainer endInstructions = NewContainer<ParallelContainer>(viewModel, "End instructions");
+        WarmCamera warmCamera = viewModel.SequencerFactory.GetItem<WarmCamera>();
+        warmCamera.Duration = 0;
+        endInstructions.Add(warmCamera);
+        endInstructions.Add(viewModel.SequencerFactory.GetItem<ParkScope>());
+        EndArea(viewModel).Add(endInstructions);
+    }
+
+    private static void BuildSimpleTargetArea(ISequence2VM viewModel) {
+        DeepSkyObjectContainer target = NewDeepSkyObject(viewModel);
+        target.Name = "M33 Pinwheel Galaxy";
+        target.Target.TargetName = "M33 Pinwheel Galaxy";
+        target.Target.SetPosition(
+            NINA.Astrometry.Angle.ByDegree(DocumentationLatitude),
+            NINA.Astrometry.Angle.ByDegree(DocumentationLongitude));
+        target.Add(NewCollapsedContainer(viewModel, "Target preparation instructions"));
+        target.Add(NewCollapsedContainer(viewModel, "Target imaging instructions"));
+        target.Add(NewCollapsedContainer(viewModel, "Target closure instructions"));
+        TargetArea(viewModel).Add(target);
+    }
+
+    private static SequentialContainer NewCollapsedContainer(ISequence2VM viewModel, string name) {
+        SequentialContainer container = NewContainer<SequentialContainer>(viewModel, name);
+        container.IsExpanded = false;
+        return container;
+    }
+
+    private static void BuildSimpleTargetPreparation(ISequence2VM viewModel) {
+        SequentialContainer sequence = NewContainer<SequentialContainer>(viewModel, "Target preparation instructions");
+        SwitchFilter filter = viewModel.SequencerFactory.GetItem<SwitchFilter>();
+        filter.ComboBoxText = "L";
+        sequence.Add(filter);
+        sequence.Add(viewModel.SequencerFactory.GetItem<CenterAndRotate>());
+        sequence.Add(viewModel.SequencerFactory.GetItem<StartGuiding>());
+        sequence.Add(viewModel.SequencerFactory.GetItem<RunAutofocus>());
+        TargetArea(viewModel).Add(sequence);
+    }
+
+    private static void BuildSimpleTargetClosure(ISequence2VM viewModel) {
+        SequentialContainer sequence = NewContainer<SequentialContainer>(viewModel, "Target closure instructions");
+        sequence.Add(viewModel.SequencerFactory.GetItem<StopGuiding>());
+        TargetArea(viewModel).Add(sequence);
+    }
+
+    private static SequentialContainer CreateSimpleImagingSet(
+            ISequence2VM viewModel,
+            ISymbolBroker symbolBroker,
+            int exposureCount,
+            int iterations,
+            int ditherEvery,
+            bool autofocusAfterFilterChange,
+            bool loopTwice,
+            bool addDitherInstruction) {
+        SequentialContainer sequence = NewContainer<SequentialContainer>(viewModel, "Target imaging instructions");
+        if (autofocusAfterFilterChange) {
+            ((ITriggerable)sequence).Add(
+                viewModel.SequencerFactory.GetTrigger<AutofocusAfterFilterChange>());
+        }
+        if (loopTwice) {
+            LoopCondition loop = viewModel.SequencerFactory.GetCondition<LoopCondition>();
+            loop.Iterations = 2;
+            ((IConditionable)sequence).Add(loop);
+        }
+        string[] filters = ["L", "R", "G", "B"];
+        for (int index = 0; index < exposureCount; index++) {
+            sequence.Add(NewSmartExposure(
+                viewModel,
+                symbolBroker,
+                filters[index % filters.Length],
+                iterations,
+                ditherEvery));
+        }
+        if (addDitherInstruction) {
+            sequence.Add(viewModel.SequencerFactory.GetItem<Dither>());
+        }
+        return sequence;
+    }
+
+    private static SmartExposure NewSmartExposure(
+            ISequence2VM viewModel,
+            ISymbolBroker symbolBroker,
+            string filterName,
+            int iterations,
+            int ditherEvery) {
+        SmartExposure exposure = viewModel.SequencerFactory.GetItem<SmartExposure>();
+        exposure.Iterations = iterations;
+        exposure.GetLoopCondition().Iterations = iterations;
+        exposure.GetTakeExposure().ExposureTime = 60;
+        exposure.GetTakeExposure().ImageType = "LIGHT";
+        exposure.GetTakeExposure().Gain = 139;
+        exposure.GetTakeExposure().Offset = 21;
+        SwitchFilter filter = exposure.GetSwitchFilter();
+        filter.XfilterExpression.SymbolBroker = symbolBroker;
+        filter.ComboBoxText = filterName;
+        filter.XfilterExpression.Evaluate(true);
+        exposure.GetDitherAfterExposures().AfterExposures = ditherEvery;
+        return exposure;
+    }
+
+    private static void AddNauticalDawnCondition(
+            ISequence2VM viewModel,
+            SequentialContainer sequence) {
+        TimeCondition until = viewModel.SequencerFactory.GetCondition<TimeCondition>();
+        until.DateTime = DocumentationApplicationHost.FixedDateTime;
+        until.SelectedProvider = until.DateTimeProviders.First(provider => provider.Name == "Nautical Dawn");
+        ((IConditionable)sequence).Add(until);
+    }
+
     private static void BuildFlow(ISequence2VM viewModel) {
         ISequenceContainer targetArea = (ISequenceContainer)viewModel.Sequencer.MainContainer.Items[1];
         AddWaits(viewModel, targetArea, 3);
@@ -87,6 +400,26 @@ internal static class SequencerFixtureState {
         targetArea.Add(repeated);
 
         AddWaits(viewModel, targetArea, 2);
+    }
+
+    private static void BuildInstructionAnatomy(ISequence2VM viewModel, string state) {
+        SequentialContainer sequence = NewContainer<SequentialContainer>(viewModel, "Instruction example");
+        TakeExposure exposure = NewExposure(viewModel, 180);
+        if (state.Contains("instructionvalidation", StringComparison.Ordinal)) {
+            exposure.Gain = 500;
+            exposure.Offset = 500;
+            exposure.Validate();
+        }
+        sequence.Add(exposure);
+        TargetArea(viewModel).Add(sequence);
+    }
+
+    private static void BuildTriggerExample<TTrigger>(ISequence2VM viewModel, string name)
+            where TTrigger : ISequenceTrigger {
+        SequentialContainer sequence = NewContainer<SequentialContainer>(viewModel, name);
+        ((ITriggerable)sequence).Add(viewModel.SequencerFactory.GetTrigger<TTrigger>());
+        sequence.Add(NewExposure(viewModel, 180));
+        TargetArea(viewModel).Add(sequence);
     }
 
     private static void AddWaits(ISequence2VM viewModel, ISequenceContainer container, int count) {
@@ -335,6 +668,12 @@ internal static class SequencerFixtureState {
     private static ISequenceContainer StartArea(ISequence2VM viewModel) =>
         (ISequenceContainer)viewModel.Sequencer.MainContainer.Items[0];
 
+    private static ISequenceContainer EndArea(ISequence2VM viewModel) =>
+        (ISequenceContainer)viewModel.Sequencer.MainContainer.Items[2];
+
     private static string Normalize(string value) =>
         new(value.Where(char.IsLetterOrDigit).Select(char.ToLowerInvariant).ToArray());
+
+    private static bool ContainsAny(string value, params string[] candidates) =>
+        candidates.Any(candidate => value.Contains(candidate, StringComparison.Ordinal));
 }

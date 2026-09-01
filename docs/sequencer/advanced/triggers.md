@@ -1,6 +1,6 @@
 Triggers are instructions that should only happen when certain events occur. These triggers can be attached to an instruction set. When attached, they will get evaluated after each instruction inside the set, similar to how loop conditions are evaluated. When the defined event occurs, the trigger will execute its instruction. After the trigger has finished its execution, the sequence will continue where it left off.
 Triggers can be identified by the highlighted lightning icon next to them in the sequencer sidebar.  
-![Triggers](../../images/sequencer/trigger/trigger.png)  
+![Triggers](../../images/generated/sequencer/trigger/trigger.png)
 
 ## Connect
 Triggers that recover selected equipment after an unexpected disconnect.
@@ -72,7 +72,7 @@ This trigger is best used in combination with the "Center After Drift" trigger t
 Trigger actions for a [safety monitor](../../tabs/equipment/safetymonitor.md). Each trigger in this category requires at least a safety monitor to be connected.
 
 ### Trigger On Unsafe
-![Trigger On Unsafe](../../images/sequencer/trigger/triggeronunsafe.png)
+![Trigger On Unsafe](../../images/generated/sequencer/trigger/triggeronunsafe.png)
 
 Runs configured instructions when the safety monitor reports unsafe conditions or disconnects after it has been connected. The trigger first runs the instructions in **Before Waiting For Safety**, then pauses with [Wait Until Safe](instructions.md#wait-until-safe), and finally runs **After Waiting For Safety** once the monitor reports safe conditions again.
 If the safety monitor disconnects after N.I.N.A. has already seen a valid connection, that disconnect is treated like an unsafe state and the trigger will run. A monitor that has never been connected yet will not trigger this behavior just because it is currently disconnected.
@@ -82,7 +82,7 @@ If this trigger fires while N.I.N.A. is working on a Deep Sky Object target, ins
 Trigger actions for a telescope. Each trigger in this category requires at least a telescope to be connected.
 
 ### Center After Drift
-![Center After Drift](../../images/sequencer/trigger/centerafterdrift.png)  
+![Center After Drift](../../images/generated/sequencer/trigger/centerafterdrift.png)
 After the set amount of exposures, this trigger will plate solve the saved image in the background. When the distance of the solved coordinates is above the specified amount of arcminutes compared to the current target coordinates, this trigger will initiate a recenter operation.
 *Requires a plate solver to be set up and the trigger needs to be inside a deep sky object sequence to have a target reference*
 
@@ -103,7 +103,7 @@ The standard post-flip rotation setting still applies. If the programmable workf
 Trigger actions that let you reuse existing trigger timing with your own instruction set.
 
 ### Custom Trigger
-![Custom Trigger](../../images/sequencer/trigger/customtrigger.png)
+![Custom Trigger](../../images/generated/sequencer/trigger/customtrigger.png)
 
 Use an existing trigger as the trigger source, then add your own instructions to run when that source would normally fire. This is useful when a built-in trigger has the timing you need, but you want custom actions instead of the built-in behavior.
 If this trigger fires while N.I.N.A. is working on a Deep Sky Object target, instructions such as slew or center will automatically use that target's coordinates. That also applies when the trigger itself is placed higher up, for example in **Global Triggers**.

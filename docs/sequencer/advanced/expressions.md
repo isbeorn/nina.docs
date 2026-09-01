@@ -51,33 +51,33 @@ Functions are a very powerful addition to Expressions.  There are many built-in 
 
 Here's a Take Exposure instruction as it might appear in NINA 3.3; you'll see a few things that are new.
 
-![Expression Example](../../images/sequencer/Sequencer_SymbolExampleInstruction.png)
+![Expression Example](../../images/generated/sequencer/Sequencer_SymbolExampleInstruction.png)
 
 The current value of an Expression is shown in curly brackets (braces).
 
-![Expression Example](../../images/sequencer/Sequencer_ExpressionValue.png)
+![Expression Example](../../images/generated/sequencer/Sequencer_ExpressionValue.png)
 
 If you hover over the Expression itself, you'll see how each of the Symbols in the Expression is evaluated.  In this example, the values of ExposureTime and FudgeFactor are shown.
 
-![Expression Errors](../../images/sequencer/Sequencer_SymbolValues.png)
+![Expression Errors](../../images/generated/sequencer/Sequencer_SymbolValues.png)
 
 On the right, there is a red error triangle, indicating that something is wrong with the Expression.  Hovering over the triangle indicates the problem; in this case, there's a reference to a Symbol, CameraGain, that hasn't been defined.
 
-![Undefined](../../images/sequencer/Sequencer_Undefined.png)
+![Undefined](../../images/generated/sequencer/Sequencer_Undefined.png)
 
 In this example, there is an orange warning triangle; this is just to alert you to a *potential* problem and will not stop a sequence from running.  The reason is that the CameraGain Variable has been *declared* in the instruction above, but that instruction has not yet been *run*.  As noted earlier on this page, Variables don't have a value until the defining instruction is actually *run*.  When it *does* run, CameraGain will have a value of 100, and the warning will disappear.
 
-![Warning](../../images/sequencer/Sequencer_ExpressionWarning.png)
+![Warning](../../images/generated/sequencer/Sequencer_ExpressionWarning.png)
 
 Here's how these same two instructions look after they have been run in the sequencer.  Note two things: first, the Define Variable instruction now shows the *current* value of the Variable (in this case, 100); and second, the warning triangle is gone in the Take Exposure instruction and CameraGain now shows a value in curly braces.
 
-![Warning Gone](../../images/sequencer/Sequencer_ExpressionWarningGone.png)
+![Warning Gone](../../images/generated/sequencer/Sequencer_ExpressionWarningGone.png)
 
 ### Instructions Updated for NINA 3.3
 
 Instructions that use celestial coordinates look a little different in NINA 3.3; there is now the ability to enter those coordinates in decimal format (in addition to hours-minutes-seconds or degrees-minutes-seconds). Changing the decimal value will automatically update H-M-S/D-M-S values, and vice versa.  You can also use Expressions in place of a decimal value.
 
-![Slew To Ra/Dec](../../images/sequencer/Sequencer_SlewToRaDec.png)  
+![Slew To Ra/Dec](../../images/generated/sequencer/Sequencer_SlewToRaDec.png)
 
 
 ### Conditional Execution

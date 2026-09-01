@@ -294,6 +294,48 @@ public class ScreenshotRendererTests {
     }
 
     [Test]
+    public void Render_CompositesNormalizedBoxCalloutsAfterCropping() {
+        ScreenshotAsset asset = new() {
+            Id = "box-annotation",
+            Classification = ScreenshotClassification.NinaUi,
+            Output = "docs/images/generated/box-annotation.png",
+            Fixture = "view",
+            State = "NINA.View.Options.GeneralView",
+            Width = 400,
+            Height = 300,
+            Crop = new ScreenshotCrop { X = 0, Y = 0, Width = 1, Height = 1 },
+            Callouts = [
+                new ScreenshotCallout {
+                    Kind = ScreenshotCalloutKind.Box,
+                    X = 0.1,
+                    Y = 0.1,
+                    Width = 0.5,
+                    Height = 0.5
+                }
+            ]
+        };
+        string output = Path.Combine(root, "box-annotation.png");
+
+        new ScreenshotRenderer(new FixtureRegistry()).Render(asset, output);
+
+        BitmapFrame frame = BitmapDecoder.Create(
+            new Uri(output),
+            BitmapCreateOptions.PreservePixelFormat,
+            BitmapCacheOption.OnLoad).Frames[0];
+        int stride = frame.PixelWidth * 4;
+        byte[] pixels = new byte[stride * frame.PixelHeight];
+        frame.CopyPixels(pixels, stride, 0);
+        int annotationPixels = 0;
+        for (int offset = 0; offset < pixels.Length; offset += 4) {
+            if (pixels[offset + 2] > 180 && pixels[offset + 1] < 100 && pixels[offset] < 100) {
+                annotationPixels++;
+            }
+        }
+
+        Assert.That(annotationPixels, Is.GreaterThan(1000));
+    }
+
+    [Test]
     public void Render_UsesFullSizeCanvasBeforeApplyingDocumentationCrop() {
         ScreenshotAsset asset = new() {
             Id = "full-size-crop",
@@ -352,6 +394,36 @@ public class ScreenshotRendererTests {
     }
 
     [Test]
+    public void Render_CropsToTheFirstRealTargetAreaTrigger() {
+        ScreenshotAsset asset = new() {
+            Id = "custom-trigger-crop",
+            Classification = ScreenshotClassification.NinaUi,
+            Output = "docs/images/generated/sequencer/trigger/customtrigger.png",
+            Fixture = "sequencer",
+            State = "custom-trigger",
+            ViewType = "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView",
+            Width = 1400,
+            Height = 190,
+            RenderWidth = 1800,
+            RenderHeight = 1000,
+            CropTarget = "target-area:first-item-trigger"
+        };
+        string output = Path.Combine(root, "custom-trigger-crop.png");
+
+        new ScreenshotRenderer(new FixtureRegistry()).Render(asset, output);
+
+        BitmapFrame frame = BitmapDecoder.Create(
+            new Uri(output),
+            BitmapCreateOptions.PreservePixelFormat,
+            BitmapCacheOption.OnLoad).Frames[0];
+        Assert.Multiple(() => {
+            Assert.That(frame.PixelWidth, Is.EqualTo(1400));
+            Assert.That(frame.PixelHeight, Is.EqualTo(190));
+            Assert.That(new FileInfo(output).Length, Is.GreaterThan(5000));
+        });
+    }
+
+    [Test]
     public void Render_CropsToAllRealTargetAreaItemsForTheFlowExample() {
         ScreenshotAsset asset = new() {
             Id = "sequence-flow-crop",
@@ -379,6 +451,165 @@ public class ScreenshotRendererTests {
             Assert.That(frame.PixelHeight, Is.EqualTo(900));
             Assert.That(new FileInfo(output).Length, Is.GreaterThan(10000));
         });
+    }
+
+    [TestCase("simple-to-advanced-start-area", "start-area:all-items")]
+    [TestCase("simple-to-advanced-end-area", "end-area:all-items")]
+    public void Render_CropsToAllRealOuterAreaItems(string state, string cropTarget) {
+        ScreenshotAsset asset = new() {
+            Id = state,
+            Classification = ScreenshotClassification.NinaUi,
+            Output = $"docs/images/generated/sequencer/simpletoadvanced/{state}.png",
+            Fixture = "sequencer",
+            State = state,
+            ViewType = "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView",
+            Width = 1458,
+            Height = 260,
+            RenderWidth = 1800,
+            RenderHeight = 1000,
+            CropTarget = cropTarget
+        };
+        string output = Path.Combine(root, $"{state}.png");
+
+        new ScreenshotRenderer(new FixtureRegistry()).Render(asset, output);
+
+        BitmapFrame frame = BitmapDecoder.Create(
+            new Uri(output),
+            BitmapCreateOptions.PreservePixelFormat,
+            BitmapCacheOption.OnLoad).Frames[0];
+        Assert.Multiple(() => {
+            Assert.That(frame.PixelWidth, Is.EqualTo(1458));
+            Assert.That(frame.PixelHeight, Is.EqualTo(260));
+            Assert.That(new FileInfo(output).Length, Is.GreaterThan(5000));
+        });
+    }
+
+    [Test]
+    public void Render_CropsToTheFilteredProductionSidebarItem() {
+        ScreenshotAsset asset = new() {
+            Id = "sequencer-sidebar-loop-until-time",
+            Classification = ScreenshotClassification.NinaUi,
+            Output = "docs/images/generated/sequencer/conditions/conditions.png",
+            Fixture = "sequencer",
+            State = "sequencer-sidebar-loop-until-time",
+            ViewType = "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView",
+            Width = 470,
+            Height = 45,
+            RenderWidth = 2340,
+            RenderHeight = 1000,
+            CropTarget = "sidebar:filtered-item"
+        };
+        string output = Path.Combine(root, "sidebar-filtered-item.png");
+
+        new ScreenshotRenderer(new FixtureRegistry()).Render(asset, output);
+
+        BitmapFrame frame = BitmapDecoder.Create(
+            new Uri(output),
+            BitmapCreateOptions.PreservePixelFormat,
+            BitmapCacheOption.OnLoad).Frames[0];
+        Assert.Multiple(() => {
+            Assert.That(frame.PixelWidth, Is.EqualTo(470));
+            Assert.That(frame.PixelHeight, Is.EqualTo(45));
+            Assert.That(new FileInfo(output).Length, Is.GreaterThan(2000));
+        });
+    }
+
+    [TestCase("target-area:first-expression:exposure-time", "Sequencer_ExpressionValue.png")]
+    [TestCase("target-area:first-expression:exposure-time", "Sequencer_SymbolValues.png")]
+    [TestCase("target-area:first-expression:gain", "Sequencer_Undefined.png")]
+    public void Render_CropsToAProductionExpressionControl(string cropTarget, string fileName) {
+        ScreenshotAsset asset = new() {
+            Id = "sequencer-expression-control",
+            Classification = ScreenshotClassification.NinaUi,
+            Output = $"docs/images/generated/sequencer/{fileName}",
+            Fixture = "sequencer",
+            State = "sequencer-expression-example",
+            ViewType = "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView",
+            Width = 520,
+            Height = 60,
+            RenderWidth = 1814,
+            RenderHeight = 900,
+            CropTarget = cropTarget
+        };
+        string output = Path.Combine(root, fileName);
+
+        new ScreenshotRenderer(new FixtureRegistry()).Render(asset, output);
+
+        BitmapFrame frame = BitmapDecoder.Create(
+            new Uri(output),
+            BitmapCreateOptions.PreservePixelFormat,
+            BitmapCacheOption.OnLoad).Frames[0];
+        Assert.Multiple(() => {
+            Assert.That(frame.PixelWidth, Is.EqualTo(520));
+            Assert.That(frame.PixelHeight, Is.EqualTo(60));
+            Assert.That(new FileInfo(output).Length, Is.GreaterThan(2000));
+        });
+    }
+
+    [Test]
+    public void Render_CapturesProductionInstructionSettingsAndDropdown() {
+        ScreenshotAsset asset = new() {
+            Id = "instruction-settings",
+            Classification = ScreenshotClassification.NinaUi,
+            Output = "docs/images/generated/sequencer/instructions/instruction_settings.png",
+            Fixture = "sequencer",
+            State = "instruction-settings",
+            ViewType = "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView",
+            Width = 1200,
+            Height = 180,
+            RenderWidth = 1814,
+            RenderHeight = 900,
+            CropTarget = "target-area:first-item-instructions"
+        };
+        string output = Path.Combine(root, "instruction-settings.png");
+
+        new ScreenshotRenderer(new FixtureRegistry()).Render(asset, output);
+
+        BitmapFrame frame = BitmapDecoder.Create(
+            new Uri(output),
+            BitmapCreateOptions.PreservePixelFormat,
+            BitmapCacheOption.OnLoad).Frames[0];
+        Assert.Multiple(() => {
+            Assert.That(frame.PixelWidth, Is.EqualTo(1200));
+            Assert.That(frame.PixelHeight, Is.EqualTo(180));
+            Assert.That(new FileInfo(output).Length, Is.GreaterThan(5000));
+        });
+    }
+
+    [Test]
+    public void Render_ProductionDropdownCleanupAllowsTheNextFixtureToRender() {
+        ScreenshotRenderer renderer = new(new FixtureRegistry());
+        ScreenshotAsset settings = new() {
+            Id = "instruction-settings-cleanup",
+            Classification = ScreenshotClassification.NinaUi,
+            Output = "docs/images/generated/sequencer/instructions/instruction_settings.png",
+            Fixture = "sequencer",
+            State = "instruction-settings",
+            ViewType = "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView",
+            Width = 1200,
+            Height = 180,
+            RenderWidth = 1814,
+            RenderHeight = 900,
+            CropTarget = "target-area:first-item-instructions"
+        };
+        ScreenshotAsset following = new() {
+            Id = "expression-after-dropdown",
+            Classification = ScreenshotClassification.NinaUi,
+            Output = "docs/images/generated/sequencer/Sequencer_ExpressionValue.png",
+            Fixture = "sequencer",
+            State = "sequencer-expression-example",
+            ViewType = "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView",
+            Width = 520,
+            Height = 60,
+            RenderWidth = 1814,
+            RenderHeight = 900,
+            CropTarget = "target-area:first-expression:exposure-time"
+        };
+
+        renderer.Render(settings, Path.Combine(root, "settings-cleanup.png"));
+        renderer.Render(following, Path.Combine(root, "following-cleanup.png"));
+
+        Assert.That(File.Exists(Path.Combine(root, "following-cleanup.png")), Is.True);
     }
 
     [Test]

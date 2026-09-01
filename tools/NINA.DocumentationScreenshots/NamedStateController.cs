@@ -16,6 +16,7 @@ using System.Windows;
 using System.Windows.Automation.Peers;
 using System.Windows.Automation.Provider;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
@@ -36,12 +37,32 @@ namespace NINA.DocumentationScreenshots;
 /// Applies catalog states by manipulating controls from NINA's compiled production visual tree.
 /// </summary>
 public static class NamedStateController {
+    private static readonly DependencyProperty CaptureDropDownProperty = DependencyProperty.RegisterAttached(
+        "CaptureDropDown",
+        typeof(bool),
+        typeof(NamedStateController),
+        new PropertyMetadata(false));
+    internal static bool ShouldCaptureDropDown(ComboBox comboBox) =>
+        (bool)comboBox.GetValue(CaptureDropDownProperty);
+
     public static void Apply(FrameworkElement fixture, ScreenshotAsset asset) {
         ResetProductionMenuMode(fixture);
         string output = asset.Output.Replace('\\', '/').ToLowerInvariant();
         ApplyAdvancedSequencerSidebarState(fixture, output, asset.Id);
         PinAltitudeChartNowMarkers(fixture);
         ApplyAdvancedSequencerDragState(fixture, output, asset.Id);
+
+        if (output.EndsWith("/sequencer/trigger/customtrigger.png", StringComparison.Ordinal)) {
+            Expander trigger = FindDescendants<Expander>(fixture)
+                .Where(expander => expander.GetType().Name == "DetachingExpander"
+                    && expander.DataContext is NINA.Sequencer.Trigger.Utility.CustomTrigger
+                    && expander.IsVisible)
+                .OrderByDescending(expander => expander.ActualWidth * expander.ActualHeight)
+                .FirstOrDefault()
+                ?? throw new CatalogException($"Screenshot '{asset.Id}' could not find the production Custom Trigger editor.");
+            trigger.IsExpanded = true;
+            trigger.UpdateLayout();
+        }
 
         if (output.EndsWith("/sequencer/sequencer_addtrigger.png", StringComparison.Ordinal)) {
             OpenProductionContextMenu(fixture, "AddTriggerButton", asset.Id);
@@ -65,13 +86,115 @@ public static class NamedStateController {
         if (output.EndsWith("/sequencer/conditions/loopuntiltime.png", StringComparison.Ordinal)) {
             ComboBox comboBox = FindDescendants<ComboBox>(fixture).FirstOrDefault()
                 ?? throw new CatalogException($"Screenshot '{asset.Id}' could not find the production time-provider ComboBox.");
-            comboBox.IsDropDownOpen = true;
+            PrepareProductionComboBox(comboBox, asset.Id, "time-provider");
+        }
+        if (output.EndsWith("/sequencer/instructions/instruction_settings.png", StringComparison.Ordinal)) {
+            OpenProductionInstructionSettings(fixture, asset.Id);
+        }
+        if (output.EndsWith("/sequencer/sequencer_symbolvalues.png", StringComparison.Ordinal)) {
+            OpenProductionExpressionSymbolsTooltip(fixture, asset.Id);
+        }
+        if (output.EndsWith("/sequencer/sequencer_undefined.png", StringComparison.Ordinal)
+            || output.EndsWith("/sequencer/sequencer_expressionwarning.png", StringComparison.Ordinal)) {
+            OpenProductionExpressionErrorTooltip(fixture, asset.Id);
         }
         if (output.EndsWith("/advanced/framing/imagesources.png", StringComparison.Ordinal)) {
             ComboBox source = FindDescendants<ComboBox>(fixture)
                 .FirstOrDefault(control => control.Name == "PART_FramingAssistantSource")
                 ?? throw new CatalogException($"Screenshot '{asset.Id}' could not find the production image-source selector.");
-            source.IsDropDownOpen = true;
+            PrepareProductionComboBox(source, asset.Id, "image-source");
+        }
+    }
+
+    private static void OpenProductionInstructionSettings(
+            FrameworkElement fixture,
+            string screenshotId) {
+        ComboBox errorBehavior = FindDescendants<ComboBox>(fixture)
+            .FirstOrDefault(control => control.Name == "PART_ErrorBehavior"
+                && control.IsVisible)
+            ?? throw new CatalogException($"Screenshot '{screenshotId}' could not find NINA's production instruction error behavior control.");
+        PrepareProductionComboBox(errorBehavior, screenshotId, "instruction error behavior");
+    }
+
+    private static void PrepareProductionComboBox(
+            ComboBox comboBox,
+            string screenshotId,
+            string description) {
+        comboBox.ApplyTemplate();
+        Popup? popup = comboBox.Template.FindName("PART_Popup", comboBox) as Popup
+            ?? comboBox.Template.FindName("Popup", comboBox) as Popup;
+        if (popup is null) {
+            throw new CatalogException($"Screenshot '{screenshotId}' could not find NINA's production {description} popup.");
+        }
+        popup.PopupAnimation = PopupAnimation.None;
+        comboBox.SetValue(CaptureDropDownProperty, true);
+    }
+
+    private static void OpenProductionExpressionSymbolsTooltip(
+            FrameworkElement fixture,
+            string screenshotId) {
+        NINA.Sequencer.Logic.ExprControl control = FindExposureExpressionControl(
+            fixture,
+            screenshotId,
+            false);
+        TextBox input = FindDescendants<TextBox>(control).FirstOrDefault()
+            ?? throw new CatalogException($"Screenshot '{screenshotId}' could not find NINA's production expression input.");
+        NINA.Sequencer.Logic.UserSymbol.ShowSymbols(input);
+        OpenProductionTooltip(input, screenshotId, "expression symbols");
+    }
+
+    private static void OpenProductionExpressionErrorTooltip(
+            FrameworkElement fixture,
+            string screenshotId) {
+        NINA.Sequencer.Logic.ExprControl control = FindExposureExpressionControl(
+            fixture,
+            screenshotId,
+            true);
+        TextBlock warning = FindDescendants<TextBlock>(control)
+            .FirstOrDefault(text => text.IsVisible
+                && text.ToolTip is not null
+                && text.Text.Contains("\u26A0", StringComparison.Ordinal))
+            ?? throw new CatalogException($"Screenshot '{screenshotId}' could not find NINA's production expression warning indicator.");
+        OpenProductionTooltip(warning, screenshotId, "expression error");
+    }
+
+    private static NINA.Sequencer.Logic.ExprControl FindExposureExpressionControl(
+            FrameworkElement fixture,
+            string screenshotId,
+            bool gain) {
+        string expectedLabel = gain ? Loc.Instance["LblGain"] : Loc.Instance["LblTime"];
+        return FindDescendants<NINA.Sequencer.Logic.ExprControl>(fixture)
+            .Where(control => control.IsVisible
+                && control.ActualWidth > 1
+                && control.ActualHeight > 1)
+            .FirstOrDefault(control => control.DataContext is TakeExposure exposure
+                && (ReferenceEquals(
+                        control.GetValue(NINA.Sequencer.Logic.ExprControl.ExpProperty),
+                        gain ? exposure.GainExpression : exposure.ExposureTimeExpression)
+                    || string.Equals(
+                        control.GetValue(NINA.Sequencer.Logic.ExprControl.LabelProperty) as string,
+                        expectedLabel,
+                        StringComparison.Ordinal)))
+            ?? throw new CatalogException($"Screenshot '{screenshotId}' could not find NINA's production Take Exposure expression control.");
+    }
+
+    private static void OpenProductionTooltip(
+            FrameworkElement anchor,
+            string screenshotId,
+            string description) {
+        object? productionContent = anchor.ToolTip;
+        if (productionContent is null) {
+            throw new CatalogException($"Screenshot '{screenshotId}' found NINA's {description} anchor without its production tooltip.");
+        }
+        ToolTip tooltip = productionContent as ToolTip ?? new ToolTip { Content = productionContent };
+        anchor.ToolTip = tooltip;
+        tooltip.PlacementTarget = anchor;
+        tooltip.Placement = System.Windows.Controls.Primitives.PlacementMode.Bottom;
+        tooltip.IsOpen = true;
+        tooltip.UpdateLayout();
+        anchor.Dispatcher.Invoke(DispatcherPriority.ApplicationIdle, new Action(() => { }));
+        if (!tooltip.IsOpen) {
+            throw new CatalogException($"Screenshot '{screenshotId}' opened NINA's production {description} tooltip but WPF closed it before capture.");
         }
     }
 

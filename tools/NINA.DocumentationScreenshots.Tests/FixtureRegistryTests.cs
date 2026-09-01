@@ -254,6 +254,484 @@ public class FixtureRegistryTests {
     }
 
     [Test]
+    public void SequencerEntity_UsesRealInvalidTakeExposureState() {
+        ScreenshotAsset asset = new() {
+            Id = "instruction-validation",
+            Classification = ScreenshotClassification.NinaUi,
+            Output = "docs/images/generated/sequencer/instructions/instruction_validation.png",
+            Width = 1096,
+            Height = 55,
+            Fixture = "sequencer-entity",
+            State = "instruction-validation",
+            SourceIdentifier = "sequencer:TakeExposure"
+        };
+
+        FrameworkElement fixture = new FixtureRegistry().Create(asset);
+        NINA.Sequencer.SequenceItem.Imaging.TakeExposure entity =
+            (NINA.Sequencer.SequenceItem.Imaging.TakeExposure)fixture.DataContext;
+
+        Assert.That(entity.Issues, Is.Not.Empty);
+    }
+
+    [TestCase("target-altitude-condition", "sequencer:AltitudeCondition")]
+    [TestCase("target-above-horizon-condition", "sequencer:AboveHorizonCondition")]
+    public void SequencerEntity_TargetCoordinateStateUsesProductionParentVisibility(
+            string state,
+            string sourceIdentifier) {
+        ScreenshotAsset asset = new() {
+            Id = state,
+            Classification = ScreenshotClassification.NinaUi,
+            Output = $"docs/images/generated/sequencer/conditions/{state}.png",
+            Width = 720,
+            Height = 35,
+            Fixture = "sequencer-entity",
+            State = state,
+            SourceIdentifier = sourceIdentifier
+        };
+
+        FrameworkElement fixture = new FixtureRegistry().Create(asset);
+        object entity = fixture.DataContext;
+
+        Assert.That(entity.GetType().GetProperty("HasDsoParent")!.GetValue(entity), Is.True);
+    }
+
+    [Test]
+    public void SequencerEntity_TimeProviderMenuUsesAstronomicalDusk() {
+        ScreenshotAsset asset = new() {
+            Id = "time-provider-menu",
+            Classification = ScreenshotClassification.NinaUi,
+            Output = "docs/images/generated/sequencer/conditions/loopuntiltime.png",
+            Width = 720,
+            Height = 168,
+            Fixture = "sequencer-entity",
+            State = "time-provider-menu",
+            SourceIdentifier = "sequencer:TimeCondition"
+        };
+
+        FrameworkElement fixture = new FixtureRegistry().Create(asset);
+        NINA.Sequencer.Conditions.TimeCondition entity =
+            (NINA.Sequencer.Conditions.TimeCondition)fixture.DataContext;
+
+        Assert.That(entity.SelectedProvider.Name, Is.EqualTo("Astronomical Dusk"));
+    }
+
+    [TestCase("instruction-generic", typeof(NINA.Sequencer.SequenceItem.Imaging.TakeExposure))]
+    [TestCase("instruction-validation", typeof(NINA.Sequencer.SequenceItem.Imaging.TakeExposure))]
+    [TestCase("custom-trigger", typeof(NINA.Sequencer.Trigger.Utility.CustomTrigger))]
+    [TestCase("trigger-on-unsafe", typeof(NINA.Sequencer.Trigger.SafetyMonitor.TriggerOnUnsafe))]
+    public void AdvancedSequencer_SelectivelyRenderedRowsUseProductionEntities(
+            string state,
+            Type expectedType) {
+        FrameworkElement fixture = new FixtureRegistry().Create(new ScreenshotAsset {
+            Id = state,
+            Classification = ScreenshotClassification.NinaUi,
+            Output = $"docs/images/generated/sequencer/{state}.png",
+            Width = 1200,
+            Height = 700,
+            Fixture = "sequencer",
+            State = state,
+            ViewType = "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView"
+        });
+        NINA.ViewModel.Sequencer.ISequence2VM viewModel =
+            (NINA.ViewModel.Sequencer.ISequence2VM)fixture.DataContext;
+        NINA.Sequencer.Container.ISequenceContainer targetArea =
+            (NINA.Sequencer.Container.ISequenceContainer)viewModel.Sequencer.MainContainer.Items[1];
+        NINA.Sequencer.Container.SequentialContainer sequence = targetArea.Items
+            .OfType<NINA.Sequencer.Container.SequentialContainer>()
+            .Single();
+
+        object entity = state.Contains("trigger", StringComparison.Ordinal)
+            ? sequence.Triggers.Single()
+            : sequence.Items.Single();
+        Assert.That(entity, Is.TypeOf(expectedType));
+        if (state == "instruction-validation") {
+            Assert.That(((NINA.Sequencer.SequenceItem.Imaging.TakeExposure)entity).Issues, Is.Not.Empty);
+        }
+    }
+
+    [TestCase("simple-to-advanced-target-area", 3, 0, 0)]
+    [TestCase("simple-to-advanced-target-preparation", 4, 0, 0)]
+    [TestCase("simple-to-advanced-target-closure", 1, 0, 0)]
+    [TestCase("simple-to-advanced-target-imaging", 8, 0, 1)]
+    [TestCase("simple-to-advanced-loop-for-two", 4, 1, 1)]
+    [TestCase("simple-to-advanced-loop-until-time", 4, 2, 1)]
+    [TestCase("simple-to-advanced-with-offsets", 4, 1, 0)]
+    [TestCase("simple-to-advanced-better-dither", 5, 1, 0)]
+    public void AdvancedSequencer_SimpleToAdvancedStatesUseProductionSequenceTrees(
+            string state,
+            int expectedItems,
+            int expectedConditions,
+            int expectedTriggers) {
+        FrameworkElement fixture = new FixtureRegistry().Create(new ScreenshotAsset {
+            Id = state,
+            Classification = ScreenshotClassification.NinaUi,
+            Output = $"docs/images/generated/sequencer/simpletoadvanced/{state}.png",
+            Width = 1442,
+            Height = 500,
+            Fixture = "sequencer",
+            State = state,
+            ViewType = "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView"
+        });
+        NINA.ViewModel.Sequencer.ISequence2VM viewModel =
+            (NINA.ViewModel.Sequencer.ISequence2VM)fixture.DataContext;
+        NINA.Sequencer.Container.ISequenceContainer targetArea =
+            (NINA.Sequencer.Container.ISequenceContainer)viewModel.Sequencer.MainContainer.Items[1];
+
+        NINA.Sequencer.Container.ISequenceContainer example = targetArea.Items
+            .OfType<NINA.Sequencer.Container.ISequenceContainer>()
+            .Single();
+        NINA.Sequencer.Conditions.IConditionable conditionable =
+            (NINA.Sequencer.Conditions.IConditionable)example;
+        NINA.Sequencer.Trigger.ITriggerable triggerable =
+            (NINA.Sequencer.Trigger.ITriggerable)example;
+        List<string> validationIssues = CollectSequenceEntities(example)
+            .OfType<NINA.Sequencer.Validations.IValidatable>()
+            .SelectMany(entity => entity.Issues.Select(issue => $"{entity.GetType().Name}: {issue}"))
+            .ToList();
+        Assert.Multiple(() => {
+            Assert.That(example.Items, Has.Count.EqualTo(expectedItems));
+            Assert.That(conditionable.Conditions, Has.Count.EqualTo(expectedConditions));
+            Assert.That(triggerable.Triggers, Has.Count.EqualTo(expectedTriggers));
+            Assert.That(validationIssues, Is.Empty);
+        });
+    }
+
+    [Test]
+    public void AdvancedSequencer_SimpleToAdvancedTargetAreaUsesDocumentationObservatoryForAltitudeChart() {
+        FrameworkElement fixture = new FixtureRegistry().Create(new ScreenshotAsset {
+            Id = "simple-to-advanced-target-area",
+            Classification = ScreenshotClassification.NinaUi,
+            Output = "docs/images/generated/sequencer/simpletoadvanced/targetarea.png",
+            Width = 1444,
+            Height = 530,
+            Fixture = "sequencer",
+            State = "simple-to-advanced-target-area",
+            ViewType = "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView"
+        });
+        NINA.ViewModel.Sequencer.ISequence2VM viewModel =
+            (NINA.ViewModel.Sequencer.ISequence2VM)fixture.DataContext;
+        NINA.Sequencer.Container.ISequenceContainer targetArea =
+            (NINA.Sequencer.Container.ISequenceContainer)viewModel.Sequencer.MainContainer.Items[1];
+        NINA.Sequencer.Container.DeepSkyObjectContainer target = targetArea.Items
+            .OfType<NINA.Sequencer.Container.DeepSkyObjectContainer>()
+            .Single();
+
+        _ = target.Target.DeepSkyObject.Altitudes;
+
+        Assert.Multiple(() => {
+            Assert.That(target.Target.DeepSkyObject.MaxAltitude.Y, Is.EqualTo(68.1).Within(0.5));
+            Assert.That(target.Target.DeepSkyObject.DoesTransitSouth, Is.True);
+        });
+    }
+
+    [TestCase("simple-to-advanced-start-area", 0, 2, 1)]
+    [TestCase("simple-to-advanced-end-area", 2, 1, 0)]
+    public void AdvancedSequencer_SimpleToAdvancedOuterAreasUseProductionSequenceTrees(
+            string state,
+            int areaIndex,
+            int expectedItems,
+            int expectedRootTriggers) {
+        FrameworkElement fixture = new FixtureRegistry().Create(new ScreenshotAsset {
+            Id = state,
+            Classification = ScreenshotClassification.NinaUi,
+            Output = $"docs/images/generated/sequencer/simpletoadvanced/{state}.png",
+            Width = 1458,
+            Height = 260,
+            Fixture = "sequencer",
+            State = state,
+            ViewType = "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView"
+        });
+        NINA.ViewModel.Sequencer.ISequence2VM viewModel =
+            (NINA.ViewModel.Sequencer.ISequence2VM)fixture.DataContext;
+        NINA.Sequencer.Container.ISequenceContainer area =
+            (NINA.Sequencer.Container.ISequenceContainer)viewModel.Sequencer.MainContainer.Items[areaIndex];
+        NINA.Sequencer.Trigger.ITriggerable root =
+            (NINA.Sequencer.Trigger.ITriggerable)viewModel.Sequencer.MainContainer;
+        List<string> validationIssues = area.Items
+            .SelectMany(CollectSequenceEntities)
+            .Concat(root.Triggers.SelectMany(CollectSequenceEntities))
+            .OfType<NINA.Sequencer.Validations.IValidatable>()
+            .SelectMany(entity => entity.Issues.Select(issue => $"{entity.GetType().Name}: {issue}"))
+            .ToList();
+
+        Assert.Multiple(() => {
+            Assert.That(area.Items, Has.Count.EqualTo(expectedItems));
+            Assert.That(root.Triggers, Has.Count.EqualTo(expectedRootTriggers));
+            Assert.That(validationIssues, Is.Empty);
+        });
+    }
+
+    private static IEnumerable<NINA.Sequencer.ISequenceEntity> CollectSequenceEntities(
+            NINA.Sequencer.ISequenceEntity root) {
+        yield return root;
+        if (root is NINA.Sequencer.Container.ISequenceContainer container) {
+            foreach (NINA.Sequencer.ISequenceEntity descendant in container.Items.SelectMany(CollectSequenceEntities)) {
+                yield return descendant;
+            }
+        }
+        if (root is NINA.Sequencer.Conditions.IConditionable conditionable) {
+            foreach (NINA.Sequencer.ISequenceEntity descendant in conditionable.Conditions.SelectMany(CollectSequenceEntities)) {
+                yield return descendant;
+            }
+        }
+        if (root is NINA.Sequencer.Trigger.ITriggerable triggerable) {
+            foreach (NINA.Sequencer.ISequenceEntity descendant in triggerable.Triggers.SelectMany(CollectSequenceEntities)) {
+                yield return descendant;
+            }
+        }
+    }
+
+    [Test]
+    public void AdvancedSequencer_SimulatorBackedParallelExampleHasNoValidationIssues() {
+        FrameworkElement fixture = new FixtureRegistry().Create(new ScreenshotAsset {
+            Id = "sequencer-parallel-instructions",
+            Classification = ScreenshotClassification.NinaUi,
+            Output = "docs/images/generated/sequencer/Sequencer_ParallelInstructions.png",
+            Width = 1450,
+            Height = 250,
+            Fixture = "sequencer",
+            State = "sequencer-parallel-instructions",
+            ViewType = "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView"
+        });
+        NINA.ViewModel.Sequencer.ISequence2VM viewModel =
+            (NINA.ViewModel.Sequencer.ISequence2VM)fixture.DataContext;
+        NINA.Sequencer.Container.ISequenceContainer targetArea =
+            (NINA.Sequencer.Container.ISequenceContainer)viewModel.Sequencer.MainContainer.Items[1];
+        NINA.Sequencer.Container.ParallelContainer sequence = targetArea.Items
+            .OfType<NINA.Sequencer.Container.ParallelContainer>()
+            .Single();
+        List<string> validationIssues = CollectSequenceEntities(sequence)
+            .OfType<NINA.Sequencer.Validations.IValidatable>()
+            .SelectMany(entity => entity.Issues.Select(issue => $"{entity.GetType().Name}: {issue}"))
+            .ToList();
+
+        Assert.That(validationIssues, Is.Empty);
+    }
+
+    [Test]
+    public void AdvancedSequencer_SimpleToAdvancedSmartExposuresResolveEachSelectedFilter() {
+        FrameworkElement fixture = new FixtureRegistry().Create(new ScreenshotAsset {
+            Id = "simple-to-advanced-target-imaging",
+            Classification = ScreenshotClassification.NinaUi,
+            Output = "docs/images/generated/sequencer/simpletoadvanced/targetimaging.png",
+            Width = 1406,
+            Height = 502,
+            Fixture = "sequencer",
+            State = "simple-to-advanced-target-imaging",
+            ViewType = "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView"
+        });
+        NINA.ViewModel.Sequencer.ISequence2VM viewModel =
+            (NINA.ViewModel.Sequencer.ISequence2VM)fixture.DataContext;
+        NINA.Sequencer.Container.ISequenceContainer targetArea =
+            (NINA.Sequencer.Container.ISequenceContainer)viewModel.Sequencer.MainContainer.Items[1];
+        NINA.Sequencer.Container.SequentialContainer sequence = targetArea.Items
+            .OfType<NINA.Sequencer.Container.SequentialContainer>()
+            .Single();
+        NINA.Sequencer.SequenceItem.Imaging.SmartExposure[] exposures = sequence.Items
+            .OfType<NINA.Sequencer.SequenceItem.Imaging.SmartExposure>()
+            .Take(4)
+            .ToArray();
+
+        Assert.Multiple(() => {
+            Assert.That(exposures.Select(exposure => exposure.GetSwitchFilter().ComboBoxText),
+                Is.EqualTo(new[] { "L", "R", "G", "B" }));
+            Assert.That(exposures.Select(exposure => exposure.GetSwitchFilter().XfilterExpression.Value),
+                Is.EqualTo(new[] { 0d, 1d, 2d, 3d }));
+        });
+    }
+
+    [TestCase("sequencer-sidebar-loop-until-time", "Loop Until Time")]
+    [TestCase("sequencer-sidebar-af-after-time", "AF After Time")]
+    public void AdvancedSequencer_FilteredSidebarStatesUseProductionFactoryItems(
+            string state,
+            string expectedFilter) {
+        FrameworkElement fixture = new FixtureRegistry().Create(new ScreenshotAsset {
+            Id = state,
+            Classification = ScreenshotClassification.NinaUi,
+            Output = $"docs/images/generated/sequencer/{state}.png",
+            Width = 470,
+            Height = 130,
+            Fixture = "sequencer",
+            State = state,
+            ViewType = "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView"
+        });
+        NINA.ViewModel.Sequencer.ISequence2VM viewModel =
+            (NINA.ViewModel.Sequencer.ISequence2VM)fixture.DataContext;
+
+        Assert.Multiple(() => {
+            Assert.That(viewModel.SequencerFactory.ViewFilter, Is.EqualTo(expectedFilter));
+            Assert.That(ReadSequencerFactorySettingsMode(viewModel), Is.False);
+        });
+    }
+
+    [Test]
+    public void AdvancedSequencer_SidebarSettingsStateUsesProductionAvailabilityMode() {
+        FrameworkElement fixture = new FixtureRegistry().Create(new ScreenshotAsset {
+            Id = "sequencer-sidebar-settings",
+            Classification = ScreenshotClassification.NinaUi,
+            Output = "docs/images/generated/sequencer/sidebar_disable_instruction.png",
+            Width = 470,
+            Height = 600,
+            Fixture = "sequencer",
+            State = "sequencer-sidebar-settings",
+            ViewType = "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView"
+        });
+        NINA.ViewModel.Sequencer.ISequence2VM viewModel =
+            (NINA.ViewModel.Sequencer.ISequence2VM)fixture.DataContext;
+
+        Assert.That(ReadSequencerFactorySettingsMode(viewModel), Is.True);
+    }
+
+    [Test]
+    public void AdvancedSequencer_InstructionSettingsStateUsesProductionMenuAndErrorBehavior() {
+        FrameworkElement fixture = new FixtureRegistry().Create(new ScreenshotAsset {
+            Id = "instruction-settings",
+            Classification = ScreenshotClassification.NinaUi,
+            Output = "docs/images/generated/sequencer/instructions/instruction_settings.png",
+            Width = 1200,
+            Height = 140,
+            Fixture = "sequencer",
+            State = "instruction-settings",
+            ViewType = "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView"
+        });
+        NINA.ViewModel.Sequencer.ISequence2VM viewModel =
+            (NINA.ViewModel.Sequencer.ISequence2VM)fixture.DataContext;
+        NINA.Sequencer.Container.ISequenceContainer targetArea =
+            (NINA.Sequencer.Container.ISequenceContainer)viewModel.Sequencer.MainContainer.Items[1];
+        NINA.Sequencer.SequenceItem.Imaging.TakeExposure exposure = targetArea.Items
+            .OfType<NINA.Sequencer.Container.SequentialContainer>()
+            .Single()
+            .Items
+            .OfType<NINA.Sequencer.SequenceItem.Imaging.TakeExposure>()
+            .Single();
+
+        Assert.Multiple(() => {
+            Assert.That(exposure.ShowMenu, Is.True);
+            Assert.That(exposure.Attempts, Is.EqualTo(3));
+            Assert.That(exposure.ErrorBehavior,
+                Is.EqualTo(NINA.Sequencer.Utility.InstructionErrorBehavior.SkipInstructionSetOnError));
+        });
+    }
+
+    [Test]
+    public void AdvancedSequencer_ExpressionExampleUsesProductionSymbolsAndExposure() {
+        FrameworkElement fixture = new FixtureRegistry().Create(new ScreenshotAsset {
+            Id = "sequencer-expression-example",
+            Classification = ScreenshotClassification.NinaUi,
+            Output = "docs/images/generated/sequencer/Sequencer_SymbolExampleInstruction.png",
+            Width = 1200,
+            Height = 70,
+            Fixture = "sequencer",
+            State = "sequencer-expression-example",
+            ViewType = "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView"
+        });
+        NINA.Sequencer.Container.SequentialContainer sequence = GetOnlyTargetSequence(fixture);
+        NINA.Sequencer.Container.SequentialContainer constants = GetOnlyStartSequence(fixture);
+        NINA.Sequencer.SequenceItem.Imaging.TakeExposure exposure = sequence.Items
+            .OfType<NINA.Sequencer.SequenceItem.Imaging.TakeExposure>()
+            .Single();
+
+        Assert.Multiple(() => {
+            Assert.That(sequence.Items, Has.Count.EqualTo(1));
+            Assert.That(constants.Items.OfType<NINA.Sequencer.SequenceItem.Expressions.GlobalConstant>()
+                .Select(item => item.Identifier), Is.EqualTo(new[] { "ExposureTime", "FudgeFactor" }));
+            Assert.That(exposure.ExposureTimeExpression.Definition, Is.EqualTo("ExposureTime + FudgeFactor"));
+            Assert.That(exposure.ExposureTimeExpression.Value, Is.EqualTo(45d));
+            Assert.That(exposure.GainExpression.Definition, Is.EqualTo("CameraGain"));
+            Assert.That(exposure.GainExpression.Error, Does.Contain("CameraGain"));
+        });
+    }
+
+    [TestCase("sequencer-expression-warning", false, true)]
+    [TestCase("sequencer-expression-warning-gone", true, false)]
+    public void AdvancedSequencer_ExpressionVariableStatesUseProductionEvaluation(
+            string state,
+            bool executed,
+            bool expectsError) {
+        FrameworkElement fixture = new FixtureRegistry().Create(new ScreenshotAsset {
+            Id = state,
+            Classification = ScreenshotClassification.NinaUi,
+            Output = $"docs/images/generated/sequencer/{state}.png",
+            Width = 1200,
+            Height = 120,
+            Fixture = "sequencer",
+            State = state,
+            ViewType = "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView"
+        });
+        NINA.Sequencer.Container.SequentialContainer sequence = GetOnlyTargetSequence(fixture);
+        NINA.Sequencer.Container.SequentialContainer constants = GetOnlyStartSequence(fixture);
+        NINA.Sequencer.SequenceItem.Expressions.GlobalVariable variable = sequence.Items
+            .OfType<NINA.Sequencer.SequenceItem.Expressions.GlobalVariable>()
+            .Single();
+        NINA.Sequencer.SequenceItem.Imaging.TakeExposure exposure = sequence.Items
+            .OfType<NINA.Sequencer.SequenceItem.Imaging.TakeExposure>()
+            .Single();
+
+        Assert.Multiple(() => {
+            Assert.That(variable.Identifier, Is.EqualTo("CameraGain"));
+            Assert.That(variable.OriginalDefinition, Is.EqualTo("100"));
+            Assert.That(variable.Executed, Is.EqualTo(executed));
+            Assert.That(constants.Items.OfType<NINA.Sequencer.SequenceItem.Expressions.GlobalConstant>()
+                .Select(item => item.Identifier), Is.EqualTo(new[] { "ExposureTime", "FudgeFactor" }));
+            Assert.That(exposure.ExposureTimeExpression.Value, Is.EqualTo(45d));
+            Assert.That(exposure.ExposureTimeExpression.Error, Is.Null);
+            Assert.That(exposure.GainExpression.Definition, Is.EqualTo("CameraGain"));
+            Assert.That(exposure.GainExpression.Error is not null, Is.EqualTo(expectsError));
+            if (!expectsError) {
+                Assert.That(exposure.GainExpression.Value, Is.EqualTo(100d));
+            }
+        });
+    }
+
+    [Test]
+    public void AdvancedSequencer_SlewToRaDecStateUsesProductionInstructionAndCoordinates() {
+        FrameworkElement fixture = new FixtureRegistry().Create(new ScreenshotAsset {
+            Id = "sequencer-slew-to-ra-dec",
+            Classification = ScreenshotClassification.NinaUi,
+            Output = "docs/images/generated/sequencer/Sequencer_SlewToRaDec.png",
+            Width = 1200,
+            Height = 70,
+            Fixture = "sequencer",
+            State = "sequencer-slew-to-ra-dec",
+            ViewType = "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView"
+        });
+        NINA.Sequencer.SequenceItem.Telescope.SlewScopeToRaDec slew = GetOnlyTargetSequence(fixture)
+            .Items
+            .OfType<NINA.Sequencer.SequenceItem.Telescope.SlewScopeToRaDec>()
+            .Single();
+
+        Assert.Multiple(() => {
+            Assert.That(slew.RaExpression.Value, Is.EqualTo(11.3758333d).Within(0.0000001d));
+            Assert.That(slew.DecExpression.Value, Is.EqualTo(-30.7198333d).Within(0.0000001d));
+            Assert.That(slew.Issues, Is.Empty);
+        });
+    }
+
+    private static NINA.Sequencer.Container.SequentialContainer GetOnlyTargetSequence(
+            FrameworkElement fixture) {
+        NINA.ViewModel.Sequencer.ISequence2VM viewModel =
+            (NINA.ViewModel.Sequencer.ISequence2VM)fixture.DataContext;
+        NINA.Sequencer.Container.ISequenceContainer targetArea =
+            (NINA.Sequencer.Container.ISequenceContainer)viewModel.Sequencer.MainContainer.Items[1];
+        return targetArea.Items.OfType<NINA.Sequencer.Container.SequentialContainer>().Single();
+    }
+
+    private static NINA.Sequencer.Container.SequentialContainer GetOnlyStartSequence(
+            FrameworkElement fixture) {
+        NINA.ViewModel.Sequencer.ISequence2VM viewModel =
+            (NINA.ViewModel.Sequencer.ISequence2VM)fixture.DataContext;
+        NINA.Sequencer.Container.ISequenceContainer startArea =
+            (NINA.Sequencer.Container.ISequenceContainer)viewModel.Sequencer.MainContainer.Items[0];
+        return startArea.Items.OfType<NINA.Sequencer.Container.SequentialContainer>().Single();
+    }
+
+    private static bool ReadSequencerFactorySettingsMode(
+            NINA.ViewModel.Sequencer.ISequence2VM viewModel) =>
+        (bool)(viewModel.SequencerFactory.GetType().GetProperty("SettingsMode")
+            ?.GetValue(viewModel.SequencerFactory)
+            ?? throw new AssertionException("The production sequencer factory has no SettingsMode property."));
+
+    [Test]
     public void SequencerEntity_UsesIsolatedProfileFilterForNestedFlatExposure() {
         ScreenshotAsset asset = new() {
             Id = "trained-dark-flat",

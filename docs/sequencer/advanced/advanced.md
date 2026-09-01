@@ -38,7 +38,7 @@ NINA 3.3 adds the ability to use Expressions, in addition to numeric values, to 
 
 ### Customizing the list of instructions
 With the gear icon in the sidebar, a customization mode can be enabled. In this mode, you can flag each instruction to be hidden. When it is flagged, the instruction will no longer be visible in the sidebar or in the context menus. This is useful if, for example, you don't have a specific type of equipment and don't want to see instructions for it cluttering your user interface. Instructions that are part of the sequence, but are hidden from the sidebar, will still be visible and active in the sequence.
-![Disable instruction in sidebar](../../images/sequencer/sidebar_disable_instruction.png)
+![Disable instruction in sidebar](../../images/generated/sequencer/sidebar_disable_instruction.png)
 
 
 ### Validations

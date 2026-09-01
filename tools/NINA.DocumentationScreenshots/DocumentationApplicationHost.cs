@@ -1115,6 +1115,7 @@ public sealed class DocumentationApplicationHost {
         ISequenceEntity entity = (ISequenceEntity)CreateWithInertServices(entityType);
         ApplySequenceMetadata(entity);
         ApplyDeterministicValues(entity);
+        ApplySequencerEntityState(entity, asset);
 
         DataTemplate? productionTemplate = Application.Current?.TryFindResource(new DataTemplateKey(entityType)) as DataTemplate;
         if (productionTemplate is not null) {
@@ -1131,6 +1132,27 @@ public sealed class DocumentationApplicationHost {
         throw new CatalogException($"Screenshot '{asset.Id}' has no production DataTemplate for '{entityType.FullName}'.");
     }
 
+    private static void ApplySequencerEntityState(ISequenceEntity entity, ScreenshotAsset asset) {
+        bool useParentCoordinates = asset.State?.StartsWith("target-", StringComparison.OrdinalIgnoreCase) == true;
+        if (entity is AltitudeCondition altitudeCondition) {
+            altitudeCondition.HasDsoParent = useParentCoordinates;
+        }
+        if (entity is AboveHorizonCondition aboveHorizonCondition) {
+            aboveHorizonCondition.HasDsoParent = useParentCoordinates;
+        }
+        if (asset.State?.Equals("time-provider-menu", StringComparison.OrdinalIgnoreCase) == true
+            && entity is TimeCondition timeCondition) {
+            timeCondition.SelectedProvider = timeCondition.DateTimeProviders
+                .First(provider => provider.Name == "Astronomical Dusk");
+        }
+        if (asset.State?.Equals("instruction-validation", StringComparison.OrdinalIgnoreCase) == true
+            && entity is TakeExposure exposure) {
+            exposure.Gain = 500;
+            exposure.Offset = 500;
+            exposure.Validate();
+        }
+    }
+
     public FrameworkElement CreateAdvancedSequencer(ScreenshotAsset asset) {
         UserSymbol.SymbolCache.Clear();
         ISequence2VM viewModel = CreateAdvancedSequenceViewModel(asset.Id);
@@ -1138,7 +1160,7 @@ public sealed class DocumentationApplicationHost {
         string imagePath = profileService.ActiveProfile.ImageFileSettings.FilePath;
         try {
             profileService.ActiveProfile.ImageFileSettings.FilePath = Path.GetTempPath();
-            SequencerFixtureState.Apply(viewModel, asset);
+            SequencerFixtureState.Apply(viewModel, asset, GetSymbolBroker());
         } finally {
             profileService.ActiveProfile.ImageFileSettings.FilePath = imagePath;
         }
@@ -1401,6 +1423,19 @@ public sealed class DocumentationApplicationHost {
             Connected = true,
             Position = 25000,
             Temperature = 9.56
+        });
+        broker.UpdateDeviceInfo(new NINA.Equipment.Equipment.MyFilterWheel.FilterWheelInfo {
+            Connected = true,
+            SelectedFilter = GetActiveProfile().FilterWheelSettings.FilterWheelFilters.First()
+        });
+        broker.UpdateDeviceInfo(new NINA.Equipment.Equipment.MyGuider.GuiderInfo {
+            Connected = true
+        });
+        broker.UpdateDeviceInfo(new NINA.Equipment.Equipment.MyRotator.RotatorInfo {
+            Connected = true,
+            Position = 0,
+            MechanicalPosition = 0,
+            Synced = true
         });
         broker.UpdateDeviceInfo(new NINA.Equipment.Equipment.MyFlatDevice.FlatDeviceInfo {
             Connected = true,
@@ -1674,6 +1709,68 @@ public sealed class DocumentationApplicationHost {
                     Position = 12500,
                     StepSize = 1,
                     Temperature = 5
+                };
+            }
+            if (type == typeof(NINA.Equipment.Equipment.MyTelescope.TelescopeInfo)) {
+                return new NINA.Equipment.Equipment.MyTelescope.TelescopeInfo {
+                    Connected = true,
+                    Name = "N.I.N.A. Documentation Simulator",
+                    CanPark = true,
+                    CanSetTrackingEnabled = true,
+                    TrackingEnabled = true,
+                    Altitude = 45,
+                    Azimuth = 180,
+                    RightAscension = 1.564,
+                    Declination = 30.66,
+                    Coordinates = new NINA.Astrometry.Coordinates(
+                        NINA.Astrometry.Angle.ByHours(1.564),
+                        NINA.Astrometry.Angle.ByDegree(30.66),
+                        NINA.Astrometry.Epoch.J2000),
+                    SiteLatitude = 52.52,
+                    SiteLongitude = 13.405
+                };
+            }
+            if (type == typeof(NINA.Equipment.Equipment.MyGuider.GuiderInfo)) {
+                return new NINA.Equipment.Equipment.MyGuider.GuiderInfo {
+                    Connected = true,
+                    Name = "N.I.N.A. Documentation Simulator"
+                };
+            }
+            if (type == typeof(NINA.Equipment.Equipment.MyRotator.RotatorInfo)) {
+                return new NINA.Equipment.Equipment.MyRotator.RotatorInfo {
+                    Connected = true,
+                    Name = "N.I.N.A. Documentation Simulator",
+                    Position = 0,
+                    MechanicalPosition = 0,
+                    StepSize = 1,
+                    Synced = true
+                };
+            }
+            if (type == typeof(NINA.Equipment.Equipment.MyDome.DomeInfo)) {
+                return new NINA.Equipment.Equipment.MyDome.DomeInfo {
+                    Connected = true,
+                    Name = "N.I.N.A. Documentation Simulator",
+                    CanSetShutter = true,
+                    CanSetPark = true,
+                    CanSetAzimuth = true,
+                    CanSyncAzimuth = true,
+                    CanPark = true,
+                    Azimuth = 180,
+                    Altitude = 45,
+                    ShutterStatus = NINA.Equipment.Interfaces.ShutterState.ShutterClosed
+                };
+            }
+            if (type == typeof(NINA.Equipment.Equipment.MyFlatDevice.FlatDeviceInfo)) {
+                return new NINA.Equipment.Equipment.MyFlatDevice.FlatDeviceInfo {
+                    Connected = true,
+                    Name = "N.I.N.A. Documentation Simulator",
+                    SupportsOpenClose = true,
+                    SupportsOnOff = true,
+                    MinBrightness = 0,
+                    MaxBrightness = 255,
+                    Brightness = 0,
+                    CoverState = NINA.Equipment.Interfaces.CoverState.Closed,
+                    LightOn = false
                 };
             }
             if (type == typeof(IList<IDateTimeProvider>)) {

@@ -378,6 +378,32 @@ public class NamedStateControllerTests {
         }
     }
 
+    [Test]
+    public void Apply_ExpandsTheProductionCustomTriggerEditor() {
+        ScreenshotAsset asset = SequencerAsset(
+            "custom-trigger",
+            "docs/images/generated/sequencer/trigger/customtrigger.png");
+        FrameworkElement fixture = new FixtureRegistry().Create(asset);
+        Window host = new() { Width = 1800, Height = 1000, Content = fixture, ShowInTaskbar = false };
+        try {
+            host.Show();
+            fixture.UpdateLayout();
+
+            NamedStateController.Apply(fixture, asset);
+
+            Expander trigger = FindDescendants<Expander>(fixture)
+                .Where(expander => expander.GetType().Name == "DetachingExpander"
+                    && expander.DataContext is NINA.Sequencer.Trigger.Utility.CustomTrigger
+                    && expander.IsVisible)
+                .OrderByDescending(expander => expander.ActualWidth * expander.ActualHeight)
+                .First();
+            Assert.That(trigger.IsExpanded, Is.True);
+        } finally {
+            CloseMenus(fixture);
+            host.Close();
+        }
+    }
+
     [TestCase("sequencer-apply-target")]
     [TestCase("sequencer-add-target-to-target-tab")]
     [TestCase("sequencer-drop-target-to-tab")]
@@ -587,6 +613,13 @@ public class NamedStateControllerTests {
     };
 
     private static void CloseMenus(DependencyObject fixture) {
+        foreach (ComboBox comboBox in FindDescendants<ComboBox>(fixture).Where(comboBox => comboBox.IsDropDownOpen)) {
+            comboBox.IsDropDownOpen = false;
+        }
+        foreach (FrameworkElement element in FindDescendants<FrameworkElement>(fixture)
+            .Where(element => element.ToolTip is ToolTip { IsOpen: true })) {
+            ((ToolTip)element.ToolTip).IsOpen = false;
+        }
         foreach (Button button in FindDescendants<Button>(fixture).Where(button => button.ContextMenu?.IsOpen == true)) {
             button.ContextMenu!.IsOpen = false;
         }

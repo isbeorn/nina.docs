@@ -561,11 +561,18 @@
     },
     {
       "id": "docs-images-sequencer-conditions-conditions-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/sequencer/conditions/conditions.png",
-      "width": 256,
-      "height": 39,
-      "exclusionReason": "This selective annotation, menu or nested workflow state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting an incomplete production view."
+      "classification": "nina-ui",
+      "output": "docs/images/generated/sequencer/conditions/conditions.png",
+      "width": 470,
+      "height": 35,
+      "fixture": "sequencer",
+      "state": "sequencer-sidebar-loop-until-time",
+      "viewType": "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView",
+      "renderWidth": 2340,
+      "renderHeight": 1000,
+      "cropTarget": "sidebar:filtered-item",
+      "displayName": "Loop Until Time",
+      "sourceIdentifier": "sequencer:LoopUntilTime"
     },
     {
       "id": "docs-images-sequencer-conditions-loopforiterations-png",
@@ -591,27 +598,36 @@
     },
     {
       "id": "docs-images-sequencer-conditions-loopuntilaltitude-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/sequencer/conditions/loopuntilaltitude.png",
-      "width": 326,
+      "classification": "nina-ui",
+      "output": "docs/images/generated/sequencer/conditions/loopuntilaltitude.png",
+      "width": 430,
       "height": 34,
-      "exclusionReason": "This selective sequencer state depends on calculated target data or an open editor state that is not reproduced faithfully by the generic entity fixture. Keep the reviewed production capture."
+      "fixture": "sequencer-entity",
+      "state": "target-altitude-condition",
+      "displayName": "Loop Until Altitude Sets Below",
+      "sourceIdentifier": "sequencer:AltitudeCondition"
     },
     {
       "id": "docs-images-sequencer-conditions-loopuntilaltitude2-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/sequencer/conditions/loopuntilaltitude2.png",
-      "width": 709,
+      "classification": "nina-ui",
+      "output": "docs/images/generated/sequencer/conditions/loopuntilaltitude2.png",
+      "width": 1170,
       "height": 35,
-      "exclusionReason": "This selective sequencer state depends on calculated target data or an open editor state that is not reproduced faithfully by the generic entity fixture. Keep the reviewed production capture."
+      "fixture": "sequencer-entity",
+      "state": "custom-altitude-condition",
+      "displayName": "Loop Until Altitude Sets Below",
+      "sourceIdentifier": "sequencer:AltitudeCondition"
     },
     {
       "id": "docs-images-sequencer-conditions-loopuntiltime-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/sequencer/conditions/loopuntiltime.png",
+      "classification": "nina-ui",
+      "output": "docs/images/generated/sequencer/conditions/loopuntiltime.png",
       "width": 640,
       "height": 168,
-      "exclusionReason": "This selective sequencer state depends on calculated target data or an open editor state that is not reproduced faithfully by the generic entity fixture. Keep the reviewed production capture."
+      "fixture": "sequencer-entity",
+      "state": "time-provider-menu",
+      "displayName": "Loop Until Time",
+      "sourceIdentifier": "sequencer:TimeCondition"
     },
     {
       "id": "docs-images-sequencer-conditions-loopwhile-png",
@@ -626,19 +642,25 @@
     },
     {
       "id": "docs-images-sequencer-conditions-loopwhilehorizon-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/sequencer/conditions/loopwhilehorizon.png",
-      "width": 328,
+      "classification": "nina-ui",
+      "output": "docs/images/generated/sequencer/conditions/loopwhilehorizon.png",
+      "width": 630,
       "height": 35,
-      "exclusionReason": "This selective sequencer state depends on calculated target data or an open editor state that is not reproduced faithfully by the generic entity fixture. Keep the reviewed production capture."
+      "fixture": "sequencer-entity",
+      "state": "target-above-horizon-condition",
+      "displayName": "Loop While Altitude Above Horizon",
+      "sourceIdentifier": "sequencer:AboveHorizonCondition"
     },
     {
       "id": "docs-images-sequencer-conditions-loopwhilehorizon2-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/sequencer/conditions/loopwhilehorizon2.png",
-      "width": 724,
-      "height": 34,
-      "exclusionReason": "This selective sequencer state depends on calculated target data or an open editor state that is not reproduced faithfully by the generic entity fixture. Keep the reviewed production capture."
+      "classification": "nina-ui",
+      "output": "docs/images/generated/sequencer/conditions/loopwhilehorizon2.png",
+      "width": 1150,
+      "height": 35,
+      "fixture": "sequencer-entity",
+      "state": "custom-above-horizon-condition",
+      "displayName": "Loop While Altitude Above Horizon",
+      "sourceIdentifier": "sequencer:AboveHorizonCondition"
     },
     {
       "id": "docs-images-sequencer-conditions-loopwhilesafe-png",
@@ -719,11 +741,14 @@
     },
     {
       "id": "docs-images-sequencer-instructions-camera-exposure-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/sequencer/instructions/camera_exposure.png",
-      "width": 703,
+      "classification": "nina-ui",
+      "output": "docs/images/generated/sequencer/instructions/camera_exposure.png",
+      "width": 850,
       "height": 35,
-      "exclusionReason": "This selective sequencer state depends on calculated target data or an open editor state that is not reproduced faithfully by the generic entity fixture. Keep the reviewed production capture."
+      "fixture": "sequencer-entity",
+      "state": "take-exposure",
+      "displayName": "Take Exposure",
+      "sourceIdentifier": "sequencer:TakeExposure"
     },
     {
       "id": "docs-images-sequencer-instructions-camera-manyexposures-png",
@@ -749,11 +774,14 @@
     },
     {
       "id": "docs-images-sequencer-instructions-camera-smartexposure-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/sequencer/instructions/camera_smartexposure.png",
+      "classification": "nina-ui",
+      "output": "docs/images/generated/sequencer/instructions/camera_smartexposure.png",
       "width": 1031,
-      "height": 35,
-      "exclusionReason": "This selective sequencer state depends on calculated target data or an open editor state that is not reproduced faithfully by the generic entity fixture. Keep the reviewed production capture."
+      "height": 60,
+      "fixture": "sequencer-entity",
+      "state": "smart-exposure",
+      "displayName": "Smart Exposure",
+      "sourceIdentifier": "sequencer:SmartExposure"
     },
     {
       "id": "docs-images-sequencer-instructions-camera-usblimit-png",
@@ -1076,51 +1104,93 @@
     },
     {
       "id": "docs-images-sequencer-instructions-instruction-buttons-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/sequencer/instructions/instruction_buttons.png",
+      "classification": "nina-ui",
+      "output": "docs/images/generated/sequencer/instructions/instruction_buttons.png",
       "width": 1096,
       "height": 55,
-      "exclusionReason": "This selective annotation, menu or nested workflow state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting an incomplete production view."
+      "fixture": "sequencer",
+      "state": "instruction-buttons",
+      "viewType": "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView",
+      "renderWidth": 1800,
+      "renderHeight": 1000,
+      "cropTarget": "target-area:first-item-instructions",
+      "callouts": [
+        { "kind": "box", "x": 0.926, "y": 0.018, "width": 0.073, "height": 0.964 }
+      ]
     },
     {
       "id": "docs-images-sequencer-instructions-instruction-generic-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/sequencer/instructions/instruction_generic.png",
+      "classification": "nina-ui",
+      "output": "docs/images/generated/sequencer/instructions/instruction_generic.png",
       "width": 1096,
       "height": 55,
-      "exclusionReason": "This selective annotation, menu or nested workflow state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting an incomplete production view."
+      "fixture": "sequencer",
+      "state": "instruction-generic",
+      "viewType": "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView",
+      "renderWidth": 1800,
+      "renderHeight": 1000,
+      "cropTarget": "target-area:first-item-instructions"
     },
     {
       "id": "docs-images-sequencer-instructions-instruction-name-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/sequencer/instructions/instruction_name.png",
+      "classification": "nina-ui",
+      "output": "docs/images/generated/sequencer/instructions/instruction_name.png",
       "width": 1096,
       "height": 55,
-      "exclusionReason": "This selective annotation, menu or nested workflow state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting an incomplete production view."
+      "fixture": "sequencer",
+      "state": "instruction-name",
+      "viewType": "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView",
+      "renderWidth": 1800,
+      "renderHeight": 1000,
+      "cropTarget": "target-area:first-item-instructions",
+      "callouts": [
+        { "kind": "box", "x": 0.008, "y": 0.145, "width": 0.124, "height": 0.691 }
+      ]
     },
     {
       "id": "docs-images-sequencer-instructions-instruction-options-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/sequencer/instructions/instruction_options.png",
+      "classification": "nina-ui",
+      "output": "docs/images/generated/sequencer/instructions/instruction_options.png",
       "width": 1096,
       "height": 55,
-      "exclusionReason": "This selective annotation, menu or nested workflow state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting an incomplete production view."
+      "fixture": "sequencer",
+      "state": "instruction-options",
+      "viewType": "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView",
+      "renderWidth": 1800,
+      "renderHeight": 1000,
+      "cropTarget": "target-area:first-item-instructions",
+      "callouts": [
+        { "kind": "box", "x": 0.145, "y": 0.018, "width": 0.335, "height": 0.964 }
+      ]
     },
     {
       "id": "docs-images-sequencer-instructions-instruction-settings-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/sequencer/instructions/instruction_settings.png",
-      "width": 502,
-      "height": 149,
-      "exclusionReason": "This selective annotation, menu or nested workflow state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting an incomplete production view."
+      "classification": "nina-ui",
+      "output": "docs/images/generated/sequencer/instructions/instruction_settings.png",
+      "width": 1200,
+      "height": 100,
+      "fixture": "sequencer",
+      "state": "instruction-settings",
+      "viewType": "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView",
+      "renderWidth": 2100,
+      "renderHeight": 900,
+      "cropTarget": "target-area:first-item-instructions"
     },
     {
       "id": "docs-images-sequencer-instructions-instruction-validation-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/sequencer/instructions/instruction_validation.png",
+      "classification": "nina-ui",
+      "output": "docs/images/generated/sequencer/instructions/instruction_validation.png",
       "width": 1096,
       "height": 55,
-      "exclusionReason": "This selective annotation, menu or nested workflow state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting an incomplete production view."
+      "fixture": "sequencer",
+      "state": "instruction-validation",
+      "viewType": "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView",
+      "renderWidth": 1800,
+      "renderHeight": 1000,
+      "cropTarget": "target-area:first-item-instructions",
+      "callouts": [
+        { "kind": "box", "x": 0.114, "y": 0.018, "width": 0.034, "height": 0.964 }
+      ]
     },
     {
       "id": "docs-images-sequencer-instructions-rotator-movemechanical-png",
@@ -1245,11 +1315,14 @@
     },
     {
       "id": "docs-images-sequencer-instructions-telescope-slewaltaz-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/sequencer/instructions/telescope_slewaltaz.png",
-      "width": 646,
+      "classification": "nina-ui",
+      "output": "docs/images/generated/sequencer/instructions/telescope_slewaltaz.png",
+      "width": 1050,
       "height": 35,
-      "exclusionReason": "This selective sequencer state depends on calculated target data or an open editor state that is not reproduced faithfully by the generic entity fixture. Keep the reviewed production capture."
+      "fixture": "sequencer-entity",
+      "state": "slew-to-alt-az",
+      "displayName": "Slew To Alt/Az",
+      "sourceIdentifier": "sequencer:SlewScopeToAltAz"
     },
     {
       "id": "docs-images-sequencer-instructions-telescope-slewcenter-png",
@@ -1352,11 +1425,14 @@
     },
     {
       "id": "docs-images-sequencer-instructions-utility-waitforaltitude-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/sequencer/instructions/utility_waitforaltitude.png",
-      "width": 751,
+      "classification": "nina-ui",
+      "output": "docs/images/generated/sequencer/instructions/utility_waitforaltitude.png",
+      "width": 1220,
       "height": 35,
-      "exclusionReason": "This selective sequencer state depends on calculated target data or an open editor state that is not reproduced faithfully by the generic entity fixture. Keep the reviewed production capture."
+      "fixture": "sequencer-entity",
+      "state": "wait-for-altitude",
+      "displayName": "Wait For Altitude",
+      "sourceIdentifier": "sequencer:WaitForAltitude"
     },
     {
       "id": "docs-images-sequencer-instructions-utility-waitfortime-png",
@@ -1415,11 +1491,14 @@
     },
     {
       "id": "docs-images-sequencer-instructions-utility-waituntilabovehorizon-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/sequencer/instructions/utility_waituntilabovehorizon.png",
-      "width": 677,
+      "classification": "nina-ui",
+      "output": "docs/images/generated/sequencer/instructions/utility_waituntilabovehorizon.png",
+      "width": 1170,
       "height": 35,
-      "exclusionReason": "This selective sequencer state depends on calculated target data or an open editor state that is not reproduced faithfully by the generic entity fixture. Keep the reviewed production capture."
+      "fixture": "sequencer-entity",
+      "state": "wait-until-above-horizon",
+      "displayName": "Wait Until Above Horizon",
+      "sourceIdentifier": "sequencer:WaitUntilAboveHorizon"
     },
     {
       "id": "docs-images-sequencer-sequencer-addinstruction-png",
@@ -1574,27 +1653,42 @@
     },
     {
       "id": "docs-images-sequencer-sequencer-expressionvalue-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/sequencer/Sequencer_ExpressionValue.png",
-      "width": 232,
-      "height": 31,
-      "exclusionReason": "This selective NINA workflow, annotation or hardware-specific state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting a guessed or incomplete view."
+      "classification": "nina-ui",
+      "output": "docs/images/generated/sequencer/Sequencer_ExpressionValue.png",
+      "width": 520,
+      "height": 60,
+      "fixture": "sequencer",
+      "state": "sequencer-expression-example",
+      "viewType": "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView",
+      "renderWidth": 1814,
+      "renderHeight": 900,
+      "cropTarget": "target-area:first-expression:exposure-time"
     },
     {
       "id": "docs-images-sequencer-sequencer-expressionwarning-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/sequencer/Sequencer_ExpressionWarning.png",
-      "width": 904,
-      "height": 104,
-      "exclusionReason": "This selective NINA workflow, annotation or hardware-specific state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting a guessed or incomplete view."
+      "classification": "nina-ui",
+      "output": "docs/images/generated/sequencer/Sequencer_ExpressionWarning.png",
+      "width": 1200,
+      "height": 100,
+      "fixture": "sequencer",
+      "state": "sequencer-expression-warning",
+      "viewType": "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView",
+      "renderWidth": 1814,
+      "renderHeight": 900,
+      "cropTarget": "target-area:first-item-instructions"
     },
     {
       "id": "docs-images-sequencer-sequencer-expressionwarninggone-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/sequencer/Sequencer_ExpressionWarningGone.png",
-      "width": 830,
-      "height": 78,
-      "exclusionReason": "This selective NINA workflow, annotation or hardware-specific state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting a guessed or incomplete view."
+      "classification": "nina-ui",
+      "output": "docs/images/generated/sequencer/Sequencer_ExpressionWarningGone.png",
+      "width": 1200,
+      "height": 80,
+      "fixture": "sequencer",
+      "state": "sequencer-expression-warning-gone",
+      "viewType": "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView",
+      "renderWidth": 1814,
+      "renderHeight": 900,
+      "cropTarget": "target-area:first-item-instructions"
     },
     {
       "id": "docs-images-sequencer-sequencer-flow-png",
@@ -1882,19 +1976,29 @@
     },
     {
       "id": "docs-images-sequencer-sequencer-slewtoradec-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/sequencer/Sequencer_SlewToRaDec.png",
-      "width": 835,
-      "height": 42,
-      "exclusionReason": "This selective NINA workflow, annotation or hardware-specific state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting a guessed or incomplete view."
+      "classification": "nina-ui",
+      "output": "docs/images/generated/sequencer/Sequencer_SlewToRaDec.png",
+      "width": 1200,
+      "height": 45,
+      "fixture": "sequencer",
+      "state": "sequencer-slew-to-ra-dec",
+      "viewType": "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView",
+      "renderWidth": 1814,
+      "renderHeight": 900,
+      "cropTarget": "target-area:first-item-instructions"
     },
     {
       "id": "docs-images-sequencer-sequencer-symbolexampleinstruction-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/sequencer/Sequencer_SymbolExampleInstruction.png",
-      "width": 873,
-      "height": 49,
-      "exclusionReason": "This selective NINA workflow, annotation or hardware-specific state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting a guessed or incomplete view."
+      "classification": "nina-ui",
+      "output": "docs/images/generated/sequencer/Sequencer_SymbolExampleInstruction.png",
+      "width": 1200,
+      "height": 45,
+      "fixture": "sequencer",
+      "state": "sequencer-expression-example",
+      "viewType": "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView",
+      "renderWidth": 1814,
+      "renderHeight": 900,
+      "cropTarget": "target-area:first-item-instructions"
     },
     {
       "id": "docs-images-sequencer-sequencer-symbols-png",
@@ -1917,11 +2021,16 @@
     },
     {
       "id": "docs-images-sequencer-sequencer-symbolvalues-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/sequencer/Sequencer_SymbolValues.png",
-      "width": 544,
-      "height": 74,
-      "exclusionReason": "This selective NINA workflow, annotation or hardware-specific state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting a guessed or incomplete view."
+      "classification": "nina-ui",
+      "output": "docs/images/generated/sequencer/Sequencer_SymbolValues.png",
+      "width": 640,
+      "height": 180,
+      "fixture": "sequencer",
+      "state": "sequencer-expression-example",
+      "viewType": "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView",
+      "renderWidth": 1814,
+      "renderHeight": 900,
+      "cropTarget": "target-area:first-expression:exposure-time"
     },
     {
       "id": "docs-images-sequencer-sequencer-targetstab-png",
@@ -1976,11 +2085,16 @@
     },
     {
       "id": "docs-images-sequencer-sequencer-undefined-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/sequencer/Sequencer_Undefined.png",
-      "width": 221,
-      "height": 78,
-      "exclusionReason": "This selective NINA workflow, annotation or hardware-specific state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting a guessed or incomplete view."
+      "classification": "nina-ui",
+      "output": "docs/images/generated/sequencer/Sequencer_Undefined.png",
+      "width": 520,
+      "height": 160,
+      "fixture": "sequencer",
+      "state": "sequencer-expression-example",
+      "viewType": "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView",
+      "renderWidth": 1814,
+      "renderHeight": 900,
+      "cropTarget": "target-area:first-expression:gain"
     },
     {
       "id": "docs-images-sequencer-sequencer-usertemplate-png",
@@ -2002,11 +2116,37 @@
     },
     {
       "id": "docs-images-sequencer-sidebar-disable-instruction-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/sequencer/sidebar_disable_instruction.png",
-      "width": 487,
-      "height": 542,
-      "exclusionReason": "This selective NINA workflow, annotation or hardware-specific state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting a guessed or incomplete view."
+      "classification": "nina-ui",
+      "output": "docs/images/generated/sequencer/sidebar_disable_instruction.png",
+      "width": 468,
+      "height": 600,
+      "fixture": "sequencer",
+      "state": "sequencer-sidebar-settings",
+      "viewType": "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView",
+      "renderWidth": 2340,
+      "renderHeight": 1274,
+      "crop": {
+        "x": 0.8,
+        "y": 0.0,
+        "width": 0.2,
+        "height": 0.4709576138147567
+      },
+      "callouts": [
+        {
+          "kind": "box",
+          "x": 0.945,
+          "y": 0.12,
+          "width": 0.045,
+          "height": 0.036
+        },
+        {
+          "kind": "arrow",
+          "points": [
+            { "x": 0.82, "y": 0.2 },
+            { "x": 0.966, "y": 0.138 }
+          ]
+        }
+      ]
     },
     {
       "id": "docs-images-sequencer-simple-imaging-details-png",
@@ -2074,27 +2214,48 @@
     },
     {
       "id": "docs-images-sequencer-simpletoadvanced-betterdither-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/sequencer/simpletoadvanced/betterdither.png",
+      "classification": "nina-ui",
+      "output": "docs/images/generated/sequencer/simpletoadvanced/betterdither.png",
       "width": 1401,
       "height": 394,
-      "exclusionReason": "This selective NINA workflow, annotation or hardware-specific state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting a guessed or incomplete view."
+      "fixture": "sequencer",
+      "state": "simple-to-advanced-better-dither",
+      "viewType": "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView",
+      "renderWidth": 1800,
+      "renderHeight": 1100,
+      "cropTarget": "target-area:first-item",
+      "displayName": "Optimized LRGB imaging instructions",
+      "sourceIdentifier": "sequencer:SequentialContainer"
     },
     {
       "id": "docs-images-sequencer-simpletoadvanced-loopfortwo-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/sequencer/simpletoadvanced/loopfortwo.png",
+      "classification": "nina-ui",
+      "output": "docs/images/generated/sequencer/simpletoadvanced/loopfortwo.png",
       "width": 1408,
       "height": 392,
-      "exclusionReason": "This selective NINA workflow, annotation or hardware-specific state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting a guessed or incomplete view."
+      "fixture": "sequencer",
+      "state": "simple-to-advanced-loop-for-two",
+      "viewType": "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView",
+      "renderWidth": 1800,
+      "renderHeight": 1100,
+      "cropTarget": "target-area:first-item",
+      "displayName": "LRGB imaging loop for two iterations",
+      "sourceIdentifier": "sequencer:SequentialContainer"
     },
     {
       "id": "docs-images-sequencer-simpletoadvanced-loopuntiltime-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/sequencer/simpletoadvanced/loopuntiltime.png",
+      "classification": "nina-ui",
+      "output": "docs/images/generated/sequencer/simpletoadvanced/loopuntiltime.png",
       "width": 1404,
       "height": 431,
-      "exclusionReason": "This selective NINA workflow, annotation or hardware-specific state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting a guessed or incomplete view."
+      "fixture": "sequencer",
+      "state": "simple-to-advanced-loop-until-time",
+      "viewType": "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView",
+      "renderWidth": 1800,
+      "renderHeight": 1100,
+      "cropTarget": "target-area:first-item",
+      "displayName": "LRGB imaging loop until nautical dawn",
+      "sourceIdentifier": "sequencer:SequentialContainer"
     },
     {
       "id": "docs-images-sequencer-simpletoadvanced-simplesequence-png",
@@ -2106,43 +2267,93 @@
     },
     {
       "id": "docs-images-sequencer-simpletoadvanced-startarea-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/sequencer/simpletoadvanced/startarea.png",
+      "classification": "nina-ui",
+      "output": "docs/images/generated/sequencer/simpletoadvanced/startarea.png",
       "width": 1458,
-      "height": 172,
-      "exclusionReason": "This selective NINA workflow, annotation or hardware-specific state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting a guessed or incomplete view."
+      "height": 220,
+      "fixture": "sequencer",
+      "state": "simple-to-advanced-start-area",
+      "viewType": "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView",
+      "renderWidth": 1800,
+      "renderHeight": 1100,
+      "cropTarget": "start-area:all-items",
+      "displayName": "Sequence start area and global meridian flip trigger",
+      "sourceIdentifier": "sequencer:StartAreaContainer"
+    },
+    {
+      "id": "docs-images-sequencer-simpletoadvanced-endarea-png",
+      "classification": "nina-ui",
+      "output": "docs/images/generated/sequencer/simpletoadvanced/endarea.png",
+      "width": 1458,
+      "height": 250,
+      "fixture": "sequencer",
+      "state": "simple-to-advanced-end-area",
+      "viewType": "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView",
+      "renderWidth": 1800,
+      "renderHeight": 1100,
+      "cropTarget": "end-area:all-items",
+      "displayName": "Sequence end area",
+      "sourceIdentifier": "sequencer:EndAreaContainer"
     },
     {
       "id": "docs-images-sequencer-simpletoadvanced-targetarea-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/sequencer/simpletoadvanced/targetarea.png",
+      "classification": "nina-ui",
+      "output": "docs/images/generated/sequencer/simpletoadvanced/targetarea.png",
       "width": 1444,
       "height": 530,
-      "exclusionReason": "This selective NINA workflow, annotation or hardware-specific state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting a guessed or incomplete view."
+      "fixture": "sequencer",
+      "state": "simple-to-advanced-target-area",
+      "viewType": "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView",
+      "renderWidth": 1800,
+      "renderHeight": 1100,
+      "cropTarget": "target-area:first-item",
+      "displayName": "M33 target sequence",
+      "sourceIdentifier": "sequencer:DeepSkyObjectContainer"
     },
     {
       "id": "docs-images-sequencer-simpletoadvanced-targetclosure-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/sequencer/simpletoadvanced/targetclosure.png",
+      "classification": "nina-ui",
+      "output": "docs/images/generated/sequencer/simpletoadvanced/targetclosure.png",
       "width": 1401,
       "height": 240,
-      "exclusionReason": "This selective NINA workflow, annotation or hardware-specific state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting a guessed or incomplete view."
+      "fixture": "sequencer",
+      "state": "simple-to-advanced-target-closure",
+      "viewType": "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView",
+      "renderWidth": 1800,
+      "renderHeight": 1100,
+      "cropTarget": "target-area:first-item",
+      "displayName": "Target closure instructions",
+      "sourceIdentifier": "sequencer:SequentialContainer"
     },
     {
       "id": "docs-images-sequencer-simpletoadvanced-targetimaging-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/sequencer/simpletoadvanced/targetimaging.png",
+      "classification": "nina-ui",
+      "output": "docs/images/generated/sequencer/simpletoadvanced/targetimaging.png",
       "width": 1406,
       "height": 502,
-      "exclusionReason": "This selective NINA workflow, annotation or hardware-specific state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting a guessed or incomplete view."
+      "fixture": "sequencer",
+      "state": "simple-to-advanced-target-imaging",
+      "viewType": "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView",
+      "renderWidth": 1800,
+      "renderHeight": 1100,
+      "cropTarget": "target-area:first-item",
+      "displayName": "Target imaging instructions",
+      "sourceIdentifier": "sequencer:SequentialContainer"
     },
     {
       "id": "docs-images-sequencer-simpletoadvanced-targetpreparation-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/sequencer/simpletoadvanced/targetpreparation.png",
+      "classification": "nina-ui",
+      "output": "docs/images/generated/sequencer/simpletoadvanced/targetpreparation.png",
       "width": 1411,
       "height": 333,
-      "exclusionReason": "This selective NINA workflow, annotation or hardware-specific state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting a guessed or incomplete view."
+      "fixture": "sequencer",
+      "state": "simple-to-advanced-target-preparation",
+      "viewType": "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView",
+      "renderWidth": 1800,
+      "renderHeight": 1100,
+      "cropTarget": "target-area:first-item",
+      "displayName": "Target preparation instructions",
+      "sourceIdentifier": "sequencer:SequentialContainer"
     },
     {
       "id": "docs-images-sequencer-simpletoadvanced-transform-png",
@@ -2154,11 +2365,18 @@
     },
     {
       "id": "docs-images-sequencer-simpletoadvanced-withoffsets-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/sequencer/simpletoadvanced/withoffsets.png",
+      "classification": "nina-ui",
+      "output": "docs/images/generated/sequencer/simpletoadvanced/withoffsets.png",
       "width": 1405,
       "height": 358,
-      "exclusionReason": "This selective NINA workflow, annotation or hardware-specific state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting a guessed or incomplete view."
+      "fixture": "sequencer",
+      "state": "simple-to-advanced-with-offsets",
+      "viewType": "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView",
+      "renderWidth": 1800,
+      "renderHeight": 1100,
+      "cropTarget": "target-area:first-item",
+      "displayName": "LRGB imaging instructions with filter offsets",
+      "sourceIdentifier": "sequencer:SequentialContainer"
     },
     {
       "id": "docs-images-sequencer-trigger-afafterexposures-png",
@@ -2217,19 +2435,27 @@
     },
     {
       "id": "docs-images-sequencer-trigger-centerafterdrift-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/sequencer/trigger/centerafterdrift.png",
-      "width": 405,
-      "height": 39,
-      "exclusionReason": "This selective annotated, validation, calculated or nested workflow state is not reproduced faithfully by a verified deterministic fixture. Keep the original capture instead of substituting an incomplete production view."
+      "classification": "nina-ui",
+      "output": "docs/images/generated/sequencer/trigger/centerafterdrift.png",
+      "width": 720,
+      "height": 55,
+      "fixture": "sequencer-entity",
+      "state": "center-after-drift",
+      "displayName": "Center After Drift",
+      "sourceIdentifier": "sequencer:CenterAfterDriftTrigger"
     },
     {
       "id": "docs-images-sequencer-trigger-customtrigger-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/sequencer/trigger/customtrigger.png",
+      "classification": "nina-ui",
+      "output": "docs/images/generated/sequencer/trigger/customtrigger.png",
       "width": 1442,
-      "height": 96,
-      "exclusionReason": "This selective annotation, menu or nested workflow state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting an incomplete production view."
+      "height": 192,
+      "fixture": "sequencer",
+      "state": "custom-trigger",
+      "viewType": "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView",
+      "renderWidth": 1800,
+      "renderHeight": 1000,
+      "cropTarget": "target-area:first-item-trigger"
     },
     {
       "id": "docs-images-sequencer-trigger-ditherafterexposures-png",
@@ -2310,19 +2536,31 @@
     },
     {
       "id": "docs-images-sequencer-trigger-trigger-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/sequencer/trigger/trigger.png",
-      "width": 258,
-      "height": 44,
-      "exclusionReason": "This selective annotation, menu or nested workflow state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting an incomplete production view."
+      "classification": "nina-ui",
+      "output": "docs/images/generated/sequencer/trigger/trigger.png",
+      "width": 470,
+      "height": 35,
+      "fixture": "sequencer",
+      "state": "sequencer-sidebar-af-after-time",
+      "viewType": "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView",
+      "renderWidth": 2340,
+      "renderHeight": 1000,
+      "cropTarget": "sidebar:filtered-item",
+      "displayName": "AF After Time",
+      "sourceIdentifier": "sequencer:AFAfterTimeTrigger"
     },
     {
       "id": "docs-images-sequencer-trigger-triggeronunsafe-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/sequencer/trigger/triggeronunsafe.png",
-      "width": 1048,
-      "height": 297,
-      "exclusionReason": "This selective annotation, menu or nested workflow state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting an incomplete production view."
+      "classification": "nina-ui",
+      "output": "docs/images/generated/sequencer/trigger/triggeronunsafe.png",
+      "width": 1442,
+      "height": 370,
+      "fixture": "sequencer",
+      "state": "trigger-on-unsafe",
+      "viewType": "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView",
+      "renderWidth": 1800,
+      "renderHeight": 1000,
+      "cropTarget": "target-area:first-item-trigger"
     },
     {
       "id": "docs-images-setup-fork2-png",

@@ -128,6 +128,9 @@ public static class ScreenshotChrome {
                     case ScreenshotCalloutKind.Label:
                         AddLabel(overlay, callout, width, height);
                         break;
+                    case ScreenshotCalloutKind.Box:
+                        AddBox(overlay, callout, width, height);
+                        break;
                     default:
                         AddBadge(overlay, callout, width, height);
                         break;
@@ -180,6 +183,18 @@ public static class ScreenshotChrome {
         Canvas.SetLeft(label, Math.Clamp(callout.X * width, 0, Math.Max(0, width - label.DesiredSize.Width)));
         Canvas.SetTop(label, Math.Clamp(callout.Y * height, 0, Math.Max(0, height - label.DesiredSize.Height)));
         overlay.Children.Add(label);
+    }
+
+    private static void AddBox(Canvas overlay, ScreenshotCallout callout, int width, int height) {
+        System.Windows.Shapes.Rectangle box = new() {
+            Width = callout.Width!.Value * width,
+            Height = callout.Height!.Value * height,
+            Stroke = new SolidColorBrush(Color.FromRgb(255, 45, 45)),
+            StrokeThickness = 3
+        };
+        Canvas.SetLeft(box, callout.X * width);
+        Canvas.SetTop(box, callout.Y * height);
+        overlay.Children.Add(box);
     }
 
     private static void AddArrow(Canvas overlay, ScreenshotCallout callout, int width, int height) {

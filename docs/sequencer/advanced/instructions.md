@@ -1,25 +1,25 @@
 ## General
-![Generic Instruction](../../images/sequencer/instructions/instruction_generic.png)  
+![Generic Instruction](../../images/generated/sequencer/instructions/instruction_generic.png)
 An instruction is a single command that the application will execute. Each instruction has a different purpose and can control various types of equipment, set parameters, or provide utility functions to automate the imaging process.
 
-![Instruction name](../../images/sequencer/instructions/instruction_name.png)  
+![Instruction name](../../images/generated/sequencer/instructions/instruction_name.png)
 Each instruction can be identified by its name and its icon.
 
 ### Validations
-![Instruction Validation](../../images/sequencer/instructions/instruction_validation.png)  
+![Instruction Validation](../../images/generated/sequencer/instructions/instruction_validation.png)
 Instructions are capable of validating prerequisites and warning the user about potential issues. When a red exclamation mark is visible next to the instruction, not all prerequisites to run this instruction are met. When hovering over the red circle, the details of which prerequisites are missing are shown.
 **Important**: An instruction that does not meet its prerequisites will be skipped and the instruction is considered failed.
 
 ### Options
-![Instruction Validation](../../images/sequencer/instructions/instruction_options.png)  
+![Instruction Validation](../../images/generated/sequencer/instructions/instruction_options.png)
 Most instructions also come with a variety of options to adjust their behavior at runtime. For example, you can adjust the exposure times, gain, and offset for an instruction that should take an exposure with your camera. Each instruction has a different set of options, which are explained in more detail below.
 
 ### Buttons
-![Generic Instruction](../../images/sequencer/instructions/instruction_buttons.png)  
+![Generic Instruction](../../images/generated/sequencer/instructions/instruction_buttons.png)
 On the right side of the instructions are buttons to delete, copy, move, or adjust advanced settings that exist for all instructions.
 ### Advanced settings
 
-![Instruction Settings](../../images/sequencer/instructions/instruction_settings.png)  
+![Instruction Settings](../../images/generated/sequencer/instructions/instruction_settings.png)
 
 When clicking on the three dots on the right side of an instruction, an advanced section will appear where advanced settings for an instruction are revealed.
 
@@ -110,7 +110,7 @@ Set your camera to a specific readout mode. The number indicates the index of th
 Sets the camera's USB transfer limit. The available range comes from the connected camera driver and the instruction is invalid when the driver does not expose this control.
 
 ### Take Exposure
-![Take Exposure](../../images/sequencer/instructions/camera_exposure.png)  
+![Take Exposure](../../images/generated/sequencer/instructions/camera_exposure.png)
 This instruction will take an exposure using the specified exposure time, binning, gain and offset.
 
 ### Take Many Exposures
@@ -123,7 +123,7 @@ Similar to the "Take Exposure" instruction, but with the added ability to specif
 Similar to the "Take Exposure" instruction, but with the added ability to specify a subframe percentage relative to the center.
 
 ### Smart Exposure
-![Smart Exposure](../../images/sequencer/instructions/camera_smartexposure.png)  
+![Smart Exposure](../../images/generated/sequencer/instructions/camera_smartexposure.png)
 Similar to the "Take Many Exposure" instruction, but with the added ability to also specify a specific filter and to dither after a specific amount of exposures.  
 Keep dither after exposures to 0, to skip the dither completely.  
 *Requires a connected filter wheel to switch filters and a connected guider to dither*
@@ -352,7 +352,7 @@ When this instruction is part of a "Deep Sky Object Sequence", the coordinates w
 *Requires a [plate solver](../../advanced/platesolving.md) to be set up*
 
 ### Slew To Alt/Az
-![Slew To Alt/Az](../../images/sequencer/instructions/telescope_slewaltaz.png)  
+![Slew To Alt/Az](../../images/generated/sequencer/instructions/telescope_slewaltaz.png)
 Slews to the specified coordinates.
 
 ### Slew To Ra/Dec
@@ -406,7 +406,7 @@ Saves the currently running sequence to the specified file path. This is useful 
 When this instruction is starting it will spawn a message box and pauses the sequence until the user action to confirm the box is taken. The box can be used for example to stop the sequence and notify you to put a cover on to take flats etc.
 
 ### Wait For Altitude
-![Wait For Altitude](../../images/sequencer/instructions/utility_waitforaltitude.png)  
+![Wait For Altitude](../../images/generated/sequencer/instructions/utility_waitforaltitude.png)
 For the given target coordinates, this instruction will simply wait until the altitude has been reached.
 When this instruction is part of a "Deep Sky Object Sequence" the coordinates will be inherited and no coordinates need to be entered here  
 
@@ -474,7 +474,7 @@ Waits for as long as the sun matches the specified parameters.
 
 This will wait until the Expression becomes True.
 ### Wait Until Above Horizon
-![Wait Until Above Horizon](../../images/sequencer/instructions/utility_waituntilabovehorizon.png)  
+![Wait Until Above Horizon](../../images/generated/sequencer/instructions/utility_waituntilabovehorizon.png)
 This will wait for as long as the specified target is below the horizon. When a [custom horizon](../../tabs/options/general.md) is set, the custom horizon will be considered as the altitude to be above of. When no custom horizon is set, 0° of altitude will be considered. Furthermore an altitude offset can be specified.  
 When this instruction is part of a "Deep Sky Object Sequence" the coordinates will be inherited and no coordinates need to be entered here 
 

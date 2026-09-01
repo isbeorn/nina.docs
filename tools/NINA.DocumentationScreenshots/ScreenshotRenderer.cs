@@ -74,6 +74,9 @@ public sealed class ScreenshotRenderer(FixtureRegistry fixtures) {
         BitmapSource rendered = desktopCapture
             ? RenderWithDesktopContextMenus(content, asset, renderWidth, renderHeight)
             : RenderWithOpenPopups(content, asset, renderWidth, renderHeight);
+        if (!desktopCapture) {
+            CloseOpenMenus(content);
+        }
         BitmapSource finalBitmap = ApplyCrop(rendered, asset, resolvedCrop);
         if (resolvedCrop is not null && asset.Callouts.Count > 0) {
             System.Windows.Controls.Image image = new() { Source = finalBitmap, Width = asset.Width, Height = asset.Height, Stretch = Stretch.Fill };
@@ -98,11 +101,22 @@ public sealed class ScreenshotRenderer(FixtureRegistry fixtures) {
             .Where(popup => popup.IsOpen)
             .Select(popup => (popup, popup.PlacementTarget as FrameworkElement))
             .ToList();
-        foreach (ComboBox comboBox in FindVisualDescendants<ComboBox>(content).Where(comboBox => comboBox.IsDropDownOpen)) {
+        foreach (ComboBox comboBox in FindVisualDescendants<ComboBox>(content)
+            .Where(comboBox => comboBox.IsDropDownOpen || NamedStateController.ShouldCaptureDropDown(comboBox))) {
             comboBox.ApplyTemplate();
             Popup? popup = comboBox.Template.FindName("PART_Popup", comboBox) as Popup
                 ?? comboBox.Template.FindName("Popup", comboBox) as Popup;
             if (popup is not null) {
+                if (!popup.IsOpen && popup.Child is FrameworkElement closedPopupChild) {
+                    closedPopupChild.Measure(new Size(renderWidth, renderHeight));
+                    Size desired = closedPopupChild.DesiredSize;
+                    closedPopupChild.Arrange(new Rect(
+                        0,
+                        0,
+                        Math.Max(comboBox.ActualWidth, desired.Width),
+                        Math.Max(1, desired.Height)));
+                    closedPopupChild.UpdateLayout();
+                }
                 int existingIndex = openPopups.FindIndex(item => ReferenceEquals(item.Popup, popup));
                 if (existingIndex >= 0) {
                     openPopups[existingIndex] = (popup, comboBox);
@@ -145,8 +159,9 @@ public sealed class ScreenshotRenderer(FixtureRegistry fixtures) {
                 if (requiresPopup && (width <= 1 || height < renderHeight / 2)) {
                     throw new CatalogException($"Screenshot '{asset.Id}' opened its production Popup but it had invalid dimensions {width}x{height}.");
                 }
-                Point popupOrigin = popupChild.PointToScreen(new Point(0, 0));
-                popup.Child = null;
+                Point popupOrigin = popup.IsOpen
+                    ? popupChild.PointToScreen(new Point(0, 0))
+                    : new Point();
                 popupChild.Measure(new Size(width, height));
                 popupChild.Arrange(new Rect(0, 0, width, height));
                 popupChild.UpdateLayout();
@@ -289,8 +304,7 @@ public sealed class ScreenshotRenderer(FixtureRegistry fixtures) {
         if (menus.Count == 0) {
             throw new CatalogException($"Screenshot '{screenshotId}' could not find its open production menu for desktop capture.");
         }
-        List<HwndSource> popupSources = GetPopupSources();
-        foreach (HwndSource source in popupSources) {
+        foreach (HwndSource source in GetPopupSources()) {
             if (source.Handle == IntPtr.Zero
                 || !SetWindowPos(source.Handle, new IntPtr(-1), 0, 0, 0, 0, 0x0001 | 0x0002 | 0x0010)) {
                 throw new CatalogException($"Screenshot '{screenshotId}' could not place its production popup above the capture window.");
@@ -306,7 +320,8 @@ public sealed class ScreenshotRenderer(FixtureRegistry fixtures) {
         .ToList();
 
     private static void CloseOpenMenus(DependencyObject root) {
-        foreach (HwndSource source in GetPopupSources()) {
+        List<HwndSource> popupSources = GetPopupSources();
+        foreach (HwndSource source in popupSources) {
             if (source.RootVisual is null) {
                 continue;
             }
@@ -315,7 +330,16 @@ public sealed class ScreenshotRenderer(FixtureRegistry fixtures) {
             }
             _ = SendMessage(source.Handle, 0x001F, IntPtr.Zero, IntPtr.Zero);
         }
-        DrainDispatcher();
+        foreach (ComboBox comboBox in FindVisualDescendants<ComboBox>(root)) {
+            comboBox.ApplyTemplate();
+            Popup? popup = comboBox.Template.FindName("PART_Popup", comboBox) as Popup
+                ?? comboBox.Template.FindName("Popup", comboBox) as Popup;
+            if (popup is not null) {
+                popup.PopupAnimation = PopupAnimation.None;
+                popup.IsOpen = false;
+            }
+            comboBox.IsDropDownOpen = false;
+        }
         foreach (Button button in FindVisualDescendants<Button>(root)) {
             if (button.ContextMenu?.IsOpen == true) {
                 button.ContextMenu.IsOpen = false;
@@ -324,11 +348,6 @@ public sealed class ScreenshotRenderer(FixtureRegistry fixtures) {
         foreach (FrameworkElement element in FindVisualDescendants<FrameworkElement>(root)
             .Where(element => element.ToolTip is ToolTip { IsOpen: true })) {
             ((ToolTip)element.ToolTip).IsOpen = false;
-        }
-        DrainDispatcher();
-        for (int attempt = 0; attempt < 10 && GetPopupSources().Count > 0; attempt++) {
-            Thread.Sleep(25);
-            DrainDispatcher();
         }
     }
 
@@ -447,30 +466,53 @@ public sealed class ScreenshotRenderer(FixtureRegistry fixtures) {
         if (asset.CropTarget.StartsWith("framing:", StringComparison.Ordinal)) {
             return ResolveFramingCrop(content, asset, renderWidth, renderHeight);
         }
+        if (asset.CropTarget == "sidebar:filtered-item") {
+            return ResolveFilteredSidebarItemCrop(content, fixture, asset, renderWidth, renderHeight);
+        }
+        if (asset.CropTarget.StartsWith("target-area:first-expression:", StringComparison.Ordinal)) {
+            return ResolveExpressionCrop(content, fixture, asset, renderWidth, renderHeight);
+        }
         bool instructionsOnly = asset.CropTarget == "target-area:first-item-instructions";
-        bool allItems = asset.CropTarget == "target-area:all-items";
-        if (asset.CropTarget != "target-area:first-item" && !instructionsOnly && !allItems) {
+        bool triggerOnly = asset.CropTarget == "target-area:first-item-trigger";
+        bool targetAreaAllItems = asset.CropTarget == "target-area:all-items";
+        bool startAreaAllItems = asset.CropTarget == "start-area:all-items";
+        bool endAreaAllItems = asset.CropTarget == "end-area:all-items";
+        bool allItems = targetAreaAllItems || startAreaAllItems || endAreaAllItems;
+        if (asset.CropTarget != "target-area:first-item" && !instructionsOnly && !triggerOnly && !allItems) {
             throw new CatalogException($"Screenshot '{asset.Id}' has unknown crop target '{asset.CropTarget}'.");
         }
+        int areaIndex = startAreaAllItems ? 0 : endAreaAllItems ? 2 : 1;
         if (fixture.DataContext is not ISequence2VM viewModel
-            || viewModel.Sequencer.MainContainer.Items.ElementAtOrDefault(1) is not ISequenceContainer targetArea
-            || targetArea.Items.FirstOrDefault() is not ISequenceItem firstTargetEntity) {
-            throw new CatalogException($"Screenshot '{asset.Id}' requested the first target-area item but the production sequence has none.");
+            || viewModel.Sequencer.MainContainer.Items.ElementAtOrDefault(areaIndex) is not ISequenceContainer sequenceArea
+            || sequenceArea.Items.FirstOrDefault() is not ISequenceItem firstAreaEntity) {
+            throw new CatalogException($"Screenshot '{asset.Id}' requested sequence area {areaIndex} but the production sequence has no items there.");
         }
 
         HashSet<NINA.Sequencer.ISequenceEntity> modelEntities = allItems
-            ? targetArea.Items.SelectMany(CollectSequenceEntities).ToHashSet()
-            : CollectSequenceEntities(firstTargetEntity);
+            ? sequenceArea.Items.SelectMany(CollectSequenceEntities).ToHashSet()
+            : CollectSequenceEntities(firstAreaEntity);
+        if (startAreaAllItems && viewModel.Sequencer.MainContainer is ITriggerable rootTriggerable) {
+            modelEntities.UnionWith(rootTriggerable.Triggers.SelectMany(CollectSequenceEntities));
+        }
         List<FrameworkElement> targets = FindVisualDescendants<FrameworkElement>(content)
             .Where(element => element.DataContext is NINA.Sequencer.ISequenceEntity entity && modelEntities.Contains(entity))
-            .Where(element => instructionsOnly
-                ? element.GetType().Name == "SequenceBlockView"
-                : element.GetType().Name is "HierarchicalSequenceContainerView" or "SequenceContainerView" or "SequenceBlockView")
+            .Where(element => {
+                if (triggerOnly) {
+                    return element is Expander
+                        && element.GetType().Name == "DetachingExpander"
+                        && element.DataContext is ISequenceTrigger;
+                }
+                if (element.GetType().Name != "SequenceBlockView") {
+                    return !instructionsOnly
+                        && element.GetType().Name is "HierarchicalSequenceContainerView" or "SequenceContainerView";
+                }
+                return true;
+            })
             .Where(element => element.ActualWidth > 1 && element.ActualHeight > 1)
             .ToList();
         if (targets.Count == 0) {
             throw new CatalogException(
-                $"Screenshot '{asset.Id}' could not locate the production sequence view for '{firstTargetEntity.Name}'.");
+                $"Screenshot '{asset.Id}' could not locate the production sequence view for '{firstAreaEntity.Name}'.");
         }
 
         Rect bounds = Rect.Empty;
@@ -479,29 +521,7 @@ public sealed class ScreenshotRenderer(FixtureRegistry fixtures) {
             Rect targetBounds = new(topLeft, new Size(target.ActualWidth, target.ActualHeight));
             bounds.Union(targetBounds);
         }
-        List<Button> menuAnchors = FindVisualDescendants<Button>(content)
-            .Where(control => control.ContextMenu?.IsOpen == true)
-            .ToList();
-        foreach (Button button in menuAnchors) {
-            ContextMenu menu = button.ContextMenu!;
-            menu.Measure(new Size(renderWidth, renderHeight));
-            Size menuSize = GetRenderedSize(menu);
-            Point menuOrigin = GetContextMenuOrigin(button, menu, menuSize.Width, content, renderWidth);
-            bounds.Union(new Rect(menuOrigin, menuSize));
-        }
-        foreach (FrameworkElement anchor in FindVisualDescendants<FrameworkElement>(content)
-            .Where(element => element.ToolTip is ToolTip { IsOpen: true })) {
-            ToolTip tooltip = (ToolTip)anchor.ToolTip;
-            Size tooltipSize = GetRenderedSize(tooltip);
-            Point tooltipOrigin = GetToolTipOrigin(
-                anchor,
-                tooltip,
-                tooltipSize,
-                content,
-                renderWidth,
-                renderHeight);
-            bounds.Union(new Rect(tooltipOrigin, tooltipSize));
-        }
+        UnionOpenOverlayBounds(content, ref bounds, renderWidth, renderHeight);
         double availableRight = renderWidth;
         TabControl? sidebar = FindVisualDescendants<TabControl>(content).FirstOrDefault(control => control.Items.Count == 5);
         if (sidebar is not null) {
@@ -526,6 +546,153 @@ public sealed class ScreenshotRenderer(FixtureRegistry fixtures) {
             Width = width / renderWidth,
             Height = height / renderHeight
         };
+    }
+
+    private static ScreenshotCrop ResolveFilteredSidebarItemCrop(
+            FrameworkElement content,
+            FrameworkElement fixture,
+            ScreenshotAsset asset,
+            int renderWidth,
+            int renderHeight) {
+        if (fixture.DataContext is not ISequence2VM viewModel
+            || string.IsNullOrWhiteSpace(viewModel.SequencerFactory.ViewFilter)) {
+            throw new CatalogException($"Screenshot '{asset.Id}' requested a filtered sidebar item without a production sidebar filter.");
+        }
+        string expectedName = viewModel.SequencerFactory.ViewFilter;
+        TextBlock label = FindVisualDescendants<TextBlock>(content)
+            .FirstOrDefault(text => text.IsVisible
+                && string.Equals(text.Text, expectedName, StringComparison.Ordinal))
+            ?? throw new CatalogException($"Screenshot '{asset.Id}' could not locate the filtered production sidebar item '{expectedName}'.");
+        FrameworkElement row = VisualAncestors(label)
+            .OfType<Grid>()
+            .Where(grid => grid.IsVisible
+                && grid.ActualHeight >= 25
+                && grid.ActualHeight <= 45
+                && grid.ActualWidth >= 200)
+            .OrderByDescending(grid => grid.ActualWidth)
+            .FirstOrDefault()
+            ?? throw new CatalogException($"Screenshot '{asset.Id}' could not locate the production sidebar row for '{expectedName}'.");
+        Point topLeft = row.TranslatePoint(new Point(0, 0), content);
+        Rect bounds = new(topLeft, new Size(row.ActualWidth, row.ActualHeight));
+        return BoundsToCrop(bounds, asset, renderWidth, renderHeight);
+    }
+
+    private static ScreenshotCrop ResolveExpressionCrop(
+            FrameworkElement content,
+            FrameworkElement fixture,
+            ScreenshotAsset asset,
+            int renderWidth,
+            int renderHeight) {
+        if (fixture.DataContext is not ISequence2VM viewModel
+            || viewModel.Sequencer.MainContainer.Items.ElementAtOrDefault(1) is not ISequenceContainer targetArea
+            || targetArea.Items.FirstOrDefault() is not ISequenceItem firstAreaEntity) {
+            throw new CatalogException($"Screenshot '{asset.Id}' requested an expression crop but the production target area is empty.");
+        }
+        NINA.Sequencer.SequenceItem.Imaging.TakeExposure exposure = CollectSequenceEntities(firstAreaEntity)
+            .OfType<NINA.Sequencer.SequenceItem.Imaging.TakeExposure>()
+            .FirstOrDefault()
+            ?? throw new CatalogException($"Screenshot '{asset.Id}' could not find a production Take Exposure instruction for its expression crop.");
+        NINA.Sequencer.Logic.Expression expression = asset.CropTarget!.EndsWith(":gain", StringComparison.Ordinal)
+            ? exposure.GainExpression
+            : exposure.ExposureTimeExpression;
+        NINA.Sequencer.Logic.ExprControl control = FindVisualDescendants<NINA.Sequencer.Logic.ExprControl>(content)
+            .Where(candidate => candidate.IsVisible
+                && candidate.ActualWidth > 1
+                && candidate.ActualHeight > 1)
+            .FirstOrDefault(candidate =>
+                ReferenceEquals(candidate.DataContext, exposure)
+                && (ReferenceEquals(
+                        candidate.GetValue(NINA.Sequencer.Logic.ExprControl.ExpProperty),
+                        expression)
+                    || string.Equals(
+                        candidate.GetValue(NINA.Sequencer.Logic.ExprControl.LabelProperty) as string,
+                        asset.CropTarget!.EndsWith(":gain", StringComparison.Ordinal)
+                            ? NINA.Core.Locale.Loc.Instance["LblGain"]
+                            : NINA.Core.Locale.Loc.Instance["LblTime"],
+                        StringComparison.Ordinal)))
+            ?? throw new CatalogException($"Screenshot '{asset.Id}' could not locate NINA's production expression control.");
+        Point topLeft = control.TranslatePoint(new Point(0, 0), content);
+        Rect bounds = new(topLeft, new Size(control.ActualWidth, control.ActualHeight));
+        UnionOpenOverlayBounds(content, ref bounds, renderWidth, renderHeight);
+        return BoundsToCrop(bounds, asset, renderWidth, renderHeight);
+    }
+
+    private static void UnionOpenOverlayBounds(
+            FrameworkElement content,
+            ref Rect bounds,
+            int renderWidth,
+            int renderHeight) {
+        foreach (ComboBox comboBox in FindVisualDescendants<ComboBox>(content)
+            .Where(control => control.IsDropDownOpen || NamedStateController.ShouldCaptureDropDown(control))) {
+            comboBox.ApplyTemplate();
+            Popup? popup = comboBox.Template.FindName("PART_Popup", comboBox) as Popup
+                ?? comboBox.Template.FindName("Popup", comboBox) as Popup;
+            if (popup?.Child is not FrameworkElement popupChild) {
+                continue;
+            }
+            popupChild.Measure(new Size(renderWidth, renderHeight));
+            Size popupSize = popupChild.DesiredSize;
+            popupChild.Arrange(new Rect(
+                0,
+                0,
+                Math.Max(comboBox.ActualWidth, popupSize.Width),
+                Math.Max(1, popupSize.Height)));
+            popupChild.UpdateLayout();
+            popupSize = GetRenderedSize(popupChild);
+            Point popupOrigin = comboBox.TranslatePoint(new Point(0, comboBox.ActualHeight), content);
+            bounds.Union(new Rect(popupOrigin, popupSize));
+        }
+        foreach (Button button in FindVisualDescendants<Button>(content)
+            .Where(control => control.ContextMenu?.IsOpen == true)) {
+            ContextMenu menu = button.ContextMenu!;
+            menu.Measure(new Size(renderWidth, renderHeight));
+            Size menuSize = GetRenderedSize(menu);
+            Point menuOrigin = GetContextMenuOrigin(button, menu, menuSize.Width, content, renderWidth);
+            bounds.Union(new Rect(menuOrigin, menuSize));
+        }
+        foreach (FrameworkElement anchor in FindVisualDescendants<FrameworkElement>(content)
+            .Where(element => element.ToolTip is ToolTip { IsOpen: true })) {
+            ToolTip tooltip = (ToolTip)anchor.ToolTip;
+            Size tooltipSize = GetRenderedSize(tooltip);
+            Point tooltipOrigin = GetToolTipOrigin(
+                anchor,
+                tooltip,
+                tooltipSize,
+                content,
+                renderWidth,
+                renderHeight);
+            bounds.Union(new Rect(tooltipOrigin, tooltipSize));
+        }
+    }
+
+    private static ScreenshotCrop BoundsToCrop(
+            Rect bounds,
+            ScreenshotAsset asset,
+            int renderWidth,
+            int renderHeight) {
+        bounds = ExpandBoundsToAspect(
+            bounds,
+            asset.Width / (double)asset.Height,
+            new Rect(0, 0, renderWidth, renderHeight),
+            asset.Id);
+        double left = Math.Clamp(bounds.Left, 0, renderWidth - 1);
+        double top = Math.Clamp(bounds.Top, 0, renderHeight - 1);
+        double width = Math.Clamp(bounds.Right - left, 1, renderWidth - left);
+        double height = Math.Clamp(bounds.Bottom - top, 1, renderHeight - top);
+        return new ScreenshotCrop {
+            X = left / renderWidth,
+            Y = top / renderHeight,
+            Width = width / renderWidth,
+            Height = height / renderHeight
+        };
+    }
+
+    private static IEnumerable<DependencyObject> VisualAncestors(DependencyObject element) {
+        DependencyObject? current = VisualTreeHelper.GetParent(element);
+        while (current is not null) {
+            yield return current;
+            current = VisualTreeHelper.GetParent(current);
+        }
     }
 
     private static ScreenshotCrop ResolveSettingsGroupCrop<TSettings>(
@@ -764,7 +931,8 @@ public sealed class ScreenshotRenderer(FixtureRegistry fixtures) {
             Math.Max(1, elements.Max(element => Math.Max(element.ActualHeight, element.DesiredSize.Height))));
     }
 
-    private static HashSet<NINA.Sequencer.ISequenceEntity> CollectSequenceEntities(ISequenceItem root) {
+
+    private static HashSet<NINA.Sequencer.ISequenceEntity> CollectSequenceEntities(NINA.Sequencer.ISequenceEntity root) {
         HashSet<NINA.Sequencer.ISequenceEntity> result = new(ReferenceEqualityComparer.Instance);
         Collect(root, result);
         return result;
@@ -823,7 +991,10 @@ public sealed class ScreenshotRenderer(FixtureRegistry fixtures) {
         Dispatcher.PushFrame(frame);
         timeout.Stop();
         if (timedOut) {
-            throw new CatalogException("The WPF dispatcher did not become idle within five seconds.");
+            string sources = string.Join(", ", PresentationSource.CurrentSources
+                .OfType<HwndSource>()
+                .Select(source => $"{source.RootVisual?.GetType().Name ?? "none"}@{source.Handle}"));
+            throw new CatalogException($"The WPF dispatcher did not become idle within five seconds. Active presentation sources: {sources}.");
         }
     }
 

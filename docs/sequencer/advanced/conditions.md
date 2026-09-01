@@ -1,7 +1,7 @@
 Loop conditions will drive the behavior of an instruction set. Without a condition, an instruction set will just process each sequence item inside once and is finished. This behavior will be changed, when loop conditions are attached. When an instruction set has a loop condition attached, it will process its items and loop itself again as long as the attached loop conditions are fulfilled. Once at least one of these loop conditions is not fulfilled anymore (e.g. a condition to loop until a specific time and the time has passed) the current instruction will be finished and afterwards the rest of the instructions inside this set will be skipped as well as the instruction set marked as finished. Conditions will be evaluated constantly in the background, so things like time based conditions or safety monitor conditions will interrupt ongoing instructions once they are no longer fulfilled.    
 
 Conditions can be identified by the highlighted icon next to them in the sequencer sidebar.  
-![Loop Conditions](../../images/sequencer/conditions/conditions.png)  
+![Loop Conditions](../../images/generated/sequencer/conditions/conditions.png)
 
 ### Loop For Iterations
 ![Loop For Iterations](../../images/generated/sequencer/conditions/loopforiterations.png)
@@ -14,13 +14,13 @@ Loop the instruction set for the specified amount of iterations.
 Loop the instruction set for the specified amount of seconds.
 
 ### Loop Until Altitude Sets Below
-![Loop Until Altitude Sets Below](../../images/sequencer/conditions/loopuntilaltitude2.png)  
+![Loop Until Altitude Sets Below](../../images/generated/sequencer/conditions/loopuntilaltitude2.png)
 For a given target coordinates the condition will loop until the altitude sets below the specified amount.
 When this condition is part of a "Deep Sky Object Sequence" the coordinates will be inherited by this set and no coordinates need to be entered  
-![Loop Until Altitude Sets Below](../../images/sequencer/conditions/loopuntilaltitude.png)  
+![Loop Until Altitude Sets Below](../../images/generated/sequencer/conditions/loopuntilaltitude.png)
 
 ### Loop Until Time
-![Loop Until Time](../../images/sequencer/conditions/loopuntiltime.png)  
+![Loop Until Time](../../images/generated/sequencer/conditions/loopuntiltime.png)
 Loops an instruction set until a specific local time or astronomy-based event. The source can be a manually entered time, a sun event, or the current target's meridian crossing. For calculated sources, the time fields are populated automatically and can be shifted earlier or later by setting an offset in minutes.
 
 This condition remains true while there is enough time left to run the next instruction. If the selected time has already passed for the current observing day, or if the next instruction's estimated duration would exceed the selected time, the condition becomes false and the instruction set stops.
@@ -67,10 +67,10 @@ This condition remains true while there is enough time left to run the next inst
 
 
 ### Loop While Altitude Above Horizon
-![Loop While Altitude Above Horizon](../../images/sequencer/conditions/loopwhilehorizon2.png)  
+![Loop While Altitude Above Horizon](../../images/generated/sequencer/conditions/loopwhilehorizon2.png)
 This will loop the instruction set for as long as the specified target is above the horizon. When a [custom horizon](../../tabs/options/general.md) is set, the custom horizon will be considered as the altitude to be above of. When no custom horizon is set, 0° of altitude will be considered. Furthermore an altitude offset can be specified.  
 When this condition is part of a "Deep Sky Object Sequence" the coordinates will be inherited by this set and no coordinates need to be entered  
-![Loop While Altitude Above Horizon](../../images/sequencer/conditions/loopwhilehorizon.png)  
+![Loop While Altitude Above Horizon](../../images/generated/sequencer/conditions/loopwhilehorizon.png)
 
 ### Loop While Safe
 ![Loop While Safe](../../images/generated/sequencer/conditions/loopwhilesafe.png)

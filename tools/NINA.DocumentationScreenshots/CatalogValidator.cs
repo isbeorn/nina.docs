@@ -115,7 +115,13 @@ public static class CatalogValidator {
         }
         if (asset.CropTarget is not "target-area:first-item"
             and not "target-area:first-item-instructions"
+            and not "target-area:first-item-trigger"
+            and not "target-area:first-expression:exposure-time"
+            and not "target-area:first-expression:gain"
             and not "target-area:all-items"
+            and not "start-area:all-items"
+            and not "end-area:all-items"
+            and not "sidebar:filtered-item"
             and not "root-add-menu"
             and not "settings:meridian-flip"
             and not "framing:image-source"
@@ -125,7 +131,13 @@ public static class CatalogValidator {
         }
         bool sequencerCrop = asset.CropTarget is "target-area:first-item"
             or "target-area:first-item-instructions"
+            or "target-area:first-item-trigger"
+            or "target-area:first-expression:exposure-time"
+            or "target-area:first-expression:gain"
             or "target-area:all-items"
+            or "start-area:all-items"
+            or "end-area:all-items"
+            or "sidebar:filtered-item"
             or "root-add-menu";
         if (sequencerCrop && !string.Equals(asset.Fixture, "sequencer", StringComparison.OrdinalIgnoreCase)) {
             throw new CatalogException($"Screenshot '{asset.Id}' uses a sequencer crop target with fixture '{asset.Fixture}'.");
@@ -159,13 +171,28 @@ public static class CatalogValidator {
             if (callout.Kind == ScreenshotCalloutKind.Label) {
                 bool validWidth = callout.Width is > 0 and <= 1
                     && callout.X + callout.Width.Value <= 1;
-                if (!validPosition || !validText || !validWidth || callout.Points.Count > 0) {
+                if (!validPosition || !validText || !validWidth || callout.Height is not null || callout.Points.Count > 0) {
                     throw new CatalogException($"Screenshot '{asset.Id}' has an invalid label callout.");
                 }
                 continue;
             }
 
-            if (!validPosition || !validText || callout.Width is not null || callout.Points.Count > 0) {
+            if (callout.Kind == ScreenshotCalloutKind.Box) {
+                bool validWidth = callout.Width is > 0 and <= 1
+                    && callout.X + callout.Width.Value <= 1;
+                bool validHeight = callout.Height is > 0 and <= 1
+                    && callout.Y + callout.Height.Value <= 1;
+                if (!validPosition
+                    || !validWidth
+                    || !validHeight
+                    || !string.IsNullOrWhiteSpace(callout.Text)
+                    || callout.Points.Count > 0) {
+                    throw new CatalogException($"Screenshot '{asset.Id}' has an invalid box callout.");
+                }
+                continue;
+            }
+
+            if (!validPosition || !validText || callout.Width is not null || callout.Height is not null || callout.Points.Count > 0) {
                 throw new CatalogException($"Screenshot '{asset.Id}' has an invalid badge callout.");
             }
         }
@@ -175,7 +202,9 @@ public static class CatalogValidator {
 
     private static string GetRenderState(ScreenshotAsset asset) {
         string crop = asset.Crop is null ? asset.CropTarget ?? string.Empty : $"{asset.Crop.X:R},{asset.Crop.Y:R},{asset.Crop.Width:R},{asset.Crop.Height:R}";
-        string callouts = string.Join(";", asset.Callouts.Select(callout => $"{callout.X:R},{callout.Y:R},{callout.Text}"));
+        string callouts = string.Join(";", asset.Callouts.Select(callout =>
+            $"{callout.Kind}:{callout.X:R},{callout.Y:R},{callout.Width:R},{callout.Height:R},{callout.Text}:" +
+            string.Join(",", callout.Points.Select(point => $"{point.X:R},{point.Y:R}"))));
         return string.Join("|", asset.Fixture, asset.ViewType, asset.State, asset.Width, asset.Height, asset.RenderWidth, asset.RenderHeight, crop, callouts);
     }
 }

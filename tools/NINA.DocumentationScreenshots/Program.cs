@@ -13,6 +13,8 @@
 #endregion "copyright"
 
 using System.Security.Cryptography;
+using System.Diagnostics;
+using System.Reflection;
 
 namespace NINA.DocumentationScreenshots;
 
@@ -21,7 +23,6 @@ public static class Program {
     public static int Main(string[] args) {
         try {
             Options options = Options.Parse(args);
-            WpfBootstrap.Initialize();
             FixtureRegistry fixtures = new();
             ScreenshotCatalog catalog = ScreenshotCatalog.Load(options.Catalog);
             IReadOnlyDictionary<ScreenshotAsset, string> paths = CatalogValidator.Validate(catalog, options.DocumentationRoot, fixtures);
@@ -34,17 +35,35 @@ public static class Program {
             if (selected.Count == 0) {
                 throw new CatalogException("No managed screenshots matched the requested filters.");
             }
+            if (options.WorkerOutput is not null) {
+                if (selected.Count != 1) {
+                    throw new CatalogException("An isolated screenshot worker requires exactly one --id selection.");
+                }
+                WpfBootstrap.Initialize();
+                new ScreenshotRenderer(fixtures).Render(selected[0], options.WorkerOutput);
+                return 0;
+            }
 
             string stagingRoot = Path.Combine(Path.GetTempPath(), $"nina-doc-screenshots-{Guid.NewGuid():N}");
             Directory.CreateDirectory(stagingRoot);
             try {
-                ScreenshotRenderer renderer = new(fixtures);
                 Dictionary<ScreenshotAsset, string> stagedPaths = [];
-                foreach (ScreenshotAsset asset in selected) {
-                    string stagedPath = Path.Combine(stagingRoot, asset.Id + ".png");
-                    Console.WriteLine($"Rendering {asset.Id}...");
-                    renderer.Render(asset, stagedPath);
-                    stagedPaths.Add(asset, stagedPath);
+                if (UseIsolatedWorkers(selected.Count)) {
+                    foreach (ScreenshotAsset asset in selected) {
+                        string stagedPath = Path.Combine(stagingRoot, asset.Id + ".png");
+                        Console.WriteLine($"Rendering {asset.Id}...");
+                        RunIsolatedWorker(options, asset, stagedPath);
+                        stagedPaths.Add(asset, stagedPath);
+                    }
+                } else {
+                    WpfBootstrap.Initialize();
+                    ScreenshotRenderer renderer = new(fixtures);
+                    foreach (ScreenshotAsset asset in selected) {
+                        string stagedPath = Path.Combine(stagingRoot, asset.Id + ".png");
+                        Console.WriteLine($"Rendering {asset.Id}...");
+                        renderer.Render(asset, stagedPath);
+                        stagedPaths.Add(asset, stagedPath);
+                    }
                 }
 
                 int added = 0;
@@ -102,6 +121,54 @@ public static class Program {
         }
     }
 
+    private static bool UseIsolatedWorkers(int selectedCount) =>
+        selectedCount > 1
+        && string.Equals(
+            Assembly.GetEntryAssembly()?.GetName().Name,
+            typeof(Program).Assembly.GetName().Name,
+            StringComparison.Ordinal);
+
+    private static void RunIsolatedWorker(
+            Options options,
+            ScreenshotAsset asset,
+            string outputPath) {
+        string executable = Path.ChangeExtension(typeof(Program).Assembly.Location, ".exe");
+        if (!File.Exists(executable)) {
+            throw new CatalogException($"The isolated screenshot renderer executable was not found: {executable}");
+        }
+        ProcessStartInfo startInfo = new(executable) {
+            UseShellExecute = false,
+            RedirectStandardOutput = true,
+            RedirectStandardError = true,
+            CreateNoWindow = true
+        };
+        startInfo.ArgumentList.Add("--catalog");
+        startInfo.ArgumentList.Add(options.Catalog);
+        startInfo.ArgumentList.Add("--docs-root");
+        startInfo.ArgumentList.Add(options.DocumentationRoot);
+        startInfo.ArgumentList.Add("--id");
+        startInfo.ArgumentList.Add(asset.Id);
+        startInfo.ArgumentList.Add("--worker-output");
+        startInfo.ArgumentList.Add(outputPath);
+
+        using Process process = Process.Start(startInfo)
+            ?? throw new CatalogException($"Screenshot '{asset.Id}' could not start its isolated renderer process.");
+        Task<string> standardOutput = process.StandardOutput.ReadToEndAsync();
+        Task<string> standardError = process.StandardError.ReadToEndAsync();
+        if (!process.WaitForExit((int)TimeSpan.FromMinutes(2).TotalMilliseconds)) {
+            process.Kill(entireProcessTree: true);
+            throw new CatalogException($"Screenshot '{asset.Id}' exceeded the two-minute isolated renderer timeout.");
+        }
+        Task.WaitAll(standardOutput, standardError);
+        if (process.ExitCode != 0) {
+            string detail = standardError.Result.Trim();
+            if (string.IsNullOrWhiteSpace(detail)) {
+                detail = standardOutput.Result.Trim();
+            }
+            throw new CatalogException($"Screenshot '{asset.Id}' failed in its isolated renderer: {detail}");
+        }
+    }
+
     private static bool IsInArea(ScreenshotAsset asset, string area) {
         string normalized = asset.Output.Replace('\\', '/');
         const string generatedPrefix = "docs/images/generated/";
@@ -128,6 +195,7 @@ public static class Program {
         public required string DocumentationRoot { get; init; }
         public string? Id { get; init; }
         public string? Area { get; init; }
+        public string? WorkerOutput { get; init; }
         public bool Preview { get; init; }
 
         public static Options Parse(string[] args) {
@@ -154,6 +222,9 @@ public static class Program {
                 DocumentationRoot = Path.GetFullPath(docsRoot),
                 Id = values.GetValueOrDefault("--id"),
                 Area = values.GetValueOrDefault("--area"),
+                WorkerOutput = values.GetValueOrDefault("--worker-output") is string workerOutput
+                    ? Path.GetFullPath(workerOutput)
+                    : null,
                 Preview = values.ContainsKey("--preview")
             };
         }

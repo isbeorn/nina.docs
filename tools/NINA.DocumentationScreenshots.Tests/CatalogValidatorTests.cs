@@ -229,6 +229,62 @@ public class CatalogValidatorTests {
     }
 
     [Test]
+    public void Validate_AcceptsBoxCalloutsAtMinimumAndMaximumCoordinates() {
+        ScreenshotAsset asset = Managed(
+            "edge-boxes",
+            "docs/images/generated/edge-boxes.png",
+            callouts: [
+                new ScreenshotCallout {
+                    Kind = ScreenshotCalloutKind.Box,
+                    X = 0,
+                    Y = 0,
+                    Width = 0.5,
+                    Height = 0.5
+                },
+                new ScreenshotCallout {
+                    Kind = ScreenshotCalloutKind.Box,
+                    X = 0.5,
+                    Y = 0.5,
+                    Width = 0.5,
+                    Height = 0.5
+                }
+            ]);
+
+        Assert.That(
+            () => CatalogValidator.Validate(Catalog(asset), root, new FixtureRegistry()),
+            Throws.Nothing);
+    }
+
+    [TestCase(-0.01, 0.5, 0.25, 0.25)]
+    [TestCase(0.5, -0.01, 0.25, 0.25)]
+    [TestCase(0.8, 0.5, 0.3, 0.25)]
+    [TestCase(0.5, 0.8, 0.25, 0.3)]
+    [TestCase(0.5, 0.5, 0, 0.25)]
+    [TestCase(0.5, 0.5, 0.25, 0)]
+    public void Validate_RejectsBoxCalloutsOutsideEveryEdge(
+            double x,
+            double y,
+            double width,
+            double height) {
+        ScreenshotAsset asset = Managed(
+            "invalid-box",
+            "docs/images/generated/invalid-box.png",
+            callouts: [
+                new ScreenshotCallout {
+                    Kind = ScreenshotCalloutKind.Box,
+                    X = x,
+                    Y = y,
+                    Width = width,
+                    Height = height
+                }
+            ]);
+
+        Assert.That(
+            () => CatalogValidator.Validate(Catalog(asset), root, new FixtureRegistry()),
+            Throws.TypeOf<CatalogException>().With.Message.Contains("invalid box callout"));
+    }
+
+    [Test]
     public void Validate_RequiresFixtureForManagedAssetsAndReasonForExcludedAssets() {
         ScreenshotCatalog missingFixture = Catalog(new ScreenshotAsset {
             Id = "managed",
@@ -284,6 +340,79 @@ public class CatalogValidatorTests {
         Assert.That(
             () => CatalogValidator.Validate(Catalog(asset), root, new FixtureRegistry()),
             Throws.Nothing);
+    }
+
+    [TestCase("start-area:all-items")]
+    [TestCase("end-area:all-items")]
+    public void Validate_AcceptsOuterAreaItemsCropForSequencerFixture(string cropTarget) {
+        ScreenshotAsset asset = new() {
+            Id = "sequencer-outer-area",
+            Classification = ScreenshotClassification.NinaUi,
+            Output = "docs/images/generated/sequencer/simpletoadvanced/outer-area.png",
+            Fixture = "sequencer",
+            State = "simple-to-advanced-start-area",
+            ViewType = "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView",
+            Width = 1458,
+            Height = 260,
+            CropTarget = cropTarget
+        };
+
+        Assert.That(
+            () => CatalogValidator.Validate(Catalog(asset), root, new FixtureRegistry()),
+            Throws.Nothing);
+    }
+
+    [TestCase("sidebar:filtered-item")]
+    [TestCase("target-area:first-expression:exposure-time")]
+    [TestCase("target-area:first-expression:gain")]
+    public void Validate_AcceptsProductionSequencerDetailCrops(string cropTarget) {
+        ScreenshotAsset asset = new() {
+            Id = "sequencer-detail-crop",
+            Classification = ScreenshotClassification.NinaUi,
+            Output = "docs/images/generated/sequencer/detail.png",
+            Fixture = "sequencer",
+            State = "sequencer-expression-example",
+            ViewType = "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView",
+            Width = 900,
+            Height = 100,
+            CropTarget = cropTarget
+        };
+
+        Assert.That(
+            () => CatalogValidator.Validate(Catalog(asset), root, new FixtureRegistry()),
+            Throws.Nothing);
+    }
+
+    [TestCase("docs-images-sequencer-instructions-camera-smartexposure-png", 1031, 60)]
+    [TestCase("docs-images-sequencer-conditions-loopuntilaltitude2-png", 1170, 35)]
+    [TestCase("docs-images-sequencer-conditions-loopwhilehorizon-png", 630, 35)]
+    [TestCase("docs-images-sequencer-conditions-loopwhilehorizon2-png", 1150, 35)]
+    [TestCase("docs-images-sequencer-instructions-telescope-slewaltaz-png", 1050, 35)]
+    [TestCase("docs-images-sequencer-instructions-utility-waitforaltitude-png", 1220, 35)]
+    [TestCase("docs-images-sequencer-instructions-utility-waituntilabovehorizon-png", 1170, 35)]
+    public void Manifest_ProblemSequencerRowsAllocateSpaceForProductionFields(
+            string id,
+            int minimumWidth,
+            int minimumHeight) {
+        ScreenshotCatalog catalog = ScreenshotCatalog.Load(FindRepositoryFile("screenshots/manifest.json"));
+        ScreenshotAsset asset = catalog.Assets.Single(candidate => candidate.Id == id);
+
+        Assert.Multiple(() => {
+            Assert.That(asset.Width, Is.GreaterThanOrEqualTo(minimumWidth));
+            Assert.That(asset.Height, Is.GreaterThanOrEqualTo(minimumHeight));
+        });
+    }
+
+    private static string FindRepositoryFile(string relativePath) {
+        DirectoryInfo? directory = new(TestContext.CurrentContext.TestDirectory);
+        while (directory is not null) {
+            string candidate = Path.Combine(directory.FullName, relativePath);
+            if (File.Exists(candidate)) {
+                return candidate;
+            }
+            directory = directory.Parent;
+        }
+        throw new AssertionException($"Could not find repository file '{relativePath}'.");
     }
 
     private static ScreenshotCatalog Catalog(params ScreenshotAsset[] assets) => new() { SchemaVersion = 1, Assets = [.. assets] };
