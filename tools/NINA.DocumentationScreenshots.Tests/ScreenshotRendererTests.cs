@@ -14,6 +14,7 @@
 
 using NUnit.Framework;
 using System.Globalization;
+using System.Diagnostics;
 using System.Threading;
 using System.Windows.Media.Imaging;
 using System.Windows;
@@ -83,6 +84,33 @@ public class ScreenshotRendererTests {
         Assert.That(File.ReadAllBytes(second), Is.EqualTo(File.ReadAllBytes(first)));
     }
 
+    [Test]
+    public void Render_WaitsForManualRotatorProductionStoryboardsBeforeCapture() {
+        ScreenshotAsset asset = new() {
+            Id = "manual-rotator-deterministic",
+            Classification = ScreenshotClassification.NinaUi,
+            Output = "docs/images/generated/tabs/manualrotator.png",
+            Fixture = "view",
+            State = "manual-rotator-35-degrees",
+            ViewType = "NINA.View.ManualRotatorView",
+            Width = 628,
+            Height = 500
+        };
+        string first = Path.Combine(root, "manual-first.png");
+        string second = Path.Combine(root, "manual-second.png");
+
+        ScreenshotRenderer renderer = new(new FixtureRegistry());
+        Stopwatch elapsed = Stopwatch.StartNew();
+        renderer.Render(asset, first);
+        elapsed.Stop();
+        renderer.Render(asset, second);
+
+        Assert.Multiple(() => {
+            Assert.That(elapsed.Elapsed, Is.GreaterThanOrEqualTo(TimeSpan.FromMilliseconds(900)));
+            Assert.That(File.ReadAllBytes(second), Is.EqualTo(File.ReadAllBytes(first)));
+        });
+    }
+
     [TestCase("simple:set-options", 1920, 61)]
     [TestCase("simple:target-tabs", 1920, 51)]
     [TestCase("simple:target-general", 960, 149)]
@@ -106,6 +134,49 @@ public class ScreenshotRendererTests {
             Height = height,
             RenderWidth = 1920,
             RenderHeight = 1080,
+            CropTarget = cropTarget
+        };
+        string output = Path.Combine(root, $"{cropTarget.Replace(':', '-')}.png");
+
+        new ScreenshotRenderer(new FixtureRegistry()).Render(asset, output);
+
+        BitmapFrame frame = BitmapDecoder.Create(
+            new Uri(output),
+            BitmapCreateOptions.PreservePixelFormat,
+            BitmapCacheOption.OnLoad).Frames[0];
+        Assert.Multiple(() => {
+            Assert.That(frame.PixelWidth, Is.EqualTo(width));
+            Assert.That(frame.PixelHeight, Is.EqualTo(height));
+            Assert.That(new FileInfo(output).Length, Is.GreaterThan(1000));
+        });
+    }
+
+    [TestCase("tabs:equipment-connector", "NINA.View.Equipment.FocuserView", 800, 150, 1400, 900)]
+    [TestCase("tabs:options-filter-wheel", "NINA.View.Options.EquipmentView", 653, 510, 1600, 1000)]
+    [TestCase("tabs:flat-wizard-controls", "NINA.View.FlatWizardView", 406, 825, 1440, 1000)]
+    [TestCase("tabs:framing-image", "NINA.View.FramingAssistantView", 901, 892, 1920, 1080)]
+    [TestCase("tabs:sky-atlas-observation", "NINA.View.SkyAtlasView", 449, 203, 1920, 1080)]
+    [TestCase("tabs:sky-atlas-altitude", "NINA.View.SkyAtlasView", 361, 185, 1920, 1080)]
+    [TestCase("tabs:guider-settings", "NINA.View.Equipment.Guider.GuiderView", 859, 258, 1400, 900)]
+    [TestCase("tabs:imaging-toolbar", "NINA.View.OverView", 1472, 103, 1920, 1080)]
+    public void Render_CropsCurrentCompiledTabRegions(
+            string cropTarget,
+            string viewType,
+            int width,
+            int height,
+            int renderWidth,
+            int renderHeight) {
+        ScreenshotAsset asset = new() {
+            Id = $"tabs-crop-{cropTarget.Replace(':', '-')}",
+            Classification = ScreenshotClassification.NinaUi,
+            Output = $"docs/images/generated/tabs/{cropTarget.Replace(':', '-')}.png",
+            Fixture = viewType == "NINA.View.FramingAssistantView" ? "framing-assistant" : "view",
+            State = "tabs-documentation",
+            ViewType = viewType,
+            Width = width,
+            Height = height,
+            RenderWidth = renderWidth,
+            RenderHeight = renderHeight,
             CropTarget = cropTarget
         };
         string output = Path.Combine(root, $"{cropTarget.Replace(':', '-')}.png");

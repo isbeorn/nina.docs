@@ -58,6 +58,9 @@ namespace NINA.DocumentationScreenshots;
 /// This class deliberately contains no screenshot-specific visual layout.
 /// </summary>
 public sealed class DocumentationApplicationHost {
+    private static readonly System.Runtime.CompilerServices.ConditionalWeakTable<object, object> SkyAtlasSearchResults = new();
+    private static readonly object FixtureViewModelGate = new();
+    private static readonly List<WeakReference<object>> FixtureViewModels = [];
     internal static NINA.Core.Utility.ICustomDateTime FixedDateTime => DocumentationFixedDateTime.Instance;
 
     public static DocumentationApplicationHost Instance { get; } = new();
@@ -88,6 +91,9 @@ public sealed class DocumentationApplicationHost {
         mainWindowViewModelType.GetProperty("OptionsVM")!.SetValue(mainWindowViewModel, optionsViewModel);
 
         NINA.MainWindow mainWindow = new() { DataContext = mainWindowViewModel };
+        RegisterFixtureViewModel(applicationViewModel);
+        RegisterFixtureViewModel(optionsViewModel);
+        RegisterFixtureViewModel(mainWindowViewModel);
         TabControl mainTabs = (TabControl)(mainWindow.FindName("MainTabControl")
             ?? throw new CatalogException($"Screenshot '{asset.Id}' could not find MainTabControl in NINA's compiled MainWindow."));
         mainTabs.SelectedIndex = (int)applicationViewModelType.GetProperty("TabIndex")!.GetValue(applicationViewModel)!;
@@ -135,6 +141,12 @@ public sealed class DocumentationApplicationHost {
         string? viewModelTypeName = viewTypeName switch {
             "NINA.View.AnchorableAutoFocusView" => "NINA.Imaging.ViewModel.Imaging.AutoFocusToolVM",
             "NINA.View.AnchorableGuiderView" => "NINA.WPF.Base.ViewModel.Equipment.Guider.GuiderVM",
+            "NINA.View.AnchorableCameraView" => "NINA.WPF.Base.ViewModel.Equipment.Camera.CameraVM",
+            "NINA.View.AnchorableFocuserView" => "NINA.WPF.Base.ViewModel.Equipment.Focuser.FocuserVM",
+            "NINA.View.AnchorableFilterWheelView" => "NINA.WPF.Base.ViewModel.Equipment.FilterWheel.FilterWheelVM",
+            "NINA.View.AnchorableFlatDeviceView" => "NINA.WPF.Base.ViewModel.Equipment.FlatDevice.FlatDeviceVM",
+            "NINA.View.AnchorableSafetyMonitorView" => "NINA.WPF.Base.ViewModel.Equipment.SafetyMonitor.SafetyMonitorVM",
+            "NINA.View.AnchorablePlateSolveView" => "NINA.ViewModel.Imaging.AnchorablePlateSolverVM",
             "NINA.View.AnchorableImageStatisticsView" => "NINA.ViewModel.ImageStatisticsVM",
             "NINA.View.AnchorableFocusTargetsView" => "NINA.ViewModel.FocusTargetsVM",
             "NINA.View.AnchorableRotatorView" => "NINA.WPF.Base.ViewModel.Equipment.Rotator.RotatorVM",
@@ -142,6 +154,11 @@ public sealed class DocumentationApplicationHost {
             "NINA.View.AnchorableTelescopeView" => "NINA.WPF.Base.ViewModel.Equipment.Telescope.TelescopeVM",
             "NINA.View.AnchorableWeatherDataView" => "NINA.WPF.Base.ViewModel.Equipment.WeatherData.WeatherDataVM",
             "NINA.View.Equipment.CameraView" => "NINA.WPF.Base.ViewModel.Equipment.Camera.CameraVM",
+            "NINA.View.Equipment.FocuserView" => "NINA.WPF.Base.ViewModel.Equipment.Focuser.FocuserVM",
+            "NINA.View.Equipment.FilterWheelView" => "NINA.WPF.Base.ViewModel.Equipment.FilterWheel.FilterWheelVM",
+            "NINA.View.Equipment.FlatDeviceView" => "NINA.WPF.Base.ViewModel.Equipment.FlatDevice.FlatDeviceVM",
+            "NINA.View.Equipment.SafetyMonitorView" => "NINA.WPF.Base.ViewModel.Equipment.SafetyMonitor.SafetyMonitorVM",
+            "NINA.View.Equipment.PHD2SetupView" => "NINA.Equipment.Equipment.MyGuider.PHD2.PHD2Guider",
             "NINA.View.Equipment.TelescopeView" => "NINA.WPF.Base.ViewModel.Equipment.Telescope.TelescopeVM",
             "NINA.View.Equipment.WeatherDataView" => "NINA.WPF.Base.ViewModel.Equipment.WeatherData.WeatherDataVM",
             "NINA.View.Equipment.Guider.GuiderView" => "NINA.WPF.Base.ViewModel.Equipment.Guider.GuiderVM",
@@ -178,18 +195,114 @@ public sealed class DocumentationApplicationHost {
         object viewModel = viewModelTypeName switch {
             "NINA.ViewModel.EquipmentVM" => CreateEquipmentViewModel(viewModelType),
             "NINA.ViewModel.DockManagerVM" => CreateDockManagerViewModel(viewModelType, asset.Id),
-            "NINA.ViewModel.Sequencer.Sequence2VM" => CreateAdvancedSequenceViewModel(asset.Id),
+            "NINA.ViewModel.Sequencer.Sequence2VM" => CreateAdvancedSequenceViewModel(asset),
+            "NINA.WPF.Base.ViewModel.Equipment.Focuser.FocuserVM" when viewTypeName == "NINA.View.Equipment.FocuserView"
+                => CreateEquipmentDeviceViewModel(viewModelType, typeof(NINA.Equipment.Interfaces.IFocuser)),
+            "NINA.WPF.Base.ViewModel.Equipment.FilterWheel.FilterWheelVM" when viewTypeName == "NINA.View.Equipment.FilterWheelView"
+                => CreateEquipmentDeviceViewModel(viewModelType, typeof(NINA.Equipment.Interfaces.IFilterWheel)),
+            "NINA.WPF.Base.ViewModel.Equipment.FlatDevice.FlatDeviceVM" when viewTypeName == "NINA.View.Equipment.FlatDeviceView"
+                => CreateEquipmentDeviceViewModel(viewModelType, typeof(NINA.Equipment.Interfaces.IFlatDevice)),
+            "NINA.WPF.Base.ViewModel.Equipment.SafetyMonitor.SafetyMonitorVM" when viewTypeName == "NINA.View.Equipment.SafetyMonitorView"
+                => CreateEquipmentDeviceViewModel(viewModelType, typeof(NINA.Equipment.Interfaces.ISafetyMonitor)),
             "NINA.ViewModel.SimpleSequenceVM" when viewTypeName == "NINA.View.SimpleSequencer.SimpleSequenceView"
                 => CreateSimpleSequenceViewModel(viewModelType, asset),
             "NINA.ViewModel.FramingAssistant.FramingAssistantVM" => CreateFramingAssistantViewModel(viewModelType, asset),
             "NINA.ViewModel.FramingAssistant.FramingPlateSolveParameter" => CreateFramingPlateSolveParameter(),
             "NINA.Equipment.Equipment.MyRotator.ManualRotator" => CreateManualRotator(),
             "NINA.ViewModel.SkyAtlasVM" => CreateSkyAtlasViewModel(viewModelType, asset.Id),
+            "NINA.Equipment.Equipment.MyGuider.PHD2.PHD2Guider" => CreateDocumentationPhd2Guider(),
             _ => CreateWithInertServices(viewModelType)
         };
         PopulateProductionViewModel(viewModel);
         view.DataContext = viewModel;
+        RegisterFixtureViewModel(viewModel);
+        if (viewModelTypeName == "NINA.ViewModel.SkyAtlasVM") {
+            PreserveSkyAtlasSearchResultsAfterViewInitialization(view, viewModel, asset.Id);
+        }
         return view;
+    }
+
+    private static void RegisterFixtureViewModel(object viewModel) {
+        lock (FixtureViewModelGate) {
+            FixtureViewModels.Add(new WeakReference<object>(viewModel));
+        }
+    }
+
+    internal static void StopAllFixtureTimers() {
+        List<object> viewModels = [];
+        lock (FixtureViewModelGate) {
+            for (int index = FixtureViewModels.Count - 1; index >= 0; index--) {
+                if (FixtureViewModels[index].TryGetTarget(out object? viewModel)) {
+                    viewModels.Add(viewModel);
+                } else {
+                    FixtureViewModels.RemoveAt(index);
+                }
+            }
+        }
+
+        HashSet<object> inspected = new(System.Collections.Generic.ReferenceEqualityComparer.Instance);
+        foreach (object viewModel in viewModels) {
+            StopDispatcherTimers(viewModel, inspected);
+            PropertyInfo? timeContextProperty = viewModel.GetType().GetProperty(
+                "TimeContext",
+                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            if (timeContextProperty?.GetValue(viewModel) is object timeContext) {
+                StopDispatcherTimers(timeContext, inspected);
+            }
+        }
+    }
+
+    private static void StopDispatcherTimers(object instance, HashSet<object> inspected) {
+        if (!inspected.Add(instance)) {
+            return;
+        }
+        for (Type? type = instance.GetType(); type is not null; type = type.BaseType) {
+            foreach (FieldInfo field in type.GetFields(
+                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.DeclaredOnly)) {
+                if (typeof(System.Windows.Threading.DispatcherTimer).IsAssignableFrom(field.FieldType)
+                        && field.GetValue(instance) is System.Windows.Threading.DispatcherTimer timer) {
+                    timer.Stop();
+                }
+            }
+        }
+    }
+
+    private static void PreserveSkyAtlasSearchResultsAfterViewInitialization(
+            FrameworkElement view,
+            object viewModel,
+            string screenshotId) {
+        view.Loaded += (_, _) => view.Dispatcher.BeginInvoke(
+            ScreenshotRenderer.DispatcherCompletionPriority,
+            new Action(() => RestoreSkyAtlasSearchResults(viewModel, screenshotId)));
+    }
+
+    internal static void RestoreSkyAtlasSearchResults(object viewModel, string screenshotId) {
+        PropertyInfo searchResultProperty = viewModel.GetType().GetProperty("SearchResult")
+            ?? throw new CatalogException($"Screenshot '{screenshotId}' could not find SkyAtlasVM.SearchResult.");
+        if (!SkyAtlasSearchResults.TryGetValue(viewModel, out object? deterministicResults)) {
+            throw new CatalogException($"Screenshot '{screenshotId}' did not create deterministic Sky Atlas results.");
+        }
+        searchResultProperty.SetValue(viewModel, deterministicResults);
+    }
+
+    private static object CreateEquipmentDeviceViewModel(Type viewModelType, Type deviceType) {
+        object device = InertValue.Create(deviceType)
+            ?? throw new CatalogException($"Could not construct offline documentation device '{deviceType.FullName}'.");
+        Type providersType = typeof(NINA.Equipment.Interfaces.ViewModel.IEquipmentProviders<>).MakeGenericType(deviceType);
+        object providers = InertValue.Create(providersType)
+            ?? throw new CatalogException($"Could not construct offline documentation providers '{providersType.FullName}'.");
+        Type chooserType = typeof(DocumentationDeviceChooserVM<>).MakeGenericType(deviceType);
+        object chooser = Activator.CreateInstance(chooserType, GetProfileService(), device, providers)
+            ?? throw new CatalogException($"Could not construct offline documentation chooser '{chooserType.FullName}'.");
+        ConstructorInfo constructor = viewModelType.GetConstructors()
+            .OrderBy(candidate => candidate.GetParameters().Length)
+            .FirstOrDefault()
+            ?? throw new CatalogException($"Production type '{viewModelType.FullName}' has no public constructor.");
+        object?[] arguments = constructor.GetParameters().Select(parameter =>
+            parameter.ParameterType == typeof(NINA.Equipment.Interfaces.ViewModel.IDeviceChooserVM)
+                ? chooser
+                : InertValue.Create(parameter.ParameterType)).ToArray();
+        return constructor.Invoke(arguments);
     }
 
     private static NINA.WPF.Base.Model.Equipment.MyCamera.Simulator.SimulatorCamera CreateCameraSimulator(
@@ -573,17 +686,31 @@ public sealed class DocumentationApplicationHost {
         NINA.Astrometry.DeepSkyObject[] objects = [
             CreateDocumentationDeepSkyObject("M 51", "Whirlpool Galaxy", 13.497, 47.195, "GALAXY", "CVN", 8.4, 11.2, imageFactory, profile, referenceDate),
             CreateDocumentationDeepSkyObject("M 31", "Andromeda Galaxy", 0.712, 41.269, "GALAXY", "AND", 3.4, 190, imageFactory, profile, referenceDate),
-            CreateDocumentationDeepSkyObject("M 42", "Orion Nebula", 5.588, -5.391, "NEBULA", "ORI", 4.0, 85, imageFactory, profile, referenceDate)
+            CreateDocumentationDeepSkyObject("M 42", "Orion Nebula", 5.588, -5.391, "NEBULA", "ORI", 4.0, 85, imageFactory, profile, referenceDate),
+            CreateDocumentationDeepSkyObject("M 33", "Triangulum Galaxy", 1.564, 30.66, "GALAXY", "TRI", 5.7, 70, imageFactory, profile, referenceDate),
+            CreateDocumentationDeepSkyObject("M 45", "Pleiades", 3.792, 24.117, "OPENCLUSTER", "TAU", 1.6, 110, imageFactory, profile, referenceDate),
+            CreateDocumentationDeepSkyObject("NGC 7000", "North America Nebula", 20.987, 44.33, "NEBULA", "CYG", 4.0, 120, imageFactory, profile, referenceDate),
+            CreateDocumentationDeepSkyObject("M 81", "Bode's Galaxy", 9.926, 69.065, "GALAXY", "UMA", 6.9, 27, imageFactory, profile, referenceDate),
+            CreateDocumentationDeepSkyObject("M 101", "Pinwheel Galaxy", 14.053, 54.349, "GALAXY", "UMA", 7.9, 29, imageFactory, profile, referenceDate)
         ];
         NINA.Core.Model.PagedList<NINA.Astrometry.DeepSkyObject> result = new(10, objects) {
             SelectedItem = objects[0]
         };
+        SkyAtlasSearchResults.Add(viewModel, result);
         PropertyInfo nighttimeDataProperty = viewModelType.GetProperty("NighttimeData")!;
         if (!SpinWait.SpinUntil(() => nighttimeDataProperty.GetValue(viewModel) is not null, TimeSpan.FromSeconds(2))) {
             throw new CatalogException($"Screenshot '{screenshotId}' timed out waiting for Sky Atlas initialization.");
         }
         nighttimeDataProperty.SetValue(viewModel, DocumentationNighttimeCalculator.Instance.Calculate(referenceDate));
         viewModelType.GetProperty("FilterDate")!.SetValue(viewModel, referenceDate);
+        viewModelType.GetProperty("SelectedMinimumAltitudeDegrees")!.SetValue(viewModel, 40d);
+        viewModelType.GetProperty("SelectedAltitudeDuration")!.SetValue(viewModel, 5d);
+        viewModelType.GetProperty("SelectedAltitudeTimeFrom")!.SetValue(
+            viewModel,
+            new DateTime(2026, 8, 31, 22, 0, 0, DateTimeKind.Local));
+        viewModelType.GetProperty("SelectedAltitudeTimeThrough")!.SetValue(
+            viewModel,
+            new DateTime(2026, 9, 1, 3, 0, 0, DateTimeKind.Local));
         viewModelType.GetProperty("SearchResult")!.SetValue(viewModel, result);
         return viewModel;
     }
@@ -691,7 +818,7 @@ public sealed class DocumentationApplicationHost {
     private static NINA.Equipment.Equipment.MyRotator.ManualRotator CreateManualRotator() => new(GetProfileService()) {
         Connected = true,
         Position = 0,
-        TargetPosition = 40
+        TargetPosition = 35
     };
 
     private static NINA.Astrometry.DeepSkyObject CreateDocumentationDeepSkyObject(
@@ -790,21 +917,7 @@ public sealed class DocumentationApplicationHost {
                 SetNonPublicProperty(autoFocusTool, nameof(autoFocusTool.AutoFocusVM), autoFocus);
                 break;
             case NINA.WPF.Base.ViewModel.Equipment.Guider.GuiderVM guider:
-                NINA.Equipment.Equipment.MyGuider.PHD2.PHD2Guider phd2 = new(
-                    GetProfileService(),
-                    (NINA.Core.Utility.WindowService.IWindowServiceFactory)InertValue.Create(
-                        typeof(NINA.Core.Utility.WindowService.IWindowServiceFactory))!);
-                phd2.AppState = new NINA.Equipment.Equipment.MyGuider.PHD2.PhdEvents.PhdEventAppState {
-                    State = "Guiding"
-                };
-                SetNonPublicProperty(phd2, nameof(phd2.Connected), true);
-                phd2.PixelScale = 1.42;
-                NINA.Equipment.Equipment.MyGuider.PHD2.Phd2Profile documentationProfile = new() {
-                    Id = 1,
-                    Name = "Documentation Equipment"
-                };
-                phd2.AvailableProfiles.Add(documentationProfile);
-                phd2.SelectedProfile = documentationProfile;
+                NINA.Equipment.Equipment.MyGuider.PHD2.PHD2Guider phd2 = CreateDocumentationPhd2Guider();
                 SetNonPublicProperty(guider, nameof(guider.Guider), phd2);
                 guider.GuiderInfo.Connected = true;
                 guider.SettingsVisible = true;
@@ -887,6 +1000,126 @@ public sealed class DocumentationApplicationHost {
                 camera.CoolerHistoryMax = 15;
                 camera.CoolerHistoryChangeId++;
                 break;
+            case NINA.WPF.Base.ViewModel.Equipment.Focuser.FocuserVM focuser:
+                SetNonPublicProperty(focuser, nameof(focuser.Focuser),
+                    InertValue.Create(typeof(NINA.Equipment.Interfaces.IFocuser))!);
+                focuser.FocuserInfo = new NINA.Equipment.Equipment.MyFocuser.FocuserInfo {
+                    Connected = true,
+                    Name = "N.I.N.A. Focuser Simulator",
+                    Description = "Deterministic absolute focuser",
+                    DriverInfo = "NINA documentation fixture",
+                    DriverVersion = "3.0",
+                    Position = 28450,
+                    StepSize = 1,
+                    Temperature = 5.6,
+                    IsMoving = false,
+                    IsSettling = false,
+                    TempComp = false,
+                    TempCompAvailable = true
+                };
+                focuser.TargetPosition = 28450;
+                break;
+            case NINA.WPF.Base.ViewModel.Equipment.FilterWheel.FilterWheelVM filterWheel:
+                SetNonPublicProperty(filterWheel, nameof(filterWheel.FW),
+                    InertValue.Create(typeof(NINA.Equipment.Interfaces.IFilterWheel))!);
+                NINA.Core.Model.Equipment.FilterInfo selectedFilter =
+                    GetActiveProfile().FilterWheelSettings.FilterWheelFilters.First();
+                filterWheel.FilterWheelInfo = new NINA.Equipment.Equipment.MyFilterWheel.FilterWheelInfo {
+                    Connected = true,
+                    Name = "N.I.N.A. Filter Wheel Simulator",
+                    Description = "Deterministic seven-position filter wheel",
+                    DriverInfo = "NINA documentation fixture",
+                    DriverVersion = "3.0",
+                    SelectedFilter = selectedFilter,
+                    IsMoving = false
+                };
+                filterWheel.TargetFilter = selectedFilter;
+                break;
+            case NINA.WPF.Base.ViewModel.Equipment.FlatDevice.FlatDeviceVM flatDevice:
+                SetNonPublicProperty(flatDevice, nameof(flatDevice.FlatDevice),
+                    InertValue.Create(typeof(NINA.Equipment.Interfaces.IFlatDevice))!);
+                flatDevice.FlatDeviceInfo = new NINA.Equipment.Equipment.MyFlatDevice.FlatDeviceInfo {
+                    Connected = true,
+                    Name = "N.I.N.A. Flat Panel Simulator",
+                    Description = "Deterministic motorized flat panel",
+                    DriverInfo = "NINA documentation fixture",
+                    DriverVersion = "3.0",
+                    SupportsOpenClose = true,
+                    SupportsOnOff = true,
+                    MinBrightness = 0,
+                    MaxBrightness = 255,
+                    Brightness = 80,
+                    CoverState = NINA.Equipment.Interfaces.CoverState.Closed,
+                    LightOn = true
+                };
+                NINA.Profile.Interfaces.IFlatDeviceSettings flatSettings = GetActiveProfile().FlatDeviceSettings;
+                if (flatSettings.TrainedFlatExposureSettings.Count == 0) {
+                    flatSettings.AddTrainedFlatExposureSetting(
+                        0,
+                        new NINA.Core.Model.Equipment.BinningMode(1, 1),
+                        50,
+                        25,
+                        80,
+                        1.2);
+                    flatSettings.AddTrainedFlatExposureSetting(
+                        4,
+                        new NINA.Core.Model.Equipment.BinningMode(1, 1),
+                        100,
+                        25,
+                        125,
+                        4.5);
+                }
+                break;
+            case NINA.WPF.Base.ViewModel.Equipment.SafetyMonitor.SafetyMonitorVM safetyMonitor:
+                SetNonPublicProperty(safetyMonitor, nameof(safetyMonitor.SafetyMonitor),
+                    InertValue.Create(typeof(NINA.Equipment.Interfaces.ISafetyMonitor))!);
+                safetyMonitor.SafetyMonitorInfo = new NINA.Equipment.Equipment.MySafetyMonitor.SafetyMonitorInfo {
+                    Connected = true,
+                    Name = "N.I.N.A. Safety Monitor Simulator",
+                    Description = "Deterministic safe observing conditions",
+                    DriverInfo = "NINA documentation fixture",
+                    DriverVersion = "3.0",
+                    IsSafe = true
+                };
+                break;
+            case NINA.WPF.Base.Interfaces.ViewModel.IAnchorablePlateSolverVM plateSolver:
+                NINA.Equipment.Equipment.MyCamera.CameraInfo plateCamera = CreateDocumentationCameraInfo();
+                plateCamera.BinningModes = new NINA.Core.Utility.AsyncObservableCollection<NINA.Core.Model.Equipment.BinningMode>([
+                    new NINA.Core.Model.Equipment.BinningMode(1, 1),
+                    new NINA.Core.Model.Equipment.BinningMode(2, 2)
+                ]);
+                plateSolver.UpdateDeviceInfo(plateCamera);
+                plateSolver.UpdateDeviceInfo(new NINA.Equipment.Equipment.MyTelescope.TelescopeInfo {
+                    Connected = true,
+                    Name = "N.I.N.A. Simulator Telescope",
+                    RightAscension = 0.712,
+                    Declination = 41.269
+                });
+                plateSolver.SnapExposureDuration = 2;
+                plateSolver.SnapBin = plateCamera.BinningModes.First();
+                plateSolver.SnapFilter = GetActiveProfile().FilterWheelSettings.FilterWheelFilters.First();
+                plateSolver.SnapGain = 50;
+                plateSolver.RepeatThreshold = 1;
+                plateSolver.Sync = true;
+                plateSolver.SlewToTarget = true;
+                plateSolver.PlateSolveResult = new NINA.PlateSolving.PlateSolveResult(
+                    new DateTime(2026, 8, 31, 22, 15, 0, DateTimeKind.Local)) {
+                    Success = true,
+                    Coordinates = new NINA.Astrometry.Coordinates(
+                        NINA.Astrometry.Angle.ByHours(0.712),
+                        NINA.Astrometry.Angle.ByDegree(41.269),
+                        NINA.Astrometry.Epoch.J2000),
+                    Pixscale = 1.29,
+                    PositionAngle = 30,
+                    Radius = 1.5,
+                    Separation = new NINA.Astrometry.Separation {
+                        RA = NINA.Astrometry.Angle.ByDegree(0.01),
+                        Dec = NINA.Astrometry.Angle.ByDegree(0.01),
+                        Distance = NINA.Astrometry.Angle.ByDegree(0.02),
+                        Bearing = NINA.Astrometry.Angle.ByDegree(45)
+                    }
+                };
+                break;
             case NINA.WPF.Base.ViewModel.Equipment.Dome.DomeVM dome:
                 SetNonPublicProperty(dome, nameof(dome.Dome),
                     InertValue.Create(typeof(NINA.Equipment.Interfaces.IDome))!);
@@ -951,6 +1184,16 @@ public sealed class DocumentationApplicationHost {
                 telescopeInfo.Azimuth = 180;
                 telescopeInfo.RightAscension = 2.065;
                 telescopeInfo.Declination = -1.6386;
+                telescopeInfo.Coordinates = new NINA.Astrometry.Coordinates(
+                    NINA.Astrometry.Angle.ByHours(telescopeInfo.RightAscension),
+                    NINA.Astrometry.Angle.ByDegree(telescopeInfo.Declination),
+                    NINA.Astrometry.Epoch.J2000);
+                telescopeInfo.RightAscensionString = NINA.Astrometry.AstroUtil.HoursToHMS(telescopeInfo.RightAscension);
+                telescopeInfo.DeclinationString = NINA.Astrometry.AstroUtil.DegreesToDMS(telescopeInfo.Declination);
+                telescopeInfo.AltitudeString = NINA.Astrometry.AstroUtil.DegreesToDMS(telescopeInfo.Altitude);
+                telescopeInfo.AzimuthString = NINA.Astrometry.AstroUtil.DegreesToDMS(telescopeInfo.Azimuth);
+                telescopeInfo.SiderealTimeString = NINA.Astrometry.AstroUtil.HoursToHMS(3.315);
+                telescopeInfo.HoursToMeridianString = NINA.Astrometry.AstroUtil.HoursToHMS(1.25);
                 telescopeInfo.TrackingEnabled = true;
                 telescopeInfo.SiteLatitude = 52.52;
                 telescopeInfo.SiteLongitude = 13.405;
@@ -1011,6 +1254,7 @@ public sealed class DocumentationApplicationHost {
                     WritableSwitches = new System.Collections.ObjectModel.ReadOnlyCollection<NINA.Equipment.Interfaces.IWritableSwitch>(switches.WritableSwitches),
                     ReadonlySwitches = new System.Collections.ObjectModel.ReadOnlyCollection<NINA.Equipment.Interfaces.ISwitch>(switches.ReadonlySwitches)
                 };
+                switches.SelectedWritableSwitch = switches.WritableSwitches.First();
                 break;
             case NINA.ViewModel.Interfaces.IFlatWizardVM flatWizard:
                 flatWizard.UpdateDeviceInfo(CreateDocumentationCameraInfo());
@@ -1052,6 +1296,25 @@ public sealed class DocumentationApplicationHost {
                 SetProperty(viewModel, "ActiveFlatInstruction", activeInstruction);
                 break;
         }
+    }
+
+    private static NINA.Equipment.Equipment.MyGuider.PHD2.PHD2Guider CreateDocumentationPhd2Guider() {
+        NINA.Equipment.Equipment.MyGuider.PHD2.PHD2Guider phd2 = new(
+            GetProfileService(),
+            (NINA.Core.Utility.WindowService.IWindowServiceFactory)InertValue.Create(
+                typeof(NINA.Core.Utility.WindowService.IWindowServiceFactory))!);
+        phd2.AppState = new NINA.Equipment.Equipment.MyGuider.PHD2.PhdEvents.PhdEventAppState {
+            State = "Guiding"
+        };
+        SetNonPublicProperty(phd2, nameof(phd2.Connected), true);
+        phd2.PixelScale = 1.42;
+        NINA.Equipment.Equipment.MyGuider.PHD2.Phd2Profile documentationProfile = new() {
+            Id = 1,
+            Name = "Documentation Equipment"
+        };
+        phd2.AvailableProfiles.Add(documentationProfile);
+        phd2.SelectedProfile = documentationProfile;
+        return phd2;
     }
 
     private static NINA.Equipment.Equipment.MyCamera.CameraInfo CreateDocumentationCameraInfo() => new() {
@@ -1332,6 +1595,19 @@ public sealed class DocumentationApplicationHost {
             profileService.ActiveProfile.ImageFileSettings.FilePath = imagePath;
         }
         return new AdvancedSequencerView { DataContext = viewModel };
+    }
+
+    private ISequence2VM CreateAdvancedSequenceViewModel(ScreenshotAsset asset) {
+        ISequence2VM viewModel = CreateAdvancedSequenceViewModel(asset.Id);
+        IProfileService profileService = GetProfileService();
+        string imagePath = profileService.ActiveProfile.ImageFileSettings.FilePath;
+        try {
+            profileService.ActiveProfile.ImageFileSettings.FilePath = Path.GetTempPath();
+            SequencerFixtureState.Apply(viewModel, asset, GetSymbolBroker());
+        } finally {
+            profileService.ActiveProfile.ImageFileSettings.FilePath = imagePath;
+        }
+        return viewModel;
     }
 
     private ISequence2VM CreateAdvancedSequenceViewModel(string screenshotId) {
@@ -1782,6 +2058,7 @@ public sealed class DocumentationApplicationHost {
                 "CanSetOffset" => true,
                 "CanSetUSBLimit" => true,
                 "Name" => "N.I.N.A. Documentation Simulator",
+                "DisplayName" => "N.I.N.A. Documentation Simulator",
                 "Description" => "Deterministic offline documentation device",
                 "DriverInfo" => "NINA documentation fixture",
                 "DriverVersion" => "3.0",
@@ -1792,6 +2069,17 @@ public sealed class DocumentationApplicationHost {
                 "ExposureMax" => 3600d,
                 "MaxBinX" => 4,
                 "MaxBinY" => 4,
+                "MaxIncrement" => 50000,
+                "MaxStep" => 50000,
+                "Filters" when declaringType.Contains("FilterWheel", StringComparison.OrdinalIgnoreCase) =>
+                    new NINA.Core.Utility.AsyncObservableCollection<NINA.Core.Model.Equipment.FilterInfo>(
+                        GetActiveProfile().FilterWheelSettings.FilterWheelFilters),
+                "Switches" when declaringType.Contains("SwitchHub", StringComparison.OrdinalIgnoreCase) =>
+                    new List<NINA.Equipment.Interfaces.ISwitch> {
+                        new DocumentationReadOnlySwitch(0, "Power", "Main observatory power", 1),
+                        new DocumentationReadOnlySwitch(1, "Switch 1", "Auxiliary relay", 1),
+                        new DocumentationReadOnlySwitch(2, "Switch 2", "Camera relay", 1)
+                    },
                 "PixelSizeX" => 3.76d,
                 "PixelSizeY" => 3.76d,
                 "Gain" => 50,
@@ -2028,7 +2316,7 @@ public sealed class DocumentationApplicationHost {
                 Longitude = longitude,
                 Elevation = elevation
             };
-            return new NINA.Astrometry.NighttimeData(
+            NINA.Astrometry.NighttimeData nighttimeData = new(
                 date,
                 referenceDate,
                 NINA.Astrometry.AstroUtil.GetMoonPhase(referenceDate, observer),
@@ -2038,6 +2326,8 @@ public sealed class DocumentationApplicationHost {
                 NINA.Astrometry.AstroUtil.GetSunRiseAndSet(referenceDate, latitude, longitude, elevation),
                 NINA.Astrometry.AstroUtil.GetMoonRiseAndSet(referenceDate, latitude, longitude, elevation),
                 NINA.Astrometry.AstroUtil.GetCivilNightTimes(referenceDate, latitude, longitude, elevation));
+            nighttimeData.Ticker.Stop();
+            return nighttimeData;
         }
     }
 

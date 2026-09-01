@@ -27,7 +27,7 @@ Rotate the camera and close the manual rotator window, and a new plate solve wil
 
 ![TargetSettings](../../images/tabs/targetsettings.png)
 
-![ManualRotator](../../images/tabs/manualrotator.PNG)
+![ManualRotator](../../images/generated/tabs/manualrotator.png)
 
 !!! tip
      If you want to set camera rotation before starting the main imaging sequence, you can use a dummy sequence with a 1s exposure to start the manual rotator.

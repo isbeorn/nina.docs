@@ -134,7 +134,15 @@ public static class CatalogValidator {
             and not "simple:target-options"
             and not "simple:autofocus"
             and not "simple:imaging-details"
-            and not "simple:transform-button") {
+            and not "simple:transform-button"
+            and not "tabs:equipment-connector"
+            and not "tabs:options-filter-wheel"
+            and not "tabs:flat-wizard-controls"
+            and not "tabs:framing-image"
+            and not "tabs:sky-atlas-observation"
+            and not "tabs:sky-atlas-altitude"
+            and not "tabs:guider-settings"
+            and not "tabs:imaging-toolbar") {
             throw new CatalogException($"Screenshot '{asset.Id}' has unknown crop target '{asset.CropTarget}'.");
         }
         bool sequencerCrop = asset.CropTarget is "target-area:first-item"
@@ -163,6 +171,12 @@ public static class CatalogValidator {
             && (!string.Equals(asset.Fixture, "view", StringComparison.OrdinalIgnoreCase)
                 || asset.ViewType != "NINA.View.SimpleSequencer.SimpleSequenceView")) {
             throw new CatalogException($"Screenshot '{asset.Id}' uses a Legacy Sequencer crop target with fixture '{asset.Fixture}'.");
+        }
+        if (asset.CropTarget.StartsWith("tabs:", StringComparison.Ordinal)
+            && !string.Equals(asset.Fixture, "view", StringComparison.OrdinalIgnoreCase)
+            && !(asset.CropTarget == "tabs:framing-image"
+                && string.Equals(asset.Fixture, "framing-assistant", StringComparison.OrdinalIgnoreCase))) {
+            throw new CatalogException($"Screenshot '{asset.Id}' uses a tabs crop target with fixture '{asset.Fixture}'.");
         }
     }
 

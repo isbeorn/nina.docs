@@ -52,6 +52,7 @@ public static class NamedStateController {
         PinAltitudeChartNowMarkers(fixture);
         ApplyAdvancedSequencerDragState(fixture, output, asset.Id);
         ApplySimpleSequencerState(fixture, asset);
+        ApplyTabsState(fixture, asset);
 
         if (output.EndsWith("/sequencer/trigger/customtrigger.png", StringComparison.Ordinal)) {
             Expander trigger = FindDescendants<Expander>(fixture)
@@ -105,6 +106,97 @@ public static class NamedStateController {
                 ?? throw new CatalogException($"Screenshot '{asset.Id}' could not find the production image-source selector.");
             PrepareProductionComboBox(source, asset.Id, "image-source");
         }
+    }
+
+    private static void ApplyTabsState(FrameworkElement fixture, ScreenshotAsset asset) {
+        if (fixture.DataContext?.GetType().FullName == "NINA.ViewModel.SkyAtlasVM") {
+            fixture.Dispatcher.Invoke(ScreenshotRenderer.DispatcherCompletionPriority, new Action(() => { }));
+            DocumentationApplicationHost.RestoreSkyAtlasSearchResults(fixture.DataContext, asset.Id);
+            fixture.Dispatcher.Invoke(DispatcherPriority.Render, new Action(() => { }));
+            fixture.UpdateLayout();
+        }
+        if (asset.State == "imaging-camera-controls") {
+            HashSet<string> headers = [Loc.Instance["LblCooling"], Loc.Instance["LblWarming"]];
+            List<Expander> controls = FindDescendants<Expander>(fixture)
+                .Where(expander => expander.Header is string header && headers.Contains(header))
+                .ToList();
+            if (controls.Count != 2) {
+                throw new CatalogException(
+                    $"Screenshot '{asset.Id}' expected NINA's production cooling and warming controls but found {controls.Count}.");
+            }
+            foreach (Expander control in controls) {
+                control.IsExpanded = true;
+            }
+            fixture.UpdateLayout();
+            return;
+        }
+        if (asset.CropTarget == "tabs:sky-atlas-observation" || asset.State == "sky-atlas-full") {
+            object viewModel = fixture.DataContext
+                ?? throw new CatalogException($"Screenshot '{asset.Id}' has no Sky Atlas view model.");
+            Type viewModelType = viewModel.GetType();
+            viewModelType.GetProperty("SelectedMinimumAltitudeDegrees")!.SetValue(viewModel, 40d);
+            viewModelType.GetProperty("SelectedAltitudeDuration")!.SetValue(viewModel, 5d);
+            viewModelType.GetProperty("SelectedAltitudeTimeFrom")!.SetValue(
+                viewModel,
+                new DateTime(2026, 8, 31, 22, 0, 0, DateTimeKind.Local));
+            viewModelType.GetProperty("SelectedAltitudeTimeThrough")!.SetValue(
+                viewModel,
+                new DateTime(2026, 9, 1, 3, 0, 0, DateTimeKind.Local));
+            fixture.Dispatcher.Invoke(ScreenshotRenderer.DispatcherCompletionPriority, new Action(() => { }));
+            fixture.UpdateLayout();
+            if (asset.CropTarget == "tabs:sky-atlas-observation") {
+                return;
+            }
+        }
+        if (asset.CropTarget == "tabs:sky-atlas-altitude") {
+            DataGrid results = PrepareSkyAtlasResultsGrid(fixture, asset.Id);
+            DataGridColumn altitude = results.Columns.FirstOrDefault(column =>
+                Equals(column.Header, Loc.Instance["LblAltitude"]))
+                ?? throw new CatalogException($"Screenshot '{asset.Id}' could not find the production Sky Atlas altitude column.");
+            results.ScrollIntoView(results.Items[0], altitude);
+            results.UpdateLayout();
+            fixture.Dispatcher.Invoke(ScreenshotRenderer.DispatcherCompletionPriority, new Action(() => { }));
+            fixture.UpdateLayout();
+            return;
+        }
+        if (asset.CropTarget != "tabs:flat-wizard-controls") {
+            return;
+        }
+        TabControl settings = FindDescendants<TabControl>(fixture)
+            .FirstOrDefault(control => control.Name == "SettingsHost")
+            ?? throw new CatalogException($"Screenshot '{asset.Id}' could not find the production Flat Wizard settings tabs.");
+        settings.SelectedIndex = 1;
+        settings.UpdateLayout();
+        fixture.Dispatcher.Invoke(ScreenshotRenderer.DispatcherCompletionPriority, new Action(() => { }));
+        Expander firstFilter = FindDescendants<Expander>(settings)
+            .FirstOrDefault(expander => expander.IsVisible)
+            ?? throw new CatalogException($"Screenshot '{asset.Id}' could not find a production Flat Wizard filter row.");
+        firstFilter.IsExpanded = true;
+        PropertyInfo? checkedProperty = firstFilter.DataContext?.GetType().GetProperty("IsChecked");
+        if (checkedProperty?.CanWrite == true) {
+            checkedProperty.SetValue(firstFilter.DataContext, true);
+        }
+        fixture.UpdateLayout();
+    }
+
+    private static DataGrid PrepareSkyAtlasResultsGrid(FrameworkElement fixture, string screenshotId) {
+        DataGrid results = FindDescendants<DataGrid>(fixture)
+            .FirstOrDefault(grid => grid.Columns.Count > 0)
+            ?? throw new CatalogException($"Screenshot '{screenshotId}' could not find the production Sky Atlas results grid.");
+        if (results.Items.Count == 0) {
+            object page = results.DataContext?.GetType().GetProperty("ItemPage")?.GetValue(results.DataContext)
+                ?? throw new CatalogException($"Screenshot '{screenshotId}' could not read the production Sky Atlas result page.");
+            if (page is not System.Collections.IEnumerable items) {
+                throw new CatalogException($"Screenshot '{screenshotId}' received an invalid Sky Atlas result page.");
+            }
+            System.Windows.Data.BindingOperations.ClearBinding(results, ItemsControl.ItemsSourceProperty);
+            results.ItemsSource = items;
+            fixture.UpdateLayout();
+        }
+        if (results.Items.Count == 0) {
+            throw new CatalogException($"Screenshot '{screenshotId}' received an empty production Sky Atlas result page.");
+        }
+        return results;
     }
 
     private static void ApplySimpleSequencerState(FrameworkElement fixture, ScreenshotAsset asset) {
@@ -218,7 +310,7 @@ public static class NamedStateController {
         tooltip.Placement = System.Windows.Controls.Primitives.PlacementMode.Bottom;
         tooltip.IsOpen = true;
         tooltip.UpdateLayout();
-        anchor.Dispatcher.Invoke(DispatcherPriority.ApplicationIdle, new Action(() => { }));
+        anchor.Dispatcher.Invoke(ScreenshotRenderer.DispatcherCompletionPriority, new Action(() => { }));
         if (!tooltip.IsOpen) {
             throw new CatalogException($"Screenshot '{screenshotId}' opened NINA's production {description} tooltip but WPF closed it before capture.");
         }
@@ -484,10 +576,10 @@ public static class NamedStateController {
             .Where(element => element.ToolTip is ToolTip { IsOpen: true })) {
             ((ToolTip)element.ToolTip).IsOpen = false;
         }
-        fixture.Dispatcher.Invoke(DispatcherPriority.ApplicationIdle, new Action(() => { }));
+        fixture.Dispatcher.Invoke(ScreenshotRenderer.DispatcherCompletionPriority, new Action(() => { }));
         for (int attempt = 0; attempt < 10 && EnumeratePopupSources().Any(); attempt++) {
             Thread.Sleep(25);
-            fixture.Dispatcher.Invoke(DispatcherPriority.ApplicationIdle, new Action(() => { }));
+            fixture.Dispatcher.Invoke(ScreenshotRenderer.DispatcherCompletionPriority, new Action(() => { }));
         }
     }
 
@@ -531,7 +623,7 @@ public static class NamedStateController {
         for (int attempt = 0; attempt < 3 && button.ContextMenu?.IsOpen != true; attempt++) {
             button.ContextMenu!.IsOpen = true;
             button.ContextMenu.UpdateLayout();
-            button.Dispatcher.Invoke(DispatcherPriority.ApplicationIdle, new Action(() => { }));
+            button.Dispatcher.Invoke(ScreenshotRenderer.DispatcherCompletionPriority, new Action(() => { }));
         }
         if (button.ContextMenu.IsOpen != true) {
             throw new CatalogException($"Screenshot '{screenshotId}' invoked NINA's production '{buttonName}' button but its menu did not open.");
@@ -551,7 +643,7 @@ public static class NamedStateController {
         tooltip.Placement = System.Windows.Controls.Primitives.PlacementMode.Bottom;
         tooltip.IsOpen = true;
         tooltip.UpdateLayout();
-        fixture.Dispatcher.Invoke(DispatcherPriority.ApplicationIdle, new Action(() => { }));
+        fixture.Dispatcher.Invoke(ScreenshotRenderer.DispatcherCompletionPriority, new Action(() => { }));
         if (!tooltip.IsOpen) {
             throw new CatalogException($"Screenshot '{screenshotId}' opened NINA's production save-target tooltip but WPF closed it before capture.");
         }
@@ -573,7 +665,7 @@ public static class NamedStateController {
         tooltip.Placement = System.Windows.Controls.Primitives.PlacementMode.Right;
         tooltip.IsOpen = true;
         tooltip.UpdateLayout();
-        fixture.Dispatcher.Invoke(DispatcherPriority.ApplicationIdle, new Action(() => { }));
+        fixture.Dispatcher.Invoke(ScreenshotRenderer.DispatcherCompletionPriority, new Action(() => { }));
         if (!tooltip.IsOpen) {
             throw new CatalogException($"Screenshot '{screenshotId}' opened NINA's production validation tooltip but WPF closed it before capture.");
         }
@@ -585,7 +677,7 @@ public static class NamedStateController {
             throw new CatalogException($"Screenshot '{screenshotId}' could not invoke NINA's production '{button.Name}' button through UI Automation.");
         }
         invoke.Invoke();
-        button.Dispatcher.Invoke(DispatcherPriority.ApplicationIdle, new Action(() => { }));
+        button.Dispatcher.Invoke(ScreenshotRenderer.DispatcherCompletionPriority, new Action(() => { }));
     }
 
     private static void Expand(MenuItem item, string screenshotId, string menuName) {
@@ -593,7 +685,7 @@ public static class NamedStateController {
             if (ItemsControl.ItemsControlFromItemContainer(item) is ContextMenu contextMenu && !contextMenu.IsOpen) {
                 contextMenu.IsOpen = true;
                 contextMenu.UpdateLayout();
-                item.Dispatcher.Invoke(DispatcherPriority.ApplicationIdle, new Action(() => { }));
+                item.Dispatcher.Invoke(ScreenshotRenderer.DispatcherCompletionPriority, new Action(() => { }));
             }
             item.BringIntoView();
             MenuItemAutomationPeer peer = new(item);
@@ -602,7 +694,7 @@ public static class NamedStateController {
             }
             item.IsSubmenuOpen = true;
             item.UpdateLayout();
-            item.Dispatcher.Invoke(DispatcherPriority.ApplicationIdle, new Action(() => { }));
+            item.Dispatcher.Invoke(ScreenshotRenderer.DispatcherCompletionPriority, new Action(() => { }));
             if (!item.IsSubmenuOpen) {
                 Thread.Sleep(25);
             }
@@ -642,7 +734,7 @@ public static class NamedStateController {
         }
         sidebar.SelectedItem = tab;
         sidebar.UpdateLayout();
-        fixture.Dispatcher.Invoke(DispatcherPriority.ApplicationIdle, new Action(() => { }));
+        fixture.Dispatcher.Invoke(ScreenshotRenderer.DispatcherCompletionPriority, new Action(() => { }));
         fixture.UpdateLayout();
 
         if (output.EndsWith("/sequencer/sequencer_usertemplate.png", StringComparison.Ordinal)) {
@@ -652,7 +744,7 @@ public static class NamedStateController {
                 ?? throw new CatalogException($"Screenshot '{screenshotId}' could not find NINA's production RGB Loop template preview.");
             template.IsExpanded = true;
             template.UpdateLayout();
-            fixture.Dispatcher.Invoke(DispatcherPriority.ApplicationIdle, new Action(() => { }));
+            fixture.Dispatcher.Invoke(ScreenshotRenderer.DispatcherCompletionPriority, new Action(() => { }));
             fixture.UpdateLayout();
         }
     }

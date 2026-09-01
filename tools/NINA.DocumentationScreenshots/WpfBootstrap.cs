@@ -78,6 +78,22 @@ public static class WpfBootstrap {
         profile.AstrometrySettings.Latitude = DocumentationAstronomy.Latitude;
         profile.AstrometrySettings.Longitude = DocumentationAstronomy.Longitude;
         profile.AstrometrySettings.Elevation = DocumentationAstronomy.Elevation;
+        profile.AstrometrySettings.Horizon = NINA.Core.Model.CustomHorizon.FromReader_Standard(
+            new StringReader("""
+                0 15
+                30 25
+                60 40
+                90 35
+                120 15
+                150 8
+                180 10
+                210 30
+                240 45
+                270 40
+                300 20
+                330 12
+                360 15
+                """));
         profile.ColorSchemaSettings.ColorSchema = profile.ColorSchemaSettings.ColorSchemas.Items
             .Single(schema => string.Equals(schema.Name, "Slate", StringComparison.Ordinal));
         FilterInfo[] filters = [

@@ -84,7 +84,7 @@ This mode will switch the operational behavior for the flat wizard for different
 
 ## Multi Mode
 
-![The Flatwizard multi mode menu](../images/tabs/flatwizard2.png)
+![The Flatwizard multi mode menu](../images/generated/tabs/flatwizard2.png)
 
 In essence, Multi Mode works just like Single Mode, but for multiple filters. The majority of controls are identical to [Single Mode](flatwizard.md#single-mode).
 

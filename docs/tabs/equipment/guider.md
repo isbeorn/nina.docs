@@ -44,7 +44,7 @@ PHD server port. Usually the default 4400 works fine. If you are using multiple 
 Use this when you run more than one PHD2 instance on the same machine.
 
 ## PHD2 Settings
-![Guider](../../images/tabs/guider_phdsettings.png)
+![Guider](../../images/generated/tabs/guider_phdsettings.png)
 
 ### Dither Pixels and Dither RA Only
 The amount of guide camera pixels to dither in PHD2. If "Dither RA only" is checked, the dither movements will only be performed in RA. 

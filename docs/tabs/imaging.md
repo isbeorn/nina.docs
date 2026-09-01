@@ -9,7 +9,7 @@ Depending on your connected equipment and the panels you enable, the Imaging wor
 
 The top bar is divided in two main sections: **Info** and **Tools**  
 
-![topbarmenu](../images/tabs/Imaging_menu.PNG)  
+![topbarmenu](../images/generated/tabs/Imaging_menu.png)
 
 ## Info  
 These windows provide important status information about captured images and connected equipment  
@@ -39,18 +39,18 @@ This panel displays the main camera and sensor properties and cooling status
 2. Camera cooling properties
 3. Camera warming 
    
-![cameratab](../images/tabs/cameratab.png)
+![cameratab](../images/generated/tabs/cameratab.png)
 
 ### Filter Wheel ![fwicon](../images/generated/tabs/imaging_fwicon.PNG)
 When a Filter Wheel is connected, this panel displays the current filter (1) and lets you manually switch filters by selecting them with the drop-down menu (2)
 
-![image](../images/tabs/imaging_filterwheel.PNG)
+![image](../images/generated/tabs/imaging_filterwheel.png)
 
 ### Focuser ![focusericon](../images/generated/tabs/imaging_focusericon.PNG)
 This panel displays the focuser status and lets you manually move it to the desired position
 > Requires a connected focuser
 
-![focuser](../images/tabs/imaging_focuser.png)
+![focuser](../images/generated/tabs/imaging_focuser.png)
 
 1. Focuser current status (Moving or Settling)
 2. Focuser current position (for absolute stepper motor focusers)
@@ -80,7 +80,7 @@ Here you can control the Rotator
 The telescope panel provides all important information about your telescope like tracking status, sidereal time, time to meridian passing and current telescope coordinates.
 > Requires a connected ASCOM telescope
 
-![telescope](../images/tabs/imaging_telescope.PNG)
+![telescope](../images/generated/tabs/imaging_telescope.png)
 
 ### Guiding ![guideicon](../images/generated/tabs/imaging_guideicon.PNG)
 The guider panel shows the current guider state, RMS values, and a live guide graph when the connected guider provides guide telemetry.
@@ -98,13 +98,13 @@ The guider panel shows the current guider state, RMS values, and a live guide gr
 ### Sequence ![sequenceicon](../images/generated/tabs/imaging_sequenceicon.PNG)
 The sequence panel follows the currently active sequencer and gives you quick access to the running sequence from the Imaging workspace. Depending on your current mode, it can show the legacy/simple sequencer, the advanced sequencer, or a navigation placeholder until a sequencer is active. To learn how to set up a sequence refer to the [Sequence](sequencer.md) section.
 
-![sequence1](../images/tabs/imaging_sequence.png)
+![sequence1](../images/generated/tabs/imaging_sequence.png)
 
 ### Switches ![switchesicon](../images/generated/tabs/imaging_switchesicon.PNG)
 This panel will let you control the active switches
 > Requires connected switches
 
-![switches](../images/tabs/imaging_switches.png)
+![switches](../images/generated/tabs/imaging_switches.png)
 
 1. Available switches and status
 2. Manually select switch
@@ -190,7 +190,7 @@ Plate solving is a very important step in the imaging process. For further infor
 > * Camera pixel size is defined in Options [Equipment](options/equipment.md)
 > * The image to be plate solved has been captured with the specified focal length and pixel size
 
-![platesolve](../images/tabs/imaging_platesolve.png)
+![platesolve](../images/generated/tabs/imaging_platesolve.png)
 
 1. Plate solving results
 2. Toggles ON/OFF syncing the telescope mount with the plate solved coordinates 

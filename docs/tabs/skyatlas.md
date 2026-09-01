@@ -2,7 +2,7 @@ The Sky Atlas lets you search N.I.N.A.'s deep sky object database and narrow the
 
 The Sky Atlas interface consists of the following main areas:
 
-![The SkyAtlas tab](../images/tabs/skyAtlas1.png)
+![The SkyAtlas tab](../images/generated/tabs/skyAtlas1.png)
 
 ### Search Field
 
@@ -18,7 +18,7 @@ The filter panel on the left groups the available search filters into expandable
 
 #### Observation
 
-![The SkyAtlas tab](../images/tabs/SkyAtlas_Altitude_Filter.png)  
+![The SkyAtlas tab](../images/generated/tabs/SkyAtlas_Altitude_Filter.png)
 
 Use the observation section to filter by:
 

@@ -874,7 +874,7 @@ public class FixtureRegistryTests {
         ScreenshotAsset asset = new() {
             Id = "sky-atlas",
             Classification = ScreenshotClassification.NinaUi,
-            Output = "docs/images/tabs/skyAtlas1.png",
+            Output = "docs/images/generated/tabs/skyAtlas1.png",
             Fixture = "view",
             State = "sky-atlas",
             ViewType = "NINA.View.SkyAtlasView",
@@ -889,7 +889,7 @@ public class FixtureRegistryTests {
         Assert.Multiple(() => {
             Assert.That(fixture, Is.TypeOf<NINA.View.SkyAtlasView>());
             Assert.That(viewModel.GetType().FullName, Is.EqualTo("NINA.ViewModel.SkyAtlasVM"));
-            Assert.That(searchResult.GetType().GetProperty("Count")!.GetValue(searchResult), Is.EqualTo(3));
+            Assert.That(searchResult.GetType().GetProperty("Count")!.GetValue(searchResult), Is.EqualTo(8));
             object selectedItem = searchResult.GetType().GetProperty("SelectedItem")!.GetValue(searchResult)!;
             Assert.That(selectedItem.GetType().GetProperty("Name")!.GetValue(selectedItem), Is.EqualTo("Whirlpool Galaxy"));
         });
@@ -1042,6 +1042,12 @@ public class FixtureRegistryTests {
     [TestCase("NINA.View.AnchorableImageHistoryView", "NINA.ViewModel.ImageHistory.ImageHistoryVM")]
     [TestCase("NINA.View.AnchorableAutoFocusView", "NINA.Imaging.ViewModel.Imaging.AutoFocusToolVM")]
     [TestCase("NINA.View.AnchorableGuiderView", "NINA.WPF.Base.ViewModel.Equipment.Guider.GuiderVM")]
+    [TestCase("NINA.View.AnchorableCameraView", "NINA.WPF.Base.ViewModel.Equipment.Camera.CameraVM")]
+    [TestCase("NINA.View.AnchorableFocuserView", "NINA.WPF.Base.ViewModel.Equipment.Focuser.FocuserVM")]
+    [TestCase("NINA.View.AnchorableFilterWheelView", "NINA.WPF.Base.ViewModel.Equipment.FilterWheel.FilterWheelVM")]
+    [TestCase("NINA.View.AnchorableFlatDeviceView", "NINA.WPF.Base.ViewModel.Equipment.FlatDevice.FlatDeviceVM")]
+    [TestCase("NINA.View.AnchorableSafetyMonitorView", "NINA.WPF.Base.ViewModel.Equipment.SafetyMonitor.SafetyMonitorVM")]
+    [TestCase("NINA.View.AnchorablePlateSolveView", "NINA.ViewModel.Imaging.AnchorablePlateSolverVM")]
     [TestCase("NINA.View.AnchorableImageStatisticsView", "NINA.ViewModel.ImageStatisticsVM")]
     [TestCase("NINA.View.AnchorableFocusTargetsView", "NINA.ViewModel.FocusTargetsVM")]
     [TestCase("NINA.View.AnchorableRotatorView", "NINA.WPF.Base.ViewModel.Equipment.Rotator.RotatorVM")]
@@ -1049,6 +1055,11 @@ public class FixtureRegistryTests {
     [TestCase("NINA.View.AnchorableTelescopeView", "NINA.WPF.Base.ViewModel.Equipment.Telescope.TelescopeVM")]
     [TestCase("NINA.View.AnchorableWeatherDataView", "NINA.WPF.Base.ViewModel.Equipment.WeatherData.WeatherDataVM")]
     [TestCase("NINA.View.Equipment.CameraView", "NINA.WPF.Base.ViewModel.Equipment.Camera.CameraVM")]
+    [TestCase("NINA.View.Equipment.FocuserView", "NINA.WPF.Base.ViewModel.Equipment.Focuser.FocuserVM")]
+    [TestCase("NINA.View.Equipment.FilterWheelView", "NINA.WPF.Base.ViewModel.Equipment.FilterWheel.FilterWheelVM")]
+    [TestCase("NINA.View.Equipment.FlatDeviceView", "NINA.WPF.Base.ViewModel.Equipment.FlatDevice.FlatDeviceVM")]
+    [TestCase("NINA.View.Equipment.SafetyMonitorView", "NINA.WPF.Base.ViewModel.Equipment.SafetyMonitor.SafetyMonitorVM")]
+    [TestCase("NINA.View.Equipment.PHD2SetupView", "NINA.Equipment.Equipment.MyGuider.PHD2.PHD2Guider")]
     [TestCase("NINA.View.Equipment.TelescopeView", "NINA.WPF.Base.ViewModel.Equipment.Telescope.TelescopeVM")]
     [TestCase("NINA.View.Equipment.WeatherDataView", "NINA.WPF.Base.ViewModel.Equipment.WeatherData.WeatherDataVM")]
     [TestCase("NINA.View.Equipment.Guider.GuiderView", "NINA.WPF.Base.ViewModel.Equipment.Guider.GuiderVM")]
@@ -1102,6 +1113,135 @@ public class FixtureRegistryTests {
             host.Content = null;
             host.Close();
         }
+    }
+
+    [TestCase("NINA.View.Equipment.FocuserView")]
+    [TestCase("NINA.View.Equipment.FilterWheelView")]
+    [TestCase("NINA.View.Equipment.FlatDeviceView")]
+    [TestCase("NINA.View.Equipment.SafetyMonitorView")]
+    public void EquipmentView_UsesASelectedOfflineDocumentationDevice(string viewType) {
+        FrameworkElement fixture = new FixtureRegistry().Create(new ScreenshotAsset {
+            Id = "selected-device-" + viewType.Split('.').Last(),
+            Classification = ScreenshotClassification.NinaUi,
+            Output = "docs/images/generated/tabs/selected-device.png",
+            Fixture = "view",
+            State = "selected-documentation-device",
+            ViewType = viewType,
+            Width = 1000,
+            Height = 600
+        });
+        object chooser = fixture.DataContext.GetType().GetProperty("DeviceChooserVM")!.GetValue(fixture.DataContext)!;
+        System.Collections.ICollection devices = (System.Collections.ICollection)chooser.GetType().GetProperty("Devices")!.GetValue(chooser)!;
+        object? selected = chooser.GetType().GetProperty("SelectedDevice")!.GetValue(chooser);
+
+        Assert.Multiple(() => {
+            Assert.That(devices, Has.Count.EqualTo(1));
+            Assert.That(selected, Is.Not.Null);
+            Assert.That(selected!.GetType().GetProperty("Name")!.GetValue(selected), Is.EqualTo("N.I.N.A. Documentation Simulator"));
+            Assert.That(selected.GetType().GetProperty("DisplayName")!.GetValue(selected), Is.EqualTo("N.I.N.A. Documentation Simulator"));
+        });
+    }
+
+    [Test]
+    public void EquipmentFilterWheel_UsesTheCompleteDocumentationFilterSet() {
+        FrameworkElement fixture = new FixtureRegistry().Create(new ScreenshotAsset {
+            Id = "equipment-filter-wheel-content",
+            Classification = ScreenshotClassification.NinaUi,
+            Output = "docs/images/generated/tabs/equipments_fw.png",
+            Fixture = "view",
+            State = "equipment-filter-wheel",
+            ViewType = "NINA.View.Equipment.FilterWheelView",
+            Width = 1816,
+            Height = 794
+        });
+        NINA.WPF.Base.ViewModel.Equipment.FilterWheel.FilterWheelVM viewModel =
+            (NINA.WPF.Base.ViewModel.Equipment.FilterWheel.FilterWheelVM)fixture.DataContext;
+
+        Assert.That(viewModel.FW.Filters.Select(filter => filter.Name),
+            Is.EqualTo(new[] { "L", "R", "G", "B", "Ha", "OIII", "SII" }));
+    }
+
+    [Test]
+    public void SkyAtlas_ObservationFixtureUsesDeterministicAltitudeFilterValues() {
+        FrameworkElement fixture = new FixtureRegistry().Create(new ScreenshotAsset {
+            Id = "sky-atlas-observation-values",
+            Classification = ScreenshotClassification.NinaUi,
+            Output = "docs/images/generated/tabs/SkyAtlas_Altitude_Filter.png",
+            Fixture = "view",
+            State = "sky-atlas-observation-filter",
+            ViewType = "NINA.View.SkyAtlasView",
+            Width = 449,
+            Height = 203
+        });
+        object viewModel = fixture.DataContext;
+
+        Assert.Multiple(() => {
+            Assert.That(viewModel.GetType().GetProperty("SelectedMinimumAltitudeDegrees")!.GetValue(viewModel), Is.EqualTo(40d));
+            Assert.That(viewModel.GetType().GetProperty("SelectedAltitudeDuration")!.GetValue(viewModel), Is.EqualTo(5d));
+            Assert.That(viewModel.GetType().GetProperty("FilterDate")!.GetValue(viewModel),
+                Is.EqualTo(new DateTime(2026, 8, 31, 12, 0, 0, DateTimeKind.Local)));
+            NINA.Core.Model.PagedList<NINA.Astrometry.DeepSkyObject> result =
+                (NINA.Core.Model.PagedList<NINA.Astrometry.DeepSkyObject>)viewModel.GetType()
+                    .GetProperty("SearchResult")!.GetValue(viewModel)!;
+            Assert.That(result.ItemPage.First().Altitudes, Is.Not.Empty);
+            Assert.That(result.ItemPage.First().Horizon, Is.Not.Empty);
+        });
+    }
+
+    [Test]
+    public void ImagingPanels_PopulateFormattedTelescopeAndSelectedSwitchValues() {
+        NINA.WPF.Base.ViewModel.Equipment.Telescope.TelescopeVM telescope =
+            (NINA.WPF.Base.ViewModel.Equipment.Telescope.TelescopeVM)new FixtureRegistry().Create(new ScreenshotAsset {
+                Id = "formatted-telescope",
+                Classification = ScreenshotClassification.NinaUi,
+                Output = "docs/images/generated/tabs/imaging_telescope.png",
+                Fixture = "view",
+                State = "imaging-telescope-status",
+                ViewType = "NINA.View.AnchorableTelescopeView",
+                Width = 384,
+                Height = 333
+            }).DataContext;
+        NINA.WPF.Base.ViewModel.Equipment.Switch.SwitchVM switches =
+            (NINA.WPF.Base.ViewModel.Equipment.Switch.SwitchVM)new FixtureRegistry().Create(new ScreenshotAsset {
+                Id = "selected-switch",
+                Classification = ScreenshotClassification.NinaUi,
+                Output = "docs/images/generated/tabs/imaging_switches.png",
+                Fixture = "view",
+                State = "imaging-switch-controls",
+                ViewType = "NINA.View.AnchorableSwitchHubView",
+                Width = 410,
+                Height = 219
+            }).DataContext;
+
+        Assert.Multiple(() => {
+            Assert.That(telescope.TelescopeInfo.SiderealTimeString, Is.Not.Empty);
+            Assert.That(telescope.TelescopeInfo.RightAscensionString, Is.Not.Empty);
+            Assert.That(telescope.TelescopeInfo.DeclinationString, Is.Not.Empty);
+            Assert.That(telescope.TelescopeInfo.AltitudeString, Is.Not.Empty);
+            Assert.That(telescope.TelescopeInfo.AzimuthString, Is.Not.Empty);
+            Assert.That(switches.SwitchHub.Switches, Has.Count.EqualTo(3));
+            Assert.That(switches.SelectedWritableSwitch, Is.SameAs(switches.WritableSwitches.First()));
+        });
+    }
+
+    [Test]
+    public void ImagingAdvancedSequence_UsesARealPopulatedProductionTree() {
+        FrameworkElement fixture = new FixtureRegistry().Create(new ScreenshotAsset {
+            Id = "imaging-advanced-sequence",
+            Classification = ScreenshotClassification.NinaUi,
+            Output = "docs/images/generated/tabs/imaging_sequence.png",
+            Fixture = "view",
+            State = "simple-to-advanced-target-area",
+            ViewType = "NINA.View.AnchorableSequence2View",
+            Width = 303,
+            Height = 595
+        });
+        NINA.ViewModel.Sequencer.ISequence2VM viewModel =
+            (NINA.ViewModel.Sequencer.ISequence2VM)fixture.DataContext;
+        NINA.Sequencer.Container.ISequenceContainer targetArea =
+            (NINA.Sequencer.Container.ISequenceContainer)viewModel.Sequencer.MainContainer.Items[1];
+
+        Assert.That(targetArea.Items, Is.Not.Empty);
     }
 
     [Test]

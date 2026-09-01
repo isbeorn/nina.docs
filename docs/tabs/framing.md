@@ -4,7 +4,7 @@ A current end-to-end workflow is to load or solve an image, set the profile-deri
 
 For further information about using the Framing Assistant refer to the [Advanced Framing](../advanced/framingassistant.md) topic.
 
-![The Framing Tab](../images/tabs/Framing10.png)
+![The Framing Tab](../images/generated/tabs/Framing10.png)
 
 ## Image source 
 
@@ -46,7 +46,7 @@ For further information about using the Framing Assistant refer to the [Advanced
 * You can specify the number of panels for an N x M size mosaic 
 * You can specify the % overlap between each panel 
 * Furthermore it is possible to enable "preserve alignment" which becomes relevant the further away from the celestial equator (declination at 0) the object is. Having this option enabled will adjust each mosaic panel separately with its own rotation to perfectly align to a big rectangle. Keep in mind that this will require separate rotation between each panel.
-    ![Mosaic](../images/tabs/framing_mosaic.PNG)
+    ![Mosaic](../images/generated/tabs/framing_mosaic.png)
 
 ### Rotation from camera
 * This will take an exposure from your connected camera, plate solve it, and determine the rotation of the frame. Afterwards, the rotation of the framing is updated.

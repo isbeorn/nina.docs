@@ -351,6 +351,34 @@ public class CatalogValidatorTests {
             Throws.Nothing);
     }
 
+    [TestCase("tabs:equipment-connector", "NINA.View.Equipment.FocuserView", "view")]
+    [TestCase("tabs:options-filter-wheel", "NINA.View.Options.EquipmentView", "view")]
+    [TestCase("tabs:flat-wizard-controls", "NINA.View.FlatWizardView", "view")]
+    [TestCase("tabs:framing-image", "NINA.View.FramingAssistantView", "framing-assistant")]
+    [TestCase("tabs:sky-atlas-observation", "NINA.View.SkyAtlasView", "view")]
+    [TestCase("tabs:sky-atlas-altitude", "NINA.View.SkyAtlasView", "view")]
+    [TestCase("tabs:guider-settings", "NINA.View.Equipment.Guider.GuiderView", "view")]
+    [TestCase("tabs:imaging-toolbar", "NINA.View.OverView", "view")]
+    public void Validate_AcceptsProductionTabsCrops(string cropTarget, string viewType, string fixture) {
+        ScreenshotAsset asset = new() {
+            Id = cropTarget.Replace(':', '-'),
+            Classification = ScreenshotClassification.NinaUi,
+            Output = $"docs/images/generated/tabs/{cropTarget.Replace(':', '-')}.png",
+            Fixture = fixture,
+            State = "tabs-documentation",
+            ViewType = viewType,
+            Width = 900,
+            Height = 300,
+            RenderWidth = 1920,
+            RenderHeight = 1080,
+            CropTarget = cropTarget
+        };
+
+        Assert.That(
+            () => CatalogValidator.Validate(Catalog(asset), root, new FixtureRegistry()),
+            Throws.Nothing);
+    }
+
     [Test]
     public void Validate_AcceptsAllTargetAreaItemsCropForSequencerFixture() {
         ScreenshotAsset asset = new() {

@@ -152,7 +152,7 @@ Example:
 
 Once a horizon file is configured, it is shown in altitude charts across the application.
 
-![Altitude chart with horizon](../../images/tabs/altitudechartwithhorizon.png)
+![Altitude chart with horizon](../../images/generated/tabs/altitudechartwithhorizon.png)
 
 ### World Map
 

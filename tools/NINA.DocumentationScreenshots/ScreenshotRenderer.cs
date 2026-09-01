@@ -31,7 +31,13 @@ using NINA.ViewModel.Sequencer;
 namespace NINA.DocumentationScreenshots;
 
 public sealed class ScreenshotRenderer(FixtureRegistry fixtures) {
+    private static int completedRendersInProcess;
+    internal static DispatcherPriority DispatcherCompletionPriority => Volatile.Read(ref completedRendersInProcess) == 0
+        ? DispatcherPriority.ApplicationIdle
+        : DispatcherPriority.Background;
+
     public void Render(ScreenshotAsset asset, string outputPath) {
+        DocumentationApplicationHost.StopAllFixtureTimers();
         using BindingTraceScope bindingTrace = new(asset.Id);
         FrameworkElement fixture = fixtures.Create(asset);
         int renderWidth = asset.RenderWidth ?? asset.Width;
@@ -62,6 +68,7 @@ public sealed class ScreenshotRenderer(FixtureRegistry fixtures) {
         DrainDispatcher();
         NamedStateController.Apply(fixture, asset);
         DrainDispatcher();
+        WaitForProductionAnimations(asset);
         bindingTrace.ThrowIfErrors();
 
         ScreenshotCrop? resolvedCrop = ResolveCrop(content, fixture, asset, renderWidth, renderHeight);
@@ -93,6 +100,18 @@ public sealed class ScreenshotRenderer(FixtureRegistry fixtures) {
         PngBitmapEncoder encoder = new();
         encoder.Frames.Add(BitmapFrame.Create(finalBitmap));
         encoder.Save(stream);
+        Interlocked.Increment(ref completedRendersInProcess);
+    }
+
+    private static void WaitForProductionAnimations(ScreenshotAsset asset) {
+        if (asset.State != "manual-rotator-35-degrees") {
+            return;
+        }
+
+        // ManualRotatorView uses one-second production storyboards for the target line and arcs.
+        // Capture their completed state so startup timing cannot change the generated PNG.
+        Thread.Sleep(1100);
+        DrainDispatcher();
     }
 
     private static BitmapSource RenderWithOpenPopups(FrameworkElement content, ScreenshotAsset asset, int renderWidth, int renderHeight) {
@@ -438,6 +457,13 @@ public sealed class ScreenshotRenderer(FixtureRegistry fixtures) {
         sourceRect.Height = Math.Min(sourceRect.Height, source.PixelHeight - sourceRect.Y);
 
         CroppedBitmap cropped = new(source, sourceRect);
+        if (asset.CropTarget == "tabs:imaging-toolbar") {
+            return PlaceProductionToolbar(cropped, asset);
+        }
+        if (asset.CropTarget?.StartsWith("tabs:", StringComparison.Ordinal) == true
+                && asset.CropTarget != "tabs:framing-image") {
+            return FitProductionElement(cropped, asset);
+        }
         if (cropped.PixelWidth == asset.Width && cropped.PixelHeight == asset.Height) {
             return cropped;
         }
@@ -446,6 +472,41 @@ public sealed class ScreenshotRenderer(FixtureRegistry fixtures) {
             asset.Width / (double)cropped.PixelWidth,
             asset.Height / (double)cropped.PixelHeight));
         return scaled;
+    }
+
+    private static BitmapSource PlaceProductionToolbar(CroppedBitmap toolbar, ScreenshotAsset asset) {
+        double scale = asset.Width / (double)toolbar.PixelWidth;
+        double toolbarHeight = Math.Min(asset.Height, toolbar.PixelHeight * scale);
+        Brush background = Application.Current?.TryFindResource("BackgroundBrush") as Brush
+            ?? throw new CatalogException("NINA's production BackgroundBrush resource is unavailable.");
+        DrawingVisual visual = new();
+        using (DrawingContext drawing = visual.RenderOpen()) {
+            drawing.DrawRectangle(background, null, new Rect(0, 0, asset.Width, asset.Height));
+            drawing.DrawImage(toolbar, new Rect(0, asset.Height - toolbarHeight, asset.Width, toolbarHeight));
+        }
+        RenderTargetBitmap result = new(asset.Width, asset.Height, 96, 96, PixelFormats.Pbgra32);
+        result.Render(visual);
+        return result;
+    }
+
+    private static BitmapSource FitProductionElement(CroppedBitmap source, ScreenshotAsset asset) {
+        double scale = Math.Min(
+            asset.Width / (double)source.PixelWidth,
+            asset.Height / (double)source.PixelHeight);
+        double width = source.PixelWidth * scale;
+        double height = source.PixelHeight * scale;
+        Brush background = Application.Current?.TryFindResource("BackgroundBrush") as Brush
+            ?? throw new CatalogException("NINA's production BackgroundBrush resource is unavailable.");
+        DrawingVisual visual = new();
+        using (DrawingContext drawing = visual.RenderOpen()) {
+            drawing.DrawRectangle(background, null, new Rect(0, 0, asset.Width, asset.Height));
+            drawing.DrawImage(
+                source,
+                new Rect((asset.Width - width) / 2, (asset.Height - height) / 2, width, height));
+        }
+        RenderTargetBitmap result = new(asset.Width, asset.Height, 96, 96, PixelFormats.Pbgra32);
+        result.Render(visual);
+        return result;
     }
 
     private static ScreenshotCrop? ResolveCrop(
@@ -468,6 +529,9 @@ public sealed class ScreenshotRenderer(FixtureRegistry fixtures) {
         }
         if (asset.CropTarget.StartsWith("simple:", StringComparison.Ordinal)) {
             return ResolveSimpleSequencerCrop(content, fixture, asset, renderWidth, renderHeight);
+        }
+        if (asset.CropTarget.StartsWith("tabs:", StringComparison.Ordinal)) {
+            return ResolveTabsCrop(content, asset, renderWidth, renderHeight);
         }
         if (asset.CropTarget == "sidebar:filtered-item") {
             return ResolveFilteredSidebarItemCrop(content, fixture, asset, renderWidth, renderHeight);
@@ -882,7 +946,6 @@ public sealed class ScreenshotRenderer(FixtureRegistry fixtures) {
                 $"Screenshot '{asset.Id}' could not locate the production settings group for '{typeof(TSettings).Name}'.");
         Point topLeft = group.TranslatePoint(new Point(0, 0), content);
         Rect bounds = new(topLeft, new Size(group.ActualWidth, group.ActualHeight));
-        bounds.Inflate(8, 8);
         bounds.Intersect(new Rect(0, 0, renderWidth, renderHeight));
         bounds = ExpandBoundsToAspect(
             bounds,
@@ -942,6 +1005,99 @@ public sealed class ScreenshotRenderer(FixtureRegistry fixtures) {
             Width = bounds.Width / renderWidth,
             Height = bounds.Height / renderHeight
         };
+    }
+
+    private static ScreenshotCrop ResolveTabsCrop(
+            FrameworkElement content,
+            ScreenshotAsset asset,
+            int renderWidth,
+            int renderHeight) {
+        FrameworkElement target = asset.CropTarget switch {
+            "tabs:equipment-connector" => FindVisualDescendants<FrameworkElement>(content)
+                .FirstOrDefault(element => element.GetType().FullName == "NINA.View.Equipment.Connector") is FrameworkElement connector
+                    ? VisualAncestors(connector).OfType<Grid>().FirstOrDefault()
+                        ?? throw MissingTabsCrop(asset)
+                    : throw MissingTabsCrop(asset),
+            "tabs:options-filter-wheel" => FindVisualDescendants<GroupBox>(content)
+                .FirstOrDefault(group => group.DataContext is NINA.Profile.Interfaces.IFilterWheelSettings)
+                    ?? throw MissingTabsCrop(asset),
+            "tabs:flat-wizard-controls" => FindVisualDescendants<GroupBox>(content)
+                .Where(group => group.IsVisible && group.ActualWidth > 1 && group.ActualHeight > 1)
+                .OrderBy(group => group.TranslatePoint(new Point(), content).X)
+                .FirstOrDefault()
+                    ?? throw MissingTabsCrop(asset),
+            "tabs:framing-image" => FindVisualDescendants<FrameworkElement>(content)
+                .FirstOrDefault(element => element.GetType().FullName == "NINA.WPF.Base.View.ImageView"
+                    && element.IsVisible && element.ActualWidth > 1 && element.ActualHeight > 1)
+                    ?? throw MissingTabsCrop(asset),
+            "tabs:sky-atlas-observation" => FindVisualDescendants<Expander>(content)
+                .FirstOrDefault(expander => Equals(expander.Header, NINA.Core.Locale.Loc.Instance["LblObservation"]))
+                    ?? throw MissingTabsCrop(asset),
+            "tabs:sky-atlas-altitude" => FindVisualDescendants<FrameworkElement>(content)
+                .FirstOrDefault(element => element.GetType().Name == "AltitudeChart"
+                    && element.IsVisible && element.ActualWidth > 1 && element.ActualHeight > 1)
+                    ?? throw MissingTabsCrop(asset),
+            "tabs:guider-settings" => FindVisualDescendants<FrameworkElement>(content)
+                .FirstOrDefault(element => element.GetType().FullName == "NINA.View.Equipment.Guider.PHD2DetailView"
+                    && element.IsVisible && element.ActualWidth > 1 && element.ActualHeight > 1) is FrameworkElement detail
+                    ? VisualAncestors(detail).OfType<GroupBox>().FirstOrDefault()
+                        ?? throw MissingTabsCrop(asset)
+                    : throw MissingTabsCrop(asset),
+            "tabs:imaging-toolbar" => FindVisualDescendants<Grid>(content)
+                .Where(grid => grid.IsVisible && grid.ActualHeight is > 20 and < 80)
+                .FirstOrDefault(grid => FindVisualDescendants<TextBlock>(grid)
+                    .Any(text => text.Text == NINA.Core.Locale.Loc.Instance["LblInfo"])
+                    && FindVisualDescendants<TextBlock>(grid)
+                    .Any(text => text.Text == NINA.Core.Locale.Loc.Instance["LblTools"]))
+                    ?? throw MissingTabsCrop(asset),
+            _ => throw MissingTabsCrop(asset)
+        };
+        Rect bounds = ElementBounds(target, content);
+        if (asset.CropTarget == "tabs:imaging-toolbar") {
+            bounds.Intersect(new Rect(0, 0, renderWidth, renderHeight));
+            return new ScreenshotCrop {
+                X = bounds.Left / renderWidth,
+                Y = bounds.Top / renderHeight,
+                Width = bounds.Width / renderWidth,
+                Height = bounds.Height / renderHeight
+            };
+        }
+        bounds.Intersect(new Rect(0, 0, renderWidth, renderHeight));
+        if (asset.CropTarget == "tabs:framing-image") {
+            bounds.Inflate(8, 8);
+            bounds.Intersect(new Rect(0, 0, renderWidth, renderHeight));
+            bounds = CenterCropToAspect(bounds, asset.Width / (double)asset.Height);
+            return new ScreenshotCrop {
+                X = bounds.Left / renderWidth,
+                Y = bounds.Top / renderHeight,
+                Width = bounds.Width / renderWidth,
+                Height = bounds.Height / renderHeight
+            };
+        }
+        return new ScreenshotCrop {
+            X = bounds.Left / renderWidth,
+            Y = bounds.Top / renderHeight,
+            Width = bounds.Width / renderWidth,
+            Height = bounds.Height / renderHeight
+        };
+    }
+
+    private static CatalogException MissingTabsCrop(ScreenshotAsset asset) => new(
+        $"Screenshot '{asset.Id}' could not locate its production tabs crop marker '{asset.CropTarget}'.");
+
+    private static Rect CenterCropToAspect(Rect bounds, double targetAspect) {
+        double width = bounds.Width;
+        double height = bounds.Height;
+        if (width / height > targetAspect) {
+            width = height * targetAspect;
+        } else {
+            height = width / targetAspect;
+        }
+        return new Rect(
+            bounds.Left + (bounds.Width - width) / 2,
+            bounds.Top + (bounds.Height - height) / 2,
+            width,
+            height);
     }
 
     private static string? GetBindingPath(DependencyObject target, DependencyProperty property) =>
@@ -1161,7 +1317,7 @@ public sealed class ScreenshotRenderer(FixtureRegistry fixtures) {
             frame.Continue = false;
         };
         timeout.Start();
-        Dispatcher.CurrentDispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle, new Action(() => frame.Continue = false));
+        Dispatcher.CurrentDispatcher.BeginInvoke(DispatcherCompletionPriority, new Action(() => frame.Continue = false));
         Dispatcher.PushFrame(frame);
         timeout.Stop();
         if (timedOut) {
@@ -1214,6 +1370,7 @@ public sealed class ScreenshotRenderer(FixtureRegistry fixtures) {
                 CloseOpenMenus(root);
             }
             Close();
+            DocumentationApplicationHost.StopAllFixtureTimers();
             DrainDispatcher();
         }
     }

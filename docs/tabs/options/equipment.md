@@ -78,7 +78,7 @@ For the above to work well, it is necessary to define the proper filters availab
 
 The screen looks like the below:
 
-![Filters](../../images/tabs/filterwheel1.png)
+![Filters](../../images/generated/tabs/filterwheel1.png)
 
 **Adding filters**
 

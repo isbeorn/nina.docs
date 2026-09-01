@@ -7,7 +7,7 @@
       "output": "docs/images/advanced/AF_advanced10.PNG",
       "width": 1393,
       "height": 519,
-      "exclusionReason": "This selective NINA workflow, annotation or hardware-specific state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting a guessed or incomplete view."
+      "exclusionReason": "This equipment selector is populated by installed third-party drivers and attached hardware. Keep the reviewed capture because an offline fixture would invent devices rather than reproduce the documented environment."
     },
     {
       "id": "docs-images-advanced-autofocusbasicsettings-png",
@@ -15,7 +15,7 @@
       "output": "docs/images/advanced/autofocusbasicsettings.png",
       "width": 914,
       "height": 164,
-      "exclusionReason": "This selective NINA workflow, annotation or hardware-specific state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting a guessed or incomplete view."
+      "exclusionReason": "This capture shows measured star HFR annotations from a processed astronomical image. Keep the reviewed data-dependent capture until the renderer can reproduce the same analysis from a deterministic source image."
     },
     {
       "id": "docs-images-advanced-autofocuscurve1-png",
@@ -2674,19 +2674,33 @@
     },
     {
       "id": "docs-images-tabs-altitudechartwithhorizon-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/tabs/altitudechartwithhorizon.png",
+      "classification": "nina-generated-visual",
+      "output": "docs/images/generated/tabs/altitudechartwithhorizon.png",
       "width": 361,
       "height": 185,
-      "exclusionReason": "This selective NINA workflow, annotation or hardware-specific state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting a guessed or incomplete view."
+      "fixture": "view",
+      "state": "sky-atlas-altitude-chart",
+      "viewType": "NINA.View.SkyAtlasView",
+      "renderWidth": 1200,
+      "renderHeight": 1080,
+      "cropTarget": "tabs:sky-atlas-altitude",
+      "displayName": "Altitude chart with horizon"
     },
     {
       "id": "docs-images-tabs-cameratab-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/tabs/cameratab.png",
+      "classification": "nina-ui",
+      "output": "docs/images/generated/tabs/cameratab.png",
       "width": 520,
-      "height": 455,
-      "exclusionReason": "This selective annotated, validation, calculated or nested workflow state is not reproduced faithfully by a verified deterministic fixture. Keep the original capture instead of substituting an incomplete production view."
+      "height": 340,
+      "fixture": "view",
+      "state": "imaging-camera-controls",
+      "viewType": "NINA.View.AnchorableCameraView",
+      "callouts": [
+        { "x": 0.8, "y": 0.2, "text": "1" },
+        { "x": 0.8, "y": 0.55, "text": "2" },
+        { "x": 0.8, "y": 0.83, "text": "3" }
+      ],
+      "displayName": "Imaging camera controls"
     },
     {
       "id": "docs-images-tabs-equipment-camera-png",
@@ -2701,19 +2715,25 @@
     },
     {
       "id": "docs-images-tabs-equipment-flats-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/tabs/equipment_flats.png",
+      "classification": "nina-ui",
+      "output": "docs/images/generated/tabs/equipment_flats.png",
       "width": 2169,
       "height": 1066,
-      "exclusionReason": "This selective NINA workflow, annotation or hardware-specific state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting a guessed or incomplete view."
+      "fixture": "view",
+      "state": "equipment-flat-device",
+      "viewType": "NINA.View.Equipment.FlatDeviceView",
+      "displayName": "Equipment flat device"
     },
     {
       "id": "docs-images-tabs-equipment-focuser-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/tabs/equipment_focuser.PNG",
+      "classification": "nina-ui",
+      "output": "docs/images/generated/tabs/equipment_focuser.png",
       "width": 1269,
-      "height": 703,
-      "exclusionReason": "This selective NINA workflow, annotation or hardware-specific state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting a guessed or incomplete view."
+      "height": 520,
+      "fixture": "view",
+      "state": "equipment-focuser",
+      "viewType": "NINA.View.Equipment.FocuserView",
+      "displayName": "Equipment focuser"
     },
     {
       "id": "docs-images-tabs-equipment-guider-png",
@@ -2739,11 +2759,14 @@
     },
     {
       "id": "docs-images-tabs-equipment-safety-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/tabs/equipment_safety.png",
-      "width": 689,
-      "height": 267,
-      "exclusionReason": "This selective annotated, validation, calculated or nested workflow state is not reproduced faithfully by a verified deterministic fixture. Keep the original capture instead of substituting an incomplete production view."
+      "classification": "nina-ui",
+      "output": "docs/images/generated/tabs/equipment_safety.png",
+      "width": 900,
+      "height": 300,
+      "fixture": "view",
+      "state": "equipment-safety-monitor",
+      "viewType": "NINA.View.Equipment.SafetyMonitorView",
+      "displayName": "Equipment safety monitor"
     },
     {
       "id": "docs-images-tabs-equipment-scope-png",
@@ -2788,27 +2811,54 @@
     },
     {
       "id": "docs-images-tabs-equipment2-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/tabs/equipment2.png",
+      "classification": "nina-ui",
+      "output": "docs/images/generated/tabs/equipment2.png",
       "width": 1043,
       "height": 92,
-      "exclusionReason": "This selective NINA workflow, annotation or hardware-specific state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting a guessed or incomplete view."
+      "fixture": "view",
+      "state": "camera-simulator-selection",
+      "viewType": "NINA.View.Equipment.CameraView",
+      "renderWidth": 1400,
+      "renderHeight": 900,
+      "cropTarget": "tabs:equipment-connector",
+      "callouts": [
+        { "x": 0.68, "y": 0.54, "text": "1" },
+        { "x": 0.88, "y": 0.18, "text": "2a" },
+        { "x": 0.93, "y": 0.18, "text": "2b" },
+        { "x": 0.98, "y": 0.18, "text": "2c" }
+      ],
+      "displayName": "Equipment connector"
     },
     {
       "id": "docs-images-tabs-equipments-fw-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/tabs/equipments_fw.png",
+      "classification": "nina-ui",
+      "output": "docs/images/generated/tabs/equipments_fw.png",
       "width": 1816,
       "height": 794,
-      "exclusionReason": "This selective annotated, validation, calculated or nested workflow state is not reproduced faithfully by a verified deterministic fixture. Keep the original capture instead of substituting an incomplete production view."
+      "fixture": "view",
+      "state": "equipment-filter-wheel",
+      "viewType": "NINA.View.Equipment.FilterWheelView",
+      "callouts": [
+        { "x": 0.27, "y": 0.2, "text": "1" },
+        { "x": 0.42, "y": 0.215, "text": "2" },
+        { "x": 0.59, "y": 0.29, "text": "3" },
+        { "x": 0.07, "y": 0.95, "text": "4" }
+      ],
+      "displayName": "Equipment filter wheel"
     },
     {
       "id": "docs-images-tabs-filterwheel1-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/tabs/filterwheel1.png",
+      "classification": "nina-ui",
+      "output": "docs/images/generated/tabs/filterwheel1.png",
       "width": 653,
-      "height": 510,
-      "exclusionReason": "This selective NINA workflow, annotation or hardware-specific state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting a guessed or incomplete view."
+      "height": 290,
+      "fixture": "view",
+      "state": "options-filter-wheel",
+      "viewType": "NINA.View.Options.EquipmentView",
+      "renderWidth": 1600,
+      "renderHeight": 1000,
+      "cropTarget": "tabs:options-filter-wheel",
+      "displayName": "Filter wheel options"
     },
     {
       "id": "docs-images-tabs-flatwizard1-png",
@@ -2823,35 +2873,56 @@
     },
     {
       "id": "docs-images-tabs-flatwizard2-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/tabs/flatwizard2.png",
-      "width": 406,
+      "classification": "nina-ui",
+      "output": "docs/images/generated/tabs/flatwizard2.png",
+      "width": 330,
       "height": 825,
-      "exclusionReason": "This selective NINA workflow, annotation or hardware-specific state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting a guessed or incomplete view."
+      "fixture": "view",
+      "state": "flat-wizard-multi-mode",
+      "viewType": "NINA.View.FlatWizardView",
+      "renderWidth": 1440,
+      "renderHeight": 1000,
+      "cropTarget": "tabs:flat-wizard-controls",
+      "displayName": "Flat Wizard multi mode"
     },
     {
       "id": "docs-images-tabs-framing-mosaic-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/tabs/framing_mosaic.PNG",
+      "classification": "nina-ui",
+      "output": "docs/images/generated/tabs/framing_mosaic.png",
       "width": 901,
       "height": 892,
-      "exclusionReason": "This selective mosaic overlay depends on a specific astronomical survey image and framing state. Keep the reviewed capture instead of substituting a synthetic background."
+      "fixture": "framing-assistant",
+      "state": "framing-mosaic-image",
+      "viewType": "NINA.View.FramingAssistantView",
+      "renderWidth": 1920,
+      "renderHeight": 1080,
+      "cropTarget": "tabs:framing-image",
+      "displayName": "Framing Assistant mosaic"
     },
     {
       "id": "docs-images-tabs-framing10-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/tabs/Framing10.png",
+      "classification": "nina-ui",
+      "output": "docs/images/generated/tabs/Framing10.png",
       "width": 2269,
       "height": 1272,
-      "exclusionReason": "This full framing view contains the altitude chart's live Now marker, which does not use the fixture time provider. Keep the original capture until the chart exposes deterministic time through an existing production interface."
+      "fixture": "framing-assistant",
+      "state": "framing-assistant-full",
+      "viewType": "NINA.View.FramingAssistantView",
+      "displayName": "Framing Assistant"
     },
     {
       "id": "docs-images-tabs-guider-phdsettings-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/tabs/guider_phdsettings.png",
-      "width": 859,
+      "classification": "nina-ui",
+      "output": "docs/images/generated/tabs/guider_phdsettings.png",
+      "width": 720,
       "height": 258,
-      "exclusionReason": "This selective NINA workflow, annotation or hardware-specific state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting a guessed or incomplete view."
+      "fixture": "view",
+      "state": "guider-phd2-settings",
+      "viewType": "NINA.View.Equipment.Guider.GuiderView",
+      "renderWidth": 1400,
+      "renderHeight": 900,
+      "cropTarget": "tabs:guider-settings",
+      "displayName": "PHD2 guider settings"
     },
     {
       "id": "docs-images-tabs-guider-phdsetup-png",
@@ -2911,19 +2982,38 @@
     },
     {
       "id": "docs-images-tabs-imaging-filterwheel-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/tabs/imaging_filterwheel.PNG",
+      "classification": "nina-ui",
+      "output": "docs/images/generated/tabs/imaging_filterwheel.png",
       "width": 411,
-      "height": 198,
-      "exclusionReason": "This selective NINA workflow, annotation or hardware-specific state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting a guessed or incomplete view."
+      "height": 110,
+      "fixture": "view",
+      "state": "imaging-filter-wheel-controls",
+      "viewType": "NINA.View.AnchorableFilterWheelView",
+      "callouts": [
+        { "x": 0.65, "y": 0.13, "text": "1" },
+        { "x": 0.9, "y": 0.5, "text": "2" }
+      ],
+      "displayName": "Imaging filter wheel"
     },
     {
       "id": "docs-images-tabs-imaging-focuser-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/tabs/imaging_focuser.png",
+      "classification": "nina-ui",
+      "output": "docs/images/generated/tabs/imaging_focuser.png",
       "width": 411,
-      "height": 393,
-      "exclusionReason": "This selective NINA workflow, annotation or hardware-specific state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting a guessed or incomplete view."
+      "height": 250,
+      "fixture": "view",
+      "state": "imaging-focuser-controls",
+      "viewType": "NINA.View.AnchorableFocuserView",
+      "callouts": [
+        { "x": 0.73, "y": 0.15, "text": "1" },
+        { "x": 0.73, "y": 0.25, "text": "2" },
+        { "x": 0.73, "y": 0.35, "text": "3" },
+        { "x": 0.81, "y": 0.45, "text": "4" },
+        { "x": 0.81, "y": 0.56, "text": "5" },
+        { "x": 0.81, "y": 0.68, "text": "6" },
+        { "x": 0.5, "y": 0.85, "text": "7" }
+      ],
+      "displayName": "Imaging focuser"
     },
     {
       "id": "docs-images-tabs-imaging-focusericon-png",
@@ -3078,11 +3168,37 @@
     },
     {
       "id": "docs-images-tabs-imaging-menu-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/tabs/Imaging_menu.PNG",
+      "classification": "nina-ui",
+      "output": "docs/images/generated/tabs/Imaging_menu.png",
       "width": 1472,
       "height": 103,
-      "exclusionReason": "This selective NINA workflow, annotation or hardware-specific state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting a guessed or incomplete view."
+      "fixture": "view",
+      "state": "imaging-toolbar",
+      "viewType": "NINA.View.OverView",
+      "renderWidth": 1920,
+      "renderHeight": 1080,
+      "cropTarget": "tabs:imaging-toolbar",
+      "callouts": [
+        { "x": 0.025, "y": 0.18, "text": "A" },
+        { "x": 0.063, "y": 0.18, "text": "B" },
+        { "x": 0.1, "y": 0.18, "text": "C" },
+        { "x": 0.137, "y": 0.18, "text": "D" },
+        { "x": 0.175, "y": 0.18, "text": "E" },
+        { "x": 0.212, "y": 0.18, "text": "F" },
+        { "x": 0.25, "y": 0.18, "text": "G" },
+        { "x": 0.287, "y": 0.18, "text": "H" },
+        { "x": 0.325, "y": 0.18, "text": "I" },
+        { "x": 0.362, "y": 0.18, "text": "J" },
+        { "x": 0.4, "y": 0.18, "text": "K" },
+        { "x": 0.438, "y": 0.18, "text": "M" },
+        { "x": 0.795, "y": 0.18, "text": "N" },
+        { "x": 0.831, "y": 0.18, "text": "O" },
+        { "x": 0.869, "y": 0.18, "text": "P" },
+        { "x": 0.906, "y": 0.18, "text": "Q" },
+        { "x": 0.944, "y": 0.18, "text": "R" },
+        { "x": 0.981, "y": 0.18, "text": "S" }
+      ],
+      "displayName": "Imaging panel toolbar"
     },
     {
       "id": "docs-images-tabs-imaging-mftargets-png",
@@ -3112,11 +3228,24 @@
     },
     {
       "id": "docs-images-tabs-imaging-platesolve-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/tabs/imaging_platesolve.png",
+      "classification": "nina-ui",
+      "output": "docs/images/generated/tabs/imaging_platesolve.png",
       "width": 921,
       "height": 550,
-      "exclusionReason": "This selective NINA workflow, annotation or hardware-specific state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting a guessed or incomplete view."
+      "fixture": "view",
+      "state": "imaging-plate-solving",
+      "viewType": "NINA.View.AnchorablePlateSolveView",
+      "callouts": [
+        { "x": 0.47, "y": 0.21, "text": "1" },
+        { "x": 0.47, "y": 0.35, "text": "2" },
+        { "x": 0.47, "y": 0.4, "text": "3" },
+        { "x": 0.47, "y": 0.46, "text": "4" },
+        { "x": 0.47, "y": 0.51, "text": "5" },
+        { "x": 0.47, "y": 0.56, "text": "6" },
+        { "x": 0.29, "y": 0.66, "text": "7" },
+        { "x": 0.11, "y": 0.77, "text": "8" }
+      ],
+      "displayName": "Imaging plate solving"
     },
     {
       "id": "docs-images-tabs-imaging-platesolveicon-png",
@@ -3157,11 +3286,14 @@
     },
     {
       "id": "docs-images-tabs-imaging-sequence-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/tabs/imaging_sequence.png",
+      "classification": "nina-ui",
+      "output": "docs/images/generated/tabs/imaging_sequence.png",
       "width": 303,
-      "height": 595,
-      "exclusionReason": "This selective NINA workflow, annotation or hardware-specific state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting a guessed or incomplete view."
+      "height": 300,
+      "fixture": "view",
+      "state": "sequencer-instructions-details",
+      "viewType": "NINA.View.AnchorableSequence2View",
+      "displayName": "Imaging sequence"
     },
     {
       "id": "docs-images-tabs-imaging-sequenceicon-png",
@@ -3200,11 +3332,19 @@
     },
     {
       "id": "docs-images-tabs-imaging-switches-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/tabs/imaging_switches.png",
+      "classification": "nina-ui",
+      "output": "docs/images/generated/tabs/imaging_switches.png",
       "width": 410,
       "height": 219,
-      "exclusionReason": "This selective NINA workflow, annotation or hardware-specific state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting a guessed or incomplete view."
+      "fixture": "view",
+      "state": "imaging-switch-controls",
+      "viewType": "NINA.View.AnchorableSwitchHubView",
+      "callouts": [
+        { "x": 0.68, "y": 0.18, "text": "1" },
+        { "x": 0.85, "y": 0.38, "text": "2" },
+        { "x": 0.54, "y": 0.52, "text": "3" }
+      ],
+      "displayName": "Imaging switches"
     },
     {
       "id": "docs-images-tabs-imaging-switchesicon-png",
@@ -3218,11 +3358,14 @@
     },
     {
       "id": "docs-images-tabs-imaging-telescope-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/tabs/imaging_telescope.PNG",
+      "classification": "nina-ui",
+      "output": "docs/images/generated/tabs/imaging_telescope.png",
       "width": 384,
-      "height": 333,
-      "exclusionReason": "This selective NINA workflow, annotation or hardware-specific state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting a guessed or incomplete view."
+      "height": 220,
+      "fixture": "view",
+      "state": "imaging-telescope-status",
+      "viewType": "NINA.View.AnchorableTelescopeView",
+      "displayName": "Imaging telescope"
     },
     {
       "id": "docs-images-tabs-imaging-telescopeicon-png",
@@ -3257,11 +3400,14 @@
     },
     {
       "id": "docs-images-tabs-manualrotator-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/tabs/manualrotator.PNG",
+      "classification": "nina-ui",
+      "output": "docs/images/generated/tabs/manualrotator.png",
       "width": 628,
-      "height": 692,
-      "exclusionReason": "This selective NINA workflow, annotation or hardware-specific state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting a guessed or incomplete view."
+      "height": 500,
+      "fixture": "view",
+      "state": "manual-rotator-35-degrees",
+      "viewType": "NINA.View.ManualRotatorView",
+      "displayName": "Manual rotator"
     },
     {
       "id": "docs-images-tabs-options-autofocus-png",
@@ -3380,23 +3526,32 @@
       "output": "docs/images/tabs/Sequence_Empty.png",
       "width": 1436,
       "height": 828,
-      "exclusionReason": "This selective annotated, validation, calculated or nested workflow state is not reproduced faithfully by a verified deterministic fixture. Keep the original capture instead of substituting an incomplete production view."
+      "exclusionReason": "This capture documents the complete empty Sequencer application shell with five contextual annotations. Keep it until a verified full-shell fixture can reproduce the same navigation context without omitting controls."
     },
     {
       "id": "docs-images-tabs-skyatlas-altitude-filter-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/tabs/SkyAtlas_Altitude_Filter.png",
+      "classification": "nina-ui",
+      "output": "docs/images/generated/tabs/SkyAtlas_Altitude_Filter.png",
       "width": 449,
       "height": 203,
-      "exclusionReason": "This selective NINA workflow, annotation or hardware-specific state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting a guessed or incomplete view."
+      "fixture": "view",
+      "state": "sky-atlas-observation-filter",
+      "viewType": "NINA.View.SkyAtlasView",
+      "renderWidth": 1200,
+      "renderHeight": 1080,
+      "cropTarget": "tabs:sky-atlas-observation",
+      "displayName": "Sky Atlas observation filter"
     },
     {
       "id": "docs-images-tabs-skyatlas1-png",
-      "classification": "brand-or-static",
-      "output": "docs/images/tabs/skyAtlas1.png",
+      "classification": "nina-ui",
+      "output": "docs/images/generated/tabs/skyAtlas1.png",
       "width": 2251,
       "height": 1300,
-      "exclusionReason": "This full sky atlas view contains the altitude chart's live Now marker, which does not use the fixture time provider. Keep the original capture until the chart exposes deterministic time through an existing production interface."
+      "fixture": "view",
+      "state": "sky-atlas-full",
+      "viewType": "NINA.View.SkyAtlasView",
+      "displayName": "Sky Atlas"
     },
     {
       "id": "docs-images-tabs-targetsettings-png",
@@ -3404,7 +3559,7 @@
       "output": "docs/images/tabs/targetsettings.png",
       "width": 511,
       "height": 242,
-      "exclusionReason": "This selective NINA workflow, annotation or hardware-specific state is not represented faithfully by a verified deterministic fixture. Keep the original capture instead of substituting a guessed or incomplete view."
+      "exclusionReason": "This selective target-settings capture documents a rotation row with contextual annotations. Keep it until that exact target editor state can be reproduced without substituting a broader or incomplete view."
     },
     {
       "id": "docs-images-tabs-weather-png",

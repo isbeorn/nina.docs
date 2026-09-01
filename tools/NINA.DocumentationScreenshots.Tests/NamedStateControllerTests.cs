@@ -601,6 +601,92 @@ public class NamedStateControllerTests {
         }
     }
 
+    [Test]
+    public void Apply_ExpandsTheRealCameraCoolingAndWarmingControls() {
+        ScreenshotAsset asset = new() {
+            Id = "imaging-camera-controls",
+            Classification = ScreenshotClassification.NinaUi,
+            Output = "docs/images/generated/tabs/cameratab.png",
+            Width = 520,
+            Height = 455,
+            Fixture = "view",
+            State = "imaging-camera-controls",
+            ViewType = "NINA.View.AnchorableCameraView"
+        };
+        FrameworkElement fixture = new FixtureRegistry().Create(asset);
+        Window host = new() { Width = asset.Width, Height = asset.Height, Content = fixture, ShowInTaskbar = false };
+        try {
+            host.Show();
+            fixture.UpdateLayout();
+
+            NamedStateController.Apply(fixture, asset);
+
+            List<Expander> cameraControls = FindDescendants<Expander>(fixture)
+                .Where(expander => Equals(expander.Header, NINA.Core.Locale.Loc.Instance["LblCooling"])
+                    || Equals(expander.Header, NINA.Core.Locale.Loc.Instance["LblWarming"]))
+                .ToList();
+            Assert.Multiple(() => {
+                Assert.That(cameraControls, Has.Count.EqualTo(2));
+                Assert.That(cameraControls, Has.All.Property(nameof(Expander.IsExpanded)).True);
+            });
+        } finally {
+            host.Close();
+        }
+    }
+
+    [Test]
+    public void Apply_RestoresTheSkyAtlasDurationSelectionAfterAnotherSkyAtlasView() {
+        FixtureRegistry registry = new();
+        ScreenshotAsset chartAsset = new() {
+            Id = "sky-atlas-chart-first",
+            Classification = ScreenshotClassification.NinaGeneratedVisual,
+            Output = "docs/images/generated/tabs/altitudechartwithhorizon.png",
+            Width = 361,
+            Height = 185,
+            Fixture = "view",
+            State = "sky-atlas-altitude-chart",
+            ViewType = "NINA.View.SkyAtlasView",
+            RenderWidth = 1200,
+            RenderHeight = 1080,
+            CropTarget = "tabs:sky-atlas-altitude"
+        };
+        FrameworkElement chart = registry.Create(chartAsset);
+        Window chartHost = new() { Width = 1200, Height = 1080, Content = chart, ShowInTaskbar = false };
+        chartHost.Show();
+        chartHost.UpdateLayout();
+        NamedStateController.Apply(chart, chartAsset);
+        chartHost.Close();
+
+        ScreenshotAsset filterAsset = new() {
+            Id = "sky-atlas-filter-second",
+            Classification = ScreenshotClassification.NinaUi,
+            Output = "docs/images/generated/tabs/SkyAtlas_Altitude_Filter.png",
+            Width = 449,
+            Height = 203,
+            Fixture = "view",
+            State = "sky-atlas-observation-filter",
+            ViewType = "NINA.View.SkyAtlasView",
+            RenderWidth = 1200,
+            RenderHeight = 1080,
+            CropTarget = "tabs:sky-atlas-observation"
+        };
+        FrameworkElement filter = registry.Create(filterAsset);
+        Window filterHost = new() { Width = 1200, Height = 1080, Content = filter, ShowInTaskbar = false };
+        try {
+            filterHost.Show();
+            filterHost.UpdateLayout();
+
+            NamedStateController.Apply(filter, filterAsset);
+
+            ComboBox duration = FindDescendants<ComboBox>(filter)
+                .First(combo => combo.Items.OfType<KeyValuePair<double, string>>()
+                    .Any(item => item.Key == 5 && item.Value == "5h"));
+            Assert.That(duration.SelectedItem, Is.EqualTo(new KeyValuePair<double, string>(5, "5h")));
+        } finally {
+            filterHost.Close();
+        }
+    }
+
     private static ScreenshotAsset SequencerAsset(string id, string output) => new() {
         Id = id,
         Classification = ScreenshotClassification.NinaUi,
