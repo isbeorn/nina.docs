@@ -17,9 +17,18 @@ using System.Windows.Automation.Peers;
 using System.Windows.Automation.Provider;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Effects;
+using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using System.Runtime.InteropServices;
+using System.Reflection;
+using Microsoft.Xaml.Behaviors;
+using NINA.Core.Enum;
+using NINA.Core.Locale;
+using NINA.Sequencer;
+using NINA.Sequencer.Behaviors;
 using NINA.Sequencer.Container;
+using NINA.Sequencer.SequenceItem.Imaging;
 
 namespace NINA.DocumentationScreenshots;
 
@@ -31,6 +40,8 @@ public static class NamedStateController {
         ResetProductionMenuMode(fixture);
         string output = asset.Output.Replace('\\', '/').ToLowerInvariant();
         ApplyAdvancedSequencerSidebarState(fixture, output, asset.Id);
+        PinAltitudeChartNowMarkers(fixture);
+        ApplyAdvancedSequencerDragState(fixture, output, asset.Id);
 
         if (output.EndsWith("/sequencer/sequencer_addtrigger.png", StringComparison.Ordinal)) {
             OpenProductionContextMenu(fixture, "AddTriggerButton", asset.Id);
@@ -43,6 +54,12 @@ public static class NamedStateController {
         }
         if (output.EndsWith("/sequencer/sequencer_addinstructionset.png", StringComparison.Ordinal)) {
             OpenProductionRootMenu(fixture, "Instruction Set", asset.Id);
+        }
+        if (output.EndsWith("/sequencer/sequencer_addtargettotargettab.png", StringComparison.Ordinal)) {
+            OpenProductionSaveTargetTooltip(fixture, asset.Id);
+        }
+        if (output.EndsWith("/sequencer/sequencer_issues.png", StringComparison.Ordinal)) {
+            OpenProductionValidationTooltip(fixture, asset.Id);
         }
 
         if (output.EndsWith("/sequencer/conditions/loopuntiltime.png", StringComparison.Ordinal)) {
@@ -58,6 +75,248 @@ public static class NamedStateController {
         }
     }
 
+    private static void PinAltitudeChartNowMarkers(FrameworkElement fixture) {
+        double fixedNow = OxyPlot.Axes.DateTimeAxis.ToDouble(DocumentationApplicationHost.FixedDateTime.Now);
+        foreach (OxyPlot.Wpf.LineAnnotation marker in FindDescendants<OxyPlot.Wpf.Plot>(fixture)
+            .SelectMany(plot => plot.Annotations.OfType<OxyPlot.Wpf.LineAnnotation>())
+            .Where(annotation => System.Windows.Data.BindingOperations
+                .GetBinding(annotation, OxyPlot.Wpf.LineAnnotation.XProperty)
+                ?.Path.Path == "Data.Ticker.OxyNow")) {
+            System.Windows.Data.BindingOperations.ClearBinding(marker, OxyPlot.Wpf.LineAnnotation.XProperty);
+            marker.X = fixedNow;
+        }
+    }
+
+    private static void ApplyAdvancedSequencerDragState(
+            FrameworkElement fixture,
+            string output,
+            string screenshotId) {
+        if (!ContainsAny(
+                output,
+                "sequencer_dragdrop.png",
+                "sequencer_addtarget.png",
+                "sequencer_applytarget.png",
+                "sequencer_droptargettotab.png",
+                "sequencer_saveastemplatedragdrop.png")) {
+            return;
+        }
+        if (fixture.DataContext is not NINA.ViewModel.Sequencer.ISequence2VM viewModel) {
+            throw new CatalogException($"Screenshot '{screenshotId}' requested a sequencer drag state without NINA's production sequencer view model.");
+        }
+
+        Grid layoutRoot = FindDescendants<Grid>(fixture)
+            .FirstOrDefault(grid => ReferenceEquals(VisualTreeHelper.GetParent(grid), fixture))
+            ?? FindDescendants<Grid>(fixture).FirstOrDefault()
+            ?? throw new CatalogException($"Screenshot '{screenshotId}' could not find the production sequencer layout grid.");
+        List<(FrameworkElement Element, DragOverBehavior Behavior)> dropTargets = FindDescendants<FrameworkElement>(fixture)
+            .Where(element => element.IsVisible && element.ActualWidth > 1 && element.ActualHeight > 1)
+            .SelectMany(element => Interaction.GetBehaviors(element)
+                .OfType<DragOverBehavior>()
+                .Select(behavior => (element, behavior)))
+            .ToList();
+        List<FrameworkElement> dragSources = FindDescendants<FrameworkElement>(fixture)
+            .Where(element => element.IsVisible && element.ActualWidth > 1 && element.ActualHeight > 1)
+            .Where(element => Interaction.GetBehaviors(element).OfType<DragDropBehavior>().Any())
+            .ToList();
+
+        FrameworkElement source;
+        (FrameworkElement Element, DragOverBehavior Behavior) target;
+        if (output.EndsWith("/sequencer/sequencer_dragdrop.png", StringComparison.Ordinal)) {
+            ISequenceContainer startArea = (ISequenceContainer)viewModel.Sequencer.MainContainer.Items[0];
+            SequentialContainer instructionSet = startArea.Items.OfType<SequentialContainer>().Single();
+            source = dragSources.FirstOrDefault(element =>
+                    element.DataContext is TakeExposure)
+                ?? throw new CatalogException($"Screenshot '{screenshotId}' could not find NINA's production Take Exposure sidebar item.");
+            source = ExpandProductionDragSource(source);
+            target = FindDropTarget(
+                dropTargets,
+                candidate => ReferenceEquals(candidate.Element.DataContext, instructionSet)
+                    && candidate.Behavior.AllowDragCenter
+                    && string.Equals(
+                        candidate.Behavior.DragOverCenterText,
+                        Loc.Instance["LblDragOver_CenterText"],
+                        StringComparison.Ordinal),
+                screenshotId,
+                "empty instruction set");
+        } else if (output.EndsWith("/sequencer/sequencer_saveastemplatedragdrop.png", StringComparison.Ordinal)) {
+            ISequenceContainer targetArea = (ISequenceContainer)viewModel.Sequencer.MainContainer.Items[1];
+            ISequenceContainer sequence = targetArea.Items.OfType<ISequenceContainer>().Single();
+            source = FindContainerDragSource(dragSources, sequence, screenshotId);
+            target = FindDropTarget(
+                dropTargets,
+                candidate => string.Equals(
+                    candidate.Behavior.DragOverCenterText,
+                    Loc.Instance["LblDragOver_AddTemplate"],
+                    StringComparison.Ordinal),
+                screenshotId,
+                "template sidebar");
+        } else {
+            TargetSequenceContainer savedTarget = dragSources
+                .Select(element => element.DataContext)
+                .OfType<TargetSequenceContainer>()
+                .FirstOrDefault()
+                ?? throw new CatalogException($"Screenshot '{screenshotId}' could not find NINA's production saved-target item.");
+            source = dragSources.First(element => ReferenceEquals(element.DataContext, savedTarget));
+            source = ExpandProductionDragSource(source);
+            if (output.EndsWith("/sequencer/sequencer_addtarget.png", StringComparison.Ordinal)) {
+                ISequenceContainer targetArea = (ISequenceContainer)viewModel.Sequencer.MainContainer.Items[1];
+                target = FindDropTarget(
+                    dropTargets,
+                    candidate => ReferenceEquals(candidate.Element.DataContext, targetArea)
+                        && candidate.Behavior.AllowDragCenter,
+                    screenshotId,
+                    "target area");
+            } else if (output.EndsWith("/sequencer/sequencer_applytarget.png", StringComparison.Ordinal)) {
+                target = FindDropTarget(
+                    dropTargets,
+                    candidate => string.Equals(
+                        candidate.Behavior.DragOverCenterText,
+                        Loc.Instance["Lbl_SequenceContainer_DeepSkyObjectContainer_UpdateTarget"],
+                        StringComparison.Ordinal),
+                    screenshotId,
+                    "deep-sky target header");
+            } else {
+                ISequenceContainer targetArea = (ISequenceContainer)viewModel.Sequencer.MainContainer.Items[1];
+                ISequenceContainer sequence = targetArea.Items.OfType<ISequenceContainer>().Single();
+                source = FindContainerDragSource(dragSources, sequence, screenshotId);
+                target = FindDropTarget(
+                    dropTargets,
+                    candidate => string.Equals(
+                        candidate.Behavior.DragOverCenterText,
+                        Loc.Instance["Lbl_Sequencer_TargetSidebar_DragOver_AddTarget"],
+                        StringComparison.Ordinal),
+                    screenshotId,
+                    "target sidebar");
+            }
+        }
+
+        AddProductionDragAdorners(layoutRoot, source, target.Element, target.Behavior, screenshotId);
+    }
+
+    private static (FrameworkElement Element, DragOverBehavior Behavior) FindDropTarget(
+            IEnumerable<(FrameworkElement Element, DragOverBehavior Behavior)> candidates,
+            Func<(FrameworkElement Element, DragOverBehavior Behavior), bool> predicate,
+            string screenshotId,
+            string description) => candidates.FirstOrDefault(predicate) is var match && match.Element is not null
+        ? match
+        : throw new CatalogException($"Screenshot '{screenshotId}' could not find NINA's production {description} drop target.");
+
+    private static FrameworkElement FindContainerDragSource(
+            IEnumerable<FrameworkElement> candidates,
+            ISequenceContainer container,
+            string screenshotId) {
+        FrameworkElement source = candidates.FirstOrDefault(element => ReferenceEquals(element.DataContext, container))
+            ?? throw new CatalogException($"Screenshot '{screenshotId}' could not find NINA's production '{container.Name}' drag source.");
+        return ExpandProductionDragSource(source);
+    }
+
+    private static FrameworkElement ExpandProductionDragSource(FrameworkElement source) {
+        object? dataContext = source.DataContext;
+        FrameworkElement result = source;
+        DependencyObject? current = VisualTreeHelper.GetParent(source);
+        while (current is FrameworkElement parent) {
+            if (!ReferenceEquals(parent.DataContext, dataContext)) {
+                break;
+            }
+            result = parent;
+            current = VisualTreeHelper.GetParent(parent);
+        }
+        return result;
+    }
+
+    private static void AddProductionDragAdorners(
+            Grid layoutRoot,
+            FrameworkElement source,
+            FrameworkElement target,
+            DragOverBehavior targetBehavior,
+            string screenshotId) {
+        RenderTargetBitmap sourceImage = RenderDragSource(source, screenshotId);
+        DragDropBehavior dragBehavior = new(layoutRoot) { OriginalParentedObject = source, IsClone = true };
+        UIElement dragAdorner = CreateProductionAdorner(
+            "NINA.Sequencer.Behaviors.DragDropAdorner",
+            screenshotId,
+            dragBehavior,
+            layoutRoot,
+            sourceImage);
+        dragAdorner.IsHitTestVisible = false;
+        SpanLayoutGrid(dragAdorner, layoutRoot);
+        Point sourceOrigin = source.TranslatePoint(new Point(0, 0), layoutRoot);
+        Point targetOrigin = target.TranslatePoint(new Point(0, 0), layoutRoot);
+        Point sourceCenter = new(sourceOrigin.X + source.ActualWidth / 2, sourceOrigin.Y + source.ActualHeight / 2);
+        Point targetCenter = new(targetOrigin.X + target.ActualWidth / 2, targetOrigin.Y + target.ActualHeight / 2);
+        Point dragCenter = new(
+            sourceCenter.X + (targetCenter.X - sourceCenter.X) * 0.7,
+            sourceCenter.Y + (targetCenter.Y - sourceCenter.Y) * 0.7);
+        dragAdorner.RenderTransform = new TranslateTransform(
+            dragCenter.X - sourceImage.PixelWidth / 2.0,
+            dragCenter.Y - sourceImage.PixelHeight / 2.0);
+        Panel.SetZIndex(dragAdorner, 1000);
+        layoutRoot.Children.Add(dragAdorner);
+        source.Effect = new BlurEffect { Radius = 10 };
+
+        bool leftOfTarget = targetBehavior.DragOverDisplayAnchor == DragOverDisplayAnchor.Left;
+        UIElement dropAdorner = CreateProductionAdorner(
+            "NINA.Sequencer.Behaviors.DragOverAdorner",
+            screenshotId,
+            target.ActualWidth,
+            target.ActualHeight,
+            targetBehavior.DragOverCenterText,
+            leftOfTarget,
+            DropTargetEnum.Center,
+            target);
+        SpanLayoutGrid(dropAdorner, layoutRoot);
+        double adornerWidth = ReadProductionAdornerDimension(dropAdorner, "AdornerWidth", screenshotId);
+        double adornerHeight = ReadProductionAdornerDimension(dropAdorner, "AdornerHeight", screenshotId);
+        dropAdorner.RenderTransform = new TranslateTransform(
+            targetOrigin.X + (leftOfTarget ? -(adornerWidth - target.ActualWidth) : target.ActualWidth),
+            targetOrigin.Y + target.ActualHeight / 2 - adornerHeight / 2);
+        Panel.SetZIndex(dropAdorner, 1001);
+        layoutRoot.Children.Add(dropAdorner);
+        layoutRoot.UpdateLayout();
+    }
+
+    private static RenderTargetBitmap RenderDragSource(FrameworkElement source, string screenshotId) {
+        int width = Math.Max(1, (int)Math.Ceiling(source.ActualWidth));
+        int height = Math.Max(1, (int)Math.Ceiling(source.ActualHeight));
+        if (width <= 1 || height <= 1) {
+            throw new CatalogException($"Screenshot '{screenshotId}' found a zero-sized production drag source.");
+        }
+        DrawingVisual clone = new();
+        using (DrawingContext drawing = clone.RenderOpen()) {
+            VisualBrush brush = new(source) { Stretch = Stretch.None, Opacity = 0.4 };
+            drawing.DrawRectangle(brush, null, new Rect(0, 0, width, height));
+        }
+        RenderTargetBitmap bitmap = new(width, height, 96, 96, PixelFormats.Pbgra32);
+        bitmap.Render(clone);
+        return bitmap;
+    }
+
+    private static UIElement CreateProductionAdorner(string typeName, string screenshotId, params object[] arguments) {
+        Type type = typeof(DragDropBehavior).Assembly.GetType(typeName, throwOnError: true)!;
+        try {
+            return (UIElement)(Activator.CreateInstance(
+                type,
+                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic,
+                binder: null,
+                args: arguments,
+                culture: null)
+                ?? throw new InvalidOperationException("The constructor returned null."));
+        } catch (Exception ex) {
+            throw new CatalogException($"Screenshot '{screenshotId}' could not create NINA's production '{type.Name}': {ex.GetBaseException().Message}");
+        }
+    }
+
+    private static double ReadProductionAdornerDimension(UIElement adorner, string fieldName, string screenshotId) =>
+        adorner.GetType().GetField(fieldName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
+            ?.GetValue(adorner) is double value
+            ? value
+            : throw new CatalogException($"Screenshot '{screenshotId}' could not read NINA's production drag adorner dimension '{fieldName}'.");
+
+    private static void SpanLayoutGrid(UIElement element, Grid layoutRoot) {
+        Grid.SetColumnSpan(element, Math.Max(1, layoutRoot.ColumnDefinitions.Count));
+        Grid.SetRowSpan(element, Math.Max(1, layoutRoot.RowDefinitions.Count));
+    }
+
     private static void ResetProductionMenuMode(FrameworkElement fixture) {
         foreach (System.Windows.Interop.HwndSource source in PresentationSource.CurrentSources
             .OfType<System.Windows.Interop.HwndSource>()
@@ -71,6 +330,10 @@ public static class NamedStateController {
         }
         foreach (Button button in FindDescendants<Button>(fixture).Where(button => button.ContextMenu?.IsOpen == true)) {
             button.ContextMenu!.IsOpen = false;
+        }
+        foreach (FrameworkElement element in FindDescendants<FrameworkElement>(fixture)
+            .Where(element => element.ToolTip is ToolTip { IsOpen: true })) {
+            ((ToolTip)element.ToolTip).IsOpen = false;
         }
         fixture.Dispatcher.Invoke(DispatcherPriority.ApplicationIdle, new Action(() => { }));
         for (int attempt = 0; attempt < 10 && EnumeratePopupSources().Any(); attempt++) {
@@ -125,6 +388,46 @@ public static class NamedStateController {
             throw new CatalogException($"Screenshot '{screenshotId}' invoked NINA's production '{buttonName}' button but its menu did not open.");
         }
         button.ContextMenu.UpdateLayout();
+    }
+
+    private static void OpenProductionSaveTargetTooltip(FrameworkElement fixture, string screenshotId) {
+        Button button = FindDescendants<Button>(fixture)
+            .FirstOrDefault(control => control.Name == "TargetContainerButton"
+                && control.DataContext is DeepSkyObjectContainer)
+            ?? throw new CatalogException($"Screenshot '{screenshotId}' could not find NINA's production save-target button.");
+        if (button.ToolTip is not ToolTip tooltip) {
+            throw new CatalogException($"Screenshot '{screenshotId}' found NINA's save-target button without its production tooltip.");
+        }
+        tooltip.PlacementTarget = button;
+        tooltip.Placement = System.Windows.Controls.Primitives.PlacementMode.Bottom;
+        tooltip.IsOpen = true;
+        tooltip.UpdateLayout();
+        fixture.Dispatcher.Invoke(DispatcherPriority.ApplicationIdle, new Action(() => { }));
+        if (!tooltip.IsOpen) {
+            throw new CatalogException($"Screenshot '{screenshotId}' opened NINA's production save-target tooltip but WPF closed it before capture.");
+        }
+    }
+
+    private static void OpenProductionValidationTooltip(FrameworkElement fixture, string screenshotId) {
+        Border issue = FindDescendants<Border>(fixture)
+            .Where(border => border.IsVisible
+                && border.DataContext is TakeExposure exposure
+                && exposure.Issues.Count > 0
+                && border.ToolTip is not null)
+            .OrderBy(border => border.ActualWidth * border.ActualHeight)
+            .FirstOrDefault()
+            ?? throw new CatalogException($"Screenshot '{screenshotId}' could not find NINA's production validation indicator.");
+        object productionContent = issue.ToolTip;
+        ToolTip tooltip = productionContent as ToolTip ?? new ToolTip { Content = productionContent };
+        issue.ToolTip = tooltip;
+        tooltip.PlacementTarget = issue;
+        tooltip.Placement = System.Windows.Controls.Primitives.PlacementMode.Right;
+        tooltip.IsOpen = true;
+        tooltip.UpdateLayout();
+        fixture.Dispatcher.Invoke(DispatcherPriority.ApplicationIdle, new Action(() => { }));
+        if (!tooltip.IsOpen) {
+            throw new CatalogException($"Screenshot '{screenshotId}' opened NINA's production validation tooltip but WPF closed it before capture.");
+        }
     }
 
     private static void Invoke(Button button, string screenshotId) {
@@ -190,13 +493,26 @@ public static class NamedStateController {
         }
         sidebar.SelectedItem = tab;
         sidebar.UpdateLayout();
+        fixture.Dispatcher.Invoke(DispatcherPriority.ApplicationIdle, new Action(() => { }));
+        fixture.UpdateLayout();
+
+        if (output.EndsWith("/sequencer/sequencer_usertemplate.png", StringComparison.Ordinal)) {
+            Expander template = FindDescendants<Expander>(fixture)
+                .FirstOrDefault(expander => expander.DataContext is TemplatedSequenceContainer item
+                    && item.Container.Name == "RGB Loop")
+                ?? throw new CatalogException($"Screenshot '{screenshotId}' could not find NINA's production RGB Loop template preview.");
+            template.IsExpanded = true;
+            template.UpdateLayout();
+            fixture.Dispatcher.Invoke(DispatcherPriority.ApplicationIdle, new Action(() => { }));
+            fixture.UpdateLayout();
+        }
     }
 
     private static string GetRequestedSidebarTab(string output) {
         if (ContainsAny(output, "sequencer_templates", "saveastemplate", "usertemplate")) {
             return "Templates";
         }
-        if (ContainsAny(output, "targetstab", "addtargettotargettab", "droptargettotab", "applytarget")) {
+        if (ContainsAny(output, "targetstab", "addtarget", "droptargettotab", "applytarget")) {
             return "Targets";
         }
         if (ContainsAny(output, "sequencer_symbols", "symbolvalues", "definesymbol", "definevariable", "defineconstant", "symbolexample", "expressionvalue", "undefined", "expressionwarning")) {

@@ -61,9 +61,23 @@ public sealed class ScreenshotCrop {
 }
 
 public sealed class ScreenshotCallout {
+    public ScreenshotCalloutKind Kind { get; init; } = ScreenshotCalloutKind.Badge;
     public double X { get; init; }
     public double Y { get; init; }
-    public required string Text { get; init; }
+    public double? Width { get; init; }
+    public string? Text { get; init; }
+    public List<ScreenshotPoint> Points { get; init; } = [];
+}
+
+public sealed class ScreenshotPoint {
+    public double X { get; init; }
+    public double Y { get; init; }
+}
+
+public enum ScreenshotCalloutKind {
+    Badge,
+    Label,
+    Arrow
 }
 
 public enum ScreenshotClassification {

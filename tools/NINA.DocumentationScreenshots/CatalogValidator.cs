@@ -115,6 +115,7 @@ public static class CatalogValidator {
         }
         if (asset.CropTarget is not "target-area:first-item"
             and not "target-area:first-item-instructions"
+            and not "target-area:all-items"
             and not "root-add-menu"
             and not "settings:meridian-flip"
             and not "framing:image-source"
@@ -124,6 +125,7 @@ public static class CatalogValidator {
         }
         bool sequencerCrop = asset.CropTarget is "target-area:first-item"
             or "target-area:first-item-instructions"
+            or "target-area:all-items"
             or "root-add-menu";
         if (sequencerCrop && !string.Equals(asset.Fixture, "sequencer", StringComparison.OrdinalIgnoreCase)) {
             throw new CatalogException($"Screenshot '{asset.Id}' uses a sequencer crop target with fixture '{asset.Fixture}'.");
@@ -141,8 +143,30 @@ public static class CatalogValidator {
 
     private static void ValidateCallouts(ScreenshotAsset asset) {
         foreach (ScreenshotCallout callout in asset.Callouts) {
-            if (!InUnitRange(callout.X) || !InUnitRange(callout.Y) || string.IsNullOrWhiteSpace(callout.Text)) {
-                throw new CatalogException($"Screenshot '{asset.Id}' has an invalid callout.");
+            if (callout.Kind == ScreenshotCalloutKind.Arrow) {
+                bool hasValidPoints = callout.Points.Count >= 2
+                    && callout.Points.All(point => InUnitRange(point.X) && InUnitRange(point.Y));
+                bool hasVisibleSegment = callout.Points.Zip(callout.Points.Skip(1))
+                    .Any(segment => segment.First.X != segment.Second.X || segment.First.Y != segment.Second.Y);
+                if (!hasValidPoints || !hasVisibleSegment || !string.IsNullOrWhiteSpace(callout.Text)) {
+                    throw new CatalogException($"Screenshot '{asset.Id}' has an invalid arrow callout.");
+                }
+                continue;
+            }
+
+            bool validPosition = InUnitRange(callout.X) && InUnitRange(callout.Y);
+            bool validText = !string.IsNullOrWhiteSpace(callout.Text);
+            if (callout.Kind == ScreenshotCalloutKind.Label) {
+                bool validWidth = callout.Width is > 0 and <= 1
+                    && callout.X + callout.Width.Value <= 1;
+                if (!validPosition || !validText || !validWidth || callout.Points.Count > 0) {
+                    throw new CatalogException($"Screenshot '{asset.Id}' has an invalid label callout.");
+                }
+                continue;
+            }
+
+            if (!validPosition || !validText || callout.Width is not null || callout.Points.Count > 0) {
+                throw new CatalogException($"Screenshot '{asset.Id}' has an invalid badge callout.");
             }
         }
     }

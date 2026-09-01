@@ -36,8 +36,9 @@ public sealed class ScreenshotRenderer(FixtureRegistry fixtures) {
         FrameworkElement fixture = fixtures.Create(asset);
         int renderWidth = asset.RenderWidth ?? asset.Width;
         int renderHeight = asset.RenderHeight ?? asset.Height;
-        bool desktopCapture = RequiresContextMenu(asset);
-        using CursorPositionScope? cursorScope = desktopCapture ? CursorPositionScope.MoveAway(asset.Id) : null;
+        bool contextMenuCapture = RequiresContextMenu(asset);
+        bool desktopCapture = RequiresDesktopContextMenus(asset);
+        using CursorPositionScope? cursorScope = contextMenuCapture ? CursorPositionScope.MoveAway(asset.Id) : null;
         bool requestsCrop = asset.Crop is not null || !string.IsNullOrWhiteSpace(asset.CropTarget);
         IReadOnlyList<ScreenshotCallout> renderCallouts = requestsCrop ? [] : asset.Callouts;
         FrameworkElement content = ScreenshotChrome.Wrap(fixture, renderWidth, renderHeight, renderCallouts);
@@ -118,6 +119,10 @@ public sealed class ScreenshotRenderer(FixtureRegistry fixtures) {
             .Where(button => button.ContextMenu?.IsOpen == true)
             .Select(button => (button.ContextMenu!, (FrameworkElement)button))
             .ToList();
+        List<(ToolTip ToolTip, FrameworkElement Anchor)> toolTipLayers = FindVisualDescendants<FrameworkElement>(content)
+            .Where(element => element.ToolTip is ToolTip { IsOpen: true })
+            .Select(element => ((ToolTip)element.ToolTip, element))
+            .ToList();
         bool requiresPopup = RequiresPopup(asset);
         if (requiresPopup && popupLayers.Count == 0) {
             throw new CatalogException($"Screenshot '{asset.Id}' requested an open dropdown state but its production Popup was not available.");
@@ -126,7 +131,7 @@ public sealed class ScreenshotRenderer(FixtureRegistry fixtures) {
         if (requiresContextMenu && contextMenuLayers.Count == 0) {
             throw new CatalogException($"Screenshot '{asset.Id}' requested an add menu state but its production ContextMenu was not available.");
         }
-        if (popupLayers.Count == 0 && contextMenuLayers.Count == 0) {
+        if (popupLayers.Count == 0 && contextMenuLayers.Count == 0 && toolTipLayers.Count == 0) {
             return baseLayer;
         }
 
@@ -164,8 +169,23 @@ public sealed class ScreenshotRenderer(FixtureRegistry fixtures) {
                 }
                 BitmapSource menuLayer = RenderVisualBrush(menu, width, height);
                 ValidateNonBlank(menuLayer, asset.Id + " production ContextMenu");
-                Point relativeOrigin = GetContextMenuOrigin(anchor, width, content, renderWidth);
+                Point relativeOrigin = GetContextMenuOrigin(anchor, menu, width, content, renderWidth);
                 drawing.DrawImage(menuLayer, new Rect(relativeOrigin.X, relativeOrigin.Y, width, height));
+            }
+            foreach ((ToolTip tooltip, FrameworkElement anchor) in toolTipLayers) {
+                Size renderedSize = GetRenderedSize(tooltip);
+                int width = Math.Max(1, (int)Math.Ceiling(renderedSize.Width));
+                int height = Math.Max(1, (int)Math.Ceiling(renderedSize.Height));
+                BitmapSource tooltipLayer = RenderVisualBrush(tooltip, width, height);
+                ValidateNonBlank(tooltipLayer, asset.Id + " production ToolTip");
+                Point relativeOrigin = GetToolTipOrigin(
+                    anchor,
+                    tooltip,
+                    new Size(width, height),
+                    content,
+                    renderWidth,
+                    renderHeight);
+                drawing.DrawImage(tooltipLayer, new Rect(relativeOrigin.X, relativeOrigin.Y, width, height));
             }
         }
 
@@ -183,6 +203,12 @@ public sealed class ScreenshotRenderer(FixtureRegistry fixtures) {
         return output.EndsWith("/sequencer/Sequencer_AddTrigger.png", StringComparison.OrdinalIgnoreCase)
             || output.EndsWith("/sequencer/Sequencer_AddLoopCondition.png", StringComparison.OrdinalIgnoreCase)
             || output.EndsWith("/sequencer/Sequencer_AddInstruction.png", StringComparison.OrdinalIgnoreCase)
+            || output.EndsWith("/sequencer/Sequencer_AddInstructionSet.png", StringComparison.OrdinalIgnoreCase);
+    }
+
+    private static bool RequiresDesktopContextMenus(ScreenshotAsset asset) {
+        string output = asset.Output.Replace('\\', '/');
+        return output.EndsWith("/sequencer/Sequencer_AddInstruction.png", StringComparison.OrdinalIgnoreCase)
             || output.EndsWith("/sequencer/Sequencer_AddInstructionSet.png", StringComparison.OrdinalIgnoreCase);
     }
 
@@ -294,6 +320,10 @@ public sealed class ScreenshotRenderer(FixtureRegistry fixtures) {
             if (button.ContextMenu?.IsOpen == true) {
                 button.ContextMenu.IsOpen = false;
             }
+        }
+        foreach (FrameworkElement element in FindVisualDescendants<FrameworkElement>(root)
+            .Where(element => element.ToolTip is ToolTip { IsOpen: true })) {
+            ((ToolTip)element.ToolTip).IsOpen = false;
         }
         DrainDispatcher();
         for (int attempt = 0; attempt < 10 && GetPopupSources().Count > 0; attempt++) {
@@ -418,16 +448,19 @@ public sealed class ScreenshotRenderer(FixtureRegistry fixtures) {
             return ResolveFramingCrop(content, asset, renderWidth, renderHeight);
         }
         bool instructionsOnly = asset.CropTarget == "target-area:first-item-instructions";
-        if (asset.CropTarget != "target-area:first-item" && !instructionsOnly) {
+        bool allItems = asset.CropTarget == "target-area:all-items";
+        if (asset.CropTarget != "target-area:first-item" && !instructionsOnly && !allItems) {
             throw new CatalogException($"Screenshot '{asset.Id}' has unknown crop target '{asset.CropTarget}'.");
         }
         if (fixture.DataContext is not ISequence2VM viewModel
             || viewModel.Sequencer.MainContainer.Items.ElementAtOrDefault(1) is not ISequenceContainer targetArea
-            || targetArea.Items.FirstOrDefault() is not ISequenceItem targetEntity) {
+            || targetArea.Items.FirstOrDefault() is not ISequenceItem firstTargetEntity) {
             throw new CatalogException($"Screenshot '{asset.Id}' requested the first target-area item but the production sequence has none.");
         }
 
-        HashSet<NINA.Sequencer.ISequenceEntity> modelEntities = CollectSequenceEntities(targetEntity);
+        HashSet<NINA.Sequencer.ISequenceEntity> modelEntities = allItems
+            ? targetArea.Items.SelectMany(CollectSequenceEntities).ToHashSet()
+            : CollectSequenceEntities(firstTargetEntity);
         List<FrameworkElement> targets = FindVisualDescendants<FrameworkElement>(content)
             .Where(element => element.DataContext is NINA.Sequencer.ISequenceEntity entity && modelEntities.Contains(entity))
             .Where(element => instructionsOnly
@@ -437,7 +470,7 @@ public sealed class ScreenshotRenderer(FixtureRegistry fixtures) {
             .ToList();
         if (targets.Count == 0) {
             throw new CatalogException(
-                $"Screenshot '{asset.Id}' could not locate the production container view for '{targetEntity.Name}'.");
+                $"Screenshot '{asset.Id}' could not locate the production sequence view for '{firstTargetEntity.Name}'.");
         }
 
         Rect bounds = Rect.Empty;
@@ -452,15 +485,28 @@ public sealed class ScreenshotRenderer(FixtureRegistry fixtures) {
         foreach (Button button in menuAnchors) {
             ContextMenu menu = button.ContextMenu!;
             menu.Measure(new Size(renderWidth, renderHeight));
-            double menuWidth = GetRenderedSize(menu).Width;
-            Point menuOrigin = GetContextMenuOrigin(button, menuWidth, content, renderWidth);
-            bounds.Union(new Rect(menuOrigin.X, bounds.Top, menuWidth, bounds.Height));
+            Size menuSize = GetRenderedSize(menu);
+            Point menuOrigin = GetContextMenuOrigin(button, menu, menuSize.Width, content, renderWidth);
+            bounds.Union(new Rect(menuOrigin, menuSize));
+        }
+        foreach (FrameworkElement anchor in FindVisualDescendants<FrameworkElement>(content)
+            .Where(element => element.ToolTip is ToolTip { IsOpen: true })) {
+            ToolTip tooltip = (ToolTip)anchor.ToolTip;
+            Size tooltipSize = GetRenderedSize(tooltip);
+            Point tooltipOrigin = GetToolTipOrigin(
+                anchor,
+                tooltip,
+                tooltipSize,
+                content,
+                renderWidth,
+                renderHeight);
+            bounds.Union(new Rect(tooltipOrigin, tooltipSize));
         }
         double availableRight = renderWidth;
         TabControl? sidebar = FindVisualDescendants<TabControl>(content).FirstOrDefault(control => control.Items.Count == 5);
-        if (sidebar is not null && menuAnchors.Count == 0) {
+        if (sidebar is not null) {
             double sidebarLeft = sidebar.TranslatePoint(new Point(0, 0), content).X;
-            if (sidebarLeft > bounds.Left) {
+            if (sidebarLeft > bounds.Left && bounds.Right <= sidebarLeft + 1) {
                 bounds.Intersect(new Rect(bounds.Left, bounds.Top, sidebarLeft - bounds.Left, bounds.Height));
                 availableRight = sidebarLeft;
             }
@@ -468,7 +514,8 @@ public sealed class ScreenshotRenderer(FixtureRegistry fixtures) {
         bounds = ExpandBoundsToAspect(
             bounds,
             asset.Width / (double)asset.Height,
-            new Rect(0, 0, availableRight, renderHeight));
+            new Rect(0, 0, availableRight, renderHeight),
+            asset.Id);
         double left = Math.Clamp(bounds.Left, 0, renderWidth - 1);
         double top = Math.Clamp(bounds.Top, 0, renderHeight - 1);
         double width = Math.Clamp(bounds.Right - left, 1, renderWidth - left);
@@ -499,7 +546,8 @@ public sealed class ScreenshotRenderer(FixtureRegistry fixtures) {
         bounds = ExpandBoundsToAspect(
             bounds,
             asset.Width / (double)asset.Height,
-            new Rect(0, 0, renderWidth, renderHeight));
+            new Rect(0, 0, renderWidth, renderHeight),
+            asset.Id);
         return new ScreenshotCrop {
             X = bounds.Left / renderWidth,
             Y = bounds.Top / renderHeight,
@@ -545,7 +593,8 @@ public sealed class ScreenshotRenderer(FixtureRegistry fixtures) {
         bounds = ExpandBoundsToAspect(
             bounds,
             asset.Width / (double)asset.Height,
-            new Rect(0, 0, renderWidth, renderHeight));
+            new Rect(0, 0, renderWidth, renderHeight),
+            asset.Id);
         return new ScreenshotCrop {
             X = bounds.Left / renderWidth,
             Y = bounds.Top / renderHeight,
@@ -567,7 +616,7 @@ public sealed class ScreenshotRenderer(FixtureRegistry fixtures) {
         }
     }
 
-    private static Rect ExpandBoundsToAspect(Rect bounds, double targetAspect, Rect available) {
+    private static Rect ExpandBoundsToAspect(Rect bounds, double targetAspect, Rect available, string screenshotId) {
         if (bounds.IsEmpty || targetAspect <= 0 || available.IsEmpty) {
             return bounds;
         }
@@ -590,8 +639,9 @@ public sealed class ScreenshotRenderer(FixtureRegistry fixtures) {
         }
         if (width + 0.01 < bounds.Width || height + 0.01 < bounds.Height) {
             throw new CatalogException(
-                $"The requested output aspect ratio cannot contain the real UI crop inside the configured render dimensions. " +
-                $"Increase renderWidth or renderHeight instead of clipping or distorting the view.");
+                $"Screenshot '{screenshotId}' requested an output aspect ratio that cannot contain its real UI crop " +
+                $"(crop {bounds.Width:F0}x{bounds.Height:F0}, available {available.Width:F0}x{available.Height:F0}). " +
+                "Increase renderWidth or renderHeight instead of clipping or distorting the view.");
         }
 
         double x = bounds.Left + (bounds.Width - width) / 2;
@@ -631,7 +681,7 @@ public sealed class ScreenshotRenderer(FixtureRegistry fixtures) {
         }
         bounds.Inflate(8, 8);
         bounds.Intersect(available);
-        bounds = ExpandBoundsToAspect(bounds, asset.Width / (double)asset.Height, available);
+        bounds = ExpandBoundsToAspect(bounds, asset.Width / (double)asset.Height, available, asset.Id);
         return new ScreenshotCrop {
             X = bounds.Left / renderWidth,
             Y = bounds.Top / renderHeight,
@@ -642,14 +692,68 @@ public sealed class ScreenshotRenderer(FixtureRegistry fixtures) {
 
     private static Point GetContextMenuOrigin(
             FrameworkElement anchor,
+            ContextMenu menu,
             double menuWidth,
             FrameworkElement content,
             double renderWidth) {
-        Point origin = anchor.TranslatePoint(new Point(0, anchor.ActualHeight), content);
+        try {
+            Point contentOrigin = content.PointToScreen(new Point(0, 0));
+            Point menuOrigin = menu.PointToScreen(new Point(0, 0));
+            DpiScale dpi = VisualTreeHelper.GetDpi(content);
+            Point relative = new(
+                (menuOrigin.X - contentOrigin.X) / dpi.DpiScaleX,
+                (menuOrigin.Y - contentOrigin.Y) / dpi.DpiScaleY);
+            if (double.IsFinite(relative.X)
+                && double.IsFinite(relative.Y)
+                && relative.X >= 0
+                && relative.X <= renderWidth
+                && relative.Y >= 0
+                && relative.Y <= content.ActualHeight) {
+                return relative;
+            }
+        } catch (InvalidOperationException) {
+            // Fall back to the anchor when WPF has not yet created the popup presentation source.
+        }
+        Point anchorTopLeft = anchor.TranslatePoint(new Point(0, 0), content);
+        double menuHeight = GetRenderedSize(menu).Height;
+        Point origin = menu.Placement switch {
+            PlacementMode.Left => new Point(anchorTopLeft.X - menuWidth, anchorTopLeft.Y),
+            PlacementMode.Right => new Point(anchorTopLeft.X + anchor.ActualWidth, anchorTopLeft.Y),
+            PlacementMode.Top => new Point(anchorTopLeft.X, anchorTopLeft.Y - menuHeight),
+            _ => new Point(anchorTopLeft.X, anchorTopLeft.Y + anchor.ActualHeight)
+        };
         if (origin.X + menuWidth > renderWidth) {
-            Point anchorTopLeft = anchor.TranslatePoint(new Point(0, 0), content);
             origin.X = Math.Max(0, anchorTopLeft.X + anchor.ActualWidth - menuWidth);
         }
+        origin.X = Math.Max(0, origin.X);
+        origin.Y = Math.Max(0, origin.Y);
+        return origin;
+    }
+
+    private static Point GetToolTipOrigin(
+            FrameworkElement anchor,
+            ToolTip tooltip,
+            Size tooltipSize,
+            FrameworkElement content,
+            double renderWidth,
+            double renderHeight) {
+        Point anchorOrigin = anchor.TranslatePoint(new Point(0, 0), content);
+        Point origin = tooltip.Placement switch {
+            PlacementMode.Right => new Point(anchorOrigin.X + anchor.ActualWidth, anchorOrigin.Y),
+            PlacementMode.Left => new Point(anchorOrigin.X - tooltipSize.Width, anchorOrigin.Y),
+            PlacementMode.Top => new Point(anchorOrigin.X, anchorOrigin.Y - tooltipSize.Height),
+            _ => new Point(anchorOrigin.X, anchorOrigin.Y + anchor.ActualHeight)
+        };
+        origin.Offset(tooltip.HorizontalOffset, tooltip.VerticalOffset);
+
+        if (origin.X + tooltipSize.Width > renderWidth && anchorOrigin.X >= tooltipSize.Width) {
+            origin.X = anchorOrigin.X - tooltipSize.Width;
+        }
+        if (origin.Y + tooltipSize.Height > renderHeight && anchorOrigin.Y >= tooltipSize.Height) {
+            origin.Y = anchorOrigin.Y - tooltipSize.Height;
+        }
+        origin.X = Math.Clamp(origin.X, 0, Math.Max(0, renderWidth - tooltipSize.Width));
+        origin.Y = Math.Clamp(origin.Y, 0, Math.Max(0, renderHeight - tooltipSize.Height));
         return origin;
     }
 

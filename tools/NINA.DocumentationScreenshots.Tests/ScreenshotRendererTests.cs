@@ -110,6 +110,32 @@ public class ScreenshotRendererTests {
     }
 
     [Test]
+    public void Render_LoopConditionsUsesFixedClock() {
+        ScreenshotAsset asset = new() {
+            Id = "deterministic-loop-conditions",
+            Classification = ScreenshotClassification.NinaUi,
+            Output = "docs/images/generated/sequencer/Sequencer_LoopConditions.png",
+            Fixture = "sequencer",
+            State = "sequencer-loop-conditions",
+            ViewType = "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView",
+            Width = 1451,
+            Height = 454,
+            RenderWidth = 1814,
+            RenderHeight = 1100,
+            CropTarget = "target-area:first-item"
+        };
+        string first = Path.Combine(root, "loop-conditions-first.png");
+        string second = Path.Combine(root, "loop-conditions-second.png");
+
+        ScreenshotRenderer renderer = new(new FixtureRegistry());
+        renderer.Render(asset, first);
+        Thread.Sleep(TimeSpan.FromSeconds(1.1));
+        renderer.Render(asset, second);
+
+        Assert.That(File.ReadAllBytes(second), Is.EqualTo(File.ReadAllBytes(first)));
+    }
+
+    [Test]
     public void Render_ContainerMenuIsDeterministicRegardlessOfDesktopCursorPosition() {
         ScreenshotAsset asset = new() {
             Id = "deterministic-add-condition",
@@ -119,7 +145,7 @@ public class ScreenshotRendererTests {
             State = "deterministic-add-condition",
             ViewType = "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView",
             Width = 1623,
-            Height = 250,
+            Height = 600,
             RenderWidth = 2029,
             RenderHeight = 1274,
             CropTarget = "target-area:first-item"
@@ -146,6 +172,29 @@ public class ScreenshotRendererTests {
 
         Assert.That(File.ReadAllBytes(second), Is.EqualTo(File.ReadAllBytes(first)),
             "Desktop hover state must not alter a generated production ContextMenu capture.");
+    }
+
+    [Test]
+    public void Render_RejectsContainerMenuCropThatWouldClipThePopup() {
+        ScreenshotAsset asset = new() {
+            Id = "container-menu-padding",
+            Classification = ScreenshotClassification.NinaUi,
+            Output = "docs/images/generated/sequencer/Sequencer_AddLoopCondition.png",
+            Fixture = "sequencer",
+            State = "container-menu-padding",
+            ViewType = "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView",
+            Width = 1623,
+            Height = 250,
+            RenderWidth = 2029,
+            RenderHeight = 1274,
+            CropTarget = "target-area:first-item"
+        };
+        string output = Path.Combine(root, "container-menu-padding.png");
+
+        Assert.That(
+            () => new ScreenshotRenderer(new FixtureRegistry()).Render(asset, output),
+            Throws.TypeOf<CatalogException>()
+                .With.Message.Contains("Increase renderWidth or renderHeight instead of clipping"));
     }
 
     [Test]
@@ -192,6 +241,56 @@ public class ScreenshotRendererTests {
         new ScreenshotRenderer(new FixtureRegistry()).Render(asset, output);
 
         Assert.That(File.Exists(output), Is.True);
+    }
+
+    [Test]
+    public void Render_CompositesNormalizedArrowAndLabelCalloutsAfterCropping() {
+        ScreenshotAsset asset = new() {
+            Id = "flow-annotations",
+            Classification = ScreenshotClassification.NinaUi,
+            Output = "docs/images/generated/flow-annotations.png",
+            Fixture = "view",
+            State = "NINA.View.Options.GeneralView",
+            Width = 400,
+            Height = 300,
+            Crop = new ScreenshotCrop { X = 0, Y = 0, Width = 1, Height = 1 },
+            Callouts = [
+                new ScreenshotCallout {
+                    Kind = ScreenshotCalloutKind.Arrow,
+                    Points = [
+                        new ScreenshotPoint { X = 0.05, Y = 0.05 },
+                        new ScreenshotPoint { X = 0.05, Y = 0.85 },
+                        new ScreenshotPoint { X = 0.25, Y = 0.85 }
+                    ]
+                },
+                new ScreenshotCallout {
+                    Kind = ScreenshotCalloutKind.Label,
+                    X = 0.3,
+                    Y = 0.75,
+                    Width = 0.4,
+                    Text = "Continue"
+                }
+            ]
+        };
+        string output = Path.Combine(root, "flow-annotations.png");
+
+        new ScreenshotRenderer(new FixtureRegistry()).Render(asset, output);
+
+        BitmapFrame frame = BitmapDecoder.Create(
+            new Uri(output),
+            BitmapCreateOptions.PreservePixelFormat,
+            BitmapCacheOption.OnLoad).Frames[0];
+        int stride = frame.PixelWidth * 4;
+        byte[] pixels = new byte[stride * frame.PixelHeight];
+        frame.CopyPixels(pixels, stride, 0);
+        int annotationPixels = 0;
+        for (int offset = 0; offset < pixels.Length; offset += 4) {
+            if (pixels[offset + 2] > 180 && pixels[offset + 1] < 100 && pixels[offset] < 100) {
+                annotationPixels++;
+            }
+        }
+
+        Assert.That(annotationPixels, Is.GreaterThan(500));
     }
 
     [Test]
@@ -253,6 +352,66 @@ public class ScreenshotRendererTests {
     }
 
     [Test]
+    public void Render_CropsToAllRealTargetAreaItemsForTheFlowExample() {
+        ScreenshotAsset asset = new() {
+            Id = "sequence-flow-crop",
+            Classification = ScreenshotClassification.NinaUi,
+            Output = "docs/images/generated/sequencer/Sequencer_Flow.png",
+            Fixture = "sequencer",
+            State = "sequencer-flow",
+            ViewType = "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView",
+            Width = 1450,
+            Height = 900,
+            RenderWidth = 1814,
+            RenderHeight = 1300,
+            CropTarget = "target-area:all-items"
+        };
+        string output = Path.Combine(root, "sequence-flow-crop.png");
+
+        new ScreenshotRenderer(new FixtureRegistry()).Render(asset, output);
+
+        BitmapFrame frame = BitmapDecoder.Create(
+            new Uri(output),
+            BitmapCreateOptions.PreservePixelFormat,
+            BitmapCacheOption.OnLoad).Frames[0];
+        Assert.Multiple(() => {
+            Assert.That(frame.PixelWidth, Is.EqualTo(1450));
+            Assert.That(frame.PixelHeight, Is.EqualTo(900));
+            Assert.That(new FileInfo(output).Length, Is.GreaterThan(10000));
+        });
+    }
+
+    [Test]
+    public void Render_CropsAndCompositesTheProductionValidationTooltipOffScreen() {
+        ScreenshotAsset asset = new() {
+            Id = "sequence-issues-crop",
+            Classification = ScreenshotClassification.NinaUi,
+            Output = "docs/images/generated/sequencer/Sequencer_Issues.png",
+            Fixture = "sequencer",
+            State = "sequencer-issues",
+            ViewType = "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView",
+            Width = 1450,
+            Height = 1000,
+            RenderWidth = 1814,
+            RenderHeight = 1000,
+            CropTarget = "target-area:first-item"
+        };
+        string output = Path.Combine(root, "sequence-issues-crop.png");
+
+        new ScreenshotRenderer(new FixtureRegistry()).Render(asset, output);
+
+        BitmapFrame frame = BitmapDecoder.Create(
+            new Uri(output),
+            BitmapCreateOptions.PreservePixelFormat,
+            BitmapCacheOption.OnLoad).Frames[0];
+        Assert.Multiple(() => {
+            Assert.That(frame.PixelWidth, Is.EqualTo(1450));
+            Assert.That(frame.PixelHeight, Is.EqualTo(1000));
+            Assert.That(new FileInfo(output).Length, Is.GreaterThan(10000));
+        });
+    }
+
+    [Test]
     public void Render_CropsToTheRealMeridianFlipSettingsGroup() {
         ScreenshotAsset asset = new() {
             Id = "meridian-flip-settings",
@@ -300,8 +459,8 @@ public class ScreenshotRendererTests {
             System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic)
             ?? throw new AssertionException("The renderer has no aspect-preserving dynamic crop helper.");
 
-        Rect wide = (Rect)method.Invoke(null, [new Rect(100, 100, 800, 100), 2d, new Rect(0, 0, 1200, 900)])!;
-        Rect tall = (Rect)method.Invoke(null, [new Rect(100, 100, 100, 600), 2d, new Rect(0, 0, 1200, 900)])!;
+        Rect wide = (Rect)method.Invoke(null, [new Rect(100, 100, 800, 100), 2d, new Rect(0, 0, 1200, 900), "wide-crop-test"])!;
+        Rect tall = (Rect)method.Invoke(null, [new Rect(100, 100, 100, 600), 2d, new Rect(0, 0, 1200, 900), "tall-crop-test"])!;
 
         Assert.Multiple(() => {
             Assert.That(wide.Width / wide.Height, Is.EqualTo(2d).Within(0.0001));
@@ -319,7 +478,7 @@ public class ScreenshotRendererTests {
             ?? throw new AssertionException("The renderer has no aspect-preserving dynamic crop helper.");
 
         System.Reflection.TargetInvocationException exception = Assert.Throws<System.Reflection.TargetInvocationException>(() =>
-            method.Invoke(null, [new Rect(0, 0, 800, 600), 4d, new Rect(0, 0, 900, 700)]))!;
+            method.Invoke(null, [new Rect(0, 0, 800, 600), 4d, new Rect(0, 0, 900, 700), "impossible-crop-test"]))!;
 
         Assert.That(exception.InnerException, Is.TypeOf<CatalogException>());
     }

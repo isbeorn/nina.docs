@@ -136,6 +136,99 @@ public class CatalogValidatorTests {
     }
 
     [Test]
+    public void Validate_AcceptsArrowCalloutAtMinimumAndMaximumCoordinates() {
+        ScreenshotAsset asset = Managed(
+            "edge-arrow",
+            "docs/images/generated/edge-arrow.png",
+            callouts: [
+                new ScreenshotCallout {
+                    Kind = ScreenshotCalloutKind.Arrow,
+                    Points = [
+                        new ScreenshotPoint { X = 0, Y = 0 },
+                        new ScreenshotPoint { X = 1, Y = 1 }
+                    ]
+                }
+            ]);
+
+        Assert.That(
+            () => CatalogValidator.Validate(Catalog(asset), root, new FixtureRegistry()),
+            Throws.Nothing);
+    }
+
+    [TestCase(-0.01, 0.5)]
+    [TestCase(0.5, -0.01)]
+    [TestCase(1.01, 0.5)]
+    [TestCase(0.5, 1.01)]
+    public void Validate_RejectsArrowCalloutPointsOutsideEveryEdge(double x, double y) {
+        ScreenshotAsset asset = Managed(
+            "invalid-arrow",
+            "docs/images/generated/invalid-arrow.png",
+            callouts: [
+                new ScreenshotCallout {
+                    Kind = ScreenshotCalloutKind.Arrow,
+                    Points = [
+                        new ScreenshotPoint { X = 0.5, Y = 0.5 },
+                        new ScreenshotPoint { X = x, Y = y }
+                    ]
+                }
+            ]);
+
+        Assert.That(
+            () => CatalogValidator.Validate(Catalog(asset), root, new FixtureRegistry()),
+            Throws.TypeOf<CatalogException>().With.Message.Contains("invalid arrow callout"));
+    }
+
+    [Test]
+    public void Validate_AcceptsLabelCalloutsAtMinimumAndMaximumCoordinates() {
+        ScreenshotAsset asset = Managed(
+            "edge-labels",
+            "docs/images/generated/edge-labels.png",
+            callouts: [
+                new ScreenshotCallout {
+                    Kind = ScreenshotCalloutKind.Label,
+                    X = 0,
+                    Y = 0,
+                    Width = 0.5,
+                    Text = "Minimum"
+                },
+                new ScreenshotCallout {
+                    Kind = ScreenshotCalloutKind.Label,
+                    X = 0.5,
+                    Y = 1,
+                    Width = 0.5,
+                    Text = "Maximum"
+                }
+            ]);
+
+        Assert.That(
+            () => CatalogValidator.Validate(Catalog(asset), root, new FixtureRegistry()),
+            Throws.Nothing);
+    }
+
+    [TestCase(-0.01, 0.5, 0.5)]
+    [TestCase(0.5, -0.01, 0.5)]
+    [TestCase(0.8, 0.5, 0.3)]
+    [TestCase(0.5, 1.01, 0.5)]
+    public void Validate_RejectsLabelCalloutsOutsideEveryEdge(double x, double y, double width) {
+        ScreenshotAsset asset = Managed(
+            "invalid-label",
+            "docs/images/generated/invalid-label.png",
+            callouts: [
+                new ScreenshotCallout {
+                    Kind = ScreenshotCalloutKind.Label,
+                    X = x,
+                    Y = y,
+                    Width = width,
+                    Text = "Invalid"
+                }
+            ]);
+
+        Assert.That(
+            () => CatalogValidator.Validate(Catalog(asset), root, new FixtureRegistry()),
+            Throws.TypeOf<CatalogException>().With.Message.Contains("invalid label callout"));
+    }
+
+    [Test]
     public void Validate_RequiresFixtureForManagedAssetsAndReasonForExcludedAssets() {
         ScreenshotCatalog missingFixture = Catalog(new ScreenshotAsset {
             Id = "managed",
@@ -167,6 +260,25 @@ public class CatalogValidatorTests {
             Width = asset.Width,
             Height = asset.Height,
             CropTarget = "settings:meridian-flip"
+        };
+
+        Assert.That(
+            () => CatalogValidator.Validate(Catalog(asset), root, new FixtureRegistry()),
+            Throws.Nothing);
+    }
+
+    [Test]
+    public void Validate_AcceptsAllTargetAreaItemsCropForSequencerFixture() {
+        ScreenshotAsset asset = new() {
+            Id = "sequencer-flow",
+            Classification = ScreenshotClassification.NinaUi,
+            Output = "docs/images/generated/sequencer/Sequencer_Flow.png",
+            Fixture = "sequencer",
+            State = "sequencer-flow",
+            ViewType = "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView",
+            Width = 1450,
+            Height = 900,
+            CropTarget = "target-area:all-items"
         };
 
         Assert.That(

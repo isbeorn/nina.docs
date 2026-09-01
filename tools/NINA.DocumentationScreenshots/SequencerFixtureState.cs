@@ -56,9 +56,18 @@ internal static class SequencerFixtureState {
             BuildInstructionDetails(viewModel);
         } else if (state.Contains("sequencerissues", StringComparison.Ordinal)) {
             BuildIssues(viewModel);
-        } else if (state.Contains("sequencerdefinevariable", StringComparison.Ordinal)
-            || state.Contains("sequencerdefineconstant", StringComparison.Ordinal)) {
+        } else if (state.Contains("sequencerdefineconstant", StringComparison.Ordinal)) {
+            BuildDefinedConstants(viewModel);
+        } else if (state.Contains("sequencerdefinevariable", StringComparison.Ordinal)) {
             BuildDefinedSymbols(viewModel);
+        } else if (state.Contains("sequencerapplytarget", StringComparison.Ordinal)
+            || state.Contains("sequenceraddtargettotargettab", StringComparison.Ordinal)
+            || state.Contains("sequencerdroptargettotab", StringComparison.Ordinal)) {
+            BuildTargetWorkflow(viewModel);
+        } else if (state.Contains("sequencersaveastemplate", StringComparison.Ordinal)) {
+            TargetArea(viewModel).Add(CreateRgbLoop(viewModel));
+        } else if (state.Contains("sequencerdragdrop", StringComparison.Ordinal)) {
+            StartArea(viewModel).Add(NewContainer<SequentialContainer>(viewModel, "Startup instructions"));
         } else if (state.Contains("sequenceraddtrigger", StringComparison.Ordinal)
             || state.Contains("sequenceraddloopcondition", StringComparison.Ordinal)) {
             TargetArea(viewModel).Add(NewContainer<SequentialContainer>(viewModel, "Imaging instructions"));
@@ -111,6 +120,7 @@ internal static class SequencerFixtureState {
     private static void BuildLoopConditions(ISequence2VM viewModel) {
         SequentialContainer sequence = NewContainer<SequentialContainer>(viewModel, "RGB until dawn");
         TimeCondition until = viewModel.SequencerFactory.GetCondition<TimeCondition>();
+        until.DateTime = DocumentationApplicationHost.FixedDateTime;
         until.SelectedProvider = until.DateTimeProviders.First(provider => provider.Name == "Astronomical Dawn");
         ((IConditionable)sequence).Add(until);
         foreach (string filterName in new[] { "R", "G", "B" }) {
@@ -164,6 +174,20 @@ internal static class SequencerFixtureState {
     }
 
     private static void BuildDeepSkyObject(ISequence2VM viewModel) {
+        DeepSkyObjectContainer target = NewDeepSkyObject(viewModel);
+        TargetArea(viewModel).Add(target);
+    }
+
+    private static void BuildTargetWorkflow(ISequence2VM viewModel) {
+        DeepSkyObjectContainer target = NewDeepSkyObject(viewModel);
+        SwitchFilter filter = viewModel.SequencerFactory.GetItem<SwitchFilter>();
+        filter.ComboBoxText = "L";
+        target.Add(filter);
+        target.Add(NewExposure(viewModel, 60));
+        TargetArea(viewModel).Add(target);
+    }
+
+    private static DeepSkyObjectContainer NewDeepSkyObject(ISequence2VM viewModel) {
         DeepSkyObjectContainer target = viewModel.SequencerFactory.GetContainer<DeepSkyObjectContainer>();
         target.Name = "Triangulum Pinwheel";
         target.Target.TargetName = "Triangulum Pinwheel";
@@ -172,7 +196,7 @@ internal static class SequencerFixtureState {
             NINA.Astrometry.Angle.ByDegree(30.66),
             NINA.Astrometry.Epoch.J2000);
         target.Target.PositionAngle = 0;
-        TargetArea(viewModel).Add(target);
+        return target;
     }
 
     private static void BuildInstructionDetails(ISequence2VM viewModel) {
@@ -213,13 +237,59 @@ internal static class SequencerFixtureState {
 
     private static void BuildDefinedSymbols(ISequence2VM viewModel) {
         SequentialContainer sequence = NewContainer<SequentialContainer>(viewModel, "Defined symbols");
-        Variable lastFilter = viewModel.SequencerFactory.GetItem<Variable>();
-        Variable maxAltitude = viewModel.SequencerFactory.GetItem<Variable>();
+        GlobalVariable lastFilter = viewModel.SequencerFactory.GetItem<GlobalVariable>();
+        GlobalVariable maxAltitude = viewModel.SequencerFactory.GetItem<GlobalVariable>();
         sequence.Add(lastFilter);
         sequence.Add(maxAltitude);
         TargetArea(viewModel).Add(sequence);
         ConfigureVariable(lastFilter, "LastFilter", "'ASKAR_D2'");
         ConfigureVariable(maxAltitude, "MaxAltitude", "80");
+    }
+
+    private static void BuildDefinedConstants(ISequence2VM viewModel) {
+        SequentialContainer sequence = NewContainer<SequentialContainer>(viewModel, "Defined constants");
+        GlobalConstant exposureTime = NewConstant(viewModel, sequence, "ExposureTime", "60");
+        GlobalConstant targetTemperature = NewConstant(viewModel, sequence, "TargetTemp", "-15");
+        sequence.Add(exposureTime);
+        sequence.Add(targetTemperature);
+        TargetArea(viewModel).Add(sequence);
+        exposureTime.Validate();
+        targetTemperature.Validate();
+    }
+
+    private static GlobalConstant NewConstant(
+            ISequence2VM viewModel,
+            ISequenceContainer context,
+            string identifier,
+            string definition) {
+        GlobalConstant constant = viewModel.SequencerFactory.GetItem<GlobalConstant>();
+        constant.Identifier = identifier;
+        constant.Expr = new NINA.Sequencer.Logic.Expression(definition, context, constant);
+        constant.Expr.Evaluate();
+        return constant;
+    }
+
+    internal static SequentialContainer CreateRgbLoop(ISequence2VM viewModel) {
+        SequentialContainer sequence = NewContainer<SequentialContainer>(viewModel, "RGB Loop");
+        AutofocusAfterHFRIncreaseTrigger autofocus = viewModel.SequencerFactory.GetTrigger<AutofocusAfterHFRIncreaseTrigger>();
+        autofocus.Amount = 5;
+        ((ITriggerable)sequence).Add(autofocus);
+
+        TimeCondition until = viewModel.SequencerFactory.GetCondition<TimeCondition>();
+        until.DateTime = DocumentationApplicationHost.FixedDateTime;
+        until.SelectedProvider = until.DateTimeProviders.First(provider => provider.Name == "Time");
+        until.Hours = 23;
+        until.Minutes = 30;
+        until.Seconds = 0;
+        ((IConditionable)sequence).Add(until);
+
+        foreach (string filterName in new[] { "R", "G", "B" }) {
+            SwitchFilter filter = viewModel.SequencerFactory.GetItem<SwitchFilter>();
+            filter.ComboBoxText = filterName;
+            sequence.Add(filter);
+            sequence.Add(NewExposure(viewModel, 10));
+        }
+        return sequence;
     }
 
     private static void ConfigureVariable(Variable variable, string identifier, string definition) {
@@ -261,6 +331,9 @@ internal static class SequencerFixtureState {
 
     private static ISequenceContainer TargetArea(ISequence2VM viewModel) =>
         (ISequenceContainer)viewModel.Sequencer.MainContainer.Items[1];
+
+    private static ISequenceContainer StartArea(ISequence2VM viewModel) =>
+        (ISequenceContainer)viewModel.Sequencer.MainContainer.Items[0];
 
     private static string Normalize(string value) =>
         new(value.Where(char.IsLetterOrDigit).Select(char.ToLowerInvariant).ToArray());

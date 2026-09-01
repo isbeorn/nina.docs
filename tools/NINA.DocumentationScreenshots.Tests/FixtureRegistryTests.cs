@@ -951,6 +951,8 @@ public class FixtureRegistryTests {
             Assert.That(example.Items.OfType<NINA.Sequencer.SequenceItem.FilterWheel.SwitchFilter>()
                 .Select(item => item.ComboBoxText), Is.EqualTo(new[] { "R", "G", "B" }));
             Assert.That(example.Items.OfType<NINA.Sequencer.SequenceItem.Imaging.TakeExposure>().Count(), Is.EqualTo(3));
+            Assert.That(example.Items.OfType<NINA.Sequencer.Validations.IValidatable>()
+                .Select(item => item.Issues), Has.All.Empty);
         });
     }
 

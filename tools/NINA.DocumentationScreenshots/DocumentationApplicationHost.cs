@@ -1132,8 +1132,16 @@ public sealed class DocumentationApplicationHost {
     }
 
     public FrameworkElement CreateAdvancedSequencer(ScreenshotAsset asset) {
+        UserSymbol.SymbolCache.Clear();
         ISequence2VM viewModel = CreateAdvancedSequenceViewModel(asset.Id);
-        SequencerFixtureState.Apply(viewModel, asset);
+        IProfileService profileService = GetProfileService();
+        string imagePath = profileService.ActiveProfile.ImageFileSettings.FilePath;
+        try {
+            profileService.ActiveProfile.ImageFileSettings.FilePath = Path.GetTempPath();
+            SequencerFixtureState.Apply(viewModel, asset);
+        } finally {
+            profileService.ActiveProfile.ImageFileSettings.FilePath = imagePath;
+        }
         return new AdvancedSequencerView { DataContext = viewModel };
     }
 
@@ -1158,7 +1166,7 @@ public sealed class DocumentationApplicationHost {
         }).ToArray();
         ISequence2VM viewModel = (ISequence2VM)constructor.Invoke(arguments);
         WaitWithDispatcher(viewModel.Initialize(), screenshotId);
-        AddDocumentationTemplates(viewModel, profileService);
+        AddDocumentationTemplates(viewModel, profileService, screenshotId);
         AddDocumentationTargets(viewModel, profileService);
         return viewModel;
     }
@@ -1178,7 +1186,10 @@ public sealed class DocumentationApplicationHost {
             []);
     }
 
-    private static void AddDocumentationTemplates(ISequence2VM viewModel, IProfileService profileService) {
+    private static void AddDocumentationTemplates(
+            ISequence2VM viewModel,
+            IProfileService profileService,
+            string screenshotId) {
         TemplateController templateController = (TemplateController)(viewModel.GetType()
             .GetProperty("TemplateController", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
             ?.GetValue(viewModel)
@@ -1207,6 +1218,14 @@ public sealed class DocumentationApplicationHost {
                 profileService,
                 TemplateController.DefaultTemplatesGroup,
                 container));
+        }
+        string normalized = new(screenshotId.Where(char.IsLetterOrDigit).Select(char.ToLowerInvariant).ToArray());
+        if (normalized.Contains("sequencerusertemplate", StringComparison.Ordinal)
+            || normalized.Contains("sequencersaveastemplate", StringComparison.Ordinal)) {
+            templateController.Templates.Add(new TemplatedSequenceContainer(
+                profileService,
+                "LblTemplate_UserTemplates",
+                SequencerFixtureState.CreateRgbLoop(viewModel)));
         }
         templateController.TemplatesView.Refresh();
         templateController.TemplatesMenuView.Refresh();
@@ -1646,6 +1665,15 @@ public sealed class DocumentationApplicationHost {
                 return new NINA.Equipment.Equipment.MyFilterWheel.FilterWheelInfo {
                     Connected = true,
                     SelectedFilter = profile.FilterWheelSettings.FilterWheelFilters.First()
+                };
+            }
+            if (type == typeof(NINA.Equipment.Equipment.MyFocuser.FocuserInfo)) {
+                return new NINA.Equipment.Equipment.MyFocuser.FocuserInfo {
+                    Connected = true,
+                    Name = "N.I.N.A. Documentation Simulator",
+                    Position = 12500,
+                    StepSize = 1,
+                    Temperature = 5
                 };
             }
             if (type == typeof(IList<IDateTimeProvider>)) {

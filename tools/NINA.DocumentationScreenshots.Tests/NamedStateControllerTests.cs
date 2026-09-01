@@ -270,15 +270,255 @@ public class NamedStateControllerTests {
             targetArea.Items.OfType<NINA.Sequencer.Container.SequentialContainer>().Single();
 
         Assert.Multiple(() => {
-            Assert.That(sequence.Items.OfType<NINA.Sequencer.SequenceItem.Expressions.Variable>()
+            Assert.That(sequence.Items, Has.All.TypeOf<NINA.Sequencer.SequenceItem.Expressions.GlobalVariable>());
+            Assert.That(sequence.Items.OfType<NINA.Sequencer.SequenceItem.Expressions.GlobalVariable>()
                 .Select(item => item.Name), Has.None.StartsWith("MISSING LABEL"));
-            Assert.That(sequence.Items.OfType<NINA.Sequencer.SequenceItem.Expressions.Variable>()
+            Assert.That(sequence.Items.OfType<NINA.Sequencer.SequenceItem.Expressions.GlobalVariable>()
                 .Select(item => item.Identifier), Is.EqualTo(new[] { "LastFilter", "MaxAltitude" }));
-            Assert.That(sequence.Items.OfType<NINA.Sequencer.SequenceItem.Expressions.Variable>()
+            Assert.That(sequence.Items.OfType<NINA.Sequencer.SequenceItem.Expressions.GlobalVariable>()
                 .Select(item => item.OriginalDefinition), Is.EqualTo(new[] { "'ASKAR_D2'", "80" }));
-            Assert.That(sequence.Items.OfType<NINA.Sequencer.SequenceItem.Expressions.Variable>()
+            Assert.That(sequence.Items.OfType<NINA.Sequencer.SequenceItem.Expressions.GlobalVariable>()
                 .Select(item => item.Issues), Has.All.Empty);
         });
+    }
+
+    [Test]
+    public void AdvancedSequencer_DefineConstantStateUsesProductionConstantItems() {
+        FrameworkElement fixture = new FixtureRegistry().Create(SequencerAsset(
+            "sequencer-define-constant",
+            "docs/images/generated/sequencer/Sequencer_DefineConstant.png"));
+        NINA.ViewModel.Sequencer.ISequence2VM viewModel =
+            (NINA.ViewModel.Sequencer.ISequence2VM)fixture.DataContext;
+        NINA.Sequencer.Container.ISequenceContainer targetArea =
+            (NINA.Sequencer.Container.ISequenceContainer)viewModel.Sequencer.MainContainer.Items[1];
+        NINA.Sequencer.Container.SequentialContainer sequence =
+            targetArea.Items.OfType<NINA.Sequencer.Container.SequentialContainer>().Single();
+
+        Assert.Multiple(() => {
+            Assert.That(sequence.Items, Has.All.TypeOf<NINA.Sequencer.SequenceItem.Expressions.GlobalConstant>());
+            Assert.That(sequence.Items.OfType<NINA.Sequencer.SequenceItem.Expressions.GlobalConstant>()
+                .Select(item => item.Identifier), Is.EqualTo(new[] { "ExposureTime", "TargetTemp" }));
+            Assert.That(sequence.Items.OfType<NINA.Sequencer.SequenceItem.Expressions.GlobalConstant>()
+                .Select(item => item.Expr.Definition), Is.EqualTo(new[] { "60", "-15" }));
+            Assert.That(sequence.Items.OfType<NINA.Sequencer.SequenceItem.Expressions.GlobalConstant>()
+                .Select(item => item.Issues), Has.All.Empty);
+        });
+    }
+
+    [Test]
+    public void AdvancedSequencer_DefinedSymbolsRemainValidAcrossRepeatedFixtures() {
+        _ = new FixtureRegistry().Create(SequencerAsset(
+            "sequencer-define-variable",
+            "docs/images/sequencer/Sequencer_DefineVariable.png"));
+
+        FrameworkElement fixture = new FixtureRegistry().Create(SequencerAsset(
+            "sequencer-define-variable-repeat",
+            "docs/images/sequencer/Sequencer_DefineVariable.png"));
+        NINA.ViewModel.Sequencer.ISequence2VM viewModel =
+            (NINA.ViewModel.Sequencer.ISequence2VM)fixture.DataContext;
+        NINA.Sequencer.Container.ISequenceContainer targetArea =
+            (NINA.Sequencer.Container.ISequenceContainer)viewModel.Sequencer.MainContainer.Items[1];
+        List<NINA.Sequencer.SequenceItem.Expressions.GlobalVariable> variables = targetArea.Items
+            .OfType<NINA.Sequencer.Container.SequentialContainer>()
+            .Single()
+            .Items
+            .OfType<NINA.Sequencer.SequenceItem.Expressions.GlobalVariable>()
+            .ToList();
+
+        Assert.Multiple(() => {
+            Assert.That(variables.Select(item => item.Identifier), Is.EqualTo(new[] { "LastFilter", "MaxAltitude" }));
+            Assert.That(variables.Select(item => item.Issues), Has.All.Empty);
+        });
+    }
+
+    [Test]
+    public void AdvancedSequencer_UserTemplateStateUsesAProductionTemplatedContainer() {
+        FrameworkElement fixture = new FixtureRegistry().Create(SequencerAsset(
+            "sequencer-user-template",
+            "docs/images/generated/sequencer/Sequencer_UserTemplate.png"));
+        object viewModel = fixture.DataContext;
+        NINA.Sequencer.TemplateController templates = (NINA.Sequencer.TemplateController)(viewModel.GetType()
+            .GetProperty("TemplateController")?.GetValue(viewModel)
+            ?? throw new AssertionException("The production sequencer view model has no TemplateController."));
+
+        NINA.Sequencer.TemplatedSequenceContainer userTemplate = templates.UserTemplates.Single();
+        NINA.Sequencer.Container.SequentialContainer sequence =
+            (NINA.Sequencer.Container.SequentialContainer)userTemplate.Container;
+        Assert.Multiple(() => {
+            Assert.That(sequence.Name, Is.EqualTo("RGB Loop"));
+            Assert.That(sequence.Triggers, Has.Exactly(1).TypeOf<NINA.Sequencer.Trigger.Autofocus.AutofocusAfterHFRIncreaseTrigger>());
+            Assert.That(sequence.Triggers.OfType<NINA.Sequencer.Trigger.Autofocus.AutofocusAfterHFRIncreaseTrigger>()
+                .Single().Issues, Is.Empty);
+            Assert.That(sequence.Conditions, Has.Exactly(1).TypeOf<NINA.Sequencer.Conditions.TimeCondition>());
+            Assert.That(sequence.Items.OfType<NINA.Sequencer.SequenceItem.FilterWheel.SwitchFilter>().ToList(), Has.Count.EqualTo(3));
+            Assert.That(sequence.Items.OfType<NINA.Sequencer.SequenceItem.Imaging.TakeExposure>().ToList(), Has.Count.EqualTo(3));
+        });
+    }
+
+    [Test]
+    public void Apply_ExpandsTheProductionUserTemplatePreview() {
+        ScreenshotAsset asset = SequencerAsset(
+            "sequencer-user-template",
+            "docs/images/generated/sequencer/Sequencer_UserTemplate.png");
+        FrameworkElement fixture = new FixtureRegistry().Create(asset);
+        Window host = new() { Width = 1900, Height = 1000, Content = fixture, ShowInTaskbar = false };
+        try {
+            host.Show();
+            fixture.UpdateLayout();
+
+            NamedStateController.Apply(fixture, asset);
+
+            Expander template = FindDescendants<Expander>(fixture)
+                .Single(expander => expander.DataContext is NINA.Sequencer.TemplatedSequenceContainer item
+                    && item.Container.Name == "RGB Loop");
+            Assert.That(template.IsExpanded, Is.True);
+        } finally {
+            CloseMenus(fixture);
+            host.Close();
+        }
+    }
+
+    [TestCase("sequencer-apply-target")]
+    [TestCase("sequencer-add-target-to-target-tab")]
+    [TestCase("sequencer-drop-target-to-tab")]
+    public void AdvancedSequencer_TargetWorkflowStatesUseAProductionDeepSkyObjectContainer(string state) {
+        FrameworkElement fixture = new FixtureRegistry().Create(SequencerAsset(
+            state,
+            $"docs/images/sequencer/Sequencer_{state}.png"));
+        NINA.ViewModel.Sequencer.ISequence2VM viewModel =
+            (NINA.ViewModel.Sequencer.ISequence2VM)fixture.DataContext;
+        NINA.Sequencer.Container.ISequenceContainer targetArea =
+            (NINA.Sequencer.Container.ISequenceContainer)viewModel.Sequencer.MainContainer.Items[1];
+
+        NINA.Sequencer.Container.DeepSkyObjectContainer target = targetArea.Items
+            .OfType<NINA.Sequencer.Container.DeepSkyObjectContainer>()
+            .Single();
+        Assert.Multiple(() => {
+            Assert.That(target.Target.TargetName, Is.EqualTo("Triangulum Pinwheel"));
+            Assert.That(target.Items, Is.Not.Empty);
+        });
+    }
+
+    [Test]
+    public void AdvancedSequencer_DragDropStateUsesAProductionEmptyInstructionSetInTheStartArea() {
+        FrameworkElement fixture = new FixtureRegistry().Create(SequencerAsset(
+            "sequencer-drag-drop",
+            "docs/images/sequencer/Sequencer_DragDrop.png"));
+        NINA.ViewModel.Sequencer.ISequence2VM viewModel =
+            (NINA.ViewModel.Sequencer.ISequence2VM)fixture.DataContext;
+        NINA.Sequencer.Container.ISequenceContainer startArea =
+            (NINA.Sequencer.Container.ISequenceContainer)viewModel.Sequencer.MainContainer.Items[0];
+
+        NINA.Sequencer.Container.SequentialContainer instructionSet = startArea.Items
+            .OfType<NINA.Sequencer.Container.SequentialContainer>()
+            .Single();
+        Assert.Multiple(() => {
+            Assert.That(instructionSet.Name, Is.EqualTo("Startup instructions"));
+            Assert.That(instructionSet.Items, Is.Empty);
+        });
+    }
+
+    [Test]
+    public void Apply_PinsProductionAltitudeChartNowMarkerToFixtureClock() {
+        ScreenshotAsset asset = SequencerAsset(
+            "sequencer-dso-set",
+            "docs/images/generated/sequencer/Sequencer_DSOSet.png");
+        FrameworkElement fixture = new FixtureRegistry().Create(asset);
+        Window host = new() { Width = 1450, Height = 900, Content = fixture, ShowInTaskbar = false };
+        try {
+            host.Show();
+            fixture.UpdateLayout();
+
+            NamedStateController.Apply(fixture, asset);
+
+            OxyPlot.Wpf.LineAnnotation marker = FindDescendants<OxyPlot.Wpf.Plot>(fixture)
+                .SelectMany(plot => plot.Annotations.OfType<OxyPlot.Wpf.LineAnnotation>())
+                .Single(annotation => annotation.Text == "Now");
+            Assert.Multiple(() => {
+                Assert.That(System.Windows.Data.BindingOperations.GetBindingBase(marker, OxyPlot.Wpf.LineAnnotation.XProperty), Is.Null);
+                Assert.That(marker.X, Is.EqualTo(OxyPlot.Axes.DateTimeAxis.ToDouble(
+                    new DateTime(2026, 8, 31, 20, 0, 0, DateTimeKind.Local))));
+            });
+        } finally {
+            CloseMenus(fixture);
+            host.Close();
+        }
+    }
+
+    [TestCase("Sequencer_DragDrop.png")]
+    [TestCase("Sequencer_AddTarget.png")]
+    [TestCase("Sequencer_ApplyTarget.png")]
+    [TestCase("Sequencer_DropTargetToTab.png")]
+    [TestCase("Sequencer_SaveAsTemplateDragDrop.png")]
+    public void Apply_UsesProductionAdornersForSequencerDragStates(string fileName) {
+        ScreenshotAsset asset = SequencerAsset(
+            Path.GetFileNameWithoutExtension(fileName),
+            $"docs/images/sequencer/{fileName}");
+        FrameworkElement fixture = new FixtureRegistry().Create(asset);
+        Window host = new() { Width = 1900, Height = 1000, Content = fixture, ShowInTaskbar = false };
+        try {
+            host.Show();
+            fixture.UpdateLayout();
+
+            NamedStateController.Apply(fixture, asset);
+
+            List<DependencyObject> descendants = FindDescendants<DependencyObject>(fixture).ToList();
+            Assert.Multiple(() => {
+                Assert.That(descendants.Count(element => element.GetType().Name == "DragDropAdorner"), Is.EqualTo(1));
+                Assert.That(descendants.Count(element => element.GetType().Name == "DragOverAdorner"), Is.EqualTo(1));
+            });
+        } finally {
+            CloseMenus(fixture);
+            host.Close();
+        }
+    }
+
+    [Test]
+    public void Apply_OpensTheProductionSaveTargetTooltip() {
+        ScreenshotAsset asset = SequencerAsset(
+            "sequencer-add-target-to-target-tab",
+            "docs/images/sequencer/Sequencer_AddTargetToTargetTab.png");
+        FrameworkElement fixture = new FixtureRegistry().Create(asset);
+        Window host = new() { Width = 1900, Height = 700, Content = fixture, ShowInTaskbar = false };
+        try {
+            host.Show();
+            fixture.UpdateLayout();
+
+            NamedStateController.Apply(fixture, asset);
+
+            Button saveTarget = FindDescendants<Button>(fixture)
+                .Single(button => button.Name == "TargetContainerButton"
+                    && button.DataContext is NINA.Sequencer.Container.DeepSkyObjectContainer);
+            Assert.That(saveTarget.ToolTip, Is.TypeOf<ToolTip>());
+            Assert.That(((ToolTip)saveTarget.ToolTip).IsOpen, Is.True);
+        } finally {
+            CloseMenus(fixture);
+            host.Close();
+        }
+    }
+
+    [Test]
+    public void Apply_OpensProductionValidationContentInATooltip() {
+        ScreenshotAsset asset = SequencerAsset(
+            "sequencer-issues",
+            "docs/images/sequencer/Sequencer_Issues.png");
+        FrameworkElement fixture = new FixtureRegistry().Create(asset);
+        Window host = new() { Width = 1500, Height = 900, Content = fixture, ShowInTaskbar = false };
+        try {
+            host.Show();
+            fixture.UpdateLayout();
+
+            NamedStateController.Apply(fixture, asset);
+
+            Border issue = FindDescendants<Border>(fixture)
+                .First(border => border.DataContext is NINA.Sequencer.SequenceItem.Imaging.TakeExposure exposure
+                    && exposure.Issues.Count > 0
+                    && border.ToolTip is ToolTip { IsOpen: true });
+            Assert.That(((ToolTip)issue.ToolTip).Content, Is.TypeOf<ItemsControl>());
+        } finally {
+            CloseMenus(fixture);
+            host.Close();
+        }
     }
 
     [TestCase("Sequencer_AddTrigger.png", "AddTriggerButton")]

@@ -121,28 +121,96 @@ public static class ScreenshotChrome {
         if (callouts.Count > 0) {
             Canvas overlay = new() { IsHitTestVisible = false };
             foreach (ScreenshotCallout callout in callouts) {
-                Border badge = new() {
-                    MinWidth = 28,
-                    MinHeight = 28,
-                    Padding = new Thickness(7, 3, 7, 3),
-                    CornerRadius = new CornerRadius(14),
-                    BorderThickness = new Thickness(2),
-                    BorderBrush = Brushes.White,
-                    Background = new SolidColorBrush(Color.FromRgb(196, 45, 45)),
-                    Child = new TextBlock {
-                        Text = callout.Text,
-                        Foreground = Brushes.White,
-                        FontWeight = FontWeights.Bold,
-                        HorizontalAlignment = HorizontalAlignment.Center,
-                        VerticalAlignment = VerticalAlignment.Center
-                    }
-                };
-                Canvas.SetLeft(badge, Math.Clamp(callout.X * width - 14, 0, width - 28));
-                Canvas.SetTop(badge, Math.Clamp(callout.Y * height - 14, 0, height - 28));
-                overlay.Children.Add(badge);
+                switch (callout.Kind) {
+                    case ScreenshotCalloutKind.Arrow:
+                        AddArrow(overlay, callout, width, height);
+                        break;
+                    case ScreenshotCalloutKind.Label:
+                        AddLabel(overlay, callout, width, height);
+                        break;
+                    default:
+                        AddBadge(overlay, callout, width, height);
+                        break;
+                }
             }
             root.Children.Add(overlay);
         }
         return root;
+    }
+
+    private static void AddBadge(Canvas overlay, ScreenshotCallout callout, int width, int height) {
+        Border badge = new() {
+            MinWidth = 28,
+            MinHeight = 28,
+            Padding = new Thickness(7, 3, 7, 3),
+            CornerRadius = new CornerRadius(14),
+            BorderThickness = new Thickness(2),
+            BorderBrush = Brushes.White,
+            Background = new SolidColorBrush(Color.FromRgb(196, 45, 45)),
+            Child = new TextBlock {
+                Text = callout.Text,
+                Foreground = Brushes.White,
+                FontWeight = FontWeights.Bold,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center
+            }
+        };
+        Canvas.SetLeft(badge, Math.Clamp(callout.X * width - 14, 0, width - 28));
+        Canvas.SetTop(badge, Math.Clamp(callout.Y * height - 14, 0, height - 28));
+        overlay.Children.Add(badge);
+    }
+
+    private static void AddLabel(Canvas overlay, ScreenshotCallout callout, int width, int height) {
+        Brush annotationBrush = new SolidColorBrush(Color.FromRgb(255, 45, 45));
+        Border label = new() {
+            Width = callout.Width!.Value * width,
+            Padding = new Thickness(8, 4, 8, 4),
+            BorderThickness = new Thickness(2),
+            BorderBrush = annotationBrush,
+            Background = new SolidColorBrush(Color.FromArgb(224, 18, 18, 18)),
+            Child = new TextBlock {
+                Text = callout.Text,
+                Foreground = annotationBrush,
+                FontSize = 14,
+                FontWeight = FontWeights.SemiBold,
+                TextWrapping = TextWrapping.Wrap
+            }
+        };
+        label.Measure(new Size(width, height));
+        Canvas.SetLeft(label, Math.Clamp(callout.X * width, 0, Math.Max(0, width - label.DesiredSize.Width)));
+        Canvas.SetTop(label, Math.Clamp(callout.Y * height, 0, Math.Max(0, height - label.DesiredSize.Height)));
+        overlay.Children.Add(label);
+    }
+
+    private static void AddArrow(Canvas overlay, ScreenshotCallout callout, int width, int height) {
+        Brush annotationBrush = new SolidColorBrush(Color.FromRgb(255, 45, 45));
+        PointCollection points = new(callout.Points.Select(point => new Point(point.X * width, point.Y * height)));
+        System.Windows.Shapes.Polyline line = new() {
+            Points = points,
+            Stroke = annotationBrush,
+            StrokeThickness = 3,
+            StrokeLineJoin = PenLineJoin.Round,
+            StrokeStartLineCap = PenLineCap.Round,
+            StrokeEndLineCap = PenLineCap.Round
+        };
+        overlay.Children.Add(line);
+
+        Point end = points[^1];
+        Point previous = points.Reverse().Skip(1).First(point => point != end);
+        Vector direction = end - previous;
+        direction.Normalize();
+        Vector perpendicular = new(-direction.Y, direction.X);
+        const double arrowLength = 12;
+        const double arrowHalfWidth = 6;
+        Point arrowBase = end - direction * arrowLength;
+        System.Windows.Shapes.Polygon arrowHead = new() {
+            Fill = annotationBrush,
+            Points = new PointCollection {
+                end,
+                arrowBase + perpendicular * arrowHalfWidth,
+                arrowBase - perpendicular * arrowHalfWidth
+            }
+        };
+        overlay.Children.Add(arrowHead);
     }
 }

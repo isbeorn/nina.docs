@@ -10,13 +10,13 @@ Symbols are names of things that have a value. These names must be made up of nu
 
 Constants are created using the Define Constant instruction, by providing a name and a value. When loaded into the sequencer, the Define Constant instruction is *immediately* executed, and the Constant becomes valid everywhere in the sequence. You can always change the value of the Constant by changing its value in the Define Constant instruction; if you do, however, *all* references to that Constant will immediately reflect the new value. Constants *cannot* be changed by a running sequence; there is no instruction that changes the value of a Constant. Therefore, Constants are best used to define a Symbol that doesn't change during the course of running a sequence.
 
-![Define Constant](../../images/sequencer/Sequencer_DefineConstant.png)
+![Define Constant](../../images/generated/sequencer/Sequencer_DefineConstant.png)
 
 #### Variables
 
 Variables are created using the Define Variable instruction, also by providing a name and a value. Unlike Constants, Variables have *no* value until the Define Variable instruction is executed in a sequence, and they *can* be modified by a running sequence using the Set Variable instruction (or the Set Variable to Date/Time instruction). Variables, then, are best used to define a Symbol whose value is expected to change during the running of a sequence.
 
-![Define Variable](../../images/sequencer/Sequencer_DefineVariable.png)
+![Define Variable](../../images/generated/sequencer/Sequencer_DefineVariable.png)
 
 #### Data
 
