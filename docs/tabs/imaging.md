@@ -17,7 +17,7 @@ These windows provide important status information about captured images and con
 ### Image ![imageicon](../images/generated/tabs/imaging_imageicon.PNG)
 The image panel is the central part of the Imaging tab and is used to display the latest captured images
 
-![image](../images/tabs/imaging_image.png)
+![image](../images/generated/tabs/imaging_image.png)
 
 1.   Zoom In/out  
 2.   Zoom to Fit  
@@ -68,7 +68,7 @@ This panel displays the focuser status and lets you manually move it to the desi
 Here you can control the Rotator
 > Requires a connected ASCOM Rotator
 
-![rotator](../images/tabs/imaging_rotator.png)
+![rotator](../images/generated/tabs/imaging_rotator.png)
 
 1. Rotator current status
 2. Rotator current position
@@ -85,7 +85,7 @@ The telescope panel provides all important information about your telescope like
 ### Guiding ![guideicon](../images/generated/tabs/imaging_guideicon.PNG)
 The guider panel shows the current guider state, RMS values, and a live guide graph when the connected guider provides guide telemetry.
 
-![guider](../images/tabs/imaging_guider.png)
+![guider](../images/generated/tabs/imaging_guider.png)
 
 1. Select the scale range of the y-axis
 2. Select the scale range of the x-axis
@@ -114,12 +114,12 @@ This panel will let you control the active switches
 The weather panel shows the values reported by the connected weather source. Only the values provided by that source are shown.
 > Some weather sources require additional setup under [Equipment > Weather](equipment/weather.md)
 
-![weather](../images/tabs/imaging_weather.png)
+![weather](../images/generated/tabs/imaging_weather.png)
 
 ### Statistics ![statsicon](../images/generated/tabs/imaging_statsicon.PNG)
 In this panel, all the important information about the last captured image is reported
 
-![statistics](../images/tabs/imaging_statistics.png)
+![statistics](../images/generated/tabs/imaging_statistics.png)
 
 1. Basic statistics relative to the last captured image:
     * Width and Height, in pixels
@@ -162,15 +162,17 @@ Hovering a plotted image point shows the recorded image properties for that expo
 ### Imaging ![image1icon](../images/generated/tabs/imaging_imagingicon.PNG)
 The imaging panel allows you to take a single exposure or live view when supported by the camera
 
-![image1](../images/tabs/imaging_image1.png)
+![image1](../images/generated/tabs/imaging_image1.png)
 
 1. Capture exposure time in seconds
 2. Filter to be used for the capture (if a Filter Wheel is connected)
 3. Camera Binning
-4. Toggles ON/OFF image looping. This is particularly useful for manual focus with a Bahtinov mask
-5. Toggles ON/OFF saving the current capture to disk
-6. When supported by the camera, this will activate the Live View mode
-7. Takes the exposure
+4. Camera gain, when the connected camera exposes gain control
+5. Toggles ON/OFF image looping. This is particularly useful for manual focus with a Bahtinov mask
+6. Toggles ON/OFF saving the current capture to disk
+7. Sets the target name stored with saved snapshots
+8. When supported by the camera, this activates Live View mode
+9. Takes the exposure
 
 ### Image History ![imagehistory](../images/generated/tabs/imaging_historyicon.PNG)
 The Image History panel shows the most recent saved images as thumbnails. The list keeps up to 50 entries and can show basic image details such as mean value in ADU, average HFR, filter, duration, and capture time.
@@ -202,7 +204,7 @@ Plate solving is a very important step in the imaging process. For further infor
 ### Auto Focus ![AFicon](../images/generated/tabs/imaging_aficon.PNG)
 This panel lets you manually trigger an Auto Focus routine based on the Auto Focus parameters set in Options [Autofocus](options/autofocus.md).
 
-![AF](../images/tabs/AF10.png)
+![AF](../images/generated/tabs/AF10.png)
 
 1. Autofocus curve 
 2. Last Auto Focus run parameters
@@ -211,7 +213,7 @@ This panel lets you manually trigger an Auto Focus routine based on the Auto Foc
 ### Manual Focus Targets ![MFicon](../images/generated/tabs/imaging_mftargetsicon.PNG)
 When you have to manual focus your scope this tab lets you conveniently choose among the current visible brighter stars according to your location and time.
 
-![MFtargets](../images/tabs/imaging_mftargets.png)
+![MFtargets](../images/generated/tabs/imaging_mftargets.png)
 
 1. List of stars to choose from
 2. Selected star properties

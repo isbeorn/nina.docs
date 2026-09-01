@@ -127,6 +127,10 @@ public sealed class DocumentationApplicationHost {
             "NINA.View.AnchorableGuiderView" => "NINA.WPF.Base.ViewModel.Equipment.Guider.GuiderVM",
             "NINA.View.AnchorableImageStatisticsView" => "NINA.ViewModel.ImageStatisticsVM",
             "NINA.View.AnchorableFocusTargetsView" => "NINA.ViewModel.FocusTargetsVM",
+            "NINA.View.AnchorableRotatorView" => "NINA.WPF.Base.ViewModel.Equipment.Rotator.RotatorVM",
+            "NINA.View.AnchorableSwitchHubView" => "NINA.WPF.Base.ViewModel.Equipment.Switch.SwitchVM",
+            "NINA.View.AnchorableTelescopeView" => "NINA.WPF.Base.ViewModel.Equipment.Telescope.TelescopeVM",
+            "NINA.View.AnchorableWeatherDataView" => "NINA.WPF.Base.ViewModel.Equipment.WeatherData.WeatherDataVM",
             "NINA.View.Equipment.CameraView" => "NINA.WPF.Base.ViewModel.Equipment.Camera.CameraVM",
             "NINA.View.Equipment.TelescopeView" => "NINA.WPF.Base.ViewModel.Equipment.Telescope.TelescopeVM",
             "NINA.View.Equipment.WeatherDataView" => "NINA.WPF.Base.ViewModel.Equipment.WeatherData.WeatherDataVM",
@@ -563,6 +567,7 @@ public sealed class DocumentationApplicationHost {
                 phd2.SelectedProfile = documentationProfile;
                 SetNonPublicProperty(guider, nameof(guider.Guider), phd2);
                 guider.GuiderInfo.Connected = true;
+                guider.SettingsVisible = true;
                 guider.GuideStepsHistory.PixelScale = 1.42;
                 for (int index = 0; index < 120; index++) {
                     guider.GuideStepsHistory.AddGuideStep(new DocumentationGuideStep(
@@ -821,6 +826,7 @@ public sealed class DocumentationApplicationHost {
         PixelSize = 3.76,
         BitDepth = 16,
         CanSetTemperature = true,
+        CanShowLiveView = true,
         CanSetGain = true,
         GainMin = 0,
         GainMax = 300,

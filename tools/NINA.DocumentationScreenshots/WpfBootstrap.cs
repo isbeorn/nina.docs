@@ -29,6 +29,7 @@ namespace NINA.DocumentationScreenshots;
 
 public static class WpfBootstrap {
     private const string ScreenshotCultureName = "en-US";
+    private static readonly Guid ScreenshotProfileId = new("1207d37d-076a-4e4f-b25c-d50989fdcc71");
     private static readonly string isolatedRoot = Path.Combine(Path.GetTempPath(), $"nina-documentation-host-{Environment.ProcessId}");
 
     public static void Initialize() {
@@ -63,8 +64,11 @@ public static class WpfBootstrap {
         }
 
         ProfileService profileService = new();
-        NINA.Profile.Profile profile = new("Documentation screenshots");
+        NINA.Profile.Profile profile = new("Documentation screenshots") {
+            Id = ScreenshotProfileId
+        };
         profile.ApplicationSettings.Culture = culture.Name;
+        profile.ApplicationSettings.SkySurveyCacheDirectory = @"C:\NINA\Cache";
         profile.CameraSettings.Id = "Documentation Camera";
         profile.CameraSettings.Gain = 50;
         profile.CameraSettings.Offset = 25;
@@ -125,7 +129,7 @@ public static class WpfBootstrap {
         profileService.Profiles.Add(new ProfileMeta {
             Id = profile.Id,
             Name = profile.Name,
-            Description = "Isolated deterministic profile for documentation screenshots",
+            Description = "Deterministic documentation profile",
             IsActive = true,
             LastUsed = new DateTime(2026, 8, 31, 20, 0, 0),
             Location = @"C:\NINA\Profiles\documentation.profile"

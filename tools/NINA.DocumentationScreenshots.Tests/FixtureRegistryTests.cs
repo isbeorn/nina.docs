@@ -63,6 +63,8 @@ public class FixtureRegistryTests {
             (NINA.Profile.Interfaces.IProfileService)Application.Current.Resources["ProfileService"];
 
         Assert.Multiple(() => {
+            Assert.That(profile.Id, Is.EqualTo(new Guid("1207d37d-076a-4e4f-b25c-d50989fdcc71")));
+            Assert.That(profile.ApplicationSettings.SkySurveyCacheDirectory, Is.EqualTo(@"C:\NINA\Cache"));
             Assert.That(profile.CameraSettings.Id, Is.EqualTo("Documentation Camera"));
             Assert.That(profile.CameraSettings.Gain, Is.EqualTo(50));
             Assert.That(profile.CameraSettings.Offset, Is.EqualTo(25));
@@ -73,6 +75,8 @@ public class FixtureRegistryTests {
             Assert.That(profileService.Profiles.Select(item => item.Id), Does.Contain(profile.Id));
             Assert.That(profileService.Profiles.Single(item => item.Id == profile.Id).Name,
                 Is.EqualTo("Documentation screenshots"));
+            Assert.That(profileService.Profiles.Single(item => item.Id == profile.Id).Description,
+                Is.EqualTo("Deterministic documentation profile"));
         });
     }
 
@@ -456,6 +460,10 @@ public class FixtureRegistryTests {
     [TestCase("NINA.View.AnchorableGuiderView", "NINA.WPF.Base.ViewModel.Equipment.Guider.GuiderVM")]
     [TestCase("NINA.View.AnchorableImageStatisticsView", "NINA.ViewModel.ImageStatisticsVM")]
     [TestCase("NINA.View.AnchorableFocusTargetsView", "NINA.ViewModel.FocusTargetsVM")]
+    [TestCase("NINA.View.AnchorableRotatorView", "NINA.WPF.Base.ViewModel.Equipment.Rotator.RotatorVM")]
+    [TestCase("NINA.View.AnchorableSwitchHubView", "NINA.WPF.Base.ViewModel.Equipment.Switch.SwitchVM")]
+    [TestCase("NINA.View.AnchorableTelescopeView", "NINA.WPF.Base.ViewModel.Equipment.Telescope.TelescopeVM")]
+    [TestCase("NINA.View.AnchorableWeatherDataView", "NINA.WPF.Base.ViewModel.Equipment.WeatherData.WeatherDataVM")]
     [TestCase("NINA.View.Equipment.CameraView", "NINA.WPF.Base.ViewModel.Equipment.Camera.CameraVM")]
     [TestCase("NINA.View.Equipment.TelescopeView", "NINA.WPF.Base.ViewModel.Equipment.Telescope.TelescopeVM")]
     [TestCase("NINA.View.Equipment.WeatherDataView", "NINA.WPF.Base.ViewModel.Equipment.WeatherData.WeatherDataVM")]
@@ -727,6 +735,7 @@ public class FixtureRegistryTests {
 
         Assert.Multiple(() => {
             Assert.That(viewModel.CameraInfo.Connected, Is.True);
+            Assert.That(viewModel.CameraInfo.CanShowLiveView, Is.True);
             Assert.That(viewModel.FilterWheelInfo.Connected, Is.True);
             Assert.That(viewModel.SnapExposureDuration, Is.EqualTo(2.5));
             Assert.That(viewModel.SnapFilter.Name, Is.EqualTo("L"));
@@ -789,6 +798,7 @@ public class FixtureRegistryTests {
             Assert.That(viewModel.GuiderInfo.Connected, Is.True);
             Assert.That(viewModel.Guider.Connected, Is.True);
             Assert.That(viewModel.Guider.State, Is.EqualTo("Guiding"));
+            Assert.That(viewModel.SettingsVisible, Is.True);
             Assert.That(viewModel.Guider.PixelScale, Is.EqualTo(1.42d));
             Assert.That(viewModel.MainCameraDitherPixels, Is.Not.NaN);
             Assert.That(viewModel.MainCameraDitherPixels, Is.GreaterThan(0));

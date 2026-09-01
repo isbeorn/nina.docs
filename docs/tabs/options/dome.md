@@ -1,6 +1,6 @@
 This is the tab where you set up all the parameters related to your dome.
 
-![Dome Settings](../../images/tabs/Options-Dome0.png)
+![Dome Settings](../../images/generated/tabs/Options-Dome0.png)
 
 ## Dome & mount geometry
 

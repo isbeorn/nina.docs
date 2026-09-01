@@ -1,6 +1,6 @@
 The General Settings tab contains application-wide settings that do not belong to a single device or workflow.
 
-![The general settings tab](../../images/tabs/OptionsGeneralv10.png)
+![The general settings tab](../../images/generated/tabs/OptionsGeneralv10.png)
 
 ## Profiles
 
