@@ -77,3 +77,6 @@ site/
 # Documentation tool build output
 /tools/**/bin/
 /tools/**/obj/
+
+.codex
+.dotnet-cli

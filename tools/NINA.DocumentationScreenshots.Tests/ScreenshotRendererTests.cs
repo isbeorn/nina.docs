@@ -13,6 +13,7 @@
 #endregion "copyright"
 
 using NUnit.Framework;
+using System.Globalization;
 using System.Threading;
 using System.Windows.Media.Imaging;
 using System.Windows;
@@ -39,6 +40,22 @@ public class ScreenshotRendererTests {
     public void TearDown() => Directory.Delete(root, recursive: true);
 
     [Test]
+    public void Initialize_UsesUnitedStatesLocaleForThreadsWpfAndProfile() {
+        CultureInfo expected = CultureInfo.GetCultureInfo("en-US");
+        NINA.Profile.Profile profile = (NINA.Profile.Profile)Application.Current.Resources["ActiveProfile"];
+        FrameworkElement element = new();
+
+        Assert.Multiple(() => {
+            Assert.That(CultureInfo.CurrentCulture.Name, Is.EqualTo(expected.Name));
+            Assert.That(CultureInfo.CurrentUICulture.Name, Is.EqualTo(expected.Name));
+            Assert.That(CultureInfo.DefaultThreadCurrentCulture?.Name, Is.EqualTo(expected.Name));
+            Assert.That(CultureInfo.DefaultThreadCurrentUICulture?.Name, Is.EqualTo(expected.Name));
+            Assert.That(element.Language.GetEquivalentCulture().Name, Is.EqualTo(expected.Name));
+            Assert.That(profile.ApplicationSettings.Culture, Is.EqualTo(expected.Name));
+        });
+    }
+
+    [Test]
     public void Render_UsesRealCompiledViewAndProducesNonBlankPngAtRequestedSize() {
         ScreenshotAsset asset = Managed("general", 640, 480);
         string output = Path.Combine(root, "general.png");
@@ -61,6 +78,32 @@ public class ScreenshotRendererTests {
 
         ScreenshotRenderer renderer = new(new FixtureRegistry());
         renderer.Render(asset, first);
+        renderer.Render(asset, second);
+
+        Assert.That(File.ReadAllBytes(second), Is.EqualTo(File.ReadAllBytes(first)));
+    }
+
+    [Test]
+    public void Render_NestedConditionsUsesFixedClock() {
+        ScreenshotAsset asset = new() {
+            Id = "deterministic-nested-conditions",
+            Classification = ScreenshotClassification.NinaUi,
+            Output = "docs/images/sequencer/Sequencer_NestedConditions.png",
+            Fixture = "sequencer",
+            State = "docs-images-sequencer-sequencer-nestedconditions-png",
+            ViewType = "NINA.View.Sequencer.AdvancedSequencer.AdvancedSequencerView",
+            Width = 1434,
+            Height = 891,
+            RenderWidth = 1793,
+            RenderHeight = 1341,
+            CropTarget = "target-area:first-item"
+        };
+        string first = Path.Combine(root, "nested-conditions-first.png");
+        string second = Path.Combine(root, "nested-conditions-second.png");
+
+        ScreenshotRenderer renderer = new(new FixtureRegistry());
+        renderer.Render(asset, first);
+        Thread.Sleep(TimeSpan.FromSeconds(1.1));
         renderer.Render(asset, second);
 
         Assert.That(File.ReadAllBytes(second), Is.EqualTo(File.ReadAllBytes(first)));

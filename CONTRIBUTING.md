@@ -69,7 +69,7 @@ Review entries marked for attention against the implementation. A match only mea
 
 ## Regenerating N.I.N.A. screenshots
 
-Application screenshots are cataloged in `screenshots/manifest.json` and rendered by the non-shipping `tools/NINA.DocumentationScreenshots` project in this documentation repository. `-NinaSource` points the project to the N.I.N.A. solution directory containing `NINA.sln`. The renderer uses compiled production views, N.I.N.A.'s production Slate color schema, isolated in-memory profile settings and no real devices or network access. Install the .NET SDK used by the source checkout before running it.
+Application screenshots are cataloged in `screenshots/manifest.json` and rendered by the non-shipping `tools/NINA.DocumentationScreenshots` project in this documentation repository. `-NinaSource` points the project to the N.I.N.A. solution directory containing `NINA.sln`. The renderer uses compiled production views, the US English (`en-US`) locale, N.I.N.A.'s production Slate color schema, isolated in-memory profile settings and no real devices or network access. Install the .NET SDK used by the source checkout before running it.
 
 Preview all managed screenshots without replacing checked-in files:
 

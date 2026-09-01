@@ -24,7 +24,7 @@ The non-shipping renderer lives in `tools/NINA.DocumentationScreenshots` in the 
 - Use production `SequenceBlockView` or the actual entity DataTemplate when a sequencer trigger or instruction has no dedicated view.
 - Provide deterministic in-memory profiles, simulator equipment, astronomical data, timestamps and sample images.
 - Avoid real devices, user profiles and network access.
-- Use fixed dimensions, 96 DPI, software rendering and disabled animations.
+- Use the US English (`en-US`) locale, fixed dimensions, 96 DPI, software rendering and disabled animations.
 - Represent crops, expanded panels, validation states and before or after containers as named fixture states.
 - Express callouts with normalized coordinates rather than editing PNG pixels manually.
 

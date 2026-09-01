@@ -57,6 +57,8 @@ namespace NINA.DocumentationScreenshots;
 /// This class deliberately contains no screenshot-specific visual layout.
 /// </summary>
 public sealed class DocumentationApplicationHost {
+    internal static NINA.Core.Utility.ICustomDateTime FixedDateTime => DocumentationFixedDateTime.Instance;
+
     public static DocumentationApplicationHost Instance { get; } = new();
     private ISymbolBroker? symbolBroker;
     private static NINA.Image.Interfaces.IRenderedImage? documentationSampleRenderedImage;
@@ -340,8 +342,13 @@ public sealed class DocumentationApplicationHost {
         NINA.Core.Model.PagedList<NINA.Astrometry.DeepSkyObject> result = new(10, objects) {
             SelectedItem = objects[0]
         };
-        viewModelType.GetProperty("SearchResult")!.SetValue(viewModel, result);
+        PropertyInfo nighttimeDataProperty = viewModelType.GetProperty("NighttimeData")!;
+        if (!SpinWait.SpinUntil(() => nighttimeDataProperty.GetValue(viewModel) is not null, TimeSpan.FromSeconds(2))) {
+            throw new CatalogException($"Screenshot '{screenshotId}' timed out waiting for Sky Atlas initialization.");
+        }
+        nighttimeDataProperty.SetValue(viewModel, DocumentationNighttimeCalculator.Instance.Calculate(referenceDate));
         viewModelType.GetProperty("FilterDate")!.SetValue(viewModel, referenceDate);
+        viewModelType.GetProperty("SearchResult")!.SetValue(viewModel, result);
         return viewModel;
     }
 

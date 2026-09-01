@@ -19,6 +19,7 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using NINA.Core.Locale;
 using NINA.Core.Model.Equipment;
 using NINA.Core.Enum;
 using NINA.Core.Utility;
@@ -27,14 +28,16 @@ using NINA.Profile;
 namespace NINA.DocumentationScreenshots;
 
 public static class WpfBootstrap {
+    private const string ScreenshotCultureName = "en-US";
     private static readonly string isolatedRoot = Path.Combine(Path.GetTempPath(), $"nina-documentation-host-{Environment.ProcessId}");
 
     public static void Initialize() {
-        CultureInfo culture = CultureInfo.GetCultureInfo("en-US");
+        CultureInfo culture = CultureInfo.GetCultureInfo(ScreenshotCultureName);
         CultureInfo.CurrentCulture = culture;
         CultureInfo.CurrentUICulture = culture;
         CultureInfo.DefaultThreadCurrentCulture = culture;
         CultureInfo.DefaultThreadCurrentUICulture = culture;
+        Loc.Instance.ReloadLocale(culture.Name);
         RenderOptions.ProcessRenderMode = System.Windows.Interop.RenderMode.SoftwareOnly;
 
         CoreUtil.APPLICATIONTEMPPATH = isolatedRoot;
@@ -52,12 +55,16 @@ public static class WpfBootstrap {
             shell.RegisterName(rootGrid.Name, rootGrid);
             app.MainWindow = shell;
         }
+        if (app.Resources["ActiveProfile"] is NINA.Profile.Profile existingProfile) {
+            existingProfile.ApplicationSettings.Culture = culture.Name;
+        }
         if (app.Resources.Contains("NINA.DocumentationScreenshots.ResourcesLoaded")) {
             return;
         }
 
         ProfileService profileService = new();
         NINA.Profile.Profile profile = new("Documentation screenshots");
+        profile.ApplicationSettings.Culture = culture.Name;
         profile.CameraSettings.Id = "Documentation Camera";
         profile.CameraSettings.Gain = 50;
         profile.CameraSettings.Offset = 25;

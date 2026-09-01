@@ -125,6 +125,7 @@ internal static class SequencerFixtureState {
     private static void BuildNestedConditions(ISequence2VM viewModel) {
         SequentialContainer outer = NewContainer<SequentialContainer>(viewModel, "Image until 23:30");
         TimeCondition until = viewModel.SequencerFactory.GetCondition<TimeCondition>();
+        until.DateTime = DocumentationApplicationHost.FixedDateTime;
         until.SelectedProvider = until.DateTimeProviders.First(provider => provider.Name == "Time");
         until.Hours = 23;
         until.Minutes = 30;

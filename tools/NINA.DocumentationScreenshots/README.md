@@ -2,7 +2,7 @@
 
 This non-shipping Windows WPF tool renders documentation images from compiled N.I.N.A. views. It lives in the documentation repository, is invoked by `scripts/generate-screenshots.ps1` and is intentionally excluded from the N.I.N.A. solution and release artifacts.
 
-The renderer loads production resource dictionaries on an STA thread, creates an isolated in-memory profile and renders a versioned screenshot catalog with fixed dimensions at 96 DPI. It does not load the user's profile, connect equipment or make network requests.
+The renderer loads production resource dictionaries on an STA thread, creates an isolated in-memory profile and renders a versioned screenshot catalog with the US English (`en-US`) locale, fixed dimensions and 96 DPI. It does not load the user's profile, connect equipment or make network requests.
 
 Fixtures live in `FixtureRegistry.cs`. Use production views and deterministic view models or data. Do not add screenshot-specific APIs to shipping projects.
 
