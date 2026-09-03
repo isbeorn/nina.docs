@@ -14,7 +14,7 @@ To resolve these issues, you can use either the `ASCOM Device Hub` or the `Optec
 
 ### **Install ASCOM Platform**:  
  
-- Ensure you have the latest ASCOM Platform installed. You can download it from the [ASCOM Standards website](https://ascom-standards.org/).
+- Ensure you have the latest ASCOM Platform installed. You can download it from the [ASCOM Standards website](//ascom-standards.org/).
 
 ### Using the ASCOM Device Hub
 
@@ -44,7 +44,7 @@ c. **Connect Devices in N.I.N.A.**:
 
 a. **Download and Install Optec ASCOM Server**:   
 
-- Download the Optec ASCOM Server from the [Optec website](https://optecinc.com/downloads/legacy/optecascomserver/). Follow the installation instructions provided.
+- Download the Optec ASCOM Server from the [Optec website](//optecinc.com/downloads/legacy/optecascomserver/). Follow the installation instructions provided.
 
 b. **Select Optec ASCOM Server**:  
 

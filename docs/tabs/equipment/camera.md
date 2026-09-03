@@ -1,6 +1,6 @@
 The Camera tab lets you connect an ASCOM-compatible camera or one of the native camera integrations supported by N.I.N.A.
 
-![Camera](../../images/tabs/equipment_camera.png)
+![Camera](../../images/generated/tabs/equipment_camera.png)
 
 The header contains the usual device controls for connecting, disconnecting, refreshing the device list, and opening the driver setup dialog when one is available.
 

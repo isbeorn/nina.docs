@@ -1,6 +1,6 @@
 The Flat Panel tab lets you connect and control compatible flat devices.
 
-![Flats](../../images/tabs/equipment_flats.png)
+![Flats](../../images/generated/tabs/equipment_flats.png)
 
 The header contains the usual device controls for connecting, disconnecting, refreshing the device list, and opening the setup dialog when one is available.
 

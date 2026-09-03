@@ -11,7 +11,7 @@ One way of countering these issues to improve long exposure quality is to use a 
   * Mount Dither
 
 ## PHD2
-PHD2 is the most commonly used guiding application. It is free and open source, and can be found [here](https://openphdguiding.org/).
+PHD2 is the most commonly used guiding application. It is free and open source, and can be found [here](//openphdguiding.org/).
 
 ### PHD2 Settings
 In order for N.I.N.A. to communicate with PHD2 and command operations such as dithering and for receiving guiding telemetry, PHD2's internal server must be enabled. To enable PHD2's internal server, go to PHD2's **Tools** menu and ensure that **Enable Server** is selected.
@@ -21,7 +21,7 @@ In order for N.I.N.A. to communicate with PHD2 and command operations such as di
 There are numerous tutorials online for setting up PHD2. One nice feature N.I.N.A. provides is that it can automatically start PHD2 and connect to it after you've set it up the first time.
 
 ## MetaGuide
-MetaGuide takes a different approach to guiding than PHD2 by using *Lucky Imaging*. It is free, and provided by Frank Freestar8n [here](http://www.astrogeeks.com/Bliss/MetaGuide/).
+MetaGuide takes a different approach to guiding than PHD2 by using *Lucky Imaging*. It is free, and provided by Frank Freestar8n [here](//www.astrogeeks.com/Bliss/MetaGuide/).
 
 ### MetaGuide Setup
 MetaGuide setup is more involved than PHD2, so be sure to carefully read the documentation. After you've set it up, you can do the following to connect it to N.I.N.A.

@@ -12,7 +12,7 @@ In the above example of a list of cameras, the `ZWO ASI1600MM Pro` is listed und
 
 Next to the drop-down box is a series of buttons:
 
-![Management](../../images/tabs/equipment2.png)
+![Management](../../images/generated/tabs/equipment2.png)
 
 1. A drop-down box that lists all detected devices.
 2. Buttons to the right of the drop-down box may be used to:

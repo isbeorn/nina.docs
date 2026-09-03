@@ -1,6 +1,6 @@
 The Dome Tab lets you connect an ASCOM-compatible Dome.
 
-![Dome](../../images/tabs/Equipment-Dome0.png)
+![Dome](../../images/generated/tabs/Equipment-Dome0.png)
 N.I.N.A. provides some useful capabilities when connected to a Dome. They include:<p>
 
 1. **Telescope Following**

@@ -1,6 +1,6 @@
 The Safety Monitor tab lets you connect and monitor compatible safety monitors. These devices report whether conditions are currently safe for imaging.
 
-![Safety Monitor](../../images/tabs/equipment_safety.png)
+![Safety Monitor](../../images/generated/tabs/equipment_safety.png)
 
 The header contains the usual device controls for connecting, disconnecting, refreshing the device list, and opening the setup dialog when one is available.
 

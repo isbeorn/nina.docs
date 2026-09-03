@@ -1,6 +1,6 @@
 The Switch tab lets you connect and control compatible switches.
 
-![Switch](../../images/tabs/equipment_switches.png)
+![Switch](../../images/generated/tabs/equipment_switches.png)
 
 The header contains the usual device controls for connecting, disconnecting, refreshing the device list, and opening the setup dialog when one is available.
 

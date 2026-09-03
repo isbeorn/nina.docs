@@ -1,7 +1,7 @@
 The Rotator tab lets you connect an ASCOM-compatible rotator.
 A Manual Rotator option is also available.
 
-![Rotator](../../images/tabs/equipment_rotator.png)
+![Rotator](../../images/generated/tabs/equipment_rotator.png)
 
 1. Rotator information
 2. Reverse the direction of the rotator (if available). Enable this option when the rotator moves in the wrong direction during centering and rotation. This is required, for example, on setups like a Hyperstar where the horizontal image axis is flipped.
@@ -27,7 +27,7 @@ Rotate the camera and close the manual rotator window, and a new plate solve wil
 
 ![TargetSettings](../../images/tabs/targetsettings.png)
 
-![ManualRotator](../../images/tabs/manualrotator.PNG)
+![ManualRotator](../../images/generated/tabs/manualrotator.png)
 
 !!! tip
      If you want to set camera rotation before starting the main imaging sequence, you can use a dummy sequence with a 1s exposure to start the manual rotator.

@@ -4,7 +4,7 @@ N.I.N.A. uses an external translation management software called Crowdin to loca
 This software offers an easy access for all people that are interested in contributing to the localization without having to know anything about coding.
 The software can be found at  
   
-**[nina.crowdin.com](http://nina.crowdin.com/)**
+**[nina.crowdin.com](//nina.crowdin.com/)**
 
 ## Quick Start
 

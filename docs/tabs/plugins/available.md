@@ -40,9 +40,9 @@ During long-running actions, the update and install buttons can be cancelled.
 
 ### State Icons
 
-* ![Update](../../images/tabs/plugins/update.png) Update available
-* ![Restart](../../images/tabs/plugins/restart.png) Installed or updated, restart required
-* ![Installed](../../images/tabs/plugins/installed.png) Installed and up to date
+* ![Update](../../images/generated/tabs/plugins/update.png) Update available
+* ![Restart](../../images/generated/tabs/plugins/restart.png) Installed or updated, restart required
+* ![Installed](../../images/generated/tabs/plugins/installed.png) Installed and up to date
 
 !!! important
     Plugins are maintained by individual authors. If a plugin causes a problem, contact the plugin maintainer first. If you need to rule out plugin-related issues, restart N.I.N.A. without that plugin installed.

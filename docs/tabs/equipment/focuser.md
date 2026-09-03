@@ -1,6 +1,6 @@
 The Focuser Tab lets you connect an ASCOM-compatible focuser
 
-![Focuser](../../images/tabs/equipment_focuser.PNG)
+![Focuser](../../images/generated/tabs/equipment_focuser.png)
 
 1. Various focuser information can be found on this page
 3. Temperature compensation can be turned on or off here. Note that this is the in-driver temperature compensation.

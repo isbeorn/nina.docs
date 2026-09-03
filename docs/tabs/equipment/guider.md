@@ -1,6 +1,6 @@
 The Guider tab lets you connect to supported guiders and configure the settings used for guiding and dithering.
 
-![Guider](../../images/tabs/equipment_guider.png)
+![Guider](../../images/generated/tabs/equipment_guider.png)
 
 The header contains the usual guider controls for connecting, disconnecting, refreshing the device list, and opening the setup dialog when one is available.
 
@@ -44,7 +44,7 @@ PHD server port. Usually the default 4400 works fine. If you are using multiple 
 Use this when you run more than one PHD2 instance on the same machine.
 
 ## PHD2 Settings
-![Guider](../../images/tabs/guider_phdsettings.png)
+![Guider](../../images/generated/tabs/guider_phdsettings.png)
 
 ### Dither Pixels and Dither RA Only
 The amount of guide camera pixels to dither in PHD2. If "Dither RA only" is checked, the dither movements will only be performed in RA. 

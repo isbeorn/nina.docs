@@ -1,6 +1,6 @@
 The General Settings tab contains application-wide settings that do not belong to a single device or workflow.
 
-![The general settings tab](../../images/tabs/OptionsGeneralv10.png)
+![The general settings tab](../../images/generated/tabs/OptionsGeneralv10.png)
 
 ## Profiles
 
@@ -152,7 +152,7 @@ Example:
 
 Once a horizon file is configured, it is shown in altitude charts across the application.
 
-![Altitude chart with horizon](../../images/tabs/altitudechartwithhorizon.png)
+![Altitude chart with horizon](../../images/generated/tabs/altitudechartwithhorizon.png)
 
 ### World Map
 

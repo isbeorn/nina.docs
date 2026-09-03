@@ -1,13 +1,15 @@
 
-The legacy sequencer offers the traditional experience of planning complete sequences for the most common use cases. The capabilities range from cooled cameras, goto mounts, automated focusers, filter wheels and guiders. 
-With this sequencer you can plan straight forward sequences with a set amount of exposures for specific filters and some basic added automation like centering of targets and keeping the objects in focus using auto focus.  
+The Legacy Sequencer offers the traditional experience of planning complete sequences for common use cases. Its capabilities include cooled cameras, goto mounts, automated focusers, filter wheels and guiders.
+With this sequencer you can plan straightforward sequences with a fixed number of exposures for specific filters and automation such as centering, guiding, autofocus, dithering and meridian flips.
 For more advanced use cases refer to the [advanced sequencer](../advanced/advanced.md) which offers a lot more planning granularity, capabilities and supports more types of equipment.
 
-![The sequencing tab](../../images/sequencer/simple/Sequencer_Screen.png)
+The Legacy Sequencer is not a separate execution engine. It translates the configured target list into advanced sequence entities at runtime. **Build Sequence** exposes that translation so the result can be customized in the Advanced Sequencer. Building again replaces the previously generated advanced sequence, so save any advanced edits first.
+
+![The sequencing tab](../../images/generated/sequencer/simple/Sequencer_Screen.png)
 
 ### Sequence Target Set Options
 
-![Sequence Target Set Options](../../images/sequencer/simple/Target_Set_Options.png)
+![Sequence Target Set Options](../../images/generated/sequencer/simple/Target_Set_Options.png)
 
 In this section you can adjust which instructions should be considered for the complete set of targets.   
 When *Cool Camera* and *Unpark Mount* are enabled, these instructions will be executed before the *first* target.  
@@ -17,7 +19,7 @@ In addition to that there is the option to enable the [auto meridian flip](../..
 
 ### Sequence Target Tab List  
   
-![Sequence Target Tab List](../../images/sequencer/simple/Target_Tabs.png)
+![Sequence Target Tab List](../../images/generated/sequencer/simple/Target_Tabs.png)
 Multiple sequences can be loaded into N.I.N.A., with each residing in its own tab at the top of the Sequence window. When multiple sequences are opened, N.I.N.A. will run each sequence in order after the prior sequence is completed. This allows you to specify multiple targets to image over the course of a night, each with their own settings and behaviors.
 
 1.  **Target tabs**
@@ -39,7 +41,7 @@ Multiple sequences can be loaded into N.I.N.A., with each residing in its own ta
 
 ### Target General Options
 
-![Target General Options](../../images/sequencer/simple/Target_General.png)
+![Target General Options](../../images/generated/sequencer/simple/Target_General.png)
 
 1. **Delay start**  
     Specifies a delay (in seconds) before the first operation when the sequence starts.
@@ -58,7 +60,7 @@ Multiple sequences can be loaded into N.I.N.A., with each residing in its own ta
 
 ### Target Information
 
-![Target Information](../../images/sequencer/simple/Target_Information.png)
+![Target Information](../../images/generated/sequencer/simple/Target_Information.png)
 
 1. **Target coordinates**  
     Displays the target name, right ascension, declination, and desired rotation angle. These may be edited as needed. The right ascension, declination, and rotation angle specified will be used to slew, center and rotate on target start (if enabled)
@@ -74,7 +76,7 @@ Multiple sequences can be loaded into N.I.N.A., with each residing in its own ta
 
 ### Target start options
 
-![Target start options](../../images/sequencer/simple/Target_Start_Options.png)
+![Target start options](../../images/generated/sequencer/simple/Target_Start_Options.png)
 
 1. **Slew to target**  
     At the beginning of the sequence, N.I.N.A. will command the mount to slew to the coordinates that are specified in RA and Dec fields. This does not plate solve to verify it is on target.
@@ -94,7 +96,7 @@ Multiple sequences can be loaded into N.I.N.A., with each residing in its own ta
 
 ### Auto Focus behavior
 
-![Auto Focus behavior](../../images/sequencer/simple/Target_Autofocus.png)
+![Auto Focus behavior](../../images/generated/sequencer/simple/Target_Autofocus.png)
 
 Due to the large number of auto focus options that can be configured in a sequence, they are grouped under an expandable menu. When the menu is not expanded, a summary of the activated options will be displayed. Expanding the menu by clicking on the arrow will reveal the auto focus settings and make them available for altering.
 
@@ -108,7 +110,7 @@ Many of the options are self-explanatory, however two in particular may require 
 
 ### Sequence entries
 
-![Sequence entries](../../images/sequencer/simple/Imaging_Details.png)
+![Sequence entries](../../images/generated/sequencer/simple/Imaging_Details.png)
 
 Sequence entries define the image acquisition order and behavior of N.I.N.A. Each sequence entry consists of up to 11 columns which determine how the images will be exposed:
 

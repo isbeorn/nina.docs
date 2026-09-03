@@ -22,7 +22,7 @@ There are already some pre-made cables to be bought online for this issue or you
 
 You can find some tutorials on how to build a DIY shutter cable here:
 
-[Nikon MC-DC2](https://www.cloudynights.com/topic/457536-usb-corded-shutter-control-for-nikon/)  
+[Nikon MC-DC2](//www.cloudynights.com/topic/457536-usb-corded-shutter-control-for-nikon/)
 
 Once you have built a RS232-Shutter cable you need to connect it to the PC, install drivers for your RS232 adapter and check which COM port is used for it.
 In N.I.N.A. you need to change the "Bulb Mode" setting to "Serial Port" and change the COM port to the port your RS232 cable is using.
@@ -32,7 +32,7 @@ In N.I.N.A. you need to change the "Bulb Mode" setting to "Serial Port" and chan
 After that you can try and snap an image with an exposure time of longer than 30s. 
 If it works you are done and can now expose for any time that you wish.
 
-Should you face issues with the RS232-Shutter exposure in N.I.N.A. feel free to contact us on our [Discord](http://discord.gg/fwpmHU4).
+Should you face issues with the RS232-Shutter exposure in N.I.N.A. feel free to contact us on our [Discord](//discord.gg/fwpmHU4).
 
 ## Mount for Bulb Shutter
 
@@ -57,7 +57,7 @@ The default settings might already work for you, so feel free to try and take a 
 If the shutter is triggered, you are done and can take longer exposures than 30s now.
 
 ### EQMOD
-By default, the Snap Port start and stop commands are specified using EQMOD standard explained [here](http://eq-mod.sourceforge.net/docs/EQASCOM_compliancy.pdf)
+By default, the Snap Port start and stop commands are specified using EQMOD standard explained [here](//eq-mod.sourceforge.net/docs/EQASCOM_compliancy.pdf)
 
 |                 | On\Start  | Off\Stop  |
 | :-------------- | :------:  | :------:  |
@@ -65,12 +65,10 @@ By default, the Snap Port start and stop commands are specified using EQMOD stan
 | **Snap port 2** | :SNAP2,1# | :SNAP2,0# |
 
 ### Green Swamp Server (GSS)
-For GSS, you can find the Snap port commands [here](https://greenswamp.org/?docs=gs-server-overview/snap-tab)
+For GSS, you can find the Snap port commands [here](//greenswamp.org/?docs=gs-server-overview/snap-tab)
 
 |                 | On\Start | Off\Stop |
 | :-------------- | :------: | :------: |
 | **Snap port 1** | :O11     | :O10     |
 | **Snap port 2** | :O21     | :O20     |
 
-
-Should your bulb exposure still not trigger please contact us on our [Discord](http://discord.gg/fwpmHU4).

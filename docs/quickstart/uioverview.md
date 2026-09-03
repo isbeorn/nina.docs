@@ -1,14 +1,18 @@
-Once you start N.I.N.A. for the first time you will be greeted with this screen. 
-Let's go over the basics for a moment to accustom you with the usage of this software.
+# Start with a profile
+
+N.I.N.A. stores equipment choices, site coordinates, imaging preferences and automation settings in a profile. Create a profile for the imaging rig you are about to use, then confirm that it is selected before changing settings or connecting devices.
 
 ![UI Overview](../images/quickstart/uioverview1.png)
 
-The UI is divided in 2 panes. 
-On the left side tabs section (1) you will find all the necessary tabs to connect your equipment, 
-on the right side you usually find the detailed information about the currently selected tab. 
-The currently selected tab is highlighted on the left side (1) so you always know where you are. 
-Feel free to click through all of them; the detailed descriptions for all tabs are provided in the Tabs section. 
-For now, let's assume you have a One-Shot-Color camera and mount with no filter wheel or any extras and just want to start a legacy sequence.
+The navigation bar opens the main workspaces. The most important ones for a first session are:
+
+* **Options** for the observing site, camera properties, file paths, plate solving, guiding and autofocus settings
+* **Equipment** for selecting, configuring and connecting each device
+* **Sky Atlas** and **Framing Assistant** for choosing and framing a target
+* **Sequencer** for building and running the session
+* **Imaging** for manual exposures and live monitoring
+
+This guide follows the current Framing Assistant and Advanced Sequencer workflow. The Simple Sequencer remains available for a compact target list and can convert its contents to an Advanced Sequence when more control is needed.
 
 !!! note
-    This Quick Start guide assumes you know how to connect your equipment to the computer and have the appropriate drivers for ASCOM and your camera (if necessary) already installed. If you do not, don't hesitate to ask us on the official N.I.N.A. Discord server.
+    Install the current Windows and device drivers before starting. N.I.N.A. can list only devices exposed by a supported native, ASCOM or Alpaca driver.

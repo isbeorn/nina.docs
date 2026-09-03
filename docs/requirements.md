@@ -18,10 +18,10 @@ The functionality of N.I.N.A. shines through when paired with a supporting cast 
 
   * [ASCOM Platform](//ascom-standards.org/Downloads/Index.htm) (recommended)
   * [PHD2 Guiding](//openphdguiding.org/downloads/)
-  * [Metaguide Guiding](//https://www.smallstarspot.com/metaguide/)
+  * [Metaguide Guiding](//www.smallstarspot.com/metaguide/)
   * Any of several supported [plate solving applications](advanced/platesolving.md) (recommended)
     * [ASTAP](//www.hnsky.org/astap.htm)
-    * [All Sky Plate Solver](http://www.astrogb.com/astrogb/All_Sky_Plate_Solver.html)
+    * [All Sky Plate Solver](//www.astrogb.com/astrogb/All_Sky_Plate_Solver.html)
     * [Local Astrometry.net (ansvr)](//adgsoftware.com/ansvr/)
     * [PlateSolve2](//planewave.com/downloads/software/)
     * [PlateSolve3](//planewave.com/downloads/software/)
@@ -34,7 +34,7 @@ The functionality of N.I.N.A. shines through when paired with a supporting cast 
     * [TheSky X](//www.bisque.com/sc/pages/TheSkyX-Editions.aspx)
     * [C2A](//www.astrosurf.com/c2a/english/download.htm)
     * [SkyTechX](//www.skytechx.eu/)
-  * [SkyAltas image data](https://nighttime-imaging.eu/download/) (optional at the bottom of the download section)
+  * [SkyAltas image data](//nighttime-imaging.eu/download/) (optional at the bottom of the download section)
 
 
 ## Supported Devices
@@ -65,7 +65,7 @@ N.I.N.A. can directly interface with a wide range of popular cameras without the
 
 The list of supported cameras can change and expand as N.I.N.A. developers gain access to relevant hardware or support is contributed.
 
-### [ASCOM Standard](https://ascom-standards.org/)
+### [ASCOM Standard](//ascom-standards.org/)
 
 Astronomy-related equipment often has an [ASCOM](//ascom-standards.org/) driver for it. N.I.N.A. supports accessing the following types of devices through their associated ASCOM drivers, as long as the drivers are fully compliant with the relevant ASCOM frameworks. Cameras that lack direct support in N.I.N.A. but *do* have an ASCOM driver may also be utilized this way. The following ASCOM device classes are supported:
 

@@ -2,7 +2,7 @@ The Flat Wizard offers the possibility to automate flat image capture. It takes 
 
 Flat Wizard takes 3 test exposures and attempts to calculate the optimal exposure time for a flat image by using linear extrapolation. Should that not be sufficient to derive a suitable exposure time, it will continue to take test exposures until it can determine the optimal exposure time or will ask to adjust the parameters when it fails to find one.
 
-![The Flatwizard tab](../images/tabs/flatwizard1.png)
+![The Flatwizard tab](../images/generated/tabs/flatwizard1.png)
 
 ## Settings
 
@@ -84,7 +84,7 @@ This mode will switch the operational behavior for the flat wizard for different
 
 ## Multi Mode
 
-![The Flatwizard multi mode menu](../images/tabs/flatwizard2.png)
+![The Flatwizard multi mode menu](../images/generated/tabs/flatwizard2.png)
 
 In essence, Multi Mode works just like Single Mode, but for multiple filters. The majority of controls are identical to [Single Mode](flatwizard.md#single-mode).
 

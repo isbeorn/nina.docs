@@ -2,11 +2,11 @@ Plugins are intended to add functionality that is useful for a more specialized 
 
 ## Getting Started
 
-The usual starting point for a new plugin is the [Plugin Template Repository](https://github.com/isbeorn/nina.plugin.template). It provides the base structure and the setup expected by the plugin system.
+The usual starting point for a new plugin is the [Plugin Template Repository](//github.com/isbeorn/nina.plugin.template). It provides the base structure and the setup expected by the plugin system.
 
 ## Making a Plugin Available in N.I.N.A.
 
-To make a plugin available from the **Available** plugins tab, submit a manifest to the main [Plugin Manifest Repository](https://github.com/isbeorn/nina.plugin.manifests).
+To make a plugin available from the **Available** plugins tab, submit a manifest to the main [Plugin Manifest Repository](//github.com/isbeorn/nina.plugin.manifests).
 
 The **Available** tab reads plugin repositories and shows the metadata supplied there, so the manifest is what users will see before they install your plugin.
 

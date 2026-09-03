@@ -1,6 +1,6 @@
 This tab lets you connect a compatible or ASCOM-compliant weather observing station
 
-![Weather](../../images/tabs/weather.PNG)
+![Weather](../../images/generated/tabs/weather.PNG)
 
 Currently the following devices are compatible with N.I.N.A.:
 

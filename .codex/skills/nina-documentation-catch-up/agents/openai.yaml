@@ -1,0 +1,4 @@
+interface:
+  display_name: "NINA Documentation Catch-Up"
+  short_description: "Maintain NINA docs and real-view screenshots"
+  default_prompt: "Use $nina-documentation-catch-up to audit NINA documentation against the current source and refresh reliable screenshots."

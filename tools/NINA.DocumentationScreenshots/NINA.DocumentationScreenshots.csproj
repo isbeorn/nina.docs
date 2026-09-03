@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <UseSystemDrawing>true</UseSystemDrawing>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <PlatformTarget>x64</PlatformTarget>
+    <SelfContained>true</SelfContained>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Deterministic>true</Deterministic>
+    <NinaSource Condition="'$(NinaSource)' == ''">$(MSBuildThisFileDirectory)..\..\..\nina</NinaSource>
+    <NinaSourceRoot>$([System.IO.Path]::GetFullPath('$(NinaSource)'))</NinaSourceRoot>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(NinaSourceRoot)\NINA\NINA.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="$(NinaSourceRoot)\NINA.Test\Autofocus\TestImage_Jelly.xisf"
+          Link="Assets\TestImage_Jelly.xisf"
+          CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <Target Name="ValidateNinaSource" BeforeTargets="PrepareForBuild">
+    <Error Condition="!Exists('$(NinaSourceRoot)\NINA.sln')"
+           Text="NinaSource must point to the NINA solution directory containing NINA.sln. Current value: $(NinaSourceRoot)" />
+    <Error Condition="!Exists('$(NinaSourceRoot)\NINA\NINA.csproj')"
+           Text="The NINA application project was not found below NinaSource: $(NinaSourceRoot)\NINA\NINA.csproj" />
+    <Error Condition="!Exists('$(NinaSourceRoot)\NINA.Test\Autofocus\TestImage_Jelly.xisf')"
+           Text="The deterministic autofocus sample was not found below NinaSource: $(NinaSourceRoot)\NINA.Test\Autofocus\TestImage_Jelly.xisf" />
+  </Target>
+</Project>

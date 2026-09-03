@@ -73,3 +73,10 @@ ENV/
 
 # MkDocs documentation
 site/
+
+# Documentation tool build output
+/tools/**/bin/
+/tools/**/obj/
+
+.dotnet-cli
+.artifacts
